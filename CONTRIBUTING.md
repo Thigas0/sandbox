@@ -13,29 +13,32 @@ only an instruction, and the known gaps. Read it once before relying on the guar
 The OS sandbox for Claude's shell commands runs on Linux, macOS, and WSL 2, not on native Windows.
 On Windows, work inside WSL 2.
 
-1. In PowerShell as administrator: `wsl --install -d Ubuntu`, then restart. `wsl -l -v` must show
-   `VERSION 2`. Virtualization has to be enabled in the firmware.
-2. In the Ubuntu terminal, install the tools and the sandbox dependencies:
+1. In PowerShell as administrator: `wsl --install -d Ubuntu`, then restart. When Ubuntu opens,
+   create your Linux user. `wsl -l -v` must show `VERSION 2`. Virtualization has to be enabled in
+   the firmware.
+2. In the Ubuntu terminal, clone into the Linux file system (not under `/mnt/c`) and run the setup:
 
    ```bash
-   sudo apt-get update && sudo apt-get install -y git python3 bubblewrap socat
+   sudo apt-get update && sudo apt-get install -y git
+   git clone https://github.com/Thigas0/sandbox.git ~/sandbox
+   cd ~/sandbox && ./scripts/setup-wsl.sh
    ```
 
-3. On Ubuntu 24.04 or later, run `sysctl kernel.apparmor_restrict_unprivileged_userns`. If it prints
-   `1`, add the AppArmor profile for `bwrap` described in
+   The script installs `python3`, `bubblewrap`, and `socat`, adds the AppArmor profile for `bwrap`
+   when Ubuntu restricts user namespaces, checks that bubblewrap can build a sandbox, and runs the
+   full verification. The manual steps are in
    [Set up Linux and WSL2](https://code.claude.com/docs/en/sandboxing#set-up-linux-and-wsl2).
-4. Set your Git identity: `git config --global user.name "Your Name"` and
+3. Set your Git identity: `git config --global user.name "Your Name"` and
    `git config --global user.email "<id>+<username>@users.noreply.github.com"`. The GitHub noreply
    address (Settings → Emails) links commits to your account without publishing your email.
-5. Clone into the Linux file system, not under `/mnt/c`:
-   `git clone https://github.com/Thigas0/sandbox.git ~/sandbox`
 
 ## Start a session
 
 - **Desktop app (main path):** in the Code tab, start a new session, open the environment picker,
   pick your distribution under **WSL**, and choose `~/sandbox`. A WSL session has no integrated
   terminal, plugins, or `@` file suggestions yet; use the Ubuntu terminal for Git.
-- **CLI (alternative):** install Claude Code inside WSL and run `claude` from `~/sandbox`.
+- **CLI (alternative):** install Claude Code inside WSL with
+  `curl -fsSL https://claude.ai/install.sh | bash`, then run `claude` from `~/sandbox`.
 
 The first session shows the workspace trust dialog, listing the two allow rules this repository
 grants. Review them before accepting. Deny and ask rules apply even before you accept.
@@ -118,11 +121,16 @@ Remaining verification:
 [.github/workflows/verify.yml](.github/workflows/verify.yml) runs `./scripts/verify.sh --full` on
 `ubuntu-latest` for pull requests and pushes to `main`: the same command you run locally.
 
-Recommended protections for `main`, where your GitHub plan supports them:
+Two repository settings need the owner, in the GitHub web UI:
 
-- Require a pull request before merging.
-- Require the `verify` status check to pass, on an up-to-date branch.
-- Block force pushes and branch deletion, and apply the rules to administrators too.
+1. **Default branch:** Settings → General → Default branch → switch to `main` → Update.
+2. **Protect `main`:** Settings → Rules → Rulesets → New ruleset → New branch ruleset. Set
+   enforcement to Active, add the target "Include default branch", and turn on:
+   - Restrict deletions and Block force pushes.
+   - Require a pull request before merging, with 0 required approvals (you cannot approve your
+     own pull request, so 1 would block a solo maintainer).
+   - Require status checks to pass: add `verify`, and require branches to be up to date.
 
-**These protections are not configured.** Set them under Settings → Rules (or Branches) on GitHub
-after making `main` the default branch.
+   Leave the bypass list empty so the rules apply to administrators too.
+
+**Neither is configured yet.** Claude cannot change repository settings from a cloud session.

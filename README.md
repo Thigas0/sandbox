@@ -7,6 +7,13 @@ application code yet; the repository holds the guardrails and the workflow that 
 - [CLAUDE.md](CLAUDE.md): the instructions Claude follows in this repository.
 - [docs/agent-boundaries.md](docs/agent-boundaries.md): what is enforced, what is only guidance, and known gaps.
 
+## Set up (inside WSL 2 or Linux)
+
+```bash
+git clone https://github.com/Thigas0/sandbox.git ~/sandbox
+cd ~/sandbox && ./scripts/setup-wsl.sh
+```
+
 ## Verify
 
 ```bash

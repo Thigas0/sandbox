@@ -7,6 +7,7 @@ yet. When a stack is added, update the map and commands below in the same change
 
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.
+- `scripts/setup-wsl.sh`: one-time WSL 2 setup (packages, sandbox check, full verification).
 - `tests/verify_test.sh`: tests for the verifier.
 - `.github/workflows/verify.yml`: CI. It runs the same script.
 - `CONTRIBUTING.md`: the human workflow. `docs/agent-boundaries.md`: what is enforced and what is not.

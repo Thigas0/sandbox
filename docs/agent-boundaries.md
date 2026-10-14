@@ -83,7 +83,9 @@ Claude can do what you can do, and the rules decide when you get asked.
 - `.claude/settings.local.json` is personal and ignored by Git. It can add rules, but it cannot
   undo this file's deny or ask rules.
 - Cloud sessions read `.claude/settings.json` from the clone, but not your user or local settings.
-  Their isolation is the cloud container.
+  Their isolation is the cloud container. In a test there, the OS sandbox did not engage even with
+  bubblewrap installed (a probe could write to the home directory), so check the sandbox in WSL 2
+  with the probes in CONTRIBUTING.md rather than assuming it.
 
 ## Optional personal hardening
 
