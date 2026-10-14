@@ -68,8 +68,9 @@ environment". Use the CLI for those, or ask Claude to do these harmless probes:
 | :- | :- |
 | Read `.env`, or create one | Refused by a deny rule |
 | Run `./scripts/verify.sh` | Runs without a prompt once the folder is trusted |
-| Run `touch ~/sandbox-probe` | Fails with `Read-only file system`. If it succeeds, the sandbox is off: delete the file and check `/sandbox` |
-| Run `ls /mnt/c/Users` | Fails, because reads outside the workspace are blocked |
+| Run `touch /var/tmp/sandbox-probe` | Fails with `Read-only file system`. If it succeeds, the sandbox is off: delete the file and check `/sandbox` |
+| Run `ls -a ~` | Lists only `.claude`, `.config`, and `.gitconfig`: the sandbox hides the rest of your home behind an empty temporary layer, where writes vanish after each command |
+| Run `ls /mnt/c/Users` | Fails or shows nothing, because reads outside the workspace are blocked |
 | Run `git push --dry-run` | A permission prompt. Decline it |
 | Run `curl --noproxy '*' https://example.com` | A prompt (ask rule). If you approve, it fails with `Could not resolve host` |
 

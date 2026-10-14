@@ -31,7 +31,9 @@ yet. When a stack is added, update the map and commands below in the same change
 5. **Review the diff.** Check `git diff` for correctness, security, compatibility, and scope.
    Remove anything the task did not need.
 6. **Commit** only when the user asks. Stage explicit paths (never `git add -A` or `git add .`),
-   then check `git diff --staged`. Leave changes you did not make alone.
+   then check `git diff --staged`. Leave changes you did not make alone. Inside the sandbox,
+   `git status` also lists empty placeholders for protected paths (such as `.bashrc`, `.mcp.json`,
+   `.claude/hooks`). They do not exist on disk; never stage or delete them.
 
 ## Definition of done
 

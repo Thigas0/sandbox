@@ -55,6 +55,13 @@ commands only: Claude's file tools, hooks, MCP servers, and other helper process
 - The public JSON schema for settings does not list `blockReadsOutsideWorkingDirectories` yet, so
   an editor may underline it. The key is documented, `claude doctor` accepts it, and a probe in a
   session confirmed it blocks reads.
+- Under the read block, the sandbox shows your home directory as an empty temporary layer with only
+  `.claude`, `.config`, and `.gitconfig` re-opened. A write there seems to succeed but vanishes after
+  the command, so probe the write boundary outside the home directory, such as `/var/tmp`.
+- While a sandboxed command runs, the sandbox places empty read-only placeholders at protected paths
+  that do not exist yet (such as `.bashrc`, `.gitconfig`, `.mcp.json`, `.vscode`, `.claude/hooks`).
+  A sandboxed `git status` lists them as untracked, but they are not on disk. Staging explicit paths
+  keeps them out of commits.
 
 ## Native Windows (for example, a college computer)
 
@@ -83,9 +90,8 @@ Claude can do what you can do, and the rules decide when you get asked.
 - `.claude/settings.local.json` is personal and ignored by Git. It can add rules, but it cannot
   undo this file's deny or ask rules.
 - Cloud sessions read `.claude/settings.json` from the clone, but not your user or local settings.
-  Their isolation is the cloud container. In a test there, the OS sandbox did not engage even with
-  bubblewrap installed (a probe could write to the home directory), so check the sandbox in WSL 2
-  with the probes in CONTRIBUTING.md rather than assuming it.
+  Their isolation is the cloud container. A cloud session sandboxes commands only when its container
+  has bubblewrap at session start; check yours with the probes in CONTRIBUTING.md.
 
 ## Optional personal hardening
 
