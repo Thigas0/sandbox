@@ -1,0 +1,11 @@
+# Personal Claude Code overrides and local state
+.claude/settings.local.json
+.claude/worktrees/
+CLAUDE.local.md
+
+# Secrets stay out of the repository; commit a .env.example with placeholders instead
+.env
+.env.*
+!.env.example
+*.pem
+*.key

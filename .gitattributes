@@ -1,0 +1,2 @@
+# LF everywhere, so the same checkout works from Windows, WSL2, and CI
+* text=auto eol=lf

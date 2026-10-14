@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "disableBypassPermissionsMode": "disable",
+    "blockReadsOutsideWorkingDirectories": true,
+    "allow": [
+      "Bash(./scripts/verify.sh)",
+      "Bash(./scripts/verify.sh --full)"
+    ],
+    "ask": [
+      "Bash(dangerouslyDisableSandbox:true)",
+      "PowerShell(dangerouslyDisableSandbox:true)",
+      "Bash(git push *)",
+      "PowerShell(git push *)",
+      "Bash(git pull *)",
+      "PowerShell(git pull *)",
+      "Bash(git merge *)",
+      "PowerShell(git merge *)",
+      "Bash(git rebase *)",
+      "PowerShell(git rebase *)",
+      "Bash(git commit *)",
+      "PowerShell(git commit *)",
+      "Bash(git reset *)",
+      "PowerShell(git reset *)",
+      "Bash(git clean *)",
+      "PowerShell(git clean *)",
+      "Bash(git restore *)",
+      "PowerShell(git restore *)",
+      "Bash(git checkout -- *)",
+      "PowerShell(git checkout -- *)",
+      "Bash(git stash drop *)",
+      "PowerShell(git stash drop *)",
+      "Bash(git stash clear *)",
+      "PowerShell(git stash clear *)",
+      "Bash(git branch -D *)",
+      "PowerShell(git branch -D *)",
+      "Bash(gh *)",
+      "PowerShell(gh *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "PowerShell(curl.exe *)",
+      "PowerShell(Invoke-WebRequest *)",
+      "PowerShell(Invoke-RestMethod *)",
+      "PowerShell(ssh *)",
+      "PowerShell(scp *)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(!.env.example)",
+      "Read(*.pem)",
+      "Read(*.key)",
+      "Read(secrets/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.git-credentials)",
+      "Read(~/.npmrc)",
+      "Read(~/.claude/.credentials.json)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "network": {
+      "allowedDomains": []
+    }
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}
