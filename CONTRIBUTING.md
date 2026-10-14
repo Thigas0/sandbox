@@ -25,7 +25,8 @@ On Windows, work inside WSL 2.
    `1`, add the AppArmor profile for `bwrap` described in
    [Set up Linux and WSL2](https://code.claude.com/docs/en/sandboxing#set-up-linux-and-wsl2).
 4. Set your Git identity: `git config --global user.name "Your Name"` and
-   `git config --global user.email "you@example.com"`.
+   `git config --global user.email "<id>+<username>@users.noreply.github.com"`. The GitHub noreply
+   address (Settings → Emails) links commits to your account without publishing your email.
 5. Clone into the Linux file system, not under `/mnt/c`:
    `git clone https://github.com/Thigas0/sandbox.git ~/sandbox`
 
@@ -123,4 +124,5 @@ Recommended protections for `main`, where your GitHub plan supports them:
 - Require the `verify` status check to pass, on an up-to-date branch.
 - Block force pushes and branch deletion, and apply the rules to administrators too.
 
-**None of these are active.** The GitHub repository has no commits yet, and the workflow has never run.
+**These protections are not configured.** Set them under Settings → Rules (or Branches) on GitHub
+after making `main` the default branch.
