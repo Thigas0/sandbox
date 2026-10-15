@@ -9,3 +9,9 @@ CLAUDE.local.md
 !.env.example
 *.pem
 *.key
+
+# Node and the site build
+node_modules/
+dist/
+playwright-report/
+test-results/

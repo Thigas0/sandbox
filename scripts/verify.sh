@@ -147,12 +147,30 @@ if [ "$in_repo" -eq 1 ]; then
   check 'No whitespace errors or conflict markers in uncommitted changes' check_diff_whitespace
 fi
 
-# Stack checks (format, lint, type check, tests, build) go here once the repository has code, e.g.
-#   check_unit_tests() { npm test >/dev/null 2>&1 || echo "npm test failed; run it for details"; }
-#   check 'Unit tests' check_unit_tests
+# Site checks (Node). They run only where a package.json exists, so the verifier's own fixtures skip them.
+# run_npm SCRIPT: run an npm script quietly; on failure print the command to run for details.
+run_npm() {
+  [ -d "$root/node_modules" ] || { echo "node_modules is missing: run npm ci"; return; }
+  (cd "$root" && npm run --silent "$1" >/dev/null 2>&1) || echo "npm run $1 failed; run it for details"
+}
+check_format() { run_npm format:check; }
+check_lint() { run_npm lint; }
+check_build() { run_npm build; }
+check_e2e() { run_npm test:e2e; }
+
+has_site=0
+[ -f "$root/package.json" ] && has_site=1
+if [ "$has_site" -eq 1 ]; then
+  check 'Formatting (prettier --check)' check_format
+  check 'Lint (eslint)' check_lint
+  check 'Build (vite build)' check_build
+fi
 
 if [ "$full" -eq 1 ]; then
   check 'Verifier self-tests (tests/verify_test.sh)' check_self_tests
+  if [ "$has_site" -eq 1 ]; then
+    check 'Browser and accessibility tests (playwright + axe)' check_e2e
+  fi
 fi
 
 if [ "$failed" -gt 0 ]; then

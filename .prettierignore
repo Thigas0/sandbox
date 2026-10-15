@@ -1,0 +1,8 @@
+dist/
+playwright-report/
+test-results/
+package-lock.json
+# Markdown e YAML do baseline seguem o estilo próprio; o Prettier cuida do código do site.
+*.md
+*.yml
+.claude/
