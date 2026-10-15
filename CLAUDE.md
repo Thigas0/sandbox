@@ -1,10 +1,14 @@
 # Repository instructions
 
-A stack-agnostic baseline for disciplined, AI-assisted development. There is no application code
-yet. When a stack is added, update the map and commands below in the same change.
+A baseline for disciplined, AI-assisted development of websites. The site is a static Vite project
+(plain HTML, CSS, and JavaScript). When the stack changes, update the map and commands below in the
+same change.
 
 ## Map
 
+- `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
+- `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
+- `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.
 - `scripts/setup-wsl.sh`: one-time WSL 2 setup (packages, sandbox check, full verification).
@@ -16,8 +20,14 @@ yet. When a stack is added, update the map and commands below in the same change
 
 - Fast check, after every meaningful change: `./scripts/verify.sh`
 - Full check, before a commit and in CI: `./scripts/verify.sh --full`
-- There is no install or build step yet. Requirements: bash 4.4+, git, and python3. The intended
-  environment is WSL 2 (Ubuntu) on Windows, or any Linux.
+- Install: `npm ci`, then `npx playwright install chromium` once.
+- Dev server: `npm run dev` (http://localhost:5173). Build: `npm run build` (to `dist/`).
+- Format: `npm run format`. Lint: `npm run lint`. Browser tests: `npm run test:e2e`.
+- `verify.sh` runs format check, lint, and build; `--full` adds the browser tests.
+- Requirements: bash 4.4+, git, python3, and Node.js 22+. The intended environment is WSL 2
+  (Ubuntu) on Windows, or any Linux.
+- In a cloud session with a preinstalled Chromium, set `PLAYWRIGHT_CHROMIUM_PATH` to it when the
+  Playwright version expects a different browser build.
 
 ## Development loop
 

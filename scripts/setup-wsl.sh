@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One-time setup inside WSL 2 (Ubuntu or Debian). Installs what the verifier and the Claude Code
-# sandbox need, checks that bubblewrap can build a sandbox, then runs the full verification.
+# sandbox need, checks that bubblewrap can build a sandbox, installs the site's Node dependencies and
+# the Playwright browser, then runs the full verification.
 #
 #   ./scripts/setup-wsl.sh
 #
@@ -56,6 +57,14 @@ else
   fail "bubblewrap could not create a sandbox. See https://code.claude.com/docs/en/sandboxing#set-up-linux-and-wsl2"
 fi
 
+step "Installing the site's dependencies (Node 22+)"
+node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
+if [ "$node_major" -lt 22 ]; then
+  fail "Node.js 22 or newer is required (found: $(node -v 2>/dev/null || echo none)). Install it with nvm (https://github.com/nvm-sh/nvm): 'nvm install 22', then run this script again."
+fi
+npm ci
+npx playwright install --with-deps chromium
+
 step "Running the full verification"
 ./scripts/verify.sh --full
 
@@ -66,6 +75,7 @@ if [ -z "$(git config --global user.email || true)" ]; then
   echo "    git config --global user.email \"<id>+<username>@users.noreply.github.com\""
 fi
 cat <<EOF
+- Start the site: npm run dev (then open http://localhost:5173)
 - Open this folder in the Claude desktop app: Code tab, new session, environment picker, WSL, $PWD
 - Optional, for /permissions, /sandbox, and claude doctor: install the CLI inside WSL with
     curl -fsSL https://claude.ai/install.sh | bash
