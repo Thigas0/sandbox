@@ -36,7 +36,9 @@ On Windows, work inside WSL 2.
 
 - **Desktop app (main path):** in the Code tab, start a new session, open the environment picker,
   pick your distribution under **WSL**, and choose `~/sandbox`. A WSL session has no integrated
-  terminal, plugins, or `@` file suggestions yet; use the Ubuntu terminal for Git.
+  terminal, plugins, or `@` file suggestions yet; use the Ubuntu terminal for Git. The plugins this
+  project relies on are vendored as project skills, commands, agents, and `.mcp.json` servers, so a
+  WSL session still loads them (approve the MCP servers when the session asks).
 - **CLI (alternative):** install Claude Code inside WSL with
   `curl -fsSL https://claude.ai/install.sh | bash`, then run `claude` from `~/sandbox`.
 

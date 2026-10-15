@@ -9,8 +9,11 @@ same change.
 - `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
-- `.claude/skills/`: third-party design skills (taste-skill, impeccable, Emil Kowalski's motion skills,
-  web-design-guidelines). Sources, commits, and licenses are in `.claude/skills/SOURCES.md`.
+- `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,
+  and performance tooling (taste-skill, impeccable, Emil Kowalski's motion skills, frontend-design,
+  searchfit-seo, and others), vendored so plugin-less sessions load them. Sources and licenses:
+  `.claude/skills/SOURCES.md`.
+- `.mcp.json`: project MCP servers (Playwright browser control, Figma). Each session asks once to enable them.
 - `docs/design-library/`: DESIGN.md references of well-known sites, to draw a visual direction from.
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.
