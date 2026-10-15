@@ -58,6 +58,13 @@ else
 fi
 
 step "Installing the site's dependencies (Node 22+)"
+# WSL appends the Windows PATH, so a Windows node or npm can answer here and then fail on the
+# \\wsl.localhost\... path. Only a Linux install inside the distribution works.
+for tool in node npm; do
+  case "$(command -v "$tool" || true)" in
+    /mnt/*) fail "$tool resolves to the Windows install ($(command -v "$tool")). Install Node inside WSL with nvm (https://github.com/nvm-sh/nvm): 'nvm install 22', open a new terminal, then run this script again." ;;
+  esac
+done
 node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
 if [ "$node_major" -lt 22 ]; then
   fail "Node.js 22 or newer is required (found: $(node -v 2>/dev/null || echo none)). Install it with nvm (https://github.com/nvm-sh/nvm): 'nvm install 22', then run this script again."

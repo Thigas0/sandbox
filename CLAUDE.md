@@ -9,6 +9,9 @@ same change.
 - `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
+- `.claude/skills/`: third-party design skills (taste-skill, impeccable, Emil Kowalski's motion skills,
+  web-design-guidelines). Sources, commits, and licenses are in `.claude/skills/SOURCES.md`.
+- `docs/design-library/`: DESIGN.md references of well-known sites, to draw a visual direction from.
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.
 - `scripts/setup-wsl.sh`: one-time WSL 2 setup (packages, sandbox check, full verification).
