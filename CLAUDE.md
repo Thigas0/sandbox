@@ -34,6 +34,12 @@ same change.
   (Ubuntu) on Windows, or any Linux.
 - In a cloud session with a preinstalled Chromium, set `PLAYWRIGHT_CHROMIUM_PATH` to it when the
   Playwright version expects a different browser build.
+- If `--full` fails only at the browser tests with `socket() failed: Operation not permitted`, the
+  sandbox is blocking Chromium's Unix sockets. Report it and ask the user to run
+  `./scripts/verify.sh --full` in their own terminal, or to approve a retry outside the sandbox.
+- A dev server you start inside the sandbox is private to that command. The user runs `npm run dev`
+  in their terminal; the Playwright MCP browser (outside the sandbox) can then open
+  http://localhost:5173.
 
 ## Development loop
 

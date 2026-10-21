@@ -18,6 +18,7 @@ copy the folder again from a newer commit, read the diff, and update this table.
 | e2e-test-generator (+ `/e2e-map`, `/e2e-write`), perf-profiler (+ `/perf-audit`, `/perf-compare`) | [petrovicistefan/claude-code-plugins](https://github.com/petrovicistefan/claude-code-plugins) 1.0.0 | as synced 2026-10-15 | MIT |
 | ai-visibility, broken-links, content-brief, content-strategy, content-translation, internal-linking, keyword-clustering, on-page-seo, schema-markup, seo-audit, technical-seo (+ 6 commands in `.claude/commands/`, 3 agents in `.claude/agents/`) | [searchfit/searchfit-seo](https://github.com/searchfit/searchfit-seo) 1.0.0 | as synced 2026-10-15 | MIT |
 | higgsfield-generate, higgsfield-brandkit, higgsfield-marketplace-cards, higgsfield-product-photoshoot, higgsfield-soul-id, higgsfield-video-explainer, higgsfield-websites, higgsfield-youtube-thumbnail | [higgsfield-ai/skills](https://github.com/higgsfield-ai/skills) | `f83af0bc1d937c8119099a11f8ebbf5e6fb99819` | MIT |
+| pro-design | "The Pro Design Skill" by Automation Academy, a public [claude.ai artifact](https://claude.ai/artifact/JdP16M6VtUjBxY8o2qU91A) | as copied 2026-10-21 (`SKILL.md` sha256 `0d7382c2fb2980d1…`) | None stated; the page offers the text to copy into a skills folder |
 
 `docs/design-library/` holds the DESIGN.md files from
 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) at
@@ -27,5 +28,6 @@ Network use: `web-design-guidelines` fetches its rules from raw.githubuserconten
 `impeccable` downloads its engine binary from the project's GitHub releases on first run and checks
 it against the published sha256. `taste-skill/scripts/assets.mjs` searches public-domain image
 archives (Openverse, Wikimedia, the Met, Art Institute of Chicago, Internet Archive, NASA).
-The `higgsfield-*` skills call the `higgsfield` CLI (`npm i -g @higgsfield/cli`), which needs
+`pro-design` opens the built site in a browser for screenshots and may first browse two or three
+sites in the same industry. The `higgsfield-*` skills call the `higgsfield` CLI (`npm i -g @higgsfield/cli`), which needs
 `higgsfield auth login` and Higgsfield credits.
