@@ -61,7 +61,13 @@ commands only: Claude's file tools, hooks, MCP servers, and other helper process
 - While a sandboxed command runs, the sandbox places empty read-only placeholders at protected paths
   that do not exist yet (such as `.bashrc`, `.gitconfig`, `.mcp.json`, `.vscode`, `.claude/hooks`).
   A sandboxed `git status` lists them as untracked, but they are not on disk. Staging explicit paths
-  keeps them out of commits.
+  keeps them out of commits, and `.prettierignore` lists them so the format check can read the tree.
+- When the sandbox blocks Unix domain sockets, Chromium cannot start inside it, so the browser tests
+  in `./scripts/verify.sh --full` fail there with `socket() failed: Operation not permitted`. Run the
+  full check in your own terminal (CI runs it too). The Playwright MCP server runs outside the
+  sandbox, so Claude can still open and screenshot a dev server you start in your terminal.
+- Paths under `.claude/` are protected: sandboxed commands cannot change them, so a `git pull` or
+  branch switch that touches `.claude/skills` must run in your terminal.
 
 ## Native Windows (for example, a college computer)
 
