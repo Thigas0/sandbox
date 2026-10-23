@@ -15,3 +15,10 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+
+# Fotos originais do fotógrafo: ficam só na máquina (o repositório é público).
+# As versões publicadas saem de `npm run fotos` para public/fotos/.
+fotos-originais/
+
+# Arquivos de trabalho da taste-skill (fichas de direção e capturas do inspetor)
+.taste-skill/
