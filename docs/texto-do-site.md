@@ -4,13 +4,15 @@ Todo o texto que aparece no site, por seção. Os dados de `src/dados/site.json`
 chaves (`{precoFoto}`) e estão listados no fim. Marque o que trocar; nada aqui é definitivo até
 você aprovar.
 
-Legenda: **[confirmar]** = depende de uma informação que eu não tenho certeza de que é verdadeira.
+Os quatro pontos marcados [confirmar] na primeira versão já foram respondidos: selfie no Fotto (sim),
+Campinas e região, o cliente da cobertura recebe as fotos, e o Pedro tira uma foto do Fotto quando
+pedem.
 
 ## Título e descrição (busca e prévia do link)
 
 - Título da aba: PDL Fotografia & Imagem – festas e jogos em Campinas
-- Descrição: Fotos de festas e jogos em Campinas por Pedro De Lucca. Ache o seu evento e compre suas
-  fotos no Fotto, ou peça um orçamento pelo WhatsApp.
+- Descrição: Fotos de festas e jogos em Campinas e região por Pedro De Lucca. Ache o seu evento e
+  compre suas fotos no Fotto, ou peça um orçamento pelo WhatsApp.
 
 ## Cabeçalho
 
@@ -21,8 +23,8 @@ Legenda: **[confirmar]** = depende de uma informação que eu não tenho certeza
 ## Abertura (primeira tela)
 
 - Título: **Festas e jogos, de perto**
-- Apoio: Pedro De Lucca fotografa festas, eventos e jogos em Campinas. As fotos de cada evento ficam
-  à venda no Fotto.
+- Apoio: Pedro De Lucca fotografa festas, eventos e jogos em Campinas e região. As fotos de cada
+  evento ficam à venda no Fotto.
 - Botão: Encontrar minhas fotos · Link: Pedir orçamento
 - Abaixo: "Último evento: {nome do evento mais recente}, {data}" (vem de `eventos.json`)
 
@@ -40,8 +42,7 @@ o título curto e o apoio, porque um título de primeira tela precisa caber em d
   Fotto. Enquanto isso, veja todos os álbuns no Fotto.
 - Subtítulo: Como comprar
   1. Abra o seu evento na lista.
-  2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum. **[confirmar: os seus eventos usam
-     a busca por selfie?]**
+  2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum.
   3. Escolha as fotos e pague online. Cada foto custa {precoFoto}.
 
 ## Trabalho
@@ -54,13 +55,11 @@ o título curto e o apoio, porque um título de primeira tela precisa caber em d
 ## Cobertura do seu evento
 
 - Título: Cobertura do seu evento
-- Texto: Festas, eventos e jogos esportivos em Campinas. **[confirmar: atende só Campinas ou também
-  a região?]**
+- Texto: Festas, eventos e jogos esportivos em Campinas e região.
   1. Você conta pelo WhatsApp a data, o local e o tipo de evento.
   2. Combinamos o preço, que depende da data, do local e da duração.
   3. No dia, eu fotografo de perto, do jeito que tudo acontece.
-  4. As fotos ficam prontas em {prazoEntrega}. **[confirmar: numa cobertura contratada, o cliente
-     recebe todas as fotos ou elas vão para o Fotto para os convidados comprarem?]**
+  4. Você recebe as fotos em {prazoEntrega}.
 
 ## Peça um orçamento
 
@@ -83,12 +82,12 @@ o título curto e o apoio, porque um título de primeira tela precisa caber em d
 
 - **Quanto custa uma foto?** Cada foto custa {precoFoto} no Fotto.
 - **Como acho a minha foto?** Abra o evento na lista acima. No Fotto, uma selfie mostra só as fotos
-  em que você aparece; você também pode navegar pelo álbum inteiro. **[confirmar: selfie]**
+  em que você aparece; você também pode navegar pelo álbum inteiro.
 - **Quando as fotos ficam prontas?** Em {prazoEntrega} depois do evento.
 - **Quanto custa uma cobertura?** Depende da data, do local e da duração. O preço é combinado pelo
   WhatsApp: comece pelo pedido de orçamento.
 - **Posso pedir para tirar uma foto minha do ar?** Pode. Mande o link da foto pelo WhatsApp ou para
-  {email} e ela sai deste site e do Fotto. **[confirmar: o Pedro tira do Fotto quando pedem?]**
+  {email} e ela sai deste site e do Fotto.
 
 ## Rodapé
 

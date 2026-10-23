@@ -50,6 +50,7 @@ const CAMPOS_SITE = [
   'fotografo',
   'frase',
   'cidade',
+  'atendimento',
   'estado',
   'pais',
   'whatsapp',

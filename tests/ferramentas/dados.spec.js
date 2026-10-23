@@ -82,6 +82,7 @@ test('site.json: WhatsApp sem o 55 e Instagram com @ são recusados', () => {
     fotografo: 'Pedro',
     frase: 'Frase',
     cidade: 'Campinas',
+    atendimento: 'Campinas e região',
     estado: 'SP',
     pais: 'BR',
     whatsapp: '(15) 99698-8578',

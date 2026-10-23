@@ -67,6 +67,7 @@ test('dados estruturados descrevem o negócio (LocalBusiness) e o fotógrafo (Pe
   });
   expect(pessoa).toMatchObject({ name: site.fotografo, worksFor: { '@id': negocio['@id'] } });
   expect(negocio.sameAs).toContain(site.fotto);
+  expect(negocio.areaServed).toBe(site.atendimento);
   expect(site.url, dominio).toMatch(/^https:\/\//);
   expect(negocio.url).toBe(`${site.url}/`);
   expect(negocio.image).toBe(`${site.url}/og.jpg`);
