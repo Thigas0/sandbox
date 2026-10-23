@@ -27,6 +27,23 @@ export const test = base.extend({
 
 export { expect };
 
+// Rola a página até o fim, em passos instantâneos (o site usa rolagem suave), para carregar as fotos
+// e disparar as entradas; depois volta ao topo e espera toda animação terminar. Medições de contraste
+// e capturas devem ver a página parada, não uma seção no meio da entrada.
+export async function percorrer(page) {
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight / 2) {
+      window.scrollTo({ top: y, behavior: 'instant' });
+      await new Promise((pronto) => requestAnimationFrame(() => setTimeout(pronto, 40)));
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+  await page.waitForFunction(() =>
+    document.getAnimations().every((animacao) => animacao.playState !== 'running'),
+  );
+}
+
 // Mesmo critério do site: sem acento, minúsculas.
 export const normalizar = (texto) =>
   texto

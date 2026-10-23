@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, PAGINAS } from './apoio.js';
+import { test, expect, PAGINAS, percorrer } from './apoio.js';
 
 const REGRAS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 const analisar = (page) => new AxeBuilder({ page }).withTags(REGRAS).analyze();
@@ -7,12 +7,14 @@ const analisar = (page) => new AxeBuilder({ page }).withTags(REGRAS).analyze();
 for (const caminho of PAGINAS) {
   test(`axe não acusa violações em ${caminho}`, async ({ page }) => {
     await page.goto(caminho);
+    await percorrer(page);
     expect((await analisar(page)).violations).toEqual([]);
   });
 
   test(`axe não acusa violações em ${caminho} com movimento reduzido`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(caminho);
+    await percorrer(page);
     expect((await analisar(page)).violations).toEqual([]);
   });
 }
@@ -21,6 +23,7 @@ test('axe não acusa violações com as perguntas abertas e os erros do formulá
   page,
 }) => {
   await page.goto('/');
+  await percorrer(page);
   for (const pergunta of await page.locator('summary').all()) await pergunta.click();
   await page.getByRole('button', { name: 'Enviar pelo WhatsApp' }).click();
   await expect(page.getByText('Informe o seu nome.')).toBeVisible();

@@ -7,7 +7,10 @@ same change.
 ## Map
 
 - `index.html`, `privacidade.html`, `src/`, `public/`: the site (PDL Fotografia & Imagem).
-  `public/` is served as is; `public/fotos/` and `public/og.jpg` are written by `npm run fotos`.
+  `public/` is served as is; `public/fotos/` and `public/og.jpg` are written by `npm run fotos`;
+  `public/marca/` holds the traced logo and `public/fontes/` the self-hosted fonts (OFL).
+- `DESIGN.md`: the brand sheet and the chosen direction ("a lente do D"). `src/movimento.js`: the
+  scroll scene and section entrances, both off under `prefers-reduced-motion`.
 - `src/dados/`: the site's data, edited by hand: `site.json` (contact, links, price), `eventos.json`
   (name, date, place, Fotto link), `fotos.json` (photo selection). `fotos.gerado.json` is generated.
 - `scripts/site/`: the Vite plugin that renders the data into the HTML at build time and validates it.

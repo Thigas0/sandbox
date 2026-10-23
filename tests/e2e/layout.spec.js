@@ -1,4 +1,4 @@
-import { test, expect, PAGINAS } from './apoio.js';
+import { test, expect, PAGINAS, percorrer } from './apoio.js';
 
 // Nada cortado e nenhuma rolagem lateral em 1440 px e 390 px. As capturas de página inteira ficam
 // em test-results/ (anexadas ao relatório) para a conferência visual.
@@ -6,18 +6,6 @@ const TAMANHOS = [
   { nome: '1440', width: 1440, height: 900 },
   { nome: '390', width: 390, height: 844 },
 ];
-
-// Rola até o fim para carregar as fotos com loading="lazy" antes de medir e fotografar.
-async function percorrer(page) {
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight / 2) {
-      window.scrollTo(0, y);
-      await new Promise((pronto) => requestAnimationFrame(() => setTimeout(pronto, 30)));
-    }
-    window.scrollTo(0, 0);
-  });
-}
 
 const problemasDeLayout = (page) =>
   page.evaluate(() => {
@@ -56,12 +44,23 @@ for (const tamanho of TAMANHOS) {
     test(`${caminho} em ${tamanho.nome} px: nada cortado, sem rolagem lateral`, async ({
       page,
     }, info) => {
+      test.setTimeout(90_000);
       await page.setViewportSize({ width: tamanho.width, height: tamanho.height });
       await page.goto(caminho);
       await percorrer(page);
       expect(await problemasDeLayout(page)).toEqual([]);
+      // Só para a captura de página inteira: o Chromium não pinta as fotos "sticky" fora da tela,
+      // então elas viram blocos comuns. As medições acima foram feitas na página como ela é.
+      await page.addStyleTag({
+        content: '.abertura{height:auto}.abertura-palco,.selecao-lamina{position:relative}',
+      });
+      await percorrer(page);
       const nome = `${caminho === '/' ? 'inicio' : 'privacidade'}-${tamanho.nome}-${info.project.name}.png`;
-      const captura = await page.screenshot({ path: info.outputPath(nome), fullPage: true });
+      const captura = await page.screenshot({
+        path: info.outputPath(nome),
+        fullPage: true,
+        scale: 'css',
+      });
       await info.attach(nome, { body: captura, contentType: 'image/png' });
     });
   }

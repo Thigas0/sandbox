@@ -1,16 +1,7 @@
-import { test, expect } from './apoio.js';
+import { test, expect, percorrer } from './apoio.js';
 
 // WCAG 2.2.2 e prefers-reduced-motion: nada se move sozinho sem controle, e quem pede menos
 // movimento vê todo o conteúdo parado.
-async function percorrer(page) {
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight / 2) {
-      window.scrollTo(0, y);
-      await new Promise((pronto) => requestAnimationFrame(() => setTimeout(pronto, 40)));
-    }
-  });
-}
-
 const animacoesRodando = (page) =>
   page.evaluate(() =>
     document

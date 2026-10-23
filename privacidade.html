@@ -8,14 +8,23 @@
       name="description"
       content="O que o site da PDL Fotografia & Imagem faz com os seus dados e como pedir para tirar uma foto sua do ar."
     />
+    <meta name="theme-color" content="#eeecea" />
+    <link rel="preload" href="/fontes/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
     <header class="topo">
-      <a class="marca" href="/">PDL <span>Fotografia &amp; Imagem</span></a>
-      <a class="menu-acao" href="/#orcamento">Pedir orçamento</a>
+      <a class="marca" href="/"
+        ><img
+          src="/marca/pdl-marca.svg"
+          alt="PDL Fotografia &amp; Imagem, início"
+          width="2598"
+          height="1018"
+      /></a>
+      <a class="botao botao-pequeno" href="/#orcamento">Pedir orçamento</a>
     </header>
 
     <main id="conteudo" class="texto-corrido">
@@ -51,14 +60,20 @@
     </main>
 
     <footer class="rodape">
-      <p class="rodape-marca">PDL Fotografia &amp; Imagem</p>
-      <ul class="rodape-links">
-        <li><a href="{{instagramUrl}}">Instagram</a></li>
-        <li><a href="{{behance}}">Behance</a></li>
-        <li><a href="{{fotto}}">Fotto</a></li>
-        <li><a href="/">Início</a></li>
-      </ul>
-      <p class="rodape-credito">© {{ano}} {{nome}}.</p>
+      <nav class="rodape-colunas" aria-label="Rodapé">
+        <ul>
+          <li><a href="{{instagramUrl}}">Instagram</a></li>
+          <li><a href="{{behance}}">Behance</a></li>
+          <li><a href="{{fotto}}">Fotto</a></li>
+        </ul>
+        <ul>
+          <li><a href="/#fotos">Encontrar minhas fotos</a></li>
+          <li><a href="/#orcamento">Pedir orçamento</a></li>
+          <li><a href="/">Início</a></li>
+        </ul>
+      </nav>
+      <p class="rodape-nome" aria-hidden="true">PDL</p>
+      <p class="rodape-credito">Fotos de {{fotografo}}. © {{ano}} {{nome}}, {{atendimento}}.</p>
     </footer>
   </body>
 </html>

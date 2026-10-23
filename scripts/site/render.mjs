@@ -61,15 +61,31 @@ function blocoCapa({ fotos, gerado }, { sizes = '100vw' }) {
   return capa ? picture(capa, gerado[capa.id], { sizes, prioridade: true }) : '';
 }
 
-function blocoSelecao({ fotos, gerado }, { sizes = '100vw' }) {
+const figura = (foto, info, classe, sizes) => {
+  const legenda = foto.legenda ? `<figcaption>${escapar(foto.legenda)}</figcaption>` : '';
+  return `<figure class="${classe}" data-foto="${foto.id}">${picture(foto, info, { sizes })}${legenda}</figure>`;
+};
+
+// A seleção (sem a capa): as primeiras `sequencia` fotos em tela cheia, uma deslizando sobre a
+// outra; as demais em pares. Sem `sequencia`, todas vão para os pares.
+function blocoSelecao({ fotos, gerado }, opcoes) {
   const capa = fotoDeCapa(fotos);
-  return fotos
-    .filter((foto) => foto !== capa)
-    .map((foto) => {
-      const legenda = foto.legenda ? `<figcaption>${escapar(foto.legenda)}</figcaption>` : '';
-      return `<figure class="selecao-item" data-foto="${foto.id}">${picture(foto, gerado[foto.id], { sizes })}${legenda}</figure>`;
-    })
-    .join('\n');
+  const selecao = fotos.filter((foto) => foto !== capa);
+  const quantas = Number(opcoes.sequencia ?? 0);
+  const sequencia = selecao.slice(0, quantas);
+  const resto = selecao.slice(quantas);
+  const blocos = [];
+  if (sequencia.length) {
+    const sizes = opcoes.sizes ?? '100vw';
+    const itens = sequencia.map((foto) => figura(foto, gerado[foto.id], 'selecao-lamina', sizes));
+    blocos.push(`<div class="selecao-sequencia">\n${itens.join('\n')}\n</div>`);
+  }
+  if (resto.length) {
+    const sizes = opcoes['sizes-resto'] ?? '100vw';
+    const itens = resto.map((foto) => figura(foto, gerado[foto.id], 'selecao-par', sizes));
+    blocos.push(`<div class="selecao-resto">\n${itens.join('\n')}\n</div>`);
+  }
+  return blocos.join('\n');
 }
 
 function blocoEventos({ eventos, site }) {
@@ -78,7 +94,7 @@ function blocoEventos({ eventos, site }) {
   }
   const itens = eventos.map(
     (evento) =>
-      `<li class="evento" data-evento><a class="evento-link" href="${escapar(evento.fotto)}"><span class="evento-nome">${escapar(evento.nome)}</span> <span class="evento-detalhes"><time datetime="${evento.data}">${dataPorExtenso(evento.data)}</time>, ${escapar(evento.local)}</span><span class="visualmente-oculto">: ver fotos no Fotto</span></a></li>`,
+      `<li class="evento" data-evento><a class="evento-link" href="${escapar(evento.fotto)}"><span class="evento-nome">${escapar(evento.nome)}</span> <span class="evento-local">${escapar(evento.local)}</span> <time class="evento-data" datetime="${evento.data}">${dataPorExtenso(evento.data)}</time><span class="visualmente-oculto">, ver fotos no Fotto</span></a></li>`,
   );
   return `<ol class="eventos" data-eventos>\n${itens.join('\n')}\n</ol>`;
 }
@@ -186,7 +202,7 @@ const BLOCOS = {
   'ultimo-evento': blocoUltimoEvento,
 };
 
-const MARCADOR = /<!--\s*pdl:([a-z-]+)((?:\s+[a-z]+="[^"]*")*)\s*-->/g;
+const MARCADOR = /<!--\s*pdl:([a-z-]+)((?:\s+[a-z-]+="[^"]*")*)\s*-->/g;
 const CHAVE = /\{\{\s*([A-Za-z]+)\s*\}\}/g;
 
 export function renderizarPagina(html, dados, { agora } = {}) {
@@ -206,7 +222,7 @@ export function renderizarPagina(html, dados, { agora } = {}) {
       return trecho;
     }
     const opcoes = Object.fromEntries(
-      [...atributos.matchAll(/([a-z]+)="([^"]*)"/g)].map(([, chave, valor]) => [chave, valor]),
+      [...atributos.matchAll(/([a-z-]+)="([^"]*)"/g)].map(([, chave, valor]) => [chave, valor]),
     );
     return bloco(dados, opcoes, saida);
   });

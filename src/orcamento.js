@@ -4,11 +4,12 @@ import { whatsapp } from './dados/site.json';
 
 const CAMPOS = ['tipo', 'data', 'cidade', 'nome', 'detalhes'];
 
+// Data de hoje no fuso de quem preenche, no formato do campo de data (AAAA-MM-DD).
 export const hojeLocal = (agora = new Date()) =>
   [
     agora.getFullYear(),
-    String(agora.getMonth() + 1).padStart(2, '0'),
-    String(agora.getDate()).padStart(2, '0'),
+    String(agora.getMonth() + 1).padStart(2, '0'), // taste-skill-ignore: mês da data
+    String(agora.getDate()).padStart(2, '0'), // taste-skill-ignore: dia da data
   ].join('-');
 
 // Os erros saem na ordem dos campos na tela, para o foco ir ao primeiro.

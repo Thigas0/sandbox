@@ -1,1 +1,101 @@
-{}
+{
+  "moldura-capa": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#482848"
+  },
+  "moldura-01": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#283828"
+  },
+  "moldura-02": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#885828"
+  },
+  "moldura-03": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#283848"
+  },
+  "moldura-04": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#683828"
+  },
+  "moldura-05": {
+    "larguras": [
+      427,
+      640,
+      960,
+      1333
+    ],
+    "largura": 1333,
+    "altura": 2000,
+    "cor": "#384828"
+  },
+  "moldura-06": {
+    "larguras": [
+      427,
+      640,
+      960,
+      1333
+    ],
+    "largura": 1333,
+    "altura": 2000,
+    "cor": "#583848"
+  },
+  "moldura-07": {
+    "larguras": [
+      640,
+      960,
+      1440,
+      2000
+    ],
+    "largura": 2000,
+    "altura": 1333,
+    "cor": "#384848"
+  },
+  "moldura-08": {
+    "larguras": [
+      427,
+      640,
+      960,
+      1333
+    ],
+    "largura": 1333,
+    "altura": 2000,
+    "cor": "#986838"
+  }
+}

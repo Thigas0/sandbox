@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "id": "moldura-capa",
+    "arquivo": "molduras/capa.jpg",
+    "alt": "Moldura provisória no lugar da foto de capa",
+    "pessoasIdentificaveis": false,
+    "capa": true
+  },
+  {
+    "id": "moldura-01",
+    "arquivo": "molduras/01.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de jogo",
+    "legenda": "Moldura provisória: jogo",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-02",
+    "arquivo": "molduras/02.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de festa",
+    "legenda": "Moldura provisória: festa",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-03",
+    "arquivo": "molduras/03.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de jogo",
+    "legenda": "Moldura provisória: jogo",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-04",
+    "arquivo": "molduras/04.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de festa",
+    "legenda": "Moldura provisória: festa",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-05",
+    "arquivo": "molduras/05.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de jogo",
+    "legenda": "Moldura provisória: jogo",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-06",
+    "arquivo": "molduras/06.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de festa",
+    "legenda": "Moldura provisória: festa",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-07",
+    "arquivo": "molduras/07.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de jogo",
+    "legenda": "Moldura provisória: jogo",
+    "pessoasIdentificaveis": false
+  },
+  {
+    "id": "moldura-08",
+    "arquivo": "molduras/08.jpg",
+    "alt": "Moldura provisória no lugar de uma foto de festa",
+    "legenda": "Moldura provisória: festa",
+    "pessoasIdentificaveis": false
+  }
+]

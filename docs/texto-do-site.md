@@ -16,50 +16,53 @@ pedem.
 
 ## Cabeçalho
 
-- Marca: PDL Fotografia & Imagem (vira o logo na Fase 3)
-- Menu: Fotos · Trabalho · Cobertura · Perguntas
+- Na página inicial não há logo no cabeçalho: o PDL monumental da abertura já é a marca.
+- Menu: Fotos · Trabalho · Cobertura · Perguntas (no celular, só "Fotos")
 - Ação: Pedir orçamento
+- Na página de privacidade: o logo vetorizado, que leva ao início.
 
 ## Abertura (primeira tela)
 
-- Título: **Festas e jogos, de perto**
+- Título: **PDL**, gigante. Leitores de tela ouvem "PDL Fotografia & Imagem".
 - Apoio: Pedro De Lucca fotografa festas, eventos e jogos em Campinas e região. As fotos de cada
   evento ficam à venda no Fotto.
-- Botão: Encontrar minhas fotos · Link: Pedir orçamento
-- Abaixo: "Último evento: {nome do evento mais recente}, {data}" (vem de `eventos.json`)
+- Botão: Encontrar minhas fotos
+- Abaixo: "Último evento: {nome do evento mais recente}, {data}", que vem de `eventos.json`.
+  Enquanto não houver eventos: "Ver os álbuns no Fotto".
 
 A frase que você aprovou como provisória ("Festas e jogos fotografados de perto, do jeito que
-aconteceram.") virou a descrição do negócio nos dados estruturados. Na tela, ela foi dividida entre
-o título curto e o apoio, porque um título de primeira tela precisa caber em duas linhas no celular.
+aconteceram.") virou a descrição do negócio nos dados estruturados.
 
 ## Encontre suas fotos
 
 - Título: Encontre suas fotos
-- Texto: Procure o evento pelo nome, pelo local ou pelo mês. Cada link abre o álbum certo no Fotto.
 - Campo de busca: "Nome do evento, local ou mês"
-- Sem resultado: Nenhum evento com esse nome. Veja todos os álbuns no Fotto ou pergunte pelo WhatsApp.
-- Lista vazia (enquanto não houver eventos): Os álbuns aparecem aqui assim que as fotos entram no
-  Fotto. Enquanto isso, veja todos os álbuns no Fotto.
-- Subtítulo: Como comprar
+- Ao lado da busca, os três passos:
   1. Abra o seu evento na lista.
   2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum.
   3. Escolha as fotos e pague online. Cada foto custa {precoFoto}.
+- Cada linha da lista: nome do evento · local · data por extenso. A linha inteira é o link do
+  álbum.
+- Sem resultado: Nenhum evento com esse nome. Veja todos os álbuns no Fotto ou pergunte pelo WhatsApp.
+- Lista vazia (enquanto não houver eventos): Os álbuns aparecem aqui assim que as fotos entram no
+  Fotto. Enquanto isso, veja todos os álbuns no Fotto.
 
 ## Trabalho
 
 - Título: Trabalho
 - Texto: Uma seleção de festas e jogos. O portfólio completo está no Behance.
-- Fotos: a seleção de 12 a 20 (proposta na Fase 1), cada uma com descrição para leitor de tela e
-  legenda opcional.
+- Fotos: a seleção de 12 a 20, cada uma com descrição para leitor de tela e legenda curta (evento,
+  cidade, mês). Hoje são molduras provisórias.
 
 ## Cobertura do seu evento
 
-- Título: Cobertura do seu evento
+- Título (para leitores de tela): Cobertura do seu evento
 - Texto: Festas, eventos e jogos esportivos em Campinas e região.
-  1. Você conta pelo WhatsApp a data, o local e o tipo de evento.
-  2. Combinamos o preço, que depende da data, do local e da duração.
-  3. No dia, eu fotografo de perto, do jeito que tudo acontece.
-  4. Você recebe as fotos em {prazoEntrega}.
+- As quatro frases da escada, cada uma com uma linha de apoio:
+  - **Você chama no WhatsApp.** Conta a data, o local e o tipo de evento.
+  - **Combinamos o preço.** Ele depende da data, do local e da duração.
+  - **No dia, eu fotografo.** De perto, do jeito que tudo acontece.
+  - **Você recebe as fotos.** Em {prazoEntrega} depois do evento.
 
 ## Peça um orçamento
 
@@ -75,7 +78,7 @@ o título curto e o apoio, porque um título de primeira tela precisa caber em d
 - Sucesso: O WhatsApp abriu em outra aba com a sua mensagem. É só enviar.
 - Janela bloqueada: O navegador bloqueou a nova janela. Abra o WhatsApp pelo link abaixo ou copie a
   mensagem. · [Abrir o WhatsApp] [Copiar mensagem] · Mensagem copiada. Agora é só colar no WhatsApp.
-- Abaixo: Prefere e-mail? {email}
+- No cupom, abaixo do texto: Prefere e-mail? {email}
 - Sem JavaScript: Sem JavaScript, escreva para {email} ou chame no Instagram @pdl_fotografia_imagem.
 
 ## Perguntas
@@ -91,9 +94,9 @@ o título curto e o apoio, porque um título de primeira tela precisa caber em d
 
 ## Rodapé
 
-- PDL Fotografia & Imagem (grande)
-- Links: Instagram · Behance · Fotto · Privacidade
-- Fotos de Pedro De Lucca. © {ano} PDL Fotografia & Imagem.
+- Links: Instagram · Behance · Fotto, e Encontrar minhas fotos · Pedir orçamento · Privacidade
+- PDL de ponta a ponta, em cores invertidas
+- Fotos de Pedro De Lucca. © {ano} PDL Fotografia & Imagem, Campinas e região.
 
 ## Página de privacidade
 

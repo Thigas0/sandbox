@@ -1,0 +1,8 @@
+Fontes servidas pelo próprio site (nenhum pedido a terceiros).
+
+bodoni-moda-latin.woff2  Bodoni Moda (eixos de peso e tamanho óptico), subconjunto latino
+jost-latin.woff2         Jost (eixo de peso), subconjunto latino
+
+Origem: pacotes @fontsource-variable/bodoni-moda e @fontsource-variable/jost, versão 5.3.0 (npm).
+Licença: SIL Open Font License 1.1 (OFL-bodoni-moda.txt e OFL-jost.txt).
+O subconjunto latino cobre o português (U+0000-00FF) e a pontuação tipográfica (U+2000-206F).

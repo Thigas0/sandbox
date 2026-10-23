@@ -134,6 +134,34 @@ test('o HTML gerado traz cada evento com o link exato, do mais recente ao mais a
   expect(html).toContain('<time datetime="2026-10-18">18 de outubro de 2026</time>');
 });
 
+test('a seleção põe a capa na lente e divide o resto entre tela cheia e pares', () => {
+  const dados = lerDados(new URL('../..', import.meta.url).pathname);
+  const info = { larguras: [640, 960], largura: 960, altura: 640, cor: '#123456' };
+  const foto = (id, extra = {}) => ({
+    id,
+    arquivo: `${id}.jpg`,
+    alt: `Foto ${id}`,
+    pessoasIdentificaveis: false,
+    ...extra,
+  });
+  const fotos = [foto('a'), foto('capa', { capa: true }), foto('b'), foto('c')];
+  const gerado = Object.fromEntries(fotos.map((f) => [f.id, info]));
+  const html = renderizarPagina(
+    '<!-- pdl:capa sizes="100vw" -->|<!-- pdl:selecao sequencia="2" sizes="100vw" sizes-resto="50vw" -->',
+    { ...dados, fotos, gerado },
+  );
+  const [capa, selecao] = html.split('|');
+  expect(capa).toContain('alt="Foto capa" fetchpriority="high"');
+  expect(capa).not.toContain('loading="lazy"');
+  const ids = (classe) =>
+    [...selecao.matchAll(new RegExp(`class="${classe}" data-foto="([^"]+)"`, 'g'))].map(
+      (m) => m[1],
+    );
+  expect(ids('selecao-lamina')).toEqual(['a', 'b']);
+  expect(ids('selecao-par')).toEqual(['c']);
+  expect(selecao).toContain('sizes="50vw" width="960" height="640" alt="Foto c" loading="lazy"');
+});
+
 test('uma chave {{...}} que não existe para o build', () => {
   const dados = lerDados(new URL('../..', import.meta.url).pathname);
   expect(problemas(() => renderizarPagina('<p>{{telefone}}</p>', dados))[0]).toMatch(
