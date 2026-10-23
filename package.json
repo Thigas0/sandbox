@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "fotos": "node scripts/fotos/gerar.mjs",
+    "fotos:verificar": "node scripts/fotos/verificar.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

@@ -20,7 +20,13 @@ cd ~/sandbox && ./scripts/setup-wsl.sh
 npm run dev        # local server with live reload: http://localhost:5173
 npm run build      # production build in dist/
 npm run test:e2e   # Playwright tests on desktop and phone, with an axe accessibility check
+npm run fotos      # published photos from fotos-originais/ (kept out of Git)
 ```
+
+## Atualizar o site (eventos e fotos)
+
+Eventos, fotos e dados do fotógrafo ficam em `src/dados/`. O passo a passo, em português, está em
+[docs/como-atualizar.md](docs/como-atualizar.md).
 
 ## Verify
 

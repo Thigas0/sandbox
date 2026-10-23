@@ -3,25 +3,217 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ponto de partida para os meus sites." />
-    <title>Meu site</title>
+    <title>PDL Fotografia &amp; Imagem – festas e jogos em Campinas</title>
+    <meta
+      name="description"
+      content="Fotos de festas e jogos em Campinas por Pedro De Lucca. Ache o seu evento e compre suas fotos no Fotto, ou peça um orçamento pelo WhatsApp."
+    />
+    <!-- pdl:head -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">Meu site</a>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <header class="topo">
+      <a class="marca" href="/">PDL <span>Fotografia &amp; Imagem</span></a>
+      <nav class="menu" aria-label="Principal">
+        <ul>
+          <li><a href="#fotos">Fotos</a></li>
+          <li><a href="#trabalho">Trabalho</a></li>
+          <li><a href="#cobertura">Cobertura</a></li>
+          <li><a href="#perguntas">Perguntas</a></li>
+        </ul>
+      </nav>
+      <a class="menu-acao" href="#orcamento">Pedir orçamento</a>
     </header>
+
     <main id="conteudo">
-      <h1>Olá, mundo!</h1>
-      <p>
-        Edite <code>index.html</code>, <code>src/style.css</code> e <code>src/main.js</code> para
-        começar.
-      </p>
-      <button type="button" id="contador">Cliques: 0</button>
+      <section class="abertura" aria-labelledby="abertura-titulo">
+        <div class="abertura-texto">
+          <h1 id="abertura-titulo">Festas e jogos, de perto</h1>
+          <p class="abertura-apoio">
+            {{fotografo}} fotografa festas, eventos e jogos em {{cidade}}. As fotos de cada evento
+            ficam à venda no Fotto.
+          </p>
+          <p class="abertura-acoes">
+            <a class="botao" href="#fotos">Encontrar minhas fotos</a>
+            <a href="#orcamento">Pedir orçamento</a>
+          </p>
+          <!-- pdl:ultimo-evento -->
+        </div>
+        <!-- pdl:capa sizes="100vw" -->
+      </section>
+
+      <section id="fotos" class="fotos" aria-labelledby="fotos-titulo">
+        <h2 id="fotos-titulo">Encontre suas fotos</h2>
+        <p>
+          Procure o evento pelo nome, pelo local ou pelo mês. Cada link abre o álbum certo no Fotto.
+        </p>
+        <div class="busca" data-busca hidden>
+          <label for="busca-eventos">Nome do evento, local ou mês</label>
+          <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
+          <p class="busca-contagem" data-busca-contagem aria-live="polite"></p>
+        </div>
+        <!-- pdl:eventos -->
+        <p class="busca-vazia" data-busca-vazia hidden>
+          Nenhum evento com esse nome. Veja <a href="{{fotto}}">todos os álbuns no Fotto</a> ou
+          pergunte pelo <a href="#orcamento">WhatsApp</a>.
+        </p>
+        <h3>Como comprar</h3>
+        <ol class="passos">
+          <li>Abra o seu evento na lista.</li>
+          <li>No Fotto, encontre-se com uma selfie ou navegue pelo álbum.</li>
+          <li>Escolha as fotos e pague online. Cada foto custa {{precoFoto}}.</li>
+        </ol>
+      </section>
+
+      <section id="trabalho" class="trabalho" aria-labelledby="trabalho-titulo">
+        <h2 id="trabalho-titulo">Trabalho</h2>
+        <p>
+          Uma seleção de festas e jogos. O portfólio completo está no
+          <a href="{{behance}}">Behance</a>.
+        </p>
+        <div class="selecao">
+          <!-- pdl:selecao sizes="(min-width: 64em) 60vw, 100vw" -->
+        </div>
+      </section>
+
+      <section id="cobertura" class="cobertura" aria-labelledby="cobertura-titulo">
+        <h2 id="cobertura-titulo">Cobertura do seu evento</h2>
+        <p>Festas, eventos e jogos esportivos em {{cidade}}.</p>
+        <ol class="passos">
+          <li>Você conta pelo WhatsApp a data, o local e o tipo de evento.</li>
+          <li>Combinamos o preço, que depende da data, do local e da duração.</li>
+          <li>No dia, eu fotografo de perto, do jeito que tudo acontece.</li>
+          <li>As fotos ficam prontas em {{prazoEntrega}}.</li>
+        </ol>
+      </section>
+
+      <section id="orcamento" class="orcamento" aria-labelledby="orcamento-titulo">
+        <h2 id="orcamento-titulo">Peça um orçamento</h2>
+        <p>Preencha e o WhatsApp abre com a mensagem pronta. Nada fica guardado neste site.</p>
+        <form class="orcamento-form" data-orcamento novalidate hidden>
+          <div class="campo">
+            <label for="orc-tipo">Tipo de evento</label>
+            <select id="orc-tipo" name="tipo" required aria-describedby="orc-tipo-erro">
+              <option value="">Escolha</option>
+              <option>Festa</option>
+              <option>Jogo ou campeonato</option>
+              <option>Outro evento</option>
+            </select>
+            <p class="erro" id="orc-tipo-erro" data-erro="tipo" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="orc-data">Data do evento</label>
+            <input
+              id="orc-data"
+              name="data"
+              type="date"
+              required
+              aria-describedby="orc-data-erro"
+            />
+            <p class="erro" id="orc-data-erro" data-erro="data" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="orc-cidade">Cidade</label>
+            <input
+              id="orc-cidade"
+              name="cidade"
+              type="text"
+              autocomplete="address-level2"
+              required
+              aria-describedby="orc-cidade-erro"
+            />
+            <p class="erro" id="orc-cidade-erro" data-erro="cidade" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="orc-nome">Seu nome</label>
+            <input
+              id="orc-nome"
+              name="nome"
+              type="text"
+              autocomplete="name"
+              required
+              aria-describedby="orc-nome-erro"
+            />
+            <p class="erro" id="orc-nome-erro" data-erro="nome" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="orc-detalhes">Detalhes (opcional)</label>
+            <textarea
+              id="orc-detalhes"
+              name="detalhes"
+              rows="3"
+              aria-describedby="orc-detalhes-dica"
+            ></textarea>
+            <p class="dica" id="orc-detalhes-dica">
+              Horário, número de convidados, o que não pode faltar.
+            </p>
+          </div>
+          <button class="botao" type="submit">Enviar pelo WhatsApp</button>
+          <p class="orcamento-status" data-orcamento-status aria-live="polite"></p>
+          <p class="orcamento-alternativa" data-orcamento-alternativa hidden>
+            <a data-orcamento-link href="#orcamento" target="_blank" rel="noopener"
+              >Abrir o WhatsApp</a
+            >
+            <button type="button" data-orcamento-copiar>Copiar mensagem</button>
+          </p>
+        </form>
+        <noscript>
+          <p>
+            Sem JavaScript, escreva para <a href="{{mailto}}">{{email}}</a> ou chame no Instagram
+            <a href="{{instagramUrl}}">{{instagram}}</a>.
+          </p>
+        </noscript>
+        <p>Prefere e-mail? <a href="{{mailto}}">{{email}}</a></p>
+      </section>
+
+      <section id="perguntas" class="perguntas" aria-labelledby="perguntas-titulo">
+        <h2 id="perguntas-titulo">Perguntas</h2>
+        <details>
+          <summary>Quanto custa uma foto?</summary>
+          <p>Cada foto custa {{precoFoto}} no Fotto.</p>
+        </details>
+        <details>
+          <summary>Como acho a minha foto?</summary>
+          <p>
+            Abra o evento na lista acima. No Fotto, uma selfie mostra só as fotos em que você
+            aparece; você também pode navegar pelo álbum inteiro.
+          </p>
+        </details>
+        <details>
+          <summary>Quando as fotos ficam prontas?</summary>
+          <p>Em {{prazoEntrega}} depois do evento.</p>
+        </details>
+        <details>
+          <summary>Quanto custa uma cobertura?</summary>
+          <p>
+            Depende da data, do local e da duração. O preço é combinado pelo WhatsApp: comece pelo
+            <a href="#orcamento">pedido de orçamento</a>.
+          </p>
+        </details>
+        <details>
+          <summary>Posso pedir para tirar uma foto minha do ar?</summary>
+          <p>
+            Pode. Mande o link da foto pelo WhatsApp ou para <a href="{{mailto}}">{{email}}</a> e
+            ela sai deste site e do Fotto.
+          </p>
+        </details>
+      </section>
     </main>
-    <footer class="site-footer">
-      <p>Feito com Vite.</p>
+
+    <footer class="rodape">
+      <p class="rodape-marca">PDL Fotografia &amp; Imagem</p>
+      <ul class="rodape-links">
+        <li><a href="{{instagramUrl}}">Instagram</a></li>
+        <li><a href="{{behance}}">Behance</a></li>
+        <li><a href="{{fotto}}">Fotto</a></li>
+        <li><a href="/privacidade.html">Privacidade</a></li>
+      </ul>
+      <p class="rodape-credito">Fotos de {{fotografo}}. © {{ano}} {{nome}}.</p>
     </footer>
     <script type="module" src="/src/main.js"></script>
   </body>

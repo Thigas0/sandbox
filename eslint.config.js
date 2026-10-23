@@ -10,7 +10,17 @@ export default [
     languageOptions: { globals: globals.browser },
   },
   {
-    files: ['*.config.js', 'tests/**/*.js'],
+    files: ['*.config.js', 'tests/**/*.js', 'scripts/**/*.mjs'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    // Os callbacks de page.evaluate() rodam no navegador.
+    files: ['tests/e2e/**/*.js'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
+  },
+  {
+    // `async ({}, info) => …` é como o Playwright dá o testInfo sem pedir fixtures.
+    files: ['tests/**/*.js'],
+    rules: { 'no-empty-pattern': ['error', { allowObjectPatternsAsParameters: true }] },
   },
 ];

@@ -6,8 +6,17 @@ same change.
 
 ## Map
 
-- `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
-- `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
+- `index.html`, `privacidade.html`, `src/`, `public/`: the site (PDL Fotografia & Imagem).
+  `public/` is served as is; `public/fotos/` and `public/og.jpg` are written by `npm run fotos`.
+- `src/dados/`: the site's data, edited by hand: `site.json` (contact, links, price), `eventos.json`
+  (name, date, place, Fotto link), `fotos.json` (photo selection). `fotos.gerado.json` is generated.
+- `scripts/site/`: the Vite plugin that renders the data into the HTML at build time and validates it.
+- `scripts/fotos/`: the photo pipeline (`gerar.mjs`) and its checker (`verificar.mjs`). Originals live in
+  `fotos-originais/`, which is ignored by Git and never committed.
+- `docs/plano-site.md`: the approved plan. `docs/como-atualizar.md`: how to add events and swap photos.
+- `tests/e2e/`: Playwright browser tests (events → Fotto, quote via WhatsApp, axe, keyboard, layout at
+  1440/390 px, SEO, motion, real text), on desktop and phone. They never reach outside localhost.
+- `tests/ferramentas/`: browser-less tests for the data validation and the photo pipeline.
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,
   and performance tooling (taste-skill, impeccable, Emil Kowalski's motion skills, frontend-design,
@@ -28,8 +37,10 @@ same change.
 - Full check, before a commit and in CI: `./scripts/verify.sh --full`
 - Install: `npm ci`, then `npx playwright install chromium` once.
 - Dev server: `npm run dev` (http://localhost:5173). Build: `npm run build` (to `dist/`).
-- Format: `npm run format`. Lint: `npm run lint`. Browser tests: `npm run test:e2e`.
-- `verify.sh` runs format check, lint, and build; `--full` adds the browser tests.
+- Format: `npm run format`. Lint: `npm run lint`. Browser and tool tests: `npm run test:e2e`.
+- Photos: `npm run fotos` (needs `fotos-originais/`), then `npm run fotos:verificar`.
+- `verify.sh` runs format check, lint, build, and the published-photos check; `--full` adds the
+  browser and tool tests.
 - Requirements: bash 4.4+, git, python3, and Node.js 22+. The intended environment is WSL 2
   (Ubuntu) on Windows, or any Linux.
 - In a cloud session with a preinstalled Chromium, set `PLAYWRIGHT_CHROMIUM_PATH` to it when the

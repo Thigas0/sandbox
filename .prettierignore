@@ -6,6 +6,8 @@ package-lock.json
 *.md
 *.yml
 .claude/
+# Escrito por `npm run fotos`; quem edita é o script, não uma pessoa.
+src/dados/fotos.gerado.json
 # Placeholders vazios que o sandbox do Claude Code cria nos caminhos protegidos enquanto um comando
 # roda. Não existem no disco e são ilegíveis dentro do sandbox, o que faria o --check falhar.
 .bash_profile

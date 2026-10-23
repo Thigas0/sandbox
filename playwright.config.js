@@ -5,7 +5,6 @@ import { defineConfig, devices } from '@playwright/test';
 const executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined;
 
 export default defineConfig({
-  testDir: 'tests/e2e',
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: process.env.CI ? 'github' : 'list',
@@ -14,8 +13,18 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], launchOptions: { executablePath } } },
-    { name: 'celular', use: { ...devices['Pixel 7'], launchOptions: { executablePath } } },
+    {
+      name: 'desktop',
+      testDir: 'tests/e2e',
+      use: { ...devices['Desktop Chrome'], launchOptions: { executablePath } },
+    },
+    {
+      name: 'celular',
+      testDir: 'tests/e2e',
+      use: { ...devices['Pixel 7'], launchOptions: { executablePath } },
+    },
+    // Testes sem navegador: o processo das fotos e a validação dos arquivos de dados.
+    { name: 'ferramentas', testDir: 'tests/ferramentas' },
   ],
   webServer: {
     command: 'npm run build && npm run preview -- --strictPort',

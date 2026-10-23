@@ -156,6 +156,7 @@ run_npm() {
 check_format() { run_npm format:check; }
 check_lint() { run_npm lint; }
 check_build() { run_npm build; }
+check_fotos() { run_npm fotos:verificar; }
 check_e2e() { run_npm test:e2e; }
 
 has_site=0
@@ -164,6 +165,7 @@ if [ "$has_site" -eq 1 ]; then
   check 'Formatting (prettier --check)' check_format
   check 'Lint (eslint)' check_lint
   check 'Build (vite build)' check_build
+  check 'Published photos: sizes, formats, credit, no GPS (npm run fotos:verificar)' check_fotos
 fi
 
 if [ "$full" -eq 1 ]; then

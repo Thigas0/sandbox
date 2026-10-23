@@ -1,0 +1,41 @@
+// Apoio comum aos testes de navegador.
+// - Nenhuma requisição sai de localhost: nada chega de verdade ao WhatsApp, ao Fotto ou a terceiros.
+//   Um teste que precisa simular o Fotto registra page.route(), que tem precedência sobre esta trava.
+// - Os dados esperados vêm dos mesmos JSON que geram o site.
+import { readFileSync } from 'node:fs';
+import { test as base, expect } from '@playwright/test';
+
+export const lerDado = (nome) =>
+  JSON.parse(readFileSync(new URL(`../../src/dados/${nome}`, import.meta.url), 'utf8'));
+
+export const PAGINAS = ['/', '/privacidade.html'];
+
+export const test = base.extend({
+  requisicoesExternas: [
+    async ({ context }, use) => {
+      const tentativas = [];
+      await context.route(/^https?:\/\/(?!localhost[:/]|127\.0\.0\.1[:/])/, (rota) => {
+        tentativas.push(rota.request().url());
+        return rota.abort();
+      });
+      await use(tentativas);
+      expect(tentativas, 'nenhuma requisição deve sair de localhost').toEqual([]);
+    },
+    { auto: true },
+  ],
+});
+
+export { expect };
+
+// Mesmo critério do site: sem acento, minúsculas.
+export const normalizar = (texto) =>
+  texto
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+
+// Ordem em que o build mostra os eventos: do mais recente ao mais antigo.
+export const eventosOrdenados = (eventos) =>
+  [...eventos].sort(
+    (a, b) => b.data.localeCompare(a.data) || a.nome.localeCompare(b.nome, 'pt-BR'),
+  );

@@ -1,7 +1,7 @@
-const botao = document.querySelector('#contador');
-let cliques = 0;
+import { iniciarBuscaDeEventos } from './eventos.js';
+import { iniciarOrcamento } from './orcamento.js';
 
-botao.addEventListener('click', () => {
-  cliques += 1;
-  botao.textContent = `Cliques: ${cliques}`;
-});
+iniciarBuscaDeEventos(document);
+
+const formulario = document.querySelector('[data-orcamento]');
+if (formulario) iniciarOrcamento(formulario);
