@@ -25,7 +25,7 @@ build para e diz o arquivo, o item e o que corrigir.
    aparece também na abertura como "Último evento".
 4. Rode `npm run format` (arruma os espaços) e `./scripts/verify.sh`.
 
-Para conferir no navegador: `npm run dev` e abra http://localhost:5173.
+Para conferir no navegador, veja [Ver o site](#ver-o-site).
 
 ## Trocar ou incluir uma foto
 
@@ -63,3 +63,39 @@ Para conferir no navegador: `npm run dev` e abra http://localhost:5173.
 (sem @), links do Behance e do Fotto, endereço do site, preço por foto, prazo de entrega e crédito.
 Enquanto um valor não for confirmado, ele fica como `A CONFIRMAR`, e o teste de texto
 (`./scripts/verify.sh --full`) acusa onde ele aparece.
+
+## Ver o site
+
+No terminal do Ubuntu (WSL), dentro da pasta do repositório, rode `npm ci` e depois `npm run dev`.
+O `npm ci` só é necessário na primeira vez e quando o `package.json` mudar. Abra
+http://localhost:5173 no navegador do Windows. Deixe o terminal aberto enquanto olha; `Ctrl+C`
+desliga. Salvar um arquivo de `src/dados/` recarrega a página sozinha. Para ver o site exatamente
+como vai ao ar, rode `npm run build && npm run preview` e abra http://localhost:4173.
+
+Para ver a versão de celular no computador, abra o Chrome ou o Edge, aperte `F12`, depois
+`Ctrl+Shift+M`, e escolha um celular.
+
+Para ver no seu celular, na mesma rede Wi-Fi, rode `npm run dev -- --host` e abra no celular o
+endereço "Network" que aparece. No WSL 2 esse endereço é interno do Windows, e o celular só o
+alcança depois deste ajuste, feito uma vez só (Windows 11 22H2 ou mais novo):
+
+1. Crie o arquivo `C:\Users\<seu usuário>\.wslconfig` com:
+
+   ```ini
+   [wsl2]
+   networkingMode=mirrored
+   ```
+
+2. No PowerShell aberto como administrador, libere as portas do site e reinicie o WSL:
+
+   ```powershell
+   New-NetFirewallHyperVRule -Name SitePDL -DisplayName "Site PDL" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 5173,4173
+   wsl --shutdown
+   ```
+
+3. Abra o Ubuntu de novo e rode `npm run dev -- --host`. O endereço "Network" passa a ser o da sua
+   rede, algo como `http://192.168.0.10:5173`.
+
+Isso não publica nada: só aparelhos na mesma rede abrem o endereço, e só enquanto o comando estiver
+rodando. No Windows 10 o caminho é outro (`netsh interface portproxy`); veja
+[a documentação do WSL](https://learn.microsoft.com/pt-br/windows/wsl/networking).

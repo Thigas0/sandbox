@@ -7,7 +7,8 @@ contratar consegue pedir um orçamento. Três pessoas bastam para achar os probl
 
 - **Site:** rode no seu computador `npm run build && npm run preview -- --host` e anote o endereço
   "Network" que aparece (por exemplo `http://192.168.0.10:4173`). Não é publicação: só quem está na
-  mesma rede Wi-Fi abre.
+  mesma rede Wi-Fi abre. No WSL 2, faça antes, uma vez só, o ajuste de rede de
+  [Ver o site](como-atualizar.md#ver-o-site); sem ele, o celular não alcança o computador.
 - **Aparelho:** o celular da própria pessoa, conectado na mesma rede, no navegador que ela usa.
 - **Conteúdo real:** pelo menos um evento recente em `src/dados/eventos.json` com o link do álbum,
   fotos reais no site (não as molduras) e o preço por foto preenchido.
