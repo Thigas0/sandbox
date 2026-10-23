@@ -17,6 +17,9 @@ same change.
 - `scripts/fotos/`: the photo pipeline (`gerar.mjs`) and its checker (`verificar.mjs`). Originals live in
   `fotos-originais/`, which is ignored by Git and never committed.
 - `docs/plano-site.md`: the approved plan. `docs/como-atualizar.md`: how to add events and swap photos.
+  `docs/texto-do-site.md`: the copy deck the client approves. `docs/estudo-referencias.md`: the
+  reference study and the two dealt directions. `docs/roteiro-teste-clientes.md`: the 5-minute test
+  script for three real clients.
 - `tests/e2e/`: Playwright browser tests (events → Fotto, quote via WhatsApp, axe, keyboard, layout at
   1440/390 px, SEO, motion, real text), on desktop and phone. They never reach outside localhost.
 - `tests/ferramentas/`: browser-less tests for the data validation and the photo pipeline.

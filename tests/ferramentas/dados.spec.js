@@ -9,6 +9,7 @@ import {
   validarFotos,
   validarSite,
 } from '../../scripts/site/dados.mjs';
+import { arquivosDeBusca } from '../../scripts/site/plugin.mjs';
 import { renderizarPagina } from '../../scripts/site/render.mjs';
 
 // Quem atualiza os eventos sozinho precisa de erros que digam o arquivo, o item e o que corrigir.
@@ -166,5 +167,19 @@ test('uma chave {{...}} que não existe para o build', () => {
   const dados = lerDados(new URL('../..', import.meta.url).pathname);
   expect(problemas(() => renderizarPagina('<p>{{telefone}}</p>', dados))[0]).toMatch(
     /^HTML: \{\{telefone\}\} não existe/,
+  );
+});
+
+test('robots.txt sempre; sitemap só com o domínio confirmado', () => {
+  expect(arquivosDeBusca({ url: 'A CONFIRMAR' })).toEqual({
+    'robots.txt': 'User-agent: *\nAllow: /\n',
+  });
+  const comDominio = arquivosDeBusca({ url: 'https://www.exemplo.com.br' });
+  expect(comDominio['robots.txt']).toBe(
+    'User-agent: *\nAllow: /\n\nSitemap: https://www.exemplo.com.br/sitemap.xml\n',
+  );
+  expect(comDominio['sitemap.xml']).toContain('<loc>https://www.exemplo.com.br/</loc>');
+  expect(comDominio['sitemap.xml']).toContain(
+    '<loc>https://www.exemplo.com.br/privacidade.html</loc>',
   );
 });

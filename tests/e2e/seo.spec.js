@@ -19,6 +19,24 @@ test('título e descrição existem e cabem no resultado de busca', async ({ pag
   await expect(page.locator('h1')).toHaveCount(1);
 });
 
+test('robots.txt libera a indexação', async ({ request }) => {
+  const resposta = await request.get('/robots.txt');
+  expect(resposta.ok()).toBe(true);
+  const texto = await resposta.text();
+  expect(texto).toMatch(/^User-agent: \*\nAllow: \/$/m);
+  expect(texto).not.toContain('<html');
+});
+
+test('o sitemap lista as duas páginas com o endereço do site', async ({ request }) => {
+  expect(site.url, dominio).toMatch(/^https:\/\//);
+  expect(await (await request.get('/robots.txt')).text()).toContain(
+    `Sitemap: ${site.url}/sitemap.xml`,
+  );
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  expect(sitemap).toContain(`<loc>${site.url}/</loc>`);
+  expect(sitemap).toContain(`<loc>${site.url}/privacidade.html</loc>`);
+});
+
 test('a prévia do link tem título, descrição, URL e imagem absolutas', async ({
   page,
   request,
