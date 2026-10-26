@@ -51,7 +51,12 @@ Para conferir no navegador, veja [Ver o site](#ver-o-site).
    - `foco` (opcional): o ponto que não pode ser cortado, na horizontal e na vertical.
    - `"capa": true` (opcional, em uma só foto): ela abre a página e vira a imagem da prévia do
      link no WhatsApp. Sem isso, vale a primeira da lista.
-   - A ordem da lista é a ordem em que as fotos aparecem.
+   - `"cobertura": true` (opcional, em uma só foto): ela ilustra os quatro passos da Cobertura e
+     sai de Trabalho. Sem isso, vale a última da lista.
+   - A ordem da lista é a ordem em que as fotos aparecem em Trabalho, em pares desencontrados que
+     se repetem a cada oito. No computador, a 1ª e a 5ª de cada oito ficam em pé (3:4), a 2ª e a 6ª
+     quase quadradas (5:4), a 3ª e a 7ª deitadas (3:2) e a 4ª e a 8ª, pequenas, em pé (4:5). Use o
+     `foco` para que o recorte não corte o que importa.
 3. Rode `npm run fotos`. Ele gera as versões AVIF e WebP em `public/fotos/` (lado maior até
    2000 px, crédito no EXIF, sem GPS), atualiza `public/og.jpg` e apaga as versões das fotos que
    saíram.

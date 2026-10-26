@@ -20,6 +20,7 @@
   --tinta: #2b2a29;
   --tinta-suave: #5f5b57;
   --tinta-clara: #c9c4be;
+  --pedra: #cdc3b6;
   --acao: #5c6b54;
   --acao-forte: #4a5744;
   --acao-tinta: #ffffff;
@@ -34,7 +35,10 @@
   --t-corpo: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   --t-linha: clamp(1.25rem, 1rem + 1vw, 1.875rem);
   --t-titulo: clamp(2.125rem, 1.25rem + 3.6vw, 4.5rem);
-  --t-monumento: min(39vw, 60svh);
+
+  /* O logo como monumento: a largura que cabe na tela, limitada pela altura (2831 × 1290). */
+  --logo-altura: 58svh;
+  --logo: min(100vw - 2 * var(--m), var(--logo-altura) * 2.1946);
 
   --m: clamp(1rem, 2vw, 2rem);
   --secao: clamp(6rem, 13vw, 11rem);
@@ -219,13 +223,13 @@ a:hover {
   height: 2.25rem;
 }
 
-/* Abertura: o PDL como monumento; a capa nasce na lente do D. */
+/* Abertura: o logo como monumento; a capa nasce na lente do D. */
 .abertura {
   position: relative;
   height: 210svh;
 }
 
-/* Grade: espaço do cabeçalho, faixa de texto, respiro, monumento. Nada se sobrepõe em tela baixa. */
+/* Grade: espaço do cabeçalho, faixa de texto, respiro, logo. Nada se sobrepõe em tela baixa. */
 .abertura-palco {
   position: sticky;
   top: 0;
@@ -240,7 +244,10 @@ a:hover {
   inset: 0;
   z-index: 1;
   background: var(--superficie);
-  clip-path: circle(var(--r, 8vw) at var(--x, 49.5%) var(--y, 71%));
+  clip-path: circle(
+    var(--r, calc(var(--logo) / 2.1946 * 0.169)) at var(--x, calc(50% + var(--logo) * 0.0071))
+      var(--y, calc(100% - var(--m) - var(--logo) / 2.1946 * 0.5012))
+  );
 }
 
 .abertura-lente .foto,
@@ -291,18 +298,16 @@ a:hover {
   position: relative;
   z-index: 2;
   grid-row: 4;
-  margin: 0;
-  font: 500 var(--t-monumento) / 0.8 var(--display);
-  letter-spacing: -0.04em;
-  text-align: center;
-  white-space: nowrap;
+  justify-self: center;
+  width: var(--logo);
+  margin: 0 0 var(--m);
   transform: scale(calc(1 - var(--p, 0) * 0.06));
   transform-origin: 50% 100%;
   opacity: calc(1 - var(--p, 0) * 1.6);
 }
 
-.monumento-d {
-  display: inline-block;
+.monumento-logo {
+  width: 100%;
 }
 
 /* Encontre suas fotos: uma linha por evento, um tamanho só. */
@@ -383,122 +388,190 @@ a:hover {
   max-width: 44rem;
 }
 
-/* Trabalho: as primeiras fotos em tela cheia, uma deslizando sobre a outra; depois, pares. */
-.trabalho-topo {
+/* Trabalho: fotos em pares desencontrados sobre o fundo vazio. O desenho se repete a cada oito
+   fotos e o primeiro par deixa lugar para o título. */
+.galeria {
+  --par: 22svh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
-  align-items: end;
-  gap: 1rem 4rem;
-  padding: var(--secao) var(--m) 3rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  column-gap: var(--m);
+  align-items: start;
+  padding: var(--secao) var(--m) 0;
 }
 
-.trabalho-topo h2,
-.trabalho-topo p {
-  margin: 0;
+.trabalho-topo {
+  grid-column: 7 / -1;
+  grid-row: 1;
+  min-height: 30svh;
+}
+
+.trabalho-topo h2 {
+  margin-bottom: 1.25rem;
 }
 
 .foto {
   display: block;
+  overflow: hidden;
   background: var(--cor, var(--superficie));
 }
 
-.selecao-sequencia {
-  position: relative;
-}
-
-.selecao-lamina {
-  position: sticky;
-  top: 0;
-  height: 100svh;
+.galeria-foto {
   margin: 0;
 }
 
-.selecao-lamina .foto,
-.selecao-lamina img {
-  width: 100%;
-  height: 100%;
+.galeria-foto .foto {
+  aspect-ratio: var(--proporcao, 4 / 5);
 }
 
-.selecao-lamina img,
-.selecao-par img {
+.galeria-foto img,
+.passo-quadro img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: var(--foco, 50% 50%);
 }
 
-.selecao-lamina figcaption {
-  position: absolute;
-  left: var(--m);
-  bottom: 1.25rem;
-  padding: 0.3rem 0.65rem;
-  background: rgb(0 0 0 / 0.55);
-  color: #ffffff;
-  font-size: var(--t-pequeno);
-}
-
-.selecao-resto {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--secao) var(--m);
-  align-items: start;
-  padding: var(--m);
-}
-
-.selecao-par {
-  margin: 0;
-}
-
-.selecao-par:nth-child(even) {
-  margin-top: 30%;
-}
-
-.selecao-par figcaption {
+.galeria-foto figcaption {
   margin-top: 0.6rem;
   color: var(--tinta-suave);
   font-size: var(--t-pequeno);
 }
 
-/* Cobertura: quatro frases que descem em escada. */
+.galeria > .galeria-foto:first-of-type {
+  grid-row: 1 / span 2;
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 1) {
+  grid-column: 1 / 5;
+  --proporcao: 3 / 4;
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 2) {
+  grid-column: 7 / 13;
+  --proporcao: 5 / 4;
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 3) {
+  grid-column: 6 / 12;
+  --proporcao: 3 / 2;
+  margin-top: var(--par);
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 4) {
+  grid-column: 2 / 5;
+  --proporcao: 4 / 5;
+  margin-top: calc(var(--par) + 24svh);
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 5) {
+  grid-column: 9 / 13;
+  --proporcao: 3 / 4;
+  margin-top: var(--par);
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 6) {
+  grid-column: 1 / 7;
+  --proporcao: 5 / 4;
+  margin-top: calc(var(--par) + 30svh);
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 7) {
+  grid-column: 2 / 8;
+  --proporcao: 3 / 2;
+  margin-top: var(--par);
+}
+
+.galeria > .galeria-foto:nth-of-type(8n + 8) {
+  grid-column: 9 / 12;
+  --proporcao: 4 / 5;
+  margin-top: calc(var(--par) + 24svh);
+}
+
+/* Da nona foto em diante não há título no caminho: o par recomeça com o seu próprio desencontro. */
+.galeria > .galeria-foto:nth-of-type(n + 9):nth-of-type(8n + 1) {
+  margin-top: var(--par);
+}
+
+.galeria > .galeria-foto:nth-of-type(n + 9):nth-of-type(8n + 2) {
+  margin-top: calc(var(--par) + 30svh);
+}
+
+/* Cobertura: quatro quadros que crescem, um por passo. A mesma foto aparece por uma lente cada vez
+   mais aberta, até a foto inteira no último. */
 .cobertura {
+  --mais-alto: 64svh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--m);
   padding: var(--secao) var(--m) 0;
 }
 
-.cobertura-intro {
-  color: var(--tinta-suave);
-  margin-bottom: 4rem;
+.cobertura h2 {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / 6;
+  grid-row: 1;
+  margin: 0;
 }
 
-.escada {
+.passos {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.escada li {
-  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+.passo:nth-child(1) {
+  grid-column: 1 / 3;
+  --alto: 26svh;
+  --lente: 24%;
+  --fundo: var(--superficie);
 }
 
-.escada li:nth-child(2) {
-  margin-left: 16.66%;
+.passo:nth-child(2) {
+  grid-column: 3 / 6;
+  --alto: 36svh;
+  --lente: 36%;
+  --fundo: var(--pedra);
 }
 
-.escada li:nth-child(3) {
-  margin-left: 33.33%;
+.passo:nth-child(3) {
+  grid-column: 6 / 9;
+  --alto: 48svh;
+  --lente: 40%;
+  --fundo: var(--tinta);
 }
 
-.escada li:nth-child(4) {
-  margin-left: 50%;
+.passo:nth-child(4) {
+  grid-column: 9 / 13;
+  --alto: var(--mais-alto);
+  --lente: 142%;
+  --fundo: var(--tinta);
 }
 
-.escada-linha {
-  max-width: none;
-  margin: 0;
-  font: 400 var(--t-titulo) / 1 var(--display);
-  letter-spacing: -0.02em;
+.passo-quadro {
+  height: var(--alto);
+  margin-top: calc(var(--mais-alto) - var(--alto));
+  background: var(--fundo);
 }
 
-.escada-apoio {
-  max-width: 34ch;
-  margin: 0.75rem 0 0;
+.passo-quadro .foto {
+  height: 100%;
+  clip-path: circle(var(--lente) at var(--foco, 50% 50%));
+}
+
+.passo-nome {
+  margin: 1.25rem 0 0;
+  font-weight: 500;
+}
+
+.passo-apoio {
+  margin: 0.35rem 0 0;
   color: var(--tinta-suave);
 }
 
@@ -643,7 +716,7 @@ details p {
   margin: 0.75rem 0 0.25rem;
 }
 
-/* Rodapé: colunas em cima, o PDL de ponta a ponta embaixo, em cores invertidas. */
+/* Rodapé: colunas em cima, o logo de ponta a ponta embaixo, em cores invertidas. */
 .rodape {
   display: grid;
   grid-template-rows: auto 1fr auto auto;
@@ -672,14 +745,10 @@ details p {
   list-style: none;
 }
 
-.rodape-nome {
+.rodape-logo {
   align-self: end;
-  max-width: none;
-  margin: 3rem 0 0;
-  font: 500 var(--t-monumento) / 0.8 var(--display);
-  letter-spacing: -0.04em;
-  text-align: center;
-  white-space: nowrap;
+  width: 100%;
+  margin-top: 3rem;
 }
 
 .rodape-credito {
@@ -703,6 +772,30 @@ details p {
   font-size: var(--t-linha);
 }
 
+/* Privacidade: o texto à esquerda e, ao lado, quatro fotos de eventos, que são o assunto dela. */
+.privacidade {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--m);
+  align-items: start;
+}
+
+.privacidade-texto {
+  grid-column: 1 / 8;
+}
+
+.privacidade-fotos {
+  grid-column: 9 / -1;
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding-top: 7rem;
+}
+
+.privacidade-fotos .galeria-foto:nth-child(even) {
+  width: 72%;
+  justify-self: end;
+}
+
 /* Entradas: título, texto e conteúdo de cada seção sobem ao aparecer, uma vez. */
 @media (prefers-reduced-motion: no-preference) {
   html.entradas [data-entrada] {
@@ -714,6 +807,52 @@ details p {
   html.entradas [data-entrada]:not(.entrou) {
     opacity: 0;
     transform: translateY(24px);
+  }
+
+  /* Ligado à rolagem, onde o navegador permite (os outros mostram as fotos paradas e inteiras):
+     cada foto de Trabalho se abre como a lente da abertura, a partir do seu ponto de foco, e
+     assenta enquanto sobe; na Cobertura, a lente de cada passo termina de abrir ao chegar. */
+  @supports (animation-timeline: view()) {
+    .galeria-foto .foto {
+      animation: abrir-lente linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+
+    .galeria-foto img,
+    .passo:last-child img {
+      animation: assentar linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+
+    .passo-quadro .foto {
+      animation: abrir-passo linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 55%;
+    }
+  }
+}
+
+@keyframes abrir-lente {
+  from {
+    clip-path: circle(12% at var(--foco, 50% 50%));
+  }
+
+  to {
+    clip-path: circle(142% at var(--foco, 50% 50%));
+  }
+}
+
+@keyframes abrir-passo {
+  from {
+    clip-path: circle(calc(var(--lente) * 0.55) at var(--foco, 50% 50%));
+  }
+}
+
+@keyframes assentar {
+  from {
+    transform: scale(1.12);
   }
 }
 
@@ -732,10 +871,10 @@ details p {
   }
 }
 
-/* Tela baixa e larga (celular deitado, janela curta): PDL menor para caber com o texto. */
+/* Tela baixa e larga (celular deitado, janela curta): logo menor para caber com o texto. */
 @media (min-width: 48.01em) and (max-height: 32rem) {
   :root {
-    --t-monumento: min(39vw, 44svh);
+    --logo-altura: 44svh;
   }
 
   .abertura-palco {
@@ -745,21 +884,21 @@ details p {
 
 @media (max-width: 48em) {
   :root {
-    --t-monumento: min(44vw, 30svh);
+    --logo-altura: 30svh;
   }
 
   .menu-extra {
     display: none;
   }
 
-  /* No celular, o PDL e o texto ficam juntos, perto do meio da tela. */
+  /* No celular, o logo fica no meio da tela e o texto embaixo, perto do polegar. */
   .abertura-palco {
-    grid-template-rows: minmax(4.5rem, 1fr) auto auto minmax(1.5rem, 1.15fr);
+    grid-template-rows: minmax(4.5rem, 1.3fr) auto minmax(2rem, 0.7fr) auto;
   }
 
   .abertura-faixa {
-    grid-row: 3;
-    margin-top: 2rem;
+    grid-row: 4;
+    margin-bottom: 1.5rem;
     grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
   }
@@ -775,10 +914,10 @@ details p {
 
   .monumento {
     grid-row: 2;
+    margin-bottom: 0;
   }
 
   .fotos-topo,
-  .trabalho-topo,
   .cupom {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -799,29 +938,101 @@ details p {
     text-align: left;
   }
 
-  .selecao-resto {
+  /* Trabalho no celular: uma coluna com larguras e lados alternados, a quarta de ponta a ponta. */
+  .galeria {
     grid-template-columns: minmax(0, 1fr);
-    gap: 4rem;
+    row-gap: 4rem;
   }
 
-  .selecao-par:nth-child(even) {
+  .trabalho-topo {
+    grid-column: 1;
+    min-height: 0;
+  }
+
+  .galeria > .galeria-foto:nth-of-type(n) {
+    grid-column: 1;
+    grid-row: auto;
+    width: 70%;
+    margin-top: 0;
+    --proporcao: 4 / 5;
+  }
+
+  .galeria > .galeria-foto:nth-of-type(4n + 2) {
     width: 84%;
-    margin: 0 0 0 auto;
+    justify-self: end;
   }
 
-  .escada li:nth-child(2) {
-    margin-left: 6vw;
+  .galeria > .galeria-foto:nth-of-type(4n + 3) {
+    width: 56%;
   }
 
-  .escada li:nth-child(3) {
-    margin-left: 12vw;
+  .galeria > .galeria-foto:nth-of-type(4n + 4) {
+    width: auto;
+    margin-inline: calc(-1 * var(--m));
   }
 
-  .escada li:nth-child(4) {
-    margin-left: 18vw;
+  .galeria > .galeria-foto:nth-of-type(4n + 4) figcaption {
+    padding-inline: var(--m);
+  }
+
+  /* Cobertura no celular: os quadros um embaixo do outro, crescendo em altura. */
+  .cobertura {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cobertura h2,
+  .passos {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .cobertura h2 {
+    margin-bottom: 2.5rem;
+  }
+
+  .passos {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .passo:nth-child(n) {
+    grid-column: 1;
+  }
+
+  .passo:nth-child(1) {
+    --alto: 34vw;
+  }
+
+  .passo:nth-child(2) {
+    --alto: 46vw;
+  }
+
+  .passo:nth-child(3) {
+    --alto: 62vw;
+  }
+
+  .passo:nth-child(4) {
+    --alto: 80vw;
+  }
+
+  .passo-quadro {
+    margin-top: 0;
   }
 
   .perguntas-lista {
     grid-column: 1 / -1;
+  }
+
+  .privacidade-texto,
+  .privacidade-fotos {
+    grid-column: 1 / -1;
+  }
+
+  .privacidade-fotos {
+    padding-top: 3rem;
+  }
+
+  .privacidade-fotos .galeria-foto:nth-child(odd) {
+    width: 84%;
   }
 }

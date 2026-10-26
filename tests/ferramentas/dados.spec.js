@@ -102,20 +102,22 @@ test('site.json: WhatsApp sem o 55 e Instagram com @ são recusados', () => {
   ]);
 });
 
-test('fotos: id inválido, duas capas e pessoasIdentificaveis ausente', () => {
+test('fotos: id inválido, duas capas, duas da cobertura e pessoasIdentificaveis ausente', () => {
   const foto = { id: 'a', arquivo: 'x.jpg', alt: 'Foto', pessoasIdentificaveis: false, capa: true };
   expect(
     problemas(() =>
       validarFotos([
-        foto,
-        { ...foto, id: 'B C' },
-        { id: 'c', arquivo: 'y.jpg', alt: 'Y', capa: true },
+        { ...foto, cobertura: true },
+        { ...foto, id: 'B C', cobertura: 'sim' },
+        { id: 'c', arquivo: 'y.jpg', alt: 'Y', capa: true, cobertura: true },
       ]),
     ),
   ).toEqual([
     'fotos.json, item 2 ("B C"): "id" usa só letras minúsculas, números e hífens, por exemplo festa-pista-01.',
+    'fotos.json, item 2 ("B C"): "cobertura" deve ser true ou false.',
     'fotos.json, item 3 ("c"): "pessoasIdentificaveis" deve ser true ou false.',
     'fotos.json: só uma foto pode ter "capa": true.',
+    'fotos.json: só uma foto pode ter "cobertura": true.',
   ]);
 });
 
@@ -135,7 +137,7 @@ test('o HTML gerado traz cada evento com o link exato, do mais recente ao mais a
   expect(html).toContain('<time datetime="2026-10-18">18 de outubro de 2026</time>');
 });
 
-test('a seleção põe a capa na lente e divide o resto entre tela cheia e pares', () => {
+test('a capa vai para a lente, uma foto para a Cobertura e as outras para Trabalho', () => {
   const dados = lerDados(new URL('../..', import.meta.url).pathname);
   const info = { larguras: [640, 960], largura: 960, altura: 640, cor: '#123456' };
   const foto = (id, extra = {}) => ({
@@ -145,22 +147,34 @@ test('a seleção põe a capa na lente e divide o resto entre tela cheia e pares
     pessoasIdentificaveis: false,
     ...extra,
   });
-  const fotos = [foto('a'), foto('capa', { capa: true }), foto('b'), foto('c')];
-  const gerado = Object.fromEntries(fotos.map((f) => [f.id, info]));
-  const html = renderizarPagina(
-    '<!-- pdl:capa sizes="100vw" -->|<!-- pdl:selecao sequencia="2" sizes="100vw" sizes-resto="50vw" -->',
-    { ...dados, fotos, gerado },
-  );
-  const [capa, selecao] = html.split('|');
+  const gerar = (fotos) =>
+    renderizarPagina(
+      '<!-- pdl:capa sizes="100vw" -->|<!-- pdl:selecao -->|<!-- pdl:foto-cobertura sizes="30vw" -->',
+      { ...dados, fotos, gerado: Object.fromEntries(fotos.map((f) => [f.id, info])) },
+    ).split('|');
+  const ids = (html) => [...html.matchAll(/data-foto="([^"]+)"/g)].map((m) => m[1]);
+
+  // Sem marcação, a Cobertura fica com a última foto que não é a capa.
+  const [capa, selecao, cobertura] = gerar([
+    foto('a'),
+    foto('capa', { capa: true }),
+    foto('b'),
+    foto('c'),
+  ]);
   expect(capa).toContain('alt="Foto capa" fetchpriority="high"');
   expect(capa).not.toContain('loading="lazy"');
-  const ids = (classe) =>
-    [...selecao.matchAll(new RegExp(`class="${classe}" data-foto="([^"]+)"`, 'g'))].map(
-      (m) => m[1],
-    );
-  expect(ids('selecao-lamina')).toEqual(['a', 'b']);
-  expect(ids('selecao-par')).toEqual(['c']);
-  expect(selecao).toContain('sizes="50vw" width="960" height="640" alt="Foto c" loading="lazy"');
+  expect(ids(selecao)).toEqual(['a', 'b']);
+  // Cada posição da grade pede a largura que ocupa, no computador e no celular.
+  expect(selecao).toContain('sizes="(min-width: 48.01em) 31vw, 66vw"');
+  expect(selecao).toContain('sizes="(min-width: 48.01em) 47vw, 80vw" width="960" height="640"');
+  expect(cobertura).toContain('/fotos/c-960w.webp');
+  // Na Cobertura a foto é ilustração repetida: o leitor de tela não a lê de novo.
+  expect(cobertura).toContain('sizes="30vw" width="960" height="640" alt="" loading="lazy"');
+
+  // "cobertura": true escolhe a foto, que sai de Trabalho.
+  const [, marcada, daCobertura] = gerar([foto('capa'), foto('a', { cobertura: true }), foto('b')]);
+  expect(ids(marcada)).toEqual(['b']);
+  expect(daCobertura).toContain('/fotos/a-960w.webp');
 });
 
 test('uma chave {{...}} que não existe para o build', () => {

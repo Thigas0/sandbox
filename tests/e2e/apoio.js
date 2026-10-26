@@ -39,8 +39,12 @@ export async function percorrer(page) {
     }
     window.scrollTo({ top: 0, behavior: 'instant' });
   });
+  // Só as animações que correm no tempo terminam; as ligadas à rolagem acompanham a posição.
   await page.waitForFunction(() =>
-    document.getAnimations().every((animacao) => animacao.playState !== 'running'),
+    document
+      .getAnimations()
+      .filter((animacao) => animacao.timeline instanceof DocumentTimeline)
+      .every((animacao) => animacao.playState !== 'running'),
   );
 }
 

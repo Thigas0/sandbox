@@ -20,7 +20,10 @@ const problemasDeLayout = (page) =>
       if (el.closest('.visualmente-oculto, .pular, [hidden], noscript')) continue;
       const caixa = el.getBoundingClientRect();
       if (caixa.width === 0 || caixa.height === 0) continue;
-      if (caixa.right > largura + 1 || caixa.left < -1) {
+      // Uma foto ampliada dentro de uma moldura que a recorta não aparece fora da moldura.
+      const moldura = el.parentElement?.closest('picture');
+      const recortada = moldura && /hidden|clip/.test(getComputedStyle(moldura).overflow);
+      if (!recortada && (caixa.right > largura + 1 || caixa.left < -1)) {
         problemas.push(
           `${descrever(el)} sai da tela (${Math.round(caixa.left)}–${Math.round(caixa.right)})`,
         );
@@ -49,10 +52,12 @@ for (const tamanho of TAMANHOS) {
       await page.goto(caminho);
       await percorrer(page);
       expect(await problemasDeLayout(page)).toEqual([]);
-      // Só para a captura de página inteira: o Chromium não pinta as fotos "sticky" fora da tela,
-      // então elas viram blocos comuns. As medições acima foram feitas na página como ela é.
+      // Só para a captura de página inteira: a abertura vira um bloco comum e as fotos ligadas à
+      // rolagem aparecem abertas, como ficam quando chegam à tela. As medições acima foram feitas
+      // na página como ela é.
       await page.addStyleTag({
-        content: '.abertura{height:auto}.abertura-palco,.selecao-lamina{position:relative}',
+        content:
+          '.abertura{height:auto}.abertura-palco{position:relative}.galeria-foto .foto,.galeria-foto img,.passo-quadro .foto,.passo-quadro img{animation:none}',
       });
       await percorrer(page);
       const nome = `${caminho === '/' ? 'inicio' : 'privacidade'}-${tamanho.nome}-${info.project.name}.png`;

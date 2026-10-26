@@ -6,9 +6,9 @@ direções estudadas e os ajustes feitos à ficha sorteada estão em `docs/estud
 ## Ideia
 
 A lente que já existe dentro do D do logo vira a janela por onde as fotos aparecem. Na primeira
-tela, o PDL ocupa a largura da página e a foto de capa aparece no miolo do D. Ao rolar, a lente se
-abre até a foto cobrir a tela, e as fotos seguintes deslizam uma sobre a outra, em tela cheia. A
-rolagem é de quem lê: nada anda sozinho.
+tela, o logo ocupa a página e a foto de capa aparece na lente do D. Ao rolar, a lente se abre até a
+foto cobrir a tela. Em Trabalho, cada foto se abre do mesmo jeito ao entrar na tela; na Cobertura,
+a lente se abre um pouco mais a cada passo. A rolagem é de quem lê: nada anda sozinho.
 
 ## Cores
 
@@ -16,6 +16,7 @@ rolagem é de quem lê: nada anda sozinho.
 | --- | --- | --- | --- |
 | Pedra | `#eeecea` | Fundo da página | |
 | Pedra média | `#e4e1dd` | Cupom do orçamento, pergunta aberta, lente sem foto | |
+| Pedra escura | `#cdc3b6` | Segundo quadro da Cobertura | |
 | Grafite | `#2b2a29` | Tinta; fundo do rodapé | 12,2:1 sobre pedra |
 | Grafite suave | `#5f5b57` | Texto secundário (local e data do evento, legendas) | 5,7:1 sobre pedra; 5,2:1 sobre pedra média |
 | Verde-mato | `#5c6b54` | Só as ações (botões); `#4a5744` ao passar o mouse | Branco sobre ele 5,7:1 (7,7:1 no escuro) |
@@ -26,12 +27,12 @@ clica. As cores fortes vêm das fotos.
 
 ## Tipos
 
-- **Bodoni Moda** (`public/fontes/bodoni-moda-latin.woff2`): o PDL monumental e os títulos.
-  Serifa de alto contraste, da mesma família de desenho do logo.
+- **Bodoni Moda** (`public/fontes/bodoni-moda-latin.woff2`): os títulos. Serifa de alto
+  contraste, da mesma família de desenho do logo.
 - **Jost** (`public/fontes/jost-latin.woff2`): texto, botões e a lista de eventos. Geométrica, como
   "FOTOGRAFIA & IMAGEM" no logo.
 
-Cinco tamanhos:
+Quatro tamanhos de texto, mais o logo:
 
 | Tamanho | Valor | Onde |
 | --- | --- | --- |
@@ -39,7 +40,7 @@ Cinco tamanhos:
 | Corpo | 17–19 px | Texto |
 | Linha | 20–30 px | Eventos, perguntas |
 | Título | 34–72 px | Títulos de seção, frases da cobertura |
-| Monumento | `min(39vw, 60svh)` | PDL na abertura e no rodapé (44vw no celular) |
+| Logo | largura da tela, até 58svh de altura | Abertura (30svh no celular) e rodapé, de ponta a ponta |
 
 As fontes são servidas pelo próprio site, sem pedido ao Google, o que é melhor para o carregamento
 e para a LGPD.
@@ -53,9 +54,11 @@ sem slogan. A frase de referência: "Festas e jogos fotografados de perto, do je
 
 A lente no miolo do D. Os arquivos:
 
-- **Logo vetorizado:** `public/marca/pdl-logo.svg`, o logo completo, e
-  `public/marca/pdl-marca.svg`, sem "FOTOGRAFIA & IMAGEM". Foram traçados a partir do PNG enviado
-  e precisam da sua aprovação.
+- **Logo vetorizado (aprovado em 2026-10-26):** `public/marca/pdl-logo.svg`, o logo completo, e
+  `public/marca/pdl-marca.svg`, sem "FOTOGRAFIA & IMAGEM". O site usa `pdl-logo-escuro.svg` (grafite,
+  na abertura) e `pdl-logo-claro.svg` (pedra, no rodapé), cópias com a cor gravada.
+- **A lente no logo:** centro em 50,71% da largura e 49,88% da altura do logo, raio de 16,9% da
+  altura, por dentro do anel mais grosso (`src/movimento.js`).
 - **Favicon:** `public/favicon.svg`, o D com a câmera e a lente sobre a pedra.
 - **Ícone do celular:** `public/apple-touch-icon.png`.
 
@@ -63,20 +66,22 @@ A lente no miolo do D. Os arquivos:
 
 | Seção | Forma | Por quê |
 | --- | --- | --- |
-| Abertura | PDL monumental, foto na lente, texto e "Encontrar minhas fotos" | Diz quem é e leva à ação nº 1 |
+| Abertura | Logo grande, foto na lente, texto e "Encontrar minhas fotos" | Diz quem é e leva à ação nº 1 |
 | Encontre suas fotos | Busca, três passos e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum |
-| Trabalho | Quatro fotos em tela cheia deslizando, depois pares | Fotos protagonistas, em movimento pela rolagem |
-| Cobertura | Quatro frases em escada | O processo, sem numerar |
+| Trabalho | Pares desencontrados sobre o fundo vazio, como numa exposição (`gallery-staggered-pairs`) | Fotos protagonistas, cada uma com espaço |
+| Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |
 | Orçamento | Cupom com o mini-formulário do WhatsApp | O trabalho nº 2 |
 | Perguntas | Título largo, perguntas recuadas | Responde preço, prazo e remoção de foto |
-| Rodapé | Links em cima, PDL de ponta a ponta embaixo, cores invertidas | Fecha com a marca |
+| Rodapé | Links em cima, logo de ponta a ponta embaixo, cores invertidas | Fecha com a marca |
 
 ## Movimento
 
-- **Cena da abertura:** a lente cresce com a rolagem até cobrir a tela; o PDL encolhe até 6% e some
-  (`src/movimento.js`).
-- **Sequência do trabalho:** as quatro primeiras fotos ficam presas no topo (`position: sticky`) e
-  a seguinte desliza por cima.
+- **Cena da abertura:** a lente cresce com a rolagem até cobrir a tela; o logo encolhe até 6% e
+  some (`src/movimento.js`).
+- **Fotos de Trabalho:** cada foto se abre num círculo a partir do seu ponto de foco e assenta
+  (de 112% para 100%) enquanto entra na tela, ligada à rolagem (`animation-timeline: view()` em
+  `src/style.css`). Onde o navegador não tem isso (o Firefox, hoje), as fotos aparecem inteiras.
+- **Cobertura:** a lente de cada quadro termina de abrir ao chegar à tela.
 - **Entradas:** título, texto e conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
   uma vez só.
 - **Resposta ao toque:** o botão encolhe 3% (140 ms) e o sublinhado do link engrossa (180 ms).

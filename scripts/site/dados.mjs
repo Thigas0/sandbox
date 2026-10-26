@@ -178,7 +178,16 @@ export function validarEventos(eventos) {
   return eventos;
 }
 
-const CAMPOS_FOTO = ['id', 'arquivo', 'alt', 'legenda', 'pessoasIdentificaveis', 'foco', 'capa'];
+const CAMPOS_FOTO = [
+  'id',
+  'arquivo',
+  'alt',
+  'legenda',
+  'pessoasIdentificaveis',
+  'foco',
+  'capa',
+  'cobertura',
+];
 
 export function validarFotos(fotos) {
   if (!Array.isArray(fotos))
@@ -186,6 +195,7 @@ export function validarFotos(fotos) {
   const problemas = [];
   const ids = new Set();
   let capas = 0;
+  let coberturas = 0;
   fotos.forEach((foto, i) => {
     const ref = `fotos.json, item ${i + 1}${objeto(foto) && preenchido(foto.id) ? ` ("${foto.id}")` : ''}`;
     if (!objeto(foto)) {
@@ -228,8 +238,13 @@ export function validarFotos(fotos) {
       problemas.push(`${ref}: "capa" deve ser true ou false.`);
     }
     if (foto.capa === true) capas += 1;
+    if (foto.cobertura !== undefined && typeof foto.cobertura !== 'boolean') {
+      problemas.push(`${ref}: "cobertura" deve ser true ou false.`);
+    }
+    if (foto.cobertura === true) coberturas += 1;
   });
   if (capas > 1) problemas.push('fotos.json: só uma foto pode ter "capa": true.');
+  if (coberturas > 1) problemas.push('fotos.json: só uma foto pode ter "cobertura": true.');
   if (problemas.length) throw new ErroDeDados(problemas);
   return fotos;
 }
@@ -266,6 +281,18 @@ export function validarGerado(fotos, gerado) {
 
 // A foto de capa abre a página e vira a imagem da prévia do link; sem "capa", vale a primeira.
 export const fotoDeCapa = (fotos) => fotos.find((foto) => foto.capa) ?? fotos[0] ?? null;
+
+// A foto da Cobertura: a marcada com "cobertura": true, ou a última da lista que não é a capa.
+export function fotoDaCobertura(fotos) {
+  const capa = fotoDeCapa(fotos);
+  return fotos.find((foto) => foto.cobertura) ?? fotos.findLast((foto) => foto !== capa) ?? capa;
+}
+
+// As fotos da seção Trabalho: todas, menos a capa e a da Cobertura, na ordem do arquivo.
+export function fotosDaSelecao(fotos) {
+  const fora = new Set([fotoDeCapa(fotos), fotoDaCobertura(fotos)]);
+  return fotos.filter((foto) => !fora.has(foto));
+}
 
 // Eventos do mais recente para o mais antigo; empate pelo nome, para a ordem não variar.
 export const ordenarEventos = (eventos) =>

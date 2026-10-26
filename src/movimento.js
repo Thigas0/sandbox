@@ -1,32 +1,33 @@
 // Movimento da página. Com prefers-reduced-motion, nada anima e todo o conteúdo fica visível.
 const reduzir = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-// Onde fica o miolo do D em relação à caixa da letra (medido na Bodoni Moda).
-const MIOLO = { x: 0.555, y: 0.49, raio: 0.2 };
+// A lente do logo em relação à caixa da imagem (public/marca/pdl-logo-escuro.svg): o centro e o
+// raio por dentro do anel mais grosso, que esconde a borda da foto.
+const LENTE = { x: 0.5071, y: 0.4988, raio: 0.169 };
 
-// A lente do D: a foto de capa aparece no miolo do D e se abre com a rolagem até cobrir a tela.
+// A lente do D: a foto de capa aparece na lente do logo e se abre com a rolagem até cobrir a tela.
 // A rolagem é de quem lê: nada anda sozinho.
 export function iniciarLente(raiz = document) {
   const cena = raiz.querySelector('[data-cena]');
   const lente = raiz.querySelector('[data-lente]');
-  const letra = raiz.querySelector('[data-d]');
-  if (!cena || !lente || !letra) return;
+  const logo = raiz.querySelector('[data-logo]');
+  if (!cena || !lente || !logo) return;
   let pedido = 0;
 
   const atualizar = () => {
     pedido = 0;
-    const d = letra.getBoundingClientRect();
+    const d = logo.getBoundingClientRect();
     const palco = lente.getBoundingClientRect();
     const percurso = cena.offsetHeight - window.innerHeight;
     const progresso =
       reduzir.matches || percurso <= 0
         ? 0
         : Math.min(1, Math.max(0, -cena.getBoundingClientRect().top / percurso));
-    const raio = d.height * MIOLO.raio;
+    const raio = d.height * LENTE.raio;
     const maximo = Math.hypot(palco.width, palco.height);
     cena.style.setProperty('--p', progresso.toFixed(3));
-    lente.style.setProperty('--x', `${(d.left - palco.left + d.width * MIOLO.x).toFixed(1)}px`);
-    lente.style.setProperty('--y', `${(d.top - palco.top + d.height * MIOLO.y).toFixed(1)}px`);
+    lente.style.setProperty('--x', `${(d.left - palco.left + d.width * LENTE.x).toFixed(1)}px`);
+    lente.style.setProperty('--y', `${(d.top - palco.top + d.height * LENTE.y).toFixed(1)}px`);
     lente.style.setProperty('--r', `${(raio + progresso * (maximo - raio)).toFixed(1)}px`);
   };
   const agendar = () => {
@@ -34,7 +35,7 @@ export function iniciarLente(raiz = document) {
   };
 
   atualizar();
-  document.fonts?.ready.then(atualizar);
+  if (!logo.complete) logo.addEventListener('load', atualizar, { once: true });
   window.addEventListener('scroll', agendar, { passive: true });
   window.addEventListener('resize', agendar);
   reduzir.addEventListener('change', agendar);

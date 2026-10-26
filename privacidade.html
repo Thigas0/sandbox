@@ -27,36 +27,42 @@
       <a class="botao botao-pequeno" href="/#orcamento">Pedir orçamento</a>
     </header>
 
-    <main id="conteudo" class="texto-corrido">
-      <h1>Privacidade</h1>
-      <p>
-        Este site não usa cookies, não tem rastreamento e não guarda dados de quem visita. As fontes
-        e as imagens vêm do próprio site, sem serviços de terceiros.
-      </p>
+    <main id="conteudo" class="texto-corrido privacidade">
+      <div class="privacidade-texto">
+        <h1>Privacidade</h1>
+        <p>
+          Este site não usa cookies, não tem rastreamento e não guarda dados de quem visita. As
+          fontes e as imagens vêm do próprio site, sem serviços de terceiros.
+        </p>
 
-      <h2>Pedido de orçamento</h2>
-      <p>
-        O formulário não envia nada para este site. Ele só monta uma mensagem e abre o WhatsApp no
-        seu aparelho, e você decide se envia. A conversa fica no WhatsApp, e {{fotografo}} usa esses
-        dados apenas para responder ao seu pedido.
-      </p>
+        <h2 data-entrada>Pedido de orçamento</h2>
+        <p data-entrada>
+          O formulário não envia nada para este site. Ele só monta uma mensagem e abre o WhatsApp no
+          seu aparelho, e você decide se envia. A conversa fica no WhatsApp, e {{fotografo}} usa
+          esses dados apenas para responder ao seu pedido.
+        </p>
 
-      <h2>Compra de fotos</h2>
-      <p>
-        As fotos dos eventos são vendidas pelo <a href="{{fotto}}">Fotto</a>, que tem a sua própria
-        política de privacidade para a busca por selfie e para o pagamento.
-      </p>
+        <h2 data-entrada>Compra de fotos</h2>
+        <p data-entrada>
+          As fotos dos eventos são vendidas pelo <a href="{{fotto}}">Fotto</a>, que tem a sua
+          própria política de privacidade para a busca por selfie e para o pagamento.
+        </p>
 
-      <h2>Fotos em que você aparece</h2>
-      <p>
-        Se você aparece em uma foto e quer que ela saia deste site ou do Fotto, peça pelo WhatsApp
-        ou para <a href="{{mailto}}">{{email}}</a>. Você também pode pedir acesso, correção ou
-        exclusão dos seus dados, como prevê a Lei Geral de Proteção de Dados (Lei 13.709/2018).
-      </p>
+        <h2 data-entrada>Fotos em que você aparece</h2>
+        <p data-entrada>
+          Se você aparece em uma foto e quer que ela saia deste site ou do Fotto, peça pelo WhatsApp
+          ou para <a href="{{mailto}}">{{email}}</a>. Você também pode pedir acesso, correção ou
+          exclusão dos seus dados, como prevê a Lei Geral de Proteção de Dados (Lei 13.709/2018).
+        </p>
 
-      <h2>Responsável</h2>
-      <p>{{fotografo}}, {{nome}}, {{cidade}} ({{estado}}). Contato: {{email}}.</p>
-      <p>Atualizada em outubro de 2026.</p>
+        <h2 data-entrada>Responsável</h2>
+        <p data-entrada>{{fotografo}}, {{nome}}, {{cidade}} ({{estado}}). Contato: {{email}}.</p>
+        <p data-entrada>Atualizada em outubro de 2026.</p>
+      </div>
+      <!-- As fotos de que esta página trata; cada uma se abre como uma lente ao entrar na tela. -->
+      <aside class="privacidade-fotos" aria-label="Fotos de eventos">
+        <!-- pdl:selecao quantas="4" -->
+      </aside>
     </main>
 
     <footer class="rodape">
@@ -72,8 +78,16 @@
           <li><a href="/">Início</a></li>
         </ul>
       </nav>
-      <p class="rodape-nome" aria-hidden="true">PDL</p>
+      <img
+        class="rodape-logo"
+        src="/marca/pdl-logo-claro.svg"
+        alt=""
+        width="2831"
+        height="1290"
+        loading="lazy"
+      />
       <p class="rodape-credito">Fotos de {{fotografo}}. © {{ano}} {{nome}}, {{atendimento}}.</p>
     </footer>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

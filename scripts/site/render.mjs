@@ -1,6 +1,6 @@
 // Transforma os dados do site em HTML. O plugin do Vite (plugin.mjs) chama `renderizarPagina`
 // para cada página: troca {{chave}} pelos textos de site.json e <!-- pdl:bloco --> pelos blocos.
-import { ErroDeDados, PENDENTE, fotoDeCapa } from './dados.mjs';
+import { ErroDeDados, PENDENTE, fotoDaCobertura, fotoDeCapa, fotosDaSelecao } from './dados.mjs';
 
 const ENTIDADES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapar = (texto) => String(texto).replace(/[&<>"']/g, (c) => ENTIDADES[c]);
@@ -43,7 +43,8 @@ const srcset = (id, larguras, extensao) =>
 // Versão usada por navegadores sem srcset: a primeira de 960 px ou mais, ou a maior que houver.
 const larguraPadrao = (larguras) => larguras.find((largura) => largura >= 960) ?? larguras.at(-1);
 
-export function picture(foto, info, { sizes, prioridade = false }) {
+// `decorativa`: a mesma foto repetida como ilustração; o leitor de tela não a lê de novo.
+export function picture(foto, info, { sizes, prioridade = false, decorativa = false }) {
   const estilo = [`--cor: ${info.cor}`, foto.foco ? `--foco: ${foto.foco}` : null]
     .filter(Boolean)
     .join('; ');
@@ -51,7 +52,7 @@ export function picture(foto, info, { sizes, prioridade = false }) {
   return [
     `<picture class="foto" style="${estilo}">`,
     `<source type="image/avif" srcset="${srcset(foto.id, info.larguras, 'avif')}" sizes="${sizes}">`,
-    `<img src="/fotos/${foto.id}-${larguraPadrao(info.larguras)}w.webp" srcset="${srcset(foto.id, info.larguras, 'webp')}" sizes="${sizes}" width="${info.largura}" height="${info.altura}" alt="${escapar(foto.alt)}" ${carregamento} decoding="async">`,
+    `<img src="/fotos/${foto.id}-${larguraPadrao(info.larguras)}w.webp" srcset="${srcset(foto.id, info.larguras, 'webp')}" sizes="${sizes}" width="${info.largura}" height="${info.altura}" alt="${decorativa ? '' : escapar(foto.alt)}" ${carregamento} decoding="async">`,
     '</picture>',
   ].join('');
 }
@@ -61,31 +62,32 @@ function blocoCapa({ fotos, gerado }, { sizes = '100vw' }) {
   return capa ? picture(capa, gerado[capa.id], { sizes, prioridade: true }) : '';
 }
 
-const figura = (foto, info, classe, sizes) => {
-  const legenda = foto.legenda ? `<figcaption>${escapar(foto.legenda)}</figcaption>` : '';
-  return `<figure class="${classe}" data-foto="${foto.id}">${picture(foto, info, { sizes })}${legenda}</figure>`;
+// Trabalho: pares desencontrados que se repetem a cada oito fotos (a grade de .galeria em
+// style.css). Cada posição tem a sua largura, no computador (fração da tela) e no celular.
+const LARGURAS_GALERIA = {
+  computador: [31, 47, 47, 23, 31, 47, 47, 23],
+  celular: [66, 80, 52, 100],
 };
 
-// A seleção (sem a capa): as primeiras `sequencia` fotos em tela cheia, uma deslizando sobre a
-// outra; as demais em pares. Sem `sequencia`, todas vão para os pares.
-function blocoSelecao({ fotos, gerado }, opcoes) {
-  const capa = fotoDeCapa(fotos);
-  const selecao = fotos.filter((foto) => foto !== capa);
-  const quantas = Number(opcoes.sequencia ?? 0);
-  const sequencia = selecao.slice(0, quantas);
-  const resto = selecao.slice(quantas);
-  const blocos = [];
-  if (sequencia.length) {
-    const sizes = opcoes.sizes ?? '100vw';
-    const itens = sequencia.map((foto) => figura(foto, gerado[foto.id], 'selecao-lamina', sizes));
-    blocos.push(`<div class="selecao-sequencia">\n${itens.join('\n')}\n</div>`);
-  }
-  if (resto.length) {
-    const sizes = opcoes['sizes-resto'] ?? '100vw';
-    const itens = resto.map((foto) => figura(foto, gerado[foto.id], 'selecao-par', sizes));
-    blocos.push(`<div class="selecao-resto">\n${itens.join('\n')}\n</div>`);
-  }
-  return blocos.join('\n');
+// `quantas`: só as primeiras fotos da seleção (a página de privacidade mostra quatro).
+function blocoSelecao({ fotos, gerado }, { quantas }) {
+  const selecao = fotosDaSelecao(fotos);
+  return selecao
+    .slice(0, quantas === undefined ? selecao.length : Number(quantas))
+    .map((foto, i) => {
+      const computador = LARGURAS_GALERIA.computador[i % 8];
+      const celular = LARGURAS_GALERIA.celular[i % 4];
+      const sizes = `(min-width: 48.01em) ${computador}vw, ${celular}vw`;
+      const legenda = foto.legenda ? `<figcaption>${escapar(foto.legenda)}</figcaption>` : '';
+      return `<figure class="galeria-foto" data-foto="${foto.id}">${picture(foto, gerado[foto.id], { sizes })}${legenda}</figure>`;
+    })
+    .join('\n');
+}
+
+// Cobertura: a mesma foto em cada passo, vista por uma lente cada vez mais aberta.
+function blocoFotoCobertura({ fotos, gerado }, { sizes = '100vw' }) {
+  const foto = fotoDaCobertura(fotos);
+  return foto ? picture(foto, gerado[foto.id], { sizes, decorativa: true }) : '';
 }
 
 function blocoEventos({ eventos, site }) {
@@ -198,6 +200,7 @@ const BLOCOS = {
   head: (dados, opcoes, html) => blocoHead(dados, html),
   capa: blocoCapa,
   selecao: blocoSelecao,
+  'foto-cobertura': blocoFotoCobertura,
   eventos: blocoEventos,
   'ultimo-evento': blocoUltimoEvento,
 };

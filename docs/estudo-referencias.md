@@ -71,6 +71,18 @@ Ajustes à ficha sorteada, cada um por um motivo do briefing:
 - **B, movimento:** a ficha só animava o título ao carregar. Somei o "obturador" da própria direção,
   ligado à rolagem, porque o briefing pede fotos em movimento guiado pela rolagem.
 
+Depois da escolha da A (2026-10-26), a pedido do cliente:
+
+- **Logo no lugar do PDL em Bodoni:** o logo aprovado ocupa a abertura e o rodapé; a foto de capa
+  nasce na lente que o logo já tem.
+- **Galeria:** a sequência em tela cheia não agradou. Ficou `gallery-staggered-pairs`, uma das
+  alternativas da própria direção: pares desencontrados, como numa exposição, e cada foto se abre
+  como a lente da abertura.
+- **Cobertura:** a escada de frases não agradou. Ficou `how-it-works-tiles-that-grow`, com quatro
+  quadros em vez de três e a mesma foto vista por uma lente cada vez mais aberta.
+- **Privacidade:** ganhou quatro fotos e entradas, porque o inspetor reprova página sem fotos e sem
+  movimento.
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.

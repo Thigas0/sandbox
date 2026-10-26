@@ -16,14 +16,15 @@ pedem.
 
 ## Cabeçalho
 
-- Na página inicial não há logo no cabeçalho: o PDL monumental da abertura já é a marca.
+- Na página inicial não há logo no cabeçalho: o logo grande da abertura já é a marca.
 - Menu: Fotos · Trabalho · Cobertura · Perguntas (no celular, só "Fotos")
 - Ação: Pedir orçamento
 - Na página de privacidade: o logo vetorizado, que leva ao início.
 
 ## Abertura (primeira tela)
 
-- Título: **PDL**, gigante. Leitores de tela ouvem "PDL Fotografia & Imagem".
+- Título: o logo, grande, com a foto de capa dentro da lente. Leitores de tela ouvem "PDL Fotografia
+  & Imagem".
 - Apoio: Pedro De Lucca fotografa festas, eventos e jogos em Campinas e região. As fotos de cada
   evento ficam à venda no Fotto.
 - Botão: Encontrar minhas fotos
@@ -56,12 +57,11 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 
 ## Cobertura do seu evento
 
-- Título (para leitores de tela): Cobertura do seu evento
-- Texto: Festas, eventos e jogos esportivos em Campinas e região.
-- As quatro frases da escada, cada uma com uma linha de apoio:
+- Título: Cobertura do seu evento
+- Quatro passos, cada um sob um quadro em que a lente se abre mais, com uma linha de apoio:
   - **Você chama no WhatsApp.** Conta a data, o local e o tipo de evento.
   - **Combinamos o preço.** Ele depende da data, do local e da duração.
-  - **No dia, eu fotografo.** De perto, do jeito que tudo acontece.
+  - **No dia, eu fotografo.** Festas, eventos e jogos em Campinas e região, de perto.
   - **Você recebe as fotos.** Em {prazoEntrega} depois do evento.
 
 ## Peça um orçamento
@@ -95,7 +95,7 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 ## Rodapé
 
 - Links: Instagram · Behance · Fotto, e Encontrar minhas fotos · Pedir orçamento · Privacidade
-- PDL de ponta a ponta, em cores invertidas
+- O logo de ponta a ponta, em cores invertidas
 - Fotos de Pedro De Lucca. © {ano} PDL Fotografia & Imagem, Campinas e região.
 
 ## Página de privacidade
@@ -120,7 +120,6 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 | `email` | A CONFIRMAR | orçamento, perguntas, privacidade |
 | `precoFoto` | A CONFIRMAR | "Como comprar" e perguntas (ex.: "R$ 15") |
 | `prazoEntrega` | A CONFIRMAR | cobertura e perguntas (ex.: "até 3 dias") |
-| `url` | A CONFIRMAR | prévia do link no WhatsApp e dados estruturados |
 
 Já confirmados: Pedro De Lucca, Campinas (SP), WhatsApp +55 15 99698-8578, @pdl_fotografia_imagem,
-Behance pedrodelucca2, Fotto pdl_fotografia_imagem.
+Behance pedrodelucca2, Fotto pdl_fotografia_imagem, endereço https://pdl-fotografia-imagem.com.br.

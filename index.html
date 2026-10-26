@@ -52,10 +52,15 @@
             <!-- pdl:ultimo-evento -->
           </div>
           <h1 id="abertura-titulo" class="monumento">
-            <span class="monumento-letras" aria-hidden="true"
-              >P<span class="monumento-d" data-d>D</span>L</span
-            >
-            <span class="visualmente-oculto">PDL Fotografia &amp; Imagem</span>
+            <img
+              class="monumento-logo"
+              src="/marca/pdl-logo-escuro.svg"
+              alt="PDL Fotografia &amp; Imagem"
+              width="2831"
+              height="1290"
+              fetchpriority="high"
+              data-logo
+            />
           </h1>
         </div>
       </section>
@@ -81,7 +86,8 @@
         </p>
       </section>
 
-      <section id="trabalho" class="trabalho" aria-labelledby="trabalho-titulo">
+      <!-- Fotos em pares desencontrados; cada uma se abre como uma lente ao entrar na tela. -->
+      <section id="trabalho" class="trabalho galeria" aria-labelledby="trabalho-titulo">
         <div class="trabalho-topo">
           <h2 id="trabalho-titulo" data-entrada>Trabalho</h2>
           <p data-entrada>
@@ -89,30 +95,42 @@
             <a href="{{behance}}">Behance</a>.
           </p>
         </div>
-        <!-- pdl:selecao sequencia="4" sizes="100vw" sizes-resto="(min-width: 48em) 50vw, 100vw" -->
+        <!-- pdl:selecao -->
       </section>
 
+      <!-- Quatro passos, a mesma foto vista por uma lente cada vez mais aberta. -->
       <section id="cobertura" class="cobertura" aria-labelledby="cobertura-titulo">
-        <h2 id="cobertura-titulo" class="visualmente-oculto">Cobertura do seu evento</h2>
-        <p class="cobertura-intro" data-entrada>
-          Festas, eventos e jogos esportivos em {{atendimento}}.
-        </p>
-        <ol class="escada">
-          <li data-entrada>
-            <p class="escada-linha">Você chama no WhatsApp.</p>
-            <p class="escada-apoio">Conta a data, o local e o tipo de evento.</p>
+        <h2 id="cobertura-titulo" data-entrada>Cobertura do seu evento</h2>
+        <ol class="passos">
+          <li class="passo">
+            <div class="passo-quadro" aria-hidden="true">
+              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
+            </div>
+            <p class="passo-nome" data-entrada>Você chama no WhatsApp.</p>
+            <p class="passo-apoio" data-entrada>Conta a data, o local e o tipo de evento.</p>
           </li>
-          <li data-entrada>
-            <p class="escada-linha">Combinamos o preço.</p>
-            <p class="escada-apoio">Ele depende da data, do local e da duração.</p>
+          <li class="passo">
+            <div class="passo-quadro" aria-hidden="true">
+              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
+            </div>
+            <p class="passo-nome" data-entrada>Combinamos o preço.</p>
+            <p class="passo-apoio" data-entrada>Ele depende da data, do local e da duração.</p>
           </li>
-          <li data-entrada>
-            <p class="escada-linha">No dia, eu fotografo.</p>
-            <p class="escada-apoio">De perto, do jeito que tudo acontece.</p>
+          <li class="passo">
+            <div class="passo-quadro" aria-hidden="true">
+              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
+            </div>
+            <p class="passo-nome" data-entrada>No dia, eu fotografo.</p>
+            <p class="passo-apoio" data-entrada>
+              Festas, eventos e jogos em {{atendimento}}, de perto.
+            </p>
           </li>
-          <li data-entrada>
-            <p class="escada-linha">Você recebe as fotos.</p>
-            <p class="escada-apoio">Em {{prazoEntrega}} depois do evento.</p>
+          <li class="passo">
+            <div class="passo-quadro" aria-hidden="true">
+              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
+            </div>
+            <p class="passo-nome" data-entrada>Você recebe as fotos.</p>
+            <p class="passo-apoio" data-entrada>Em {{prazoEntrega}} depois do evento.</p>
           </li>
         </ol>
       </section>
@@ -251,7 +269,14 @@
           <li><a href="/privacidade.html">Privacidade</a></li>
         </ul>
       </nav>
-      <p class="rodape-nome" aria-hidden="true">PDL</p>
+      <img
+        class="rodape-logo"
+        src="/marca/pdl-logo-claro.svg"
+        alt=""
+        width="2831"
+        height="1290"
+        loading="lazy"
+      />
       <p class="rodape-credito">Fotos de {{fotografo}}. © {{ano}} {{nome}}, {{atendimento}}.</p>
     </footer>
     <script type="module" src="/src/main.js"></script>
