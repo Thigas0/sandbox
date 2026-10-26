@@ -8,7 +8,7 @@
       name="description"
       content="Fotos de festas e jogos em Campinas e região por Pedro De Lucca. Ache o seu evento e compre suas fotos no Fotto, ou peça um orçamento pelo WhatsApp."
     />
-    <meta name="theme-color" content="#eeecea" />
+    <meta name="theme-color" content="#f4efe6" />
     <!-- pdl:head -->
     <link
       rel="preload"
@@ -30,38 +30,42 @@
           <li><a href="#fotos">Fotos</a></li>
           <li class="menu-extra"><a href="#trabalho">Trabalho</a></li>
           <li class="menu-extra"><a href="#cobertura">Cobertura</a></li>
+          <li><a href="#orcamento">Orçamento</a></li>
           <li class="menu-extra"><a href="#perguntas">Perguntas</a></li>
         </ul>
       </nav>
-      <a class="botao botao-pequeno" href="#orcamento">Pedir orçamento</a>
     </header>
 
     <main id="conteudo">
-      <!-- A foto de capa nasce na lente do D e se abre com a rolagem (src/movimento.js). -->
+      <!-- Primeira tela: um quadro de moldura dupla, como as peças da marca, com o logo no centro.
+           A foto de capa nasce na lente do D e se abre com a rolagem (src/movimento.js). -->
       <section class="abertura" aria-labelledby="abertura-titulo" data-cena>
         <div class="abertura-palco">
           <div class="abertura-lente" data-lente>
             <!-- pdl:capa sizes="100vw" -->
           </div>
-          <div class="abertura-faixa">
+          <div class="abertura-quadro">
+            <h1 id="abertura-titulo" class="monumento">
+              <img
+                class="monumento-logo"
+                src="/marca/pdl-logo-escuro.svg"
+                alt="PDL Fotografia &amp; Imagem"
+                width="2831"
+                height="1290"
+                fetchpriority="high"
+                data-logo
+              />
+            </h1>
+            <p class="abertura-frase">{{frase}}</p>
             <p class="abertura-apoio">
-              {{fotografo}} fotografa festas, eventos e jogos em {{atendimento}}. As fotos de cada
-              evento ficam à venda no Fotto.
+              Por {{fotografo}}, em {{atendimento}}. As fotos de cada evento ficam à venda no Fotto.
             </p>
-            <p class="abertura-acoes"><a class="botao" href="#fotos">Encontrar minhas fotos</a></p>
+            <p class="abertura-acoes">
+              <a class="botao" href="#fotos">Encontrar minhas fotos</a>
+              <a class="botao-contorno" href="#orcamento">Pedir orçamento</a>
+            </p>
             <!-- pdl:ultimo-evento -->
           </div>
-          <h1 id="abertura-titulo" class="monumento">
-            <img
-              class="monumento-logo"
-              src="/marca/pdl-logo-escuro.svg"
-              alt="PDL Fotografia &amp; Imagem"
-              width="2831"
-              height="1290"
-              fetchpriority="high"
-              data-logo
-            />
-          </h1>
         </div>
       </section>
 
@@ -76,7 +80,7 @@
           <ol class="passos-compra">
             <li>Abra o seu evento na lista.</li>
             <li>No Fotto, encontre-se com uma selfie ou navegue pelo álbum.</li>
-            <li>Escolha as fotos e pague online. Cada foto custa {{precoFoto}}.</li>
+            <li>Escolha as fotos e pague online, no próprio Fotto.</li>
           </ol>
         </div>
         <!-- pdl:eventos -->
@@ -224,8 +228,8 @@
         <h2 id="perguntas-titulo" data-entrada>Perguntas</h2>
         <div class="perguntas-lista" data-entrada>
           <details>
-            <summary>Quanto custa uma foto?</summary>
-            <p>Cada foto custa {{precoFoto}} no Fotto.</p>
+            <summary>Onde vejo o preço das fotos?</summary>
+            <p>No álbum do evento, no Fotto, antes de pagar.</p>
           </details>
           <details>
             <summary>Como acho a minha foto?</summary>

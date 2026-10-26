@@ -6,24 +6,42 @@ direções estudadas e os ajustes feitos à ficha sorteada estão em `docs/estud
 ## Ideia
 
 A lente que já existe dentro do D do logo vira a janela por onde as fotos aparecem. Na primeira
-tela, o logo ocupa a página e a foto de capa aparece na lente do D. Ao rolar, a lente se abre até a
+tela, o logo fica no centro de um quadro de moldura dupla e a foto de capa aparece na lente do D. Ao rolar, a lente se abre até a
 foto cobrir a tela. Em Trabalho, cada foto se abre do mesmo jeito ao entrar na tela; na Cobertura,
 a lente se abre um pouco mais a cada passo. A rolagem é de quem lê: nada anda sozinho.
 
 ## Cores
 
+Desde 2026-10-26, as cores seguem a peça da marca que o cliente enviou ("Respeite o trabalho
+fotográfico. Valorize quem cria."): papel marfim, tinta quase preta, uma moldura de duas linhas
+finas e um losango dourado.
+
 | Nome | Hex | Papel | Contraste |
 | --- | --- | --- | --- |
-| Pedra | `#eeecea` | Fundo da página | |
-| Pedra média | `#e4e1dd` | Cupom do orçamento, pergunta aberta, lente sem foto | |
-| Pedra escura | `#cdc3b6` | Segundo quadro da Cobertura | |
-| Grafite | `#2b2a29` | Tinta; fundo do rodapé | 12,2:1 sobre pedra |
-| Grafite suave | `#5f5b57` | Texto secundário (local e data do evento, legendas) | 5,7:1 sobre pedra; 5,2:1 sobre pedra média |
-| Verde-mato | `#5c6b54` | Só as ações (botões); `#4a5744` ao passar o mouse | Branco sobre ele 5,7:1 (7,7:1 no escuro) |
-| Erro | `#9e2a14` | Mensagens de erro do formulário | 6,4:1 sobre pedra |
+| Marfim | `#f4efe6` | Fundo da página, com grão de papel | |
+| Papel | `#faf7f1` | Paspatur das fotos, cartão do orçamento | |
+| Areia | `#ebe4d6` | Faixas de Trabalho e do orçamento, pergunta aberta | |
+| Areia escura | `#ddd3c1` | Segundo quadro da Cobertura | |
+| Linha | `#d3c9b6` | A moldura dupla (abertura e orçamento) | Decorativa |
+| Dourado | `#b09b74` | Só o losango sobre o logo | Decorativo |
+| Tinta | `#24211d` | Texto, botão principal, fundo do rodapé | 14,0:1 sobre marfim; 12,7:1 sobre areia |
+| Tinta suave | `#5f574b` | Texto secundário (local e data, legendas, apoio) | 6,2:1 sobre marfim; 5,6:1 sobre areia |
+| Tinta clara | `#cfc6b5` | Texto secundário no rodapé escuro | 9,5:1 sobre tinta |
+| Erro | `#9e2a14` | Mensagens de erro do formulário | 6,6:1 sobre marfim |
 
-Proporção: a pedra cobre quase tudo, o grafite faz o texto e o PDL, e o verde aparece só onde se
-clica. As cores fortes vêm das fotos.
+O botão principal é tinta com letra marfim (14,0:1) e escurece para `#4a4032` ao passar o mouse; o
+secundário tem só o contorno. As cores fortes vêm das fotos.
+
+## Profundidade, sem perder a calma
+
+- **Grão de papel:** um ruído fino e quente (`--grao` em `src/style.css`) sobre o marfim e as faixas
+  de areia, para o fundo não parecer branco chapado.
+- **Moldura dupla:** a mesma da peça da marca, em volta da primeira tela e do cartão do orçamento.
+  É uma exceção pedida pelo cliente à regra da taste-skill que proíbe linhas finas.
+- **Faixas de tom:** Trabalho e Orçamento ficam sobre areia; o resto, sobre marfim; o rodapé, na
+  tinta.
+- **Paspatur:** em Trabalho e na página de privacidade, cada foto vem montada num papel mais claro,
+  como numa exposição. É um passo de tom, sem linha e sem sombra.
 
 ## Tipos
 
@@ -40,7 +58,7 @@ Quatro tamanhos de texto, mais o logo:
 | Corpo | 17–19 px | Texto |
 | Linha | 20–30 px | Eventos, perguntas |
 | Título | 34–72 px | Títulos de seção, frases da cobertura |
-| Logo | largura da tela, até 58svh de altura | Abertura (30svh no celular) e rodapé, de ponta a ponta |
+| Logo | até 60% da largura e 40svh de altura | Abertura, no centro (84% da largura no celular); rodapé, de ponta a ponta |
 
 As fontes são servidas pelo próprio site, sem pedido ao Google, o que é melhor para o carregamento
 e para a LGPD.
@@ -66,7 +84,7 @@ A lente no miolo do D. Os arquivos:
 
 | Seção | Forma | Por quê |
 | --- | --- | --- |
-| Abertura | Logo grande, foto na lente, texto e "Encontrar minhas fotos" | Diz quem é e leva à ação nº 1 |
+| Abertura | Quadro de moldura dupla: losango, logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
 | Encontre suas fotos | Busca, três passos e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum |
 | Trabalho | Pares desencontrados sobre o fundo vazio, como numa exposição (`gallery-staggered-pairs`) | Fotos protagonistas, cada uma com espaço |
 | Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |

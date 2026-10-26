@@ -16,8 +16,9 @@ se movem com fluidez e a interface fica em silêncio. Publicar e configurar dom�
 - **Público:** chega pelo Instagram e por indicação. Por isso o site é pensado primeiro para celular,
   com a prévia do link no WhatsApp e os eventos recentes no topo.
 - **O que vende:** festa espontânea é o que mais vende; a dúvida que trava a compra é o preço.
-- **Preço:** o site mostra o preço por foto no Fotto. A cobertura aparece como "preço combinado no
-  WhatsApp".
+- **Preço:** o site não mostra o preço por foto (R$ 8 no Fotto em 2026-10-26): por decisão do
+  cliente, a pessoa vê o preço no álbum do Fotto. Antes, o plano mostrava o preço no site. A
+  cobertura aparece como "preço combinado no WhatsApp".
 - **Frase (provisória, você ajusta):** "Festas e jogos fotografados de perto, do jeito que
   aconteceram."
 - **Contato:** WhatsApp com mini-formulário (tipo de evento, data, cidade, nome e detalhes opcionais).

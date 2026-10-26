@@ -15,17 +15,25 @@
 }
 
 :root {
-  --chao: #eeecea;
-  --superficie: #e4e1dd;
-  --tinta: #2b2a29;
-  --tinta-suave: #5f5b57;
-  --tinta-clara: #c9c4be;
-  --pedra: #cdc3b6;
-  --acao: #5c6b54;
-  --acao-forte: #4a5744;
-  --acao-tinta: #ffffff;
-  --campo: #ffffff;
+  /* Marfim, areia e tinta quase preta, como a peça da marca "Respeite o trabalho fotográfico";
+     o dourado só em detalhes (o losango). Contrastes em DESIGN.md. */
+  --chao: #f4efe6;
+  --papel: #faf7f1;
+  --superficie: #ebe4d6;
+  --pedra: #ddd3c1;
+  --linha: #d3c9b6;
+  --ouro: #b09b74;
+  --tinta: #24211d;
+  --tinta-suave: #5f574b;
+  --tinta-clara: #cfc6b5;
+  --acao: #24211d;
+  --acao-forte: #4a4032;
+  --acao-tinta: #f4efe6;
+  --campo: #fffdf9;
   --erro: #9e2a14;
+
+  /* Grão de papel: um ruído fino e quente sobre o marfim, que tira o fundo do branco chapado. */
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .16 0 0 0 0 .1 .11 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 
   --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
   --texto: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
@@ -36,11 +44,12 @@
   --t-linha: clamp(1.25rem, 1rem + 1vw, 1.875rem);
   --t-titulo: clamp(2.125rem, 1.25rem + 3.6vw, 4.5rem);
 
-  /* O logo como monumento: a largura que cabe na tela, limitada pela altura (2831 × 1290). */
-  --logo-altura: 58svh;
-  --logo: min(100vw - 2 * var(--m), var(--logo-altura) * 2.1946);
+  /* O logo no centro da primeira tela: a largura que cabe, limitada pela altura (2831 × 1290). */
+  --logo-altura: 40svh;
+  --logo: min(60vw, var(--logo-altura) * 2.1946);
 
   --m: clamp(1rem, 2vw, 2rem);
+  --moldura: clamp(0.625rem, 1.6vw, 1.5rem);
   --secao: clamp(6rem, 13vw, 11rem);
   --medida: 38rem;
 
@@ -64,7 +73,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--chao);
+  background: var(--grao) var(--chao);
   color: var(--tinta);
   font: 400 var(--t-corpo) / 1.5 var(--texto);
   overflow-wrap: break-word;
@@ -166,20 +175,28 @@ a:hover {
 }
 
 .botao-contorno {
-  padding: 0.7rem 1.1rem;
+  display: inline-block;
+  padding: calc(0.85rem - 2px) calc(1.35rem - 2px);
   border: 2px solid var(--tinta);
   background: transparent;
   color: var(--tinta);
   font: 500 var(--t-corpo) / 1.1 var(--texto);
+  text-decoration: none;
   cursor: pointer;
-  transition: transform var(--t-toque) var(--ease-out);
+  transition:
+    transform var(--t-toque) var(--ease-out),
+    background-color var(--t-passar) ease;
+}
+
+.botao-contorno:hover {
+  background: var(--superficie);
 }
 
 .botao-contorno:active {
   transform: scale(0.97);
 }
 
-/* Cabeçalho: sobre a abertura, rola com a página (não esconde o foco de ninguém). */
+/* Cabeçalho: sobre a abertura, dentro da moldura, rola com a página (não esconde o foco). */
 .topo {
   display: flex;
   align-items: center;
@@ -187,6 +204,11 @@ a:hover {
   gap: 0.75rem 1.5rem;
   padding: 1.1rem var(--m);
   font-size: var(--t-pequeno);
+}
+
+.topo-sobre {
+  justify-content: center;
+  padding-top: calc(var(--moldura) + 0.9rem);
 }
 
 .topo-sobre {
@@ -223,20 +245,34 @@ a:hover {
   height: 2.25rem;
 }
 
-/* Abertura: o logo como monumento; a capa nasce na lente do D. */
+/* Abertura: um quadro de moldura dupla, como as peças da marca, com o logo no centro. A capa
+   nasce na lente do D e se abre com a rolagem até cobrir a tela. */
 .abertura {
   position: relative;
   height: 210svh;
 }
 
-/* Grade: espaço do cabeçalho, faixa de texto, respiro, logo. Nada se sobrepõe em tela baixa. */
 .abertura-palco {
   position: sticky;
   top: 0;
   height: 100svh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: minmax(5.5rem, 20svh) auto minmax(1.5rem, 1fr) auto;
+  place-items: center;
+  padding: calc(var(--moldura) + 3.75rem) calc(var(--moldura) + var(--m))
+    calc(var(--moldura) + 1.5rem);
+}
+
+/* A moldura dupla da peça da marca: duas linhas finas, uma dentro da outra. */
+.abertura-palco::before {
+  content: '';
+  position: absolute;
+  inset: var(--moldura);
+  /* Exceção pedida pelo cliente: a moldura dupla vem da peça da marca. taste-skill-ignore */
+  border: 1px solid var(--linha); /* taste-skill-ignore */
+  outline: 1px solid var(--linha);
+  outline-offset: -7px;
+  pointer-events: none;
 }
 
 .abertura-lente {
@@ -244,10 +280,7 @@ a:hover {
   inset: 0;
   z-index: 1;
   background: var(--superficie);
-  clip-path: circle(
-    var(--r, calc(var(--logo) / 2.1946 * 0.169)) at var(--x, calc(50% + var(--logo) * 0.0071))
-      var(--y, calc(100% - var(--m) - var(--logo) / 2.1946 * 0.5012))
-  );
+  clip-path: circle(var(--r, 0px) at var(--x, 50%) var(--y, 40%));
 }
 
 .abertura-lente .foto,
@@ -261,53 +294,73 @@ a:hover {
   object-position: var(--foco, 50% 50%);
 }
 
-.abertura-faixa {
+.abertura-quadro {
   position: relative;
   z-index: 2;
-  grid-row: 2;
-  margin: 0 var(--m);
-  display: grid;
-  grid-template-columns: minmax(0, 34ch) auto;
-  justify-content: space-between;
-  align-items: start;
-  gap: 0.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* O losango dourado da peça da marca, sobre o logo. */
+.abertura-quadro::before {
+  content: '';
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-bottom: clamp(0.75rem, 2.5svh, 1.5rem);
+  background: var(--ouro);
+  transform: rotate(45deg);
   opacity: calc(1 - var(--p, 0) * 3);
 }
 
-.abertura-faixa:focus-within {
+.abertura-quadro > :not(.monumento) {
+  opacity: calc(1 - var(--p, 0) * 3);
+}
+
+.abertura-quadro:focus-within > * {
   opacity: 1;
 }
 
-.abertura-apoio,
-.abertura-acoes,
-.ultimo-evento {
-  margin: 0;
-}
-
-.abertura-acoes {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.ultimo-evento {
-  grid-column: 1;
-  color: var(--tinta-suave);
-}
-
 .monumento {
-  position: relative;
-  z-index: 2;
-  grid-row: 4;
-  justify-self: center;
   width: var(--logo);
-  margin: 0 0 var(--m);
+  margin: 0 0 clamp(1rem, 3.5svh, 2.25rem);
   transform: scale(calc(1 - var(--p, 0) * 0.06));
-  transform-origin: 50% 100%;
   opacity: calc(1 - var(--p, 0) * 1.6);
 }
 
 .monumento-logo {
   width: 100%;
+}
+
+.abertura-frase {
+  max-width: 24ch;
+  margin: 0;
+  font: 400 var(--t-linha) / 1.2 var(--display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.abertura-apoio {
+  max-width: 44ch;
+  margin: 0.75rem 0 0;
+  color: var(--tinta-suave);
+  font-size: var(--t-pequeno);
+}
+
+.abertura-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: none;
+  margin: clamp(1.25rem, 4svh, 2.25rem) 0 0;
+}
+
+.ultimo-evento {
+  margin: 1rem 0 0;
+  color: var(--tinta-suave);
+  font-size: var(--t-pequeno);
 }
 
 /* Encontre suas fotos: uma linha por evento, um tamanho só. */
@@ -388,8 +441,9 @@ a:hover {
   max-width: 44rem;
 }
 
-/* Trabalho: fotos em pares desencontrados sobre o fundo vazio. O desenho se repete a cada oito
-   fotos e o primeiro par deixa lugar para o título. */
+/* Trabalho: uma parede de areia com as fotos montadas em paspatur, em pares desencontrados,
+   como numa exposição. O desenho se repete a cada oito fotos e o primeiro par deixa lugar para o
+   título. */
 .galeria {
   --par: 22svh;
   display: grid;
@@ -397,7 +451,9 @@ a:hover {
   grid-auto-flow: row dense;
   column-gap: var(--m);
   align-items: start;
-  padding: var(--secao) var(--m) 0;
+  margin-top: var(--secao);
+  padding: var(--secao) var(--m);
+  background: var(--grao) var(--superficie);
 }
 
 .trabalho-topo {
@@ -416,8 +472,11 @@ a:hover {
   background: var(--cor, var(--superficie));
 }
 
+/* O paspatur: um passo de tom mais claro em volta da foto, sem linha nem sombra. */
 .galeria-foto {
   margin: 0;
+  padding: clamp(0.625rem, 1.4vw, 1.25rem);
+  background: var(--papel);
 }
 
 .galeria-foto .foto {
@@ -433,7 +492,7 @@ a:hover {
 }
 
 .galeria-foto figcaption {
-  margin-top: 0.6rem;
+  margin-top: 0.75rem;
   color: var(--tinta-suave);
   font-size: var(--t-pequeno);
 }
@@ -575,19 +634,32 @@ a:hover {
   color: var(--tinta-suave);
 }
 
-/* Orçamento: um cupom com o formulário. */
+/* Orçamento: um cartão de papel com a moldura dupla da marca, sobre uma faixa de areia. */
 .orcamento {
-  padding: var(--secao) var(--m) 0;
+  margin-top: var(--secao);
+  padding: var(--secao) var(--m);
+  background: var(--grao) var(--superficie);
 }
 
 .cupom {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: 2.5rem;
   max-width: 72rem;
   margin: 0 auto;
-  padding: clamp(1.5rem, 4vw, 3.5rem);
-  background: var(--superficie);
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--papel);
+}
+
+.cupom::before {
+  content: '';
+  position: absolute;
+  inset: 0.625rem;
+  border: 1px solid var(--linha); /* taste-skill-ignore: a mesma moldura da marca */
+  outline: 1px solid var(--linha);
+  outline-offset: -7px;
+  pointer-events: none;
 }
 
 .cupom-email {
@@ -871,50 +943,35 @@ details p {
   }
 }
 
-/* Tela baixa e larga (celular deitado, janela curta): logo menor para caber com o texto. */
-@media (min-width: 48.01em) and (max-height: 32rem) {
+/* Tela baixa (celular deitado, janela curta): logo menor e sem a linha de apoio, para caber. */
+@media (max-height: 32rem) {
   :root {
-    --logo-altura: 44svh;
+    --logo-altura: 28svh;
   }
 
   .abertura-palco {
-    grid-template-rows: minmax(4.5rem, 18svh) auto minmax(0.75rem, 1fr) auto;
+    padding-top: calc(var(--moldura) + 3rem);
+  }
+
+  .abertura-apoio {
+    display: none;
   }
 }
 
 @media (max-width: 48em) {
   :root {
-    --logo-altura: 30svh;
+    --logo: min(84vw, var(--logo-altura) * 2.1946);
   }
 
   .menu-extra {
     display: none;
   }
 
-  /* No celular, o logo fica no meio da tela e o texto embaixo, perto do polegar. */
-  .abertura-palco {
-    grid-template-rows: minmax(4.5rem, 1.3fr) auto minmax(2rem, 0.7fr) auto;
-  }
-
-  .abertura-faixa {
-    grid-row: 4;
-    margin-bottom: 1.5rem;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-  }
-
+  /* No celular, os dois botões ficam um sobre o outro, na largura do polegar. */
   .abertura-acoes {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .ultimo-evento {
-    grid-column: 1;
-  }
-
-  .monumento {
-    grid-row: 2;
-    margin-bottom: 0;
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 20rem);
   }
 
   .fotos-topo,

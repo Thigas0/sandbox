@@ -59,7 +59,6 @@ const CAMPOS_SITE = [
   'behance',
   'fotto',
   'url',
-  'precoFoto',
   'prazoEntrega',
   'credito',
 ];

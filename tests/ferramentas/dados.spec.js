@@ -92,7 +92,6 @@ test('site.json: WhatsApp sem o 55 e Instagram com @ são recusados', () => {
     behance: 'https://www.behance.net/x',
     fotto: 'https://www.fotto.com.br/x',
     url: 'A CONFIRMAR',
-    precoFoto: 'R$ 15',
     prazoEntrega: '3 dias',
     credito: 'Pedro',
   };

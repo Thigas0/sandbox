@@ -83,6 +83,16 @@ Depois da escolha da A (2026-10-26), a pedido do cliente:
 - **Privacidade:** ganhou quatro fotos e entradas, porque o inspetor reprova página sem fotos e sem
   movimento.
 
+Na rodada seguinte (2026-10-26, também a pedido do cliente):
+
+- **Cores:** as da peça da marca "Respeite o trabalho fotográfico" (marfim, tinta quase preta,
+  dourado só no losango) no lugar da pedra e do verde da ficha. O inspetor avisa que o fundo é
+  creme; fica assim porque a cor é da marca.
+- **Profundidade:** grão de papel, faixas de areia, paspatur nas fotos e a moldura dupla da peça
+  da marca. A moldura é a única exceção à regra das linhas finas, marcada no CSS.
+- **Primeira tela:** composição centralizada dentro da moldura (losango, logo, frase, apoio, duas
+  ações, último evento), no lugar do texto num canto e do logo embaixo.
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.

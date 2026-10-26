@@ -11,7 +11,7 @@ contratar consegue pedir um orçamento. Três pessoas bastam para achar os probl
   [Ver o site](como-atualizar.md#ver-o-site); sem ele, o celular não alcança o computador.
 - **Aparelho:** o celular da própria pessoa, conectado na mesma rede, no navegador que ela usa.
 - **Conteúdo real:** pelo menos um evento recente em `src/dados/eventos.json` com o link do álbum,
-  fotos reais no site (não as molduras) e o preço por foto preenchido.
+  fotos reais no site (não as molduras).
 - **Material:** uma folha de anotação por pessoa (modelo abaixo) e um cronômetro.
 - **Privacidade:** peça licença para observar e anotar. Não grave rosto nem tela sem autorização
   por escrito (LGPD). Nas anotações, use "Pessoa 1, 2, 3", sem nome.
@@ -41,7 +41,7 @@ O que observar:
 - **Tempo até tocar no evento certo.** Meta: menos de 30 segundos.
 - **Caminho:** usou "Encontrar minhas fotos", o "Último evento", a busca, ou só rolou a página?
 - **Busca:** se usou, o que digitou, e achou de primeira?
-- **Preço:** viu o preço por foto antes de sair do site?
+- **Preço:** o site não mostra o preço por foto. Achou o preço no Fotto? Estranhou não vê-lo antes?
 - **Passagem para o Fotto:** percebeu que mudou de site? Desconfiou de algo?
 - **No Fotto:** usou a selfie? Achou a própria foto? Onde parou ou voltou?
 
@@ -76,7 +76,7 @@ Sucesso: o WhatsApp abriu com a mensagem completa. Não precisa enviar.
 | Perfil (convidado, atleta ou família, contratante) | | | |
 | T1: tempo até o evento certo | | | |
 | T1: caminho usado | | | |
-| T1: viu o preço por foto? | | | |
+| T1: achou o preço no Fotto? | | | |
 | T1: chegou ao pagamento? | | | |
 | T1: onde hesitou | | | |
 | T2: tempo até o formulário | | | |

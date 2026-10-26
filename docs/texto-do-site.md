@@ -1,7 +1,7 @@
 # Texto do site: rascunho para aprovação
 
 Todo o texto que aparece no site, por seção. Os dados de `src/dados/site.json` entram entre
-chaves (`{precoFoto}`) e estão listados no fim. Marque o que trocar; nada aqui é definitivo até
+chaves (`{prazoEntrega}`) e estão listados no fim. Marque o que trocar; nada aqui é definitivo até
 você aprovar.
 
 Os quatro pontos marcados [confirmar] na primeira versão já foram respondidos: selfie no Fotto (sim),
@@ -16,23 +16,22 @@ pedem.
 
 ## Cabeçalho
 
-- Na página inicial não há logo no cabeçalho: o logo grande da abertura já é a marca.
-- Menu: Fotos · Trabalho · Cobertura · Perguntas (no celular, só "Fotos")
-- Ação: Pedir orçamento
-- Na página de privacidade: o logo vetorizado, que leva ao início.
+- Na página inicial não há logo no cabeçalho: o logo da abertura já é a marca.
+- Menu, centralizado: Fotos · Trabalho · Cobertura · Orçamento · Perguntas (no celular, só "Fotos"
+  e "Orçamento")
+- Na página de privacidade: o logo vetorizado, que leva ao início, e o botão Pedir orçamento.
 
 ## Abertura (primeira tela)
 
-- Título: o logo, grande, com a foto de capa dentro da lente. Leitores de tela ouvem "PDL Fotografia
-  & Imagem".
-- Apoio: Pedro De Lucca fotografa festas, eventos e jogos em Campinas e região. As fotos de cada
-  evento ficam à venda no Fotto.
-- Botão: Encontrar minhas fotos
+- Título: o logo, no centro de um quadro de moldura dupla, com a foto de capa dentro da lente.
+  Leitores de tela ouvem "PDL Fotografia & Imagem".
+- Frase: Festas e jogos fotografados de perto, do jeito que aconteceram.
+- Apoio: Por Pedro De Lucca, em Campinas e região. As fotos de cada evento ficam à venda no Fotto.
+- Botões: Encontrar minhas fotos · Pedir orçamento
 - Abaixo: "Último evento: {nome do evento mais recente}, {data}", que vem de `eventos.json`.
   Enquanto não houver eventos: "Ver os álbuns no Fotto".
 
-A frase que você aprovou como provisória ("Festas e jogos fotografados de perto, do jeito que
-aconteceram.") virou a descrição do negócio nos dados estruturados.
+A frase também é a descrição do negócio nos dados estruturados.
 
 ## Encontre suas fotos
 
@@ -41,7 +40,7 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 - Ao lado da busca, os três passos:
   1. Abra o seu evento na lista.
   2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum.
-  3. Escolha as fotos e pague online. Cada foto custa {precoFoto}.
+  3. Escolha as fotos e pague online, no próprio Fotto.
 - Cada linha da lista: nome do evento · local · data por extenso. A linha inteira é o link do
   álbum.
 - Sem resultado: Nenhum evento com esse nome. Veja todos os álbuns no Fotto ou pergunte pelo WhatsApp.
@@ -83,7 +82,7 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 
 ## Perguntas
 
-- **Quanto custa uma foto?** Cada foto custa {precoFoto} no Fotto.
+- **Onde vejo o preço das fotos?** No álbum do evento, no Fotto, antes de pagar.
 - **Como acho a minha foto?** Abra o evento na lista acima. No Fotto, uma selfie mostra só as fotos
   em que você aparece; você também pode navegar pelo álbum inteiro.
 - **Quando as fotos ficam prontas?** Em {prazoEntrega} depois do evento.
@@ -118,7 +117,6 @@ aconteceram.") virou a descrição do negócio nos dados estruturados.
 | Campo | Hoje | Onde aparece |
 | --- | --- | --- |
 | `email` | A CONFIRMAR | orçamento, perguntas, privacidade |
-| `precoFoto` | A CONFIRMAR | "Como comprar" e perguntas (ex.: "R$ 15") |
 | `prazoEntrega` | A CONFIRMAR | cobertura e perguntas (ex.: "até 3 dias") |
 
 Já confirmados: Pedro De Lucca, Campinas (SP), WhatsApp +55 15 99698-8578, @pdl_fotografia_imagem,

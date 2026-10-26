@@ -24,7 +24,6 @@ export function textos(site, agora = new Date()) {
     cidade: site.cidade,
     atendimento: site.atendimento,
     estado: site.estado,
-    precoFoto: site.precoFoto,
     prazoEntrega: site.prazoEntrega,
     email: site.email,
     mailto: `mailto:${site.email}`,

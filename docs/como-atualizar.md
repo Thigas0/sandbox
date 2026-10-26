@@ -65,7 +65,7 @@ Para conferir no navegador, veja [Ver o site](#ver-o-site).
 ## Dados do fotógrafo
 
 `src/dados/site.json` guarda nome, cidade, WhatsApp (só números, com 55 e DDD), e-mail, Instagram
-(sem @), links do Behance e do Fotto, endereço do site, preço por foto, prazo de entrega e crédito.
+(sem @), links do Behance e do Fotto, endereço do site, prazo de entrega e crédito.
 Enquanto um valor não for confirmado, ele fica como `A CONFIRMAR`, e o teste de texto
 (`./scripts/verify.sh --full`) acusa onde ele aparece.
 
