@@ -7,22 +7,22 @@
   font-display: swap;
 }
 
+/* A fonte da linha "FOTOGRAFIA & IMAGEM" do logo (Source Sans), para todo o texto. */
 @font-face {
-  font-family: 'Jost';
-  src: url('/fontes/jost-latin.woff2') format('woff2');
-  font-weight: 100 900;
+  font-family: 'Source Sans 3';
+  src: url('/fontes/source-sans-3-latin.woff2') format('woff2');
+  font-weight: 200 900;
   font-display: swap;
 }
 
 :root {
-  /* Marfim, areia e tinta quase preta, como a peça da marca "Respeite o trabalho fotográfico";
-     o dourado só em detalhes (o losango). Contrastes em DESIGN.md. */
+  /* Marfim, areia e tinta quase preta, como a peça da marca "Respeite o trabalho fotográfico".
+     Contrastes em DESIGN.md. */
   --chao: #f4efe6;
   --papel: #faf7f1;
   --superficie: #ebe4d6;
   --pedra: #ddd3c1;
   --linha: #d3c9b6;
-  --ouro: #b09b74;
   --tinta: #24211d;
   --tinta-suave: #5f574b;
   --tinta-clara: #cfc6b5;
@@ -36,12 +36,15 @@
   --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .16 0 0 0 0 .1 .11 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 
   --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
-  --texto: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
+  --texto: 'Source Sans 3', 'Source Sans Pro', 'Segoe UI', system-ui, sans-serif;
 
-  /* Cinco tamanhos fazem todo o trabalho. */
+  /* Cinco tamanhos de texto numa escala de razão 1,25 a partir do corpo (no computador, 19 px):
+     pequeno = corpo ÷ 1,25 (15); destaque = corpo × 1,25 (24); linha = corpo × 1,25² (30);
+     título = corpo × 1,25⁶ (72). No celular a escala se aperta, sem trocar a ordem. */
   --t-pequeno: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --t-corpo: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  --t-linha: clamp(1.25rem, 1rem + 1vw, 1.875rem);
+  --t-destaque: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  --t-linha: clamp(1.3125rem, 1.05rem + 1vw, 1.875rem);
   --t-titulo: clamp(2.125rem, 1.25rem + 3.6vw, 4.5rem);
 
   /* O logo no centro da primeira tela: a largura que cabe, limitada pela altura (2831 × 1290). */
@@ -303,17 +306,6 @@ a:hover {
   text-align: center;
 }
 
-/* O losango dourado da peça da marca, sobre o logo. */
-.abertura-quadro::before {
-  content: '';
-  width: 0.6rem;
-  height: 0.6rem;
-  margin-bottom: clamp(0.75rem, 2.5svh, 1.5rem);
-  background: var(--ouro);
-  transform: rotate(45deg);
-  opacity: calc(1 - var(--p, 0) * 3);
-}
-
 .abertura-quadro > :not(.monumento) {
   opacity: calc(1 - var(--p, 0) * 3);
 }
@@ -345,7 +337,6 @@ a:hover {
   max-width: 44ch;
   margin: 0.75rem 0 0;
   color: var(--tinta-suave);
-  font-size: var(--t-pequeno);
 }
 
 .abertura-acoes {
@@ -388,19 +379,32 @@ a:hover {
   color: var(--tinta-suave);
 }
 
+/* Os três passos da compra um degrau acima do texto corrido, com o número em Bodoni. Sem a
+   busca (enquanto não há eventos), ocupam a largura toda. */
 .passos-compra {
   grid-column: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem 2rem;
+  gap: 1rem 3rem;
   margin: 0;
-  padding-left: 1.2em;
-  color: var(--tinta-suave);
-  font-size: var(--t-pequeno);
+  padding-left: 1.3em;
+  font-size: var(--t-destaque);
+  line-height: 1.35;
+}
+
+.busca[hidden] + .passos-compra {
+  grid-column: 1 / -1;
+}
+
+.passos-compra li {
+  max-width: 32ch;
+  padding-left: 0.2em;
 }
 
 .passos-compra li::marker {
+  color: var(--tinta-suave);
   font-family: var(--display);
+  font-size: var(--t-linha);
 }
 
 .eventos {
@@ -626,7 +630,9 @@ a:hover {
 
 .passo-nome {
   margin: 1.25rem 0 0;
+  font-size: var(--t-destaque);
   font-weight: 500;
+  line-height: 1.25;
 }
 
 .passo-apoio {

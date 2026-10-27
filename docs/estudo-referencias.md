@@ -86,12 +86,20 @@ Depois da escolha da A (2026-10-26), a pedido do cliente:
 Na rodada seguinte (2026-10-26, também a pedido do cliente):
 
 - **Cores:** as da peça da marca "Respeite o trabalho fotográfico" (marfim, tinta quase preta,
-  dourado só no losango) no lugar da pedra e do verde da ficha. O inspetor avisa que o fundo é
+  um losango dourado, que saiu na rodada seguinte) no lugar da pedra e do verde da ficha. O inspetor avisa que o fundo é
   creme; fica assim porque a cor é da marca.
 - **Profundidade:** grão de papel, faixas de areia, paspatur nas fotos e a moldura dupla da peça
   da marca. A moldura é a única exceção à regra das linhas finas, marcada no CSS.
-- **Primeira tela:** composição centralizada dentro da moldura (losango, logo, frase, apoio, duas
+- **Primeira tela:** composição centralizada dentro da moldura (logo, frase, apoio, duas
   ações, último evento), no lugar do texto num canto e do logo embaixo.
+
+Na rodada de 2026-10-27, a pedido do cliente:
+
+- **Fonte do texto:** a Jost saiu. Entrou a Source Sans 3, a fonte da linha "FOTOGRAFIA & IMAGEM"
+  do logo, identificada por sobreposição letra a letra com 70 famílias livres.
+- **Tamanhos:** os passos da compra e da Cobertura subiram para um tamanho novo, "destaque", na
+  mesma escala de razão 1,25 dos outros.
+- **Losango:** saiu de cima do logo.
 
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na

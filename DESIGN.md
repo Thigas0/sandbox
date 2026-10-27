@@ -13,8 +13,8 @@ a lente se abre um pouco mais a cada passo. A rolagem é de quem lê: nada anda 
 ## Cores
 
 Desde 2026-10-26, as cores seguem a peça da marca que o cliente enviou ("Respeite o trabalho
-fotográfico. Valorize quem cria."): papel marfim, tinta quase preta, uma moldura de duas linhas
-finas e um losango dourado.
+fotográfico. Valorize quem cria."): papel marfim, tinta quase preta e uma moldura de duas
+linhas finas. O losango dourado da peça saiu em 2026-10-27, a pedido do cliente.
 
 | Nome | Hex | Papel | Contraste |
 | --- | --- | --- | --- |
@@ -23,7 +23,6 @@ finas e um losango dourado.
 | Areia | `#ebe4d6` | Faixas de Trabalho e do orçamento, pergunta aberta | |
 | Areia escura | `#ddd3c1` | Segundo quadro da Cobertura | |
 | Linha | `#d3c9b6` | A moldura dupla (abertura e orçamento) | Decorativa |
-| Dourado | `#b09b74` | Só o losango sobre o logo | Decorativo |
 | Tinta | `#24211d` | Texto, botão principal, fundo do rodapé | 14,0:1 sobre marfim; 12,7:1 sobre areia |
 | Tinta suave | `#5f574b` | Texto secundário (local e data, legendas, apoio) | 6,2:1 sobre marfim; 5,6:1 sobre areia |
 | Tinta clara | `#cfc6b5` | Texto secundário no rodapé escuro | 9,5:1 sobre tinta |
@@ -47,17 +46,21 @@ secundário tem só o contorno. As cores fortes vêm das fotos.
 
 - **Bodoni Moda** (`public/fontes/bodoni-moda-latin.woff2`): os títulos. Serifa de alto
   contraste, da mesma família de desenho do logo.
-- **Jost** (`public/fontes/jost-latin.woff2`): texto, botões e a lista de eventos. Geométrica, como
-  "FOTOGRAFIA & IMAGEM" no logo.
+- **Source Sans 3** (`public/fontes/source-sans-3-latin.woff2`): texto, botões, menu e a lista de
+  eventos. É a fonte da linha "FOTOGRAFIA & IMAGEM" do logo: a Source Sans (antes chamada Source
+  Sans Pro), no peso regular. Foi identificada em 2026-10-27 comparando, letra a letra, essa linha
+  do logo original com 70 famílias de fontes livres; foi a que mais coincidiu (a Jost, usada antes,
+  ficou bem atrás).
 
-Quatro tamanhos de texto, mais o logo:
+Cinco tamanhos de texto, numa escala de razão 1,25 a partir do corpo, mais o logo:
 
 | Tamanho | Valor | Onde |
 | --- | --- | --- |
-| Pequeno | 14–15 px | Rótulos, legendas, passos |
-| Corpo | 17–19 px | Texto |
-| Linha | 20–30 px | Eventos, perguntas |
-| Título | 34–72 px | Títulos de seção, frases da cobertura |
+| Pequeno | 14–15 px (corpo ÷ 1,25) | Menu, rótulos, legendas, último evento |
+| Corpo | 17–19 px | Texto, botões, apoio da abertura |
+| Destaque | 19–24 px (corpo × 1,25) | Os três passos da compra e os passos da Cobertura |
+| Linha | 21–30 px (corpo × 1,25²) | Eventos, perguntas, frase da abertura |
+| Título | 34–72 px (corpo × 1,25⁶) | Títulos de seção |
 | Logo | até 60% da largura e 40svh de altura | Abertura, no centro (84% da largura no celular); rodapé, de ponta a ponta |
 
 As fontes são servidas pelo próprio site, sem pedido ao Google, o que é melhor para o carregamento
@@ -84,7 +87,7 @@ A lente no miolo do D. Os arquivos:
 
 | Seção | Forma | Por quê |
 | --- | --- | --- |
-| Abertura | Quadro de moldura dupla: losango, logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
+| Abertura | Quadro de moldura dupla: logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
 | Encontre suas fotos | Busca, três passos e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum |
 | Trabalho | Pares desencontrados sobre o fundo vazio, como numa exposição (`gallery-staggered-pairs`) | Fotos protagonistas, cada uma com espaço |
 | Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |

@@ -1,8 +1,10 @@
 Fontes servidas pelo próprio site (nenhum pedido a terceiros).
 
-bodoni-moda-latin.woff2  Bodoni Moda (eixos de peso e tamanho óptico), subconjunto latino
-jost-latin.woff2         Jost (eixo de peso), subconjunto latino
+bodoni-moda-latin.woff2    Bodoni Moda (eixos de peso e tamanho óptico), subconjunto latino
+source-sans-3-latin.woff2  Source Sans 3 (eixo de peso), subconjunto latino. É a fonte da linha
+                           "FOTOGRAFIA & IMAGEM" do logo (Source Sans, antes chamada Source Sans Pro).
 
-Origem: pacotes @fontsource-variable/bodoni-moda e @fontsource-variable/jost, versão 5.3.0 (npm).
-Licença: SIL Open Font License 1.1 (OFL-bodoni-moda.txt e OFL-jost.txt).
+Origem: pacotes @fontsource-variable/bodoni-moda e @fontsource-variable/source-sans-3, versão 5.3.0
+(npm).
+Licença: SIL Open Font License 1.1 (OFL-bodoni-moda.txt e OFL-source-sans-3.txt).
 O subconjunto latino cobre o português (U+0000-00FF) e a pontuação tipográfica (U+2000-206F).
