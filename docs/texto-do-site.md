@@ -36,11 +36,11 @@ A frase também é a descrição do negócio nos dados estruturados.
 ## Encontre suas fotos
 
 - Título: Encontre suas fotos
-- Campo de busca: "Nome do evento, local ou mês"
-- Ao lado da busca, os três passos:
+- Ao lado do título, um embaixo do outro, os três passos:
   1. Abra o seu evento na lista.
   2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum.
   3. Escolha as fotos e pague online, no próprio Fotto.
+- Campo de busca, acima da lista: "Nome do evento, local ou mês"
 - Cada linha da lista: nome do evento · local · data por extenso. A linha inteira é o link do
   álbum.
 - Sem resultado: Nenhum evento com esse nome. Veja todos os álbuns no Fotto ou pergunte pelo WhatsApp.
@@ -67,13 +67,14 @@ A frase também é a descrição do negócio nos dados estruturados.
 
 - Título: Peça um orçamento
 - Texto: Preencha e o WhatsApp abre com a mensagem pronta. Nada fica guardado neste site.
-- Campos: Tipo de evento (Festa, Jogo ou campeonato, Outro evento) · Data do evento · Cidade · Seu
-  nome · Detalhes (opcional): "Horário, número de convidados, o que não pode faltar."
+- Campos: Tipo de evento (Festa, Jogo ou campeonato, Outro evento) · Data do evento · Local ("O
+  lugar e a cidade, por exemplo: Clube Tal, Campinas.") · Seu nome · Detalhes (opcional):
+  "Horário, número de convidados, o que não pode faltar."
 - Botão: Enviar pelo WhatsApp
 - Mensagem que chega no WhatsApp: "Olá! Sou {nome}. Quero um orçamento de cobertura: {tipo}, {data},
-  {cidade}. Detalhes: {detalhes}"
+  {local}. Detalhes: {detalhes}"
 - Erros: Escolha o tipo de evento. · Informe a data do evento. · A data precisa ser hoje ou depois. ·
-  Informe a cidade do evento. · Informe o seu nome.
+  Informe o local do evento. · Informe o seu nome.
 - Sucesso: O WhatsApp abriu em outra aba com a sua mensagem. É só enviar.
 - Janela bloqueada: O navegador bloqueou a nova janela. Abra o WhatsApp pelo link abaixo ou copie a
   mensagem. · [Abrir o WhatsApp] [Copiar mensagem] · Mensagem copiada. Agora é só colar no WhatsApp.

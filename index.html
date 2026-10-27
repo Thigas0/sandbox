@@ -75,19 +75,21 @@
         </div>
       </section>
 
+      <!-- O título e, ao lado, os três passos da compra, um embaixo do outro; depois a busca e a
+           lista de eventos. -->
       <section id="fotos" class="fotos" aria-labelledby="fotos-titulo">
-        <h2 id="fotos-titulo" data-entrada>Encontre suas fotos</h2>
-        <div class="fotos-topo" data-entrada>
-          <div class="busca" data-busca hidden>
-            <label for="busca-eventos">Nome do evento, local ou mês</label>
-            <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
-            <p class="busca-contagem" data-busca-contagem aria-live="polite"></p>
-          </div>
-          <ol class="passos-compra">
+        <div class="fotos-topo">
+          <h2 id="fotos-titulo" data-entrada>Encontre suas fotos</h2>
+          <ol class="passos-compra" data-entrada>
             <li>Abra o seu evento na lista.</li>
             <li>No Fotto, encontre-se com uma selfie ou navegue pelo álbum.</li>
             <li>Escolha as fotos e pague online, no próprio Fotto.</li>
           </ol>
+        </div>
+        <div class="busca" data-busca hidden>
+          <label for="busca-eventos">Nome do evento, local ou mês</label>
+          <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
+          <p class="busca-contagem" data-busca-contagem aria-live="polite"></p>
         </div>
         <!-- pdl:eventos -->
         <p class="busca-vazia" data-busca-vazia hidden>
@@ -96,16 +98,30 @@
         </p>
       </section>
 
-      <!-- Fotos em pares desencontrados; cada uma se abre como uma lente ao entrar na tela. -->
-      <section id="trabalho" class="trabalho galeria" aria-labelledby="trabalho-titulo">
-        <div class="trabalho-topo">
-          <h2 id="trabalho-titulo" data-entrada>Trabalho</h2>
-          <p data-entrada>
-            Uma seleção de festas e jogos. O portfólio completo está no
-            <a href="{{behance}}">Behance</a>.
-          </p>
+      <!-- Uma parede de exposição: a lente do logo, ao fundo, gira com a rolagem como o anel de
+           foco, e as fotos ficam a distâncias diferentes dela (src/movimento.js). -->
+      <section id="trabalho" class="trabalho" aria-labelledby="trabalho-titulo" data-galeria>
+        <div class="trabalho-fundo" aria-hidden="true">
+          <img
+            class="trabalho-lente"
+            src="/marca/pdl-lente.svg"
+            alt=""
+            width="472"
+            height="472"
+            loading="lazy"
+            data-lente-fundo
+          />
         </div>
-        <!-- pdl:selecao -->
+        <div class="galeria" data-revelar>
+          <div class="trabalho-topo">
+            <h2 id="trabalho-titulo" data-entrada>Trabalho</h2>
+            <p data-entrada>
+              Uma seleção de festas e jogos. O portfólio completo está no
+              <a href="{{behance}}">Behance</a>.
+            </p>
+          </div>
+          <!-- pdl:selecao -->
+        </div>
       </section>
 
       <!-- Quatro passos, a mesma foto vista por uma lente cada vez mais aberta. -->
@@ -175,16 +191,19 @@
               <p class="erro" id="orc-data-erro" data-erro="data" hidden></p>
             </div>
             <div class="campo">
-              <label for="orc-cidade">Cidade</label>
+              <label for="orc-local">Local</label>
               <input
-                id="orc-cidade"
-                name="cidade"
+                id="orc-local"
+                name="local"
                 type="text"
-                autocomplete="address-level2"
+                autocomplete="off"
                 required
-                aria-describedby="orc-cidade-erro"
+                aria-describedby="orc-local-dica orc-local-erro"
               />
-              <p class="erro" id="orc-cidade-erro" data-erro="cidade" hidden></p>
+              <p class="dica" id="orc-local-dica">
+                O lugar e a cidade, por exemplo: Clube Tal, Campinas.
+              </p>
+              <p class="erro" id="orc-local-erro" data-erro="local" hidden></p>
             </div>
             <div class="campo">
               <label for="orc-nome">Seu nome</label>

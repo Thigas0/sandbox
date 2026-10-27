@@ -22,7 +22,7 @@ linhas finas. O losango dourado da peça saiu em 2026-10-27, a pedido do cliente
 | Papel | `#faf7f1` | Paspatur das fotos, cartão do orçamento | |
 | Areia | `#ebe4d6` | Faixas de Trabalho e do orçamento, pergunta aberta | |
 | Areia escura | `#ddd3c1` | Segundo quadro da Cobertura | |
-| Linha | `#d3c9b6` | A moldura dupla (abertura e orçamento) | Decorativa |
+| Linha | `#b3a385` | A moldura dupla (abertura e orçamento): filete de 2 px por fora e de 1 px por dentro | Decorativa |
 | Tinta | `#24211d` | Texto, botão principal, fundo do rodapé | 14,0:1 sobre marfim; 12,7:1 sobre areia |
 | Tinta suave | `#5f574b` | Texto secundário (local e data, legendas, apoio) | 6,2:1 sobre marfim; 5,6:1 sobre areia |
 | Tinta clara | `#cfc6b5` | Texto secundário no rodapé escuro | 9,5:1 sobre tinta |
@@ -35,12 +35,18 @@ secundário tem só o contorno. As cores fortes vêm das fotos.
 
 - **Grão de papel:** um ruído fino e quente (`--grao` em `src/style.css`) sobre o marfim e as faixas
   de areia, para o fundo não parecer branco chapado.
-- **Moldura dupla:** a mesma da peça da marca, em volta da primeira tela e do cartão do orçamento.
-  É uma exceção pedida pelo cliente à regra da taste-skill que proíbe linhas finas.
+- **Moldura dupla:** a mesma da peça da marca, em volta da primeira tela e do cartão do orçamento:
+  um filete de 2 px por fora e um de 1 px por dentro, 5 px entre eles. Na abertura, o menu fica numa
+  faixa acima da moldura, para não cruzar a linha quando a página rola. É uma exceção pedida pelo
+  cliente à regra da taste-skill que proíbe linhas finas.
 - **Faixas de tom:** Trabalho e Orçamento ficam sobre areia; o resto, sobre marfim; o rodapé, na
   tinta.
 - **Paspatur:** em Trabalho e na página de privacidade, cada foto vem montada num papel mais claro,
   como numa exposição. É um passo de tom, sem linha e sem sombra.
+- **A lente ao fundo de Trabalho:** a lente do logo (`public/marca/pdl-lente.svg`, recortada do
+  logo traçado), enorme e um tom mais escura que a parede de areia, fica presa no meio da tela
+  enquanto as fotos passam na frente dela. As fotos andam em velocidades diferentes (umas parecem
+  mais perto, outras mais longe), e a lente gira com a rolagem, como o anel de foco.
 
 ## Tipos
 
@@ -88,8 +94,8 @@ A lente no miolo do D. Os arquivos:
 | Seção | Forma | Por quê |
 | --- | --- | --- |
 | Abertura | Quadro de moldura dupla: logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
-| Encontre suas fotos | Busca, três passos e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum |
-| Trabalho | Pares desencontrados sobre o fundo vazio, como numa exposição (`gallery-staggered-pairs`) | Fotos protagonistas, cada uma com espaço |
+| Encontre suas fotos | O título à esquerda e, a partir do meio da página, os três passos um embaixo do outro, com o número em Bodoni pendurado; embaixo, a busca e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum, lendo na ordem natural |
+| Trabalho | Pares desencontrados sobre uma parede de areia, como numa exposição (`gallery-staggered-pairs`), com a lente do logo ao fundo | Fotos protagonistas, cada uma com espaço e profundidade |
 | Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |
 | Orçamento | Cupom com o mini-formulário do WhatsApp | O trabalho nº 2 |
 | Perguntas | Título largo, perguntas recuadas | Responde preço, prazo e remoção de foto |
@@ -99,15 +105,18 @@ A lente no miolo do D. Os arquivos:
 
 - **Cena da abertura:** a lente cresce com a rolagem até cobrir a tela; o logo encolhe até 6% e
   some (`src/movimento.js`).
-- **Fotos de Trabalho:** cada foto se abre num círculo a partir do seu ponto de foco e assenta
-  (de 112% para 100%) enquanto entra na tela, ligada à rolagem (`animation-timeline: view()` em
-  `src/style.css`). Onde o navegador não tem isso (o Firefox, hoje), as fotos aparecem inteiras.
+- **Fotos de Trabalho** (`iniciarFotos` em `src/movimento.js`, em todo navegador): ligadas à
+  rolagem, cada foto se abre num círculo a partir do seu ponto de foco enquanto entra na tela e
+  passeia um pouco dentro do paspatur, como vista por uma janela. Cada uma anda até 100 px a mais
+  ou a menos que a página (metade no celular), o que as separa em camadas, e a lente do fundo gira
+  até 160° e cresce de 92% para 108%. As quatro fotos da página de privacidade se abrem do mesmo
+  jeito, com um terço do desvio.
 - **Cobertura:** a lente de cada quadro termina de abrir ao chegar à tela.
 - **Entradas:** título, texto e conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
   uma vez só.
 - **Resposta ao toque:** o botão encolhe 3% (140 ms) e o sublinhado do link engrossa (180 ms).
-- **Movimento reduzido** (`prefers-reduced-motion`): sem cena e sem entradas, com todo o conteúdo
-  visível.
+- **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas e com Trabalho parado,
+  com todo o conteúdo visível.
 - **WCAG 2.2.2:** não há nada que se mova sozinho.
 
 ## Provisório

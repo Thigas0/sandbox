@@ -101,6 +101,15 @@ Na rodada de 2026-10-27, a pedido do cliente:
   mesma escala de razão 1,25 dos outros.
 - **Losango:** saiu de cima do logo.
 
+Na rodada seguinte (2026-10-27), também a pedido do cliente:
+
+- **Compra:** os três passos saíram das três colunas espalhadas e ficaram um embaixo do outro, ao
+  lado do título, a partir do meio da página.
+- **Moldura:** mais visível (filete grosso e fino, num tom mais escuro), com o menu acima dela.
+- **Trabalho:** a lente do logo, enorme, ao fundo; fotos em camadas e rolagem interativa em todo
+  navegador (antes, só onde havia `animation-timeline`).
+- **Orçamento:** o campo "Cidade" virou "Local".
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.

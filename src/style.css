@@ -22,7 +22,7 @@
   --papel: #faf7f1;
   --superficie: #ebe4d6;
   --pedra: #ddd3c1;
-  --linha: #d3c9b6;
+  --linha: #b3a385;
   --tinta: #24211d;
   --tinta-suave: #5f574b;
   --tinta-clara: #cfc6b5;
@@ -53,6 +53,7 @@
 
   --m: clamp(1rem, 2vw, 2rem);
   --moldura: clamp(0.625rem, 1.6vw, 1.5rem);
+  --topo: 3.5rem;
   --secao: clamp(6rem, 13vw, 11rem);
   --medida: 38rem;
 
@@ -209,15 +210,14 @@ a:hover {
   font-size: var(--t-pequeno);
 }
 
-.topo-sobre {
-  justify-content: center;
-  padding-top: calc(var(--moldura) + 0.9rem);
-}
-
+/* Na abertura, o menu fica numa faixa acima da moldura: ao rolar, ele sobe e nunca cruza a linha. */
 .topo-sobre {
   position: absolute;
   inset: 0 0 auto;
   z-index: 3;
+  justify-content: center;
+  height: var(--topo);
+  padding-block: 0;
 }
 
 .menu ul {
@@ -262,19 +262,19 @@ a:hover {
   overflow: hidden;
   display: grid;
   place-items: center;
-  padding: calc(var(--moldura) + 3.75rem) calc(var(--moldura) + var(--m))
-    calc(var(--moldura) + 1.5rem);
+  padding: calc(var(--topo) + 1.5rem) calc(var(--moldura) + var(--m)) calc(var(--moldura) + 1.5rem);
 }
 
-/* A moldura dupla da peça da marca: duas linhas finas, uma dentro da outra. */
+/* A moldura dupla da peça da marca: um filete mais grosso por fora e um fino por dentro. Começa
+   abaixo da faixa do menu. */
 .abertura-palco::before {
   content: '';
   position: absolute;
-  inset: var(--moldura);
+  inset: var(--topo) var(--moldura) var(--moldura);
   /* Exceção pedida pelo cliente: a moldura dupla vem da peça da marca. taste-skill-ignore */
-  border: 1px solid var(--linha); /* taste-skill-ignore */
+  border: 2px solid var(--linha); /* taste-skill-ignore */
   outline: 1px solid var(--linha);
-  outline-offset: -7px;
+  outline-offset: -8px;
   pointer-events: none;
 }
 
@@ -354,22 +354,32 @@ a:hover {
   font-size: var(--t-pequeno);
 }
 
-/* Encontre suas fotos: uma linha por evento, um tamanho só. */
+/* Encontre suas fotos: o título e, ao lado, os três passos da compra, um embaixo do outro, como
+   se lê; embaixo, a busca e uma linha por evento, num tamanho só. */
 .fotos {
   padding: var(--secao) var(--m) 0;
 }
 
+/* Na mesma grade de 12 colunas de Trabalho: os passos começam no meio da página, na mesma
+   vertical do título de Trabalho, mais abaixo. */
 .fotos-topo {
   display: grid;
-  grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
-  gap: 1.5rem 4rem;
-  align-items: start;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 2rem var(--m);
+  align-items: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.fotos-topo h2 {
+  grid-column: 1 / 7;
+  margin: 0;
 }
 
 .busca {
   display: grid;
   gap: 0.4rem;
+  max-width: 26rem;
+  margin-bottom: 2rem;
   font-size: var(--t-pequeno);
 }
 
@@ -379,26 +389,21 @@ a:hover {
   color: var(--tinta-suave);
 }
 
-/* Os três passos da compra um degrau acima do texto corrido, com o número em Bodoni. Sem a
-   busca (enquanto não há eventos), ocupam a largura toda. */
+/* Os passos um degrau acima do texto corrido. O número, em Bodoni, fica pendurado à esquerda e a
+   segunda linha começa embaixo da primeira palavra. */
 .passos-compra {
-  grid-column: 2;
+  grid-column: 7 / -1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem 3rem;
+  gap: 1rem;
+  max-width: 34rem;
   margin: 0;
-  padding-left: 1.3em;
+  padding-left: 1.5em;
   font-size: var(--t-destaque);
   line-height: 1.35;
 }
 
-.busca[hidden] + .passos-compra {
-  grid-column: 1 / -1;
-}
-
 .passos-compra li {
-  max-width: 32ch;
-  padding-left: 0.2em;
+  padding-left: 0.4em;
 }
 
 .passos-compra li::marker {
@@ -446,18 +451,45 @@ a:hover {
 }
 
 /* Trabalho: uma parede de areia com as fotos montadas em paspatur, em pares desencontrados,
-   como numa exposição. O desenho se repete a cada oito fotos e o primeiro par deixa lugar para o
-   título. */
+   como numa exposição. Ao fundo, a lente do logo, enorme e um tom mais escura que a parede, fica
+   presa no meio da tela enquanto as fotos passam na frente dela, cada uma a uma distância
+   (src/movimento.js). O desenho das fotos se repete a cada oito e o primeiro par deixa lugar para
+   o título. */
+/* overflow: clip corta o fundo preso no fim da seção (sem isso, a lente passaria por cima da
+   Cobertura) e, ao contrário de hidden, não impede o position: sticky. */
+.trabalho {
+  position: relative;
+  margin-top: var(--secao);
+  overflow: clip;
+  background: var(--grao) var(--superficie);
+}
+
+/* Uma tela de altura que não ocupa lugar (margem negativa) e fica presa enquanto a seção passa. */
+.trabalho-fundo {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.trabalho-lente {
+  width: min(96vmin, 60rem);
+}
+
 .galeria {
   --par: 22svh;
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-flow: row dense;
   column-gap: var(--m);
   align-items: start;
-  margin-top: var(--secao);
   padding: var(--secao) var(--m);
-  background: var(--grao) var(--superficie);
 }
 
 .trabalho-topo {
@@ -570,11 +602,14 @@ a:hover {
   padding: var(--secao) var(--m) 0;
 }
 
+/* O título divide a linha da grade com os quadros; align-self: start deixa a caixa dele do tamanho
+   do texto, sem cobrir os nomes dos passos embaixo. */
 .cobertura h2 {
   position: relative;
   z-index: 1;
   grid-column: 1 / 6;
   grid-row: 1;
+  align-self: start;
   margin: 0;
 }
 
@@ -662,9 +697,9 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0.625rem;
-  border: 1px solid var(--linha); /* taste-skill-ignore: a mesma moldura da marca */
+  border: 2px solid var(--linha); /* taste-skill-ignore: a mesma moldura da marca */
   outline: 1px solid var(--linha);
-  outline-offset: -7px;
+  outline-offset: -8px;
   pointer-events: none;
 }
 
@@ -887,17 +922,10 @@ details p {
     transform: translateY(24px);
   }
 
-  /* Ligado à rolagem, onde o navegador permite (os outros mostram as fotos paradas e inteiras):
-     cada foto de Trabalho se abre como a lente da abertura, a partir do seu ponto de foco, e
-     assenta enquanto sobe; na Cobertura, a lente de cada passo termina de abrir ao chegar. */
+  /* Na Cobertura, ligado à rolagem onde o navegador permite (os outros mostram os quadros prontos):
+     a lente de cada passo termina de abrir ao chegar. As fotos de Trabalho são movidas por
+     src/movimento.js, que funciona em todo navegador. */
   @supports (animation-timeline: view()) {
-    .galeria-foto .foto {
-      animation: abrir-lente linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 50%;
-    }
-
-    .galeria-foto img,
     .passo:last-child img {
       animation: assentar linear both;
       animation-timeline: view();
@@ -909,16 +937,6 @@ details p {
       animation-timeline: view();
       animation-range: entry 20% cover 55%;
     }
-  }
-}
-
-@keyframes abrir-lente {
-  from {
-    clip-path: circle(12% at var(--foco, 50% 50%));
-  }
-
-  to {
-    clip-path: circle(142% at var(--foco, 50% 50%));
   }
 }
 
@@ -985,9 +1003,8 @@ details p {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .passos-compra {
-    grid-column: auto;
-    grid-template-columns: minmax(0, 1fr);
+  .fotos-topo > * {
+    grid-column: 1 / -1;
   }
 
   .evento-link {

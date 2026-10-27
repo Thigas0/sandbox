@@ -53,11 +53,11 @@ for (const tamanho of TAMANHOS) {
       await percorrer(page);
       expect(await problemasDeLayout(page)).toEqual([]);
       // Só para a captura de página inteira: a abertura vira um bloco comum e as fotos ligadas à
-      // rolagem aparecem abertas, como ficam quando chegam à tela. As medições acima foram feitas
-      // na página como ela é.
+      // rolagem aparecem abertas e no lugar, como ficam quando chegam à tela. As medições acima
+      // foram feitas na página como ela é.
       await page.addStyleTag({
         content:
-          '.abertura{height:auto}.abertura-palco{position:relative}.galeria-foto .foto,.galeria-foto img,.passo-quadro .foto,.passo-quadro img{animation:none}',
+          '.abertura{height:auto}.abertura-palco{position:relative}.galeria-foto,.galeria-foto .foto,.galeria-foto img,.passo-quadro .foto,.passo-quadro img{animation:none;transform:none!important;clip-path:none!important}',
       });
       await percorrer(page);
       const nome = `${caminho === '/' ? 'inicio' : 'privacidade'}-${tamanho.nome}-${info.project.name}.png`;
@@ -69,4 +69,30 @@ for (const tamanho of TAMANHOS) {
       await info.attach(nome, { body: captura, contentType: 'image/png' });
     });
   }
+}
+
+// O menu fica numa faixa acima da moldura da abertura. A moldura fica presa enquanto a lente se
+// abre e o menu sobe com a página: se ele começasse dentro da moldura, cruzaria a linha ao rolar.
+for (const tamanho of TAMANHOS) {
+  test(`em ${tamanho.nome} px o menu não encosta na moldura, parado ou rolando`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: tamanho.width, height: tamanho.height });
+    await page.goto('/');
+    for (const rolagem of [0, 20, 40, 80]) {
+      await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), rolagem);
+      const medidas = await page.evaluate(() => {
+        const palco = document.querySelector('.abertura-palco');
+        const moldura = getComputedStyle(palco, '::before');
+        const menu = document.querySelector('.topo-sobre .menu').getBoundingClientRect();
+        return {
+          menuEmbaixo: menu.bottom,
+          molduraEmCima: palco.getBoundingClientRect().top + parseFloat(moldura.top),
+        };
+      });
+      expect(medidas.menuEmbaixo, `rolagem de ${rolagem} px`).toBeLessThanOrEqual(
+        medidas.molduraEmCima,
+      );
+    }
+  });
 }

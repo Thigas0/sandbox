@@ -47,3 +47,47 @@ test('nada que se mova sozinho fica sem botão de pausa', async ({ page }) => {
     ),
   ).toBe(false);
 });
+
+// Trabalho: a rolagem é interativa em qualquer navegador (o script não depende de recursos novos de
+// CSS). A lente do fundo gira e as fotos se abrem e mudam de lugar conforme a página desce.
+test('em Trabalho, rolar gira a lente do fundo e abre as fotos', async ({ page }) => {
+  await page.goto('/');
+  const estado = () =>
+    page.evaluate(() => ({
+      lente: document.querySelector('[data-lente-fundo]').style.transform,
+      fotos: [...document.querySelectorAll('#trabalho .galeria-foto')].map((figura) => ({
+        recorte: figura.querySelector('.foto').style.clipPath,
+        lugar: figura.style.transform,
+      })),
+    }));
+  const topo = await page.evaluate(
+    () => document.querySelector('#trabalho').getBoundingClientRect().top + window.scrollY,
+  );
+  await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), topo);
+  await expect.poll(async () => (await estado()).lente).toMatch(/rotate/);
+  const antes = await estado();
+  await page.evaluate(
+    (y) => window.scrollTo({ top: y + window.innerHeight * 1.5, behavior: 'instant' }),
+    topo,
+  );
+  await expect.poll(async () => (await estado()).lente).not.toBe(antes.lente);
+  const depois = await estado();
+  // Uma foto que estava fechada (recortada num círculo) se abriu, e alguma foto mudou de lugar.
+  expect(antes.fotos.some((f, i) => f.recorte && !depois.fotos[i].recorte)).toBe(true);
+  expect(depois.fotos.some((f, i) => f.lugar !== antes.fotos[i].lugar)).toBe(true);
+});
+
+test('com movimento reduzido, Trabalho fica parado e as fotos inteiras', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await percorrer(page);
+  const estilos = await page.evaluate(() =>
+    [
+      document.querySelector('[data-lente-fundo]'),
+      ...document.querySelectorAll('.galeria-foto, .galeria-foto .foto, .galeria-foto img'),
+    ]
+      .map((el) => el.getAttribute('style') ?? '')
+      .filter((estilo) => /transform|clip-path/.test(estilo)),
+  );
+  expect(estilos).toEqual([]);
+});

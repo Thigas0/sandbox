@@ -2,7 +2,7 @@
 // Nada é enviado a este site. Se o navegador bloquear a janela, mostramos o link e a cópia.
 import { whatsapp } from './dados/site.json';
 
-const CAMPOS = ['tipo', 'data', 'cidade', 'nome', 'detalhes'];
+const CAMPOS = ['tipo', 'data', 'local', 'nome', 'detalhes'];
 
 // Data de hoje no fuso de quem preenche, no formato do campo de data (AAAA-MM-DD).
 export const hojeLocal = (agora = new Date()) =>
@@ -18,15 +18,15 @@ export function validarPedido(pedido, hoje) {
   if (!pedido.tipo) erros.tipo = 'Escolha o tipo de evento.';
   if (!pedido.data) erros.data = 'Informe a data do evento.';
   else if (pedido.data < hoje) erros.data = 'A data precisa ser hoje ou depois.';
-  if (!pedido.cidade) erros.cidade = 'Informe a cidade do evento.';
+  if (!pedido.local) erros.local = 'Informe o local do evento.';
   if (!pedido.nome) erros.nome = 'Informe o seu nome.';
   return erros;
 }
 
 const dataBrasileira = (iso) => iso.split('-').reverse().join('/');
 
-export function montarMensagem({ tipo, data, cidade, nome, detalhes }) {
-  const texto = `Olá! Sou ${nome}. Quero um orçamento de cobertura: ${tipo}, ${dataBrasileira(data)}, ${cidade}.`;
+export function montarMensagem({ tipo, data, local, nome, detalhes }) {
+  const texto = `Olá! Sou ${nome}. Quero um orçamento de cobertura: ${tipo}, ${dataBrasileira(data)}, ${local}.`;
   return detalhes ? `${texto} Detalhes: ${detalhes}` : texto;
 }
 

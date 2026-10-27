@@ -19,14 +19,14 @@ async function preencher(page, campos = {}) {
   const pedido = {
     tipo: 'Festa',
     data: '2026-12-12',
-    cidade: 'Campinas',
+    local: 'Clube Tal, Campinas',
     nome: 'Ana',
     detalhes: '',
     ...campos,
   };
   await page.getByLabel('Tipo de evento').selectOption(pedido.tipo);
   await page.getByLabel('Data do evento').fill(pedido.data);
-  await page.getByLabel('Cidade', { exact: true }).fill(pedido.cidade);
+  await page.getByLabel('Local', { exact: true }).fill(pedido.local);
   await page.getByLabel('Seu nome').fill(pedido.nome);
   if (pedido.detalhes) await page.getByLabel('Detalhes (opcional)').fill(pedido.detalhes);
 }
@@ -47,7 +47,7 @@ test('validação: campos vazios mostram as mensagens e o foco vai para o primei
   await enviar(page);
   await expect(page.getByText('Escolha o tipo de evento.')).toBeVisible();
   await expect(page.getByText('Informe a data do evento.')).toBeVisible();
-  await expect(page.getByText('Informe a cidade do evento.')).toBeVisible();
+  await expect(page.getByText('Informe o local do evento.')).toBeVisible();
   await expect(page.getByText('Informe o seu nome.')).toBeVisible();
   await expect(page.getByLabel('Tipo de evento')).toBeFocused();
   await expect(page.getByLabel('Seu nome')).toHaveAttribute('aria-invalid', 'true');
@@ -70,7 +70,7 @@ test('sucesso: abre o WhatsApp com o número e a mensagem certos', async ({ page
   await preencher(page, { detalhes: 'Das 20h à meia-noite.' });
   await enviar(page);
   const mensagem =
-    'Olá! Sou Ana. Quero um orçamento de cobertura: Festa, 12/12/2026, Campinas. Detalhes: Das 20h à meia-noite.';
+    'Olá! Sou Ana. Quero um orçamento de cobertura: Festa, 12/12/2026, Clube Tal, Campinas. Detalhes: Das 20h à meia-noite.';
   expect(await aberturas(page)).toEqual([{ url: linkEsperado(mensagem), alvo: '_blank' }]);
   await expect(page.locator('[data-orcamento-status]')).toHaveText(
     'O WhatsApp abriu em outra aba com a sua mensagem. É só enviar.',
@@ -84,10 +84,14 @@ test.describe('erro: janela bloqueada', () => {
   test('mostra o link certo e copia a mensagem', async ({ page }) => {
     await simularJanela(page, { bloqueada: true });
     await page.goto('/#orcamento');
-    await preencher(page, { tipo: 'Jogo ou campeonato', cidade: 'Valinhos', nome: 'Rui' });
+    await preencher(page, {
+      tipo: 'Jogo ou campeonato',
+      local: 'Ginásio Municipal, Valinhos',
+      nome: 'Rui',
+    });
     await enviar(page);
     const mensagem =
-      'Olá! Sou Rui. Quero um orçamento de cobertura: Jogo ou campeonato, 12/12/2026, Valinhos.';
+      'Olá! Sou Rui. Quero um orçamento de cobertura: Jogo ou campeonato, 12/12/2026, Ginásio Municipal, Valinhos.';
     await expect(page.locator('[data-orcamento-status]')).toContainText('bloqueou a nova janela');
     const link = page.getByRole('link', { name: 'Abrir o WhatsApp' });
     await expect(link).toBeVisible();
