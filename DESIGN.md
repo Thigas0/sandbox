@@ -64,8 +64,8 @@ Cinco tamanhos de texto, numa escala de razão 1,25 a partir do corpo, mais o lo
 | --- | --- | --- |
 | Pequeno | 14–15 px (corpo ÷ 1,25) | Menu, rótulos, legendas, último evento |
 | Corpo | 17–19 px | Texto, botões, apoio da abertura |
-| Destaque | 19–24 px (corpo × 1,25) | Os três passos da compra e os passos da Cobertura |
-| Linha | 21–30 px (corpo × 1,25²) | Eventos, perguntas, frase da abertura |
+| Destaque | 19–24 px (corpo × 1,25) | Os passos da Cobertura |
+| Linha | 21–30 px (corpo × 1,25²) | Eventos, perguntas, frase da abertura, frase de Fotos |
 | Título | 34–72 px (corpo × 1,25⁶) | Títulos de seção |
 | Logo | até 60% da largura e 40svh de altura | Abertura, no centro (84% da largura no celular); rodapé, de ponta a ponta |
 
@@ -94,7 +94,7 @@ A lente no miolo do D. Os arquivos:
 | Seção | Forma | Por quê |
 | --- | --- | --- |
 | Abertura | Quadro de moldura dupla: logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
-| Encontre suas fotos | O título à esquerda e, a partir do meio da página, os três passos um embaixo do outro, com o número em Bodoni pendurado; embaixo, a busca e uma linha por evento, num tamanho só | O trabalho nº 1: achar o álbum, lendo na ordem natural |
+| Encontre suas fotos | Tudo a partir da margem esquerda: o título, uma frase corrida que conta como comprar ("Abra o seu evento na lista. No Fotto, uma selfie mostra só as fotos em que você aparece: escolha as suas e pague ali mesmo."), a busca e uma linha por evento | O trabalho nº 1: achar o álbum, lendo de cima para baixo, sem tópicos numerados |
 | Trabalho | Pares desencontrados sobre uma parede de areia, como numa exposição (`gallery-staggered-pairs`), com a lente do logo ao fundo | Fotos protagonistas, cada uma com espaço e profundidade |
 | Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |
 | Orçamento | Cupom com o mini-formulário do WhatsApp | O trabalho nº 2 |
@@ -112,11 +112,17 @@ A lente no miolo do D. Os arquivos:
   até 160° e cresce de 92% para 108%. As quatro fotos da página de privacidade se abrem do mesmo
   jeito, com um terço do desvio.
 - **Cobertura:** a lente de cada quadro termina de abrir ao chegar à tela.
-- **Entradas:** título, texto e conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
-  uma vez só.
+- **Texto que sobe** (`iniciarPalavras` em `src/movimento.js`): na primeira vez que a página desce
+  até eles, os títulos das seções e a frase de Fotos aparecem com cada palavra subindo de trás da
+  própria linha, como numa máscara, em 800 ms. As linhas sobem uma depois da outra (120 ms). Nos
+  títulos, as palavras de cada linha vêm da esquerda para a direita (40 ms); a frase de Fotos sobe
+  linha a linha, 200 ms depois do título, para ser lida logo. O leitor de tela ouve cada texto
+  inteiro, e no fim o elemento volta a ser só texto, no mesmo lugar.
+- **Entradas:** o texto e o conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
+  depois do título, uma vez só.
 - **Resposta ao toque:** o botão encolhe 3% (140 ms) e o sublinhado do link engrossa (180 ms).
-- **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas e com Trabalho parado,
-  com todo o conteúdo visível.
+- **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas, sem texto que sobe e
+  com Trabalho parado, com todo o conteúdo visível.
 - **WCAG 2.2.2:** não há nada que se mova sozinho.
 
 ## Provisório

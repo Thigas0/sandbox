@@ -61,6 +61,7 @@
   --t-toque: 140ms;
   --t-passar: 180ms;
   --t-entrada: 700ms;
+  --t-palavra: 800ms;
   color-scheme: light;
 }
 
@@ -354,25 +355,23 @@ a:hover {
   font-size: var(--t-pequeno);
 }
 
-/* Encontre suas fotos: o título e, ao lado, os três passos da compra, um embaixo do outro, como
-   se lê; embaixo, a busca e uma linha por evento, num tamanho só. */
+/* Encontre suas fotos: o título e, embaixo, uma frase corrida que conta como comprar, no tamanho
+   das linhas de evento; depois a busca e uma linha por evento. Tudo parte da margem esquerda. */
 .fotos {
   padding: var(--secao) var(--m) 0;
 }
 
-/* Na mesma grade de 12 colunas de Trabalho: os passos começam no meio da página, na mesma
-   vertical do título de Trabalho, mais abaixo. */
-.fotos-topo {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 2rem var(--m);
-  align-items: center;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
+.fotos h2 {
+  margin-bottom: 1.75rem;
 }
 
-.fotos-topo h2 {
-  grid-column: 1 / 7;
-  margin: 0;
+/* Três linhas no computador, que quebram onde a frase respira: depois da selfie e depois dos
+   dois-pontos. */
+.fotos-frase {
+  max-width: 40ch;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--t-linha);
+  line-height: 1.35;
 }
 
 .busca {
@@ -387,29 +386,6 @@ a:hover {
   margin: 0;
   min-height: 1.5em;
   color: var(--tinta-suave);
-}
-
-/* Os passos um degrau acima do texto corrido. O número, em Bodoni, fica pendurado à esquerda e a
-   segunda linha começa embaixo da primeira palavra. */
-.passos-compra {
-  grid-column: 7 / -1;
-  display: grid;
-  gap: 1rem;
-  max-width: 34rem;
-  margin: 0;
-  padding-left: 1.5em;
-  font-size: var(--t-destaque);
-  line-height: 1.35;
-}
-
-.passos-compra li {
-  padding-left: 0.4em;
-}
-
-.passos-compra li::marker {
-  color: var(--tinta-suave);
-  font-family: var(--display);
-  font-size: var(--t-linha);
 }
 
 .eventos {
@@ -444,10 +420,19 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
+/* Os avisos da lista, em tinta suave e com a entrelinha da frase, para não competir com ela; o
+   link, que é a saída, fica em tinta cheia. */
 .eventos-vazio,
 .busca-vazia {
-  font-size: var(--t-linha);
   max-width: 44rem;
+  color: var(--tinta-suave);
+  font-size: var(--t-linha);
+  line-height: 1.35;
+}
+
+.eventos-vazio a,
+.busca-vazia a {
+  color: var(--tinta);
 }
 
 /* Trabalho: uma parede de areia com as fotos montadas em paspatur, em pares desencontrados,
@@ -909,7 +894,22 @@ details p {
   justify-self: end;
 }
 
-/* Entradas: título, texto e conteúdo de cada seção sobem ao aparecer, uma vez. */
+/* Texto que sobe (src/movimento.js): cada palavra ganha uma máscara do tamanho da linha, com folga
+   em cima e embaixo para acentos e descendentes (a margem negativa devolve a folga, e o texto fica
+   onde estava), e a tinta sobe de trás dela. No fim, o texto volta a ser só texto. */
+.palavra {
+  display: inline-block;
+  padding: 0.15em 0.06em 0.25em;
+  margin: -0.15em -0.06em -0.25em;
+  clip-path: inset(0);
+}
+
+.palavra > span {
+  display: inline-block;
+}
+
+/* Entradas: o texto e o conteúdo de cada seção sobem ao aparecer, uma vez; os títulos e a frase de
+   Fotos sobem palavra por palavra. */
 @media (prefers-reduced-motion: no-preference) {
   html.entradas [data-entrada] {
     transition:
@@ -920,6 +920,14 @@ details p {
   html.entradas [data-entrada]:not(.entrou) {
     opacity: 0;
     transform: translateY(24px);
+  }
+
+  .palavra > span {
+    transition: transform var(--t-palavra) var(--ease-out) var(--atraso, 0ms);
+  }
+
+  [data-palavras]:not(.subiu) .palavra > span {
+    transform: translateY(calc(100% + 0.5em));
   }
 
   /* Na Cobertura, ligado à rolagem onde o navegador permite (os outros mostram os quadros prontos):
@@ -998,13 +1006,8 @@ details p {
     width: min(100%, 20rem);
   }
 
-  .fotos-topo,
   .cupom {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .fotos-topo > * {
-    grid-column: 1 / -1;
   }
 
   .evento-link {

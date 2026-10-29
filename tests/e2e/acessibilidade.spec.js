@@ -19,6 +19,32 @@ for (const caminho of PAGINAS) {
   });
 }
 
+// Antes de a página descer, os títulos estão divididos em palavras escondidas (src/movimento.js):
+// o leitor de tela ouve cada título inteiro uma vez, e as seções continuam com nome. O contraste
+// fica com os testes acima, com a página parada: para medi-lo, o axe rola a página, o que dispararia
+// as entradas no meio da medição.
+test('axe não acusa violações antes de os títulos subirem', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator('#cobertura-titulo .palavra').first()).toBeAttached();
+  for (const nome of [
+    'Encontre suas fotos',
+    'Trabalho',
+    'Cobertura do seu evento',
+    'Peça um orçamento',
+    'Perguntas',
+  ]) {
+    await expect(page.getByRole('heading', { name: nome, exact: true })).toHaveCount(1);
+    await expect(page.getByRole('region', { name: nome, exact: true })).toHaveCount(1);
+  }
+  const resultado = await new AxeBuilder({ page })
+    .withTags(REGRAS)
+    .disableRules(['color-contrast'])
+    .analyze();
+  expect(resultado.violations).toEqual([]);
+  await expect(page.locator('#cobertura-titulo .palavra').first()).toBeAttached();
+});
+
 test('axe não acusa violações com as perguntas abertas e os erros do formulário à mostra', async ({
   page,
 }) => {

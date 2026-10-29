@@ -36,10 +36,9 @@ A frase também é a descrição do negócio nos dados estruturados.
 ## Encontre suas fotos
 
 - Título: Encontre suas fotos
-- Ao lado do título, um embaixo do outro, os três passos:
-  1. Abra o seu evento na lista.
-  2. No Fotto, encontre-se com uma selfie ou navegue pelo álbum.
-  3. Escolha as fotos e pague online, no próprio Fotto.
+- Embaixo do título, uma frase corrida (no lugar dos três passos numerados): Abra o seu evento na
+  lista. No Fotto, uma selfie mostra só as fotos em que você aparece: escolha as suas e pague ali
+  mesmo.
 - Campo de busca, acima da lista: "Nome do evento, local ou mês"
 - Cada linha da lista: nome do evento · local · data por extenso. A linha inteira é o link do
   álbum.

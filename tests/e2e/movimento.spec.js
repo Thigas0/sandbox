@@ -77,6 +77,61 @@ test('em Trabalho, rolar gira a lente do fundo e abre as fotos', async ({ page }
   expect(depois.fotos.some((f, i) => f.lugar !== antes.fotos[i].lugar)).toBe(true);
 });
 
+// Texto que sobe: na primeira vez que a página desce até um título (ou até a frase de Fotos), as
+// palavras sobem de trás da linha. Antes disso, o leitor de tela já ouve o texto inteiro; depois, o
+// elemento volta a ser só texto, no mesmo lugar, e não sobe de novo.
+const estadoDoTexto = (page, seletor) =>
+  page.locator(seletor).evaluate((el) => {
+    const primeira = el.querySelector('.palavra > span');
+    return {
+      palavras: el.querySelectorAll('.palavra').length,
+      escondida: primeira ? getComputedStyle(primeira).transform !== 'none' : false,
+      ocultasDoLeitor: el.querySelectorAll('[aria-hidden="true"] .palavra').length,
+      texto: el.textContent.trim().replace(/\s+/g, ' '),
+      altura: el.getBoundingClientRect().height,
+    };
+  });
+
+test('ao descer a página, os títulos sobem palavra por palavra, uma vez', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  const titulo = page.getByRole('heading', { name: 'Encontre suas fotos', exact: true });
+  await expect(titulo).toHaveCount(1);
+  const antes = await estadoDoTexto(page, '#fotos-titulo');
+  expect(antes).toMatchObject({ palavras: 3, escondida: true, ocultasDoLeitor: 3 });
+  const frase = await estadoDoTexto(page, '#fotos .fotos-frase');
+  expect(frase.palavras).toBeGreaterThan(10);
+  expect(frase.escondida).toBe(true);
+
+  await page
+    .locator('#fotos')
+    .evaluate((secao) => window.scrollTo({ top: secao.offsetTop, behavior: 'instant' }));
+  // Sobe e, no fim, volta a ser o texto de antes, no mesmo lugar.
+  await expect.poll(async () => (await estadoDoTexto(page, '#fotos-titulo')).palavras).toBe(0);
+  const depois = await estadoDoTexto(page, '#fotos-titulo');
+  expect(depois.texto).toBe('Encontre suas fotos');
+  expect(depois.altura).toBeCloseTo(antes.altura, 0);
+  await expect(titulo).toHaveText('Encontre suas fotos');
+  await expect
+    .poll(async () => (await estadoDoTexto(page, '#fotos .fotos-frase')).palavras)
+    .toBe(0);
+
+  // Subir e descer de novo não esconde o texto outra vez.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page
+    .locator('#fotos')
+    .evaluate((secao) => window.scrollTo({ top: secao.offsetTop, behavior: 'instant' }));
+  await page.waitForTimeout(300);
+  expect((await estadoDoTexto(page, '#fotos-titulo')).palavras).toBe(0);
+});
+
+test('com movimento reduzido, os títulos já estão inteiros, sem divisão', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  expect(await page.locator('[data-palavras]').count()).toBeGreaterThan(3);
+  await expect(page.locator('.palavra')).toHaveCount(0);
+});
+
 test('com movimento reduzido, Trabalho fica parado e as fotos inteiras', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');

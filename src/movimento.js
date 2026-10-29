@@ -42,16 +42,19 @@ export function iniciarLente(raiz = document) {
 }
 
 // Entradas: as partes de cada seção sobem uma vez ao aparecer, em ordem de leitura (80 ms entre
-// elas). Sem JavaScript, ou com movimento reduzido, a classe não entra e nada fica escondido.
+// elas, contando o título, que sobe palavra por palavra). Sem JavaScript, ou com movimento
+// reduzido, a classe não entra e nada fica escondido.
 export function iniciarEntradas(raiz = document) {
   if (reduzir.matches || !('IntersectionObserver' in window)) return;
   const alvos = [...raiz.querySelectorAll('[data-entrada]')];
   if (!alvos.length) return;
   const ordem = new Map();
-  for (const alvo of alvos) {
-    const secao = alvo.closest('section') ?? document.body;
+  for (const parte of raiz.querySelectorAll('[data-entrada], [data-palavras]')) {
+    const secao = parte.closest('section') ?? document.body;
     const posicao = ordem.get(secao) ?? 0;
-    alvo.style.setProperty('--atraso', `${posicao * 80}ms`);
+    if (parte.hasAttribute('data-entrada')) {
+      parte.style.setProperty('--atraso', `${posicao * 80}ms`);
+    }
     ordem.set(secao, posicao + 1);
   }
   const observador = new IntersectionObserver(
@@ -66,6 +69,90 @@ export function iniciarEntradas(raiz = document) {
   );
   document.documentElement.classList.add('entradas');
   alvos.forEach((alvo) => observador.observe(alvo));
+}
+
+// Texto que sobe: os títulos das seções e a frase de Fotos ([data-palavras]) aparecem uma vez,
+// quando chegam à tela, com cada palavra subindo de trás da própria linha. As linhas sobem uma
+// depois da outra (120 ms); num título, as palavras de cada linha vêm da esquerda para a direita
+// (40 ms), e uma frase marcada data-palavras="linhas" sobe linha a linha, para ler logo.
+// Enquanto isso, o leitor de tela lê a frase inteira numa cópia oculta; no fim, o elemento volta a
+// ter só o texto de antes. Sem JavaScript, ou com movimento reduzido, o texto já está lá, parado.
+export function iniciarPalavras(raiz = document) {
+  if (reduzir.matches || !('IntersectionObserver' in window)) return;
+  const alvos = [...raiz.querySelectorAll('[data-palavras]')].filter(
+    (alvo) => !alvo.children.length && alvo.textContent.trim(),
+  );
+  if (!alvos.length) return;
+  // Para cada texto dividido: o texto de antes, quanto ele espera para começar e o intervalo
+  // entre as palavras de uma linha.
+  const divididos = new Map();
+  const ordem = new Map();
+
+  for (const alvo of alvos) {
+    const texto = alvo.textContent.trim().replace(/\s+/g, ' ');
+    const oculto = document.createElement('span');
+    oculto.className = 'visualmente-oculto';
+    oculto.textContent = texto;
+    const palavras = document.createElement('span');
+    palavras.setAttribute('aria-hidden', 'true');
+    texto.split(' ').forEach((palavra, i) => {
+      const mascara = document.createElement('span');
+      mascara.className = 'palavra';
+      mascara.append(document.createElement('span'));
+      mascara.firstChild.textContent = palavra;
+      palavras.append(...(i ? [' ', mascara] : [mascara]));
+    });
+    alvo.replaceChildren(oculto, palavras);
+    // O segundo texto de uma seção (a frase, depois do título) começa 200 ms depois do primeiro.
+    const secao = alvo.closest('section') ?? document.body;
+    const posicao = ordem.get(secao) ?? 0;
+    const onda = alvo.dataset.palavras === 'linhas' ? 0 : 40;
+    divididos.set(alvo, { texto, espera: posicao * 200, onda });
+    ordem.set(secao, posicao + 1);
+  }
+
+  const restaurar = (alvo) => {
+    if (!divididos.has(alvo)) return;
+    alvo.textContent = divididos.get(alvo).texto;
+    alvo.classList.remove('subiu');
+    divididos.delete(alvo);
+  };
+
+  const revelar = (alvo) => {
+    const { espera, onda } = divididos.get(alvo);
+    let linha = -1;
+    let topo = -Infinity;
+    let posicao = 0;
+    for (const mascara of alvo.querySelectorAll('.palavra')) {
+      if (mascara.offsetTop > topo + 2) {
+        linha += 1;
+        topo = mascara.offsetTop;
+        posicao = 0;
+      }
+      mascara.style.setProperty('--atraso', `${espera + linha * 120 + posicao * onda}ms`);
+      posicao += 1;
+    }
+    alvo.classList.add('subiu');
+    const subidas = alvo.getAnimations({ subtree: true }).map((animacao) => animacao.finished);
+    Promise.allSettled(subidas).then(() => restaurar(alvo));
+  };
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      for (const entrada of entradas) {
+        if (!entrada.isIntersecting) continue;
+        observador.unobserve(entrada.target);
+        revelar(entrada.target);
+      }
+    },
+    { rootMargin: '0px 0px -10% 0px' },
+  );
+  alvos.forEach((alvo) => observador.observe(alvo));
+  reduzir.addEventListener('change', () => {
+    if (!reduzir.matches) return;
+    observador.disconnect();
+    [...divididos.keys()].forEach(restaurar);
+  });
 }
 
 // Quanto cada foto de Trabalho anda a mais (positivo, parece mais perto) ou a menos (negativo,

@@ -75,17 +75,14 @@
         </div>
       </section>
 
-      <!-- O título e, ao lado, os três passos da compra, um embaixo do outro; depois a busca e a
-           lista de eventos. -->
+      <!-- O título e uma frase corrida que conta como comprar; embaixo, a busca e a lista de
+           eventos. Tudo alinhado à esquerda, como se lê. -->
       <section id="fotos" class="fotos" aria-labelledby="fotos-titulo">
-        <div class="fotos-topo">
-          <h2 id="fotos-titulo" data-entrada>Encontre suas fotos</h2>
-          <ol class="passos-compra" data-entrada>
-            <li>Abra o seu evento na lista.</li>
-            <li>No Fotto, encontre-se com uma selfie ou navegue pelo álbum.</li>
-            <li>Escolha as fotos e pague online, no próprio Fotto.</li>
-          </ol>
-        </div>
+        <h2 id="fotos-titulo" data-palavras>Encontre suas fotos</h2>
+        <p class="fotos-frase" data-palavras="linhas">
+          Abra o seu evento na lista. No Fotto, uma selfie mostra só as fotos em que você aparece:
+          escolha as suas e pague ali mesmo.
+        </p>
         <div class="busca" data-busca hidden>
           <label for="busca-eventos">Nome do evento, local ou mês</label>
           <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
@@ -114,7 +111,7 @@
         </div>
         <div class="galeria" data-revelar>
           <div class="trabalho-topo">
-            <h2 id="trabalho-titulo" data-entrada>Trabalho</h2>
+            <h2 id="trabalho-titulo" data-palavras>Trabalho</h2>
             <p data-entrada>
               Uma seleção de festas e jogos. O portfólio completo está no
               <a href="{{behance}}">Behance</a>.
@@ -126,7 +123,7 @@
 
       <!-- Quatro passos, a mesma foto vista por uma lente cada vez mais aberta. -->
       <section id="cobertura" class="cobertura" aria-labelledby="cobertura-titulo">
-        <h2 id="cobertura-titulo" data-entrada>Cobertura do seu evento</h2>
+        <h2 id="cobertura-titulo" data-palavras>Cobertura do seu evento</h2>
         <ol class="passos">
           <li class="passo">
             <div class="passo-quadro" aria-hidden="true">
@@ -164,7 +161,7 @@
       <section id="orcamento" class="orcamento" aria-labelledby="orcamento-titulo">
         <div class="cupom" data-entrada>
           <div class="cupom-texto">
-            <h2 id="orcamento-titulo">Peça um orçamento</h2>
+            <h2 id="orcamento-titulo" data-palavras>Peça um orçamento</h2>
             <p>Preencha e o WhatsApp abre com a mensagem pronta. Nada fica guardado neste site.</p>
             <p class="cupom-email">Prefere e-mail? <a href="{{mailto}}">{{email}}</a></p>
           </div>
@@ -250,7 +247,7 @@
       </section>
 
       <section id="perguntas" class="perguntas" aria-labelledby="perguntas-titulo">
-        <h2 id="perguntas-titulo" data-entrada>Perguntas</h2>
+        <h2 id="perguntas-titulo" data-palavras>Perguntas</h2>
         <div class="perguntas-lista" data-entrada>
           <details>
             <summary>Onde vejo o preço das fotos?</summary>

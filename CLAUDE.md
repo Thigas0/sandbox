@@ -10,8 +10,9 @@ same change.
   `public/` is served as is; `public/fotos/` and `public/og.jpg` are written by `npm run fotos`;
   `public/marca/` holds the traced logo and `public/fontes/` the self-hosted fonts (OFL).
 - `DESIGN.md`: the brand sheet and the chosen direction ("a lente do D"). `src/movimento.js`: the
-  scroll scene, the scroll-linked work wall (lens and photos) and the section entrances; the
-  Cobertura reveals are CSS in `src/style.css`. All of it is off under `prefers-reduced-motion`.
+  scroll scene, the scroll-linked work wall (lens and photos), the headings that rise word by word
+  and the section entrances; the Cobertura reveals are CSS in `src/style.css`. All of it is off
+  under `prefers-reduced-motion`.
 - `src/dados/`: the site's data, edited by hand: `site.json` (contact, links, price), `eventos.json`
   (name, date, place, Fotto link), `fotos.json` (photo selection). `fotos.gerado.json` is generated.
 - `scripts/site/`: the Vite plugin that renders the data into the HTML at build time and validates it.

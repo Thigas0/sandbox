@@ -1,5 +1,5 @@
 import { iniciarBuscaDeEventos } from './eventos.js';
-import { iniciarEntradas, iniciarFotos, iniciarLente } from './movimento.js';
+import { iniciarEntradas, iniciarFotos, iniciarLente, iniciarPalavras } from './movimento.js';
 import { iniciarOrcamento } from './orcamento.js';
 
 iniciarBuscaDeEventos(document);
@@ -10,3 +10,4 @@ if (formulario) iniciarOrcamento(formulario);
 iniciarLente(document);
 iniciarFotos(document);
 iniciarEntradas(document);
+iniciarPalavras(document);

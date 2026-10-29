@@ -110,6 +110,14 @@ Na rodada seguinte (2026-10-27), também a pedido do cliente:
   navegador (antes, só onde havia `animation-timeline`).
 - **Orçamento:** o campo "Cidade" virou "Local".
 
+Na rodada seguinte (2026-10-28), também a pedido do cliente:
+
+- **Compra:** os três passos numerados viraram uma frase corrida embaixo do título, e a seção
+  inteira passou a partir da margem esquerda. Antes, foram comparadas três formas em 1440 e 390 px:
+  frase corrida (a escolhida), busca em destaque e ficha na margem.
+- **Texto que sobe:** os títulos das seções e a frase de Fotos aparecem com as palavras subindo de
+  trás da linha, na primeira vez que a página desce até eles.
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.
