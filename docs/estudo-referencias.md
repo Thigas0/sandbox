@@ -130,6 +130,15 @@ Na rodada seguinte (2026-10-29), também a pedido do cliente, que escolheu cada 
 - **Texto:** o foco da lente no lugar das palavras que subiam: as letras chegam desfocadas e
   afastadas e entram em foco do centro para as pontas.
 
+Na rodada seguinte (2026-10-29), também a pedido do cliente:
+
+- **Modo escuro:** a "câmara escura", que segue o sistema e tem um botão no topo; a escolha fica no
+  aparelho, e a página de privacidade passou a dizer isso.
+- **Perguntas:** "Quanto custa uma cobertura?" veio para o topo.
+- **Cobertura:** sem as linhas de apoio, e "Combinamos o preço" virou "Combinamos o orçamento".
+- **Privacidade:** duas fotos em vez de quatro.
+- **Rodapé:** links e crédito centralizados.
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.

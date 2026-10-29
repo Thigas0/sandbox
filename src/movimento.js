@@ -282,13 +282,14 @@ export function iniciarFilme(raiz = document) {
 const PROFUNDIDADES = [80, -50, 60, 100, -40, 70, -60, 90];
 
 // A revelação: a foto entra clara, lavada e um pouco quente, como o papel quando cai no revelador,
-// e ganha contraste e cor até ficar como é ao chegar a 60% da tela. `r` vai de 0 (papel) a 1
-// (revelada); a curva suave faz a imagem surgir devagar e assentar devagar.
-const revelar = (r) => {
+// e ganha contraste e cor até ficar como é ao chegar a 60% da tela. No modo escuro, ela sai da
+// sombra em vez do branco. `r` vai de 0 (papel) a 1 (revelada); a curva suave faz a imagem surgir
+// devagar e assentar devagar.
+const revelar = (r, escuro) => {
   const s = r * r * (3 - 2 * r);
   if (s >= 1) return '';
-  const contraste = 0.35 + 0.65 * s;
-  const brilho = 1 + 0.85 * (1 - s);
+  const contraste = escuro ? 0.6 + 0.4 * s : 0.35 + 0.65 * s;
+  const brilho = escuro ? 0.3 + 0.7 * s : 1 + 0.85 * (1 - s);
   return `contrast(${contraste.toFixed(3)}) brightness(${brilho.toFixed(3)}) saturate(${s.toFixed(3)}) sepia(${(0.35 * (1 - s)).toFixed(3)})`;
 };
 
@@ -331,10 +332,11 @@ export function iniciarFotos(raiz = document) {
     const tela = window.innerHeight;
     const fundo = window.scrollY + tela;
     const fator = window.innerWidth < 768 ? 0.5 : 1;
+    const escuro = document.documentElement.dataset.tema === 'escuro';
     for (const f of fotos) {
       if (f.topo > fundo + tela || f.topo + f.altura < window.scrollY - tela) continue;
       const passagem = limitar((fundo - f.topo) / (tela + f.altura));
-      f.img.style.filter = revelar(limitar((fundo - f.topo) / (tela * 0.6)));
+      f.img.style.filter = revelar(limitar((fundo - f.topo) / (tela * 0.6)), escuro);
       f.img.style.transform = `translate3d(0, ${((passagem - 0.5) * 9).toFixed(2)}%, 0) scale(1.14)`;
       if (f.profundidade) {
         const desvio = (0.5 - passagem) * f.profundidade * fator;
@@ -373,5 +375,7 @@ export function iniciarFotos(raiz = document) {
   window.addEventListener('load', remedir, { once: true });
   window.addEventListener('scroll', agendar, { passive: true });
   window.addEventListener('resize', remedir);
+  // A troca de tema muda a receita das fotos que ainda estão no revelador (src/tema.js).
+  document.addEventListener('tema', agendar);
   reduzir.addEventListener('change', () => reduzir.matches && desligar());
 }

@@ -9,6 +9,25 @@
       content="O que o site da PDL Fotografia & Imagem faz com os seus dados e como pedir para tirar uma foto sua do ar."
     />
     <meta name="theme-color" content="#f4efe6" />
+    <script>
+      // O tema antes da primeira pintura: a escolha guardada neste aparelho ou, sem ela, a do
+      // sistema. O botão e as mudanças ficam em src/tema.js.
+      (function () {
+        var tema = null;
+        try {
+          tema = localStorage.getItem('tema');
+        } catch (erro) {
+          tema = null;
+        }
+        if (tema !== 'claro' && tema !== 'escuro') {
+          tema = matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro';
+        }
+        document.documentElement.dataset.tema = tema;
+        if (tema === 'escuro') {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#191714');
+        }
+      })();
+    </script>
     <link
       rel="preload"
       href="/fontes/source-sans-3-latin.woff2"
@@ -30,6 +49,13 @@
           width="2598"
           height="1018"
       /></a>
+      <button class="tema" type="button" aria-pressed="false" data-tema-botao hidden>
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+          <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M10 1.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" />
+        </svg>
+        <span class="visualmente-oculto">Modo escuro</span>
+      </button>
       <a class="botao botao-pequeno" href="/#orcamento">Pedir orçamento</a>
     </header>
 
@@ -37,8 +63,9 @@
       <div class="privacidade-texto">
         <h1>Privacidade</h1>
         <p>
-          Este site não usa cookies, não tem rastreamento e não guarda dados de quem visita. As
-          fontes e as imagens vêm do próprio site, sem serviços de terceiros.
+          Este site não usa cookies, não tem rastreamento e não guarda dados de quem visita. Ele só
+          lembra, no seu próprio aparelho, se você escolheu o modo claro ou o escuro. As fontes e as
+          imagens vêm do próprio site, sem serviços de terceiros.
         </p>
 
         <h2 data-entrada>Pedido de orçamento</h2>
@@ -65,9 +92,9 @@
         <p data-entrada>{{fotografo}}, {{nome}}, {{cidade}} ({{estado}}). Contato: {{email}}.</p>
         <p data-entrada>Atualizada em outubro de 2026.</p>
       </div>
-      <!-- As fotos de que esta página trata; cada uma se abre como uma lente ao entrar na tela. -->
+      <!-- As fotos de que esta página trata; cada uma se revela ao entrar na tela. -->
       <aside class="privacidade-fotos" aria-label="Fotos de eventos" data-revelar>
-        <!-- pdl:selecao quantas="4" -->
+        <!-- pdl:selecao quantas="2" -->
       </aside>
     </main>
 

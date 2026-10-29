@@ -68,7 +68,7 @@ const LARGURAS_GALERIA = {
   celular: [66, 80, 52, 100],
 };
 
-// `quantas`: só as primeiras fotos da seleção (a página de privacidade mostra quatro).
+// `quantas`: só as primeiras fotos da seleção (a página de privacidade mostra duas).
 function blocoSelecao({ fotos, gerado }, { quantas }) {
   const selecao = fotosDaSelecao(fotos);
   return selecao

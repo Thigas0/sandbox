@@ -9,6 +9,25 @@
       content="Fotos de festas e jogos em Campinas e região por Pedro De Lucca. Ache o seu evento e compre suas fotos no Fotto, ou peça um orçamento pelo WhatsApp."
     />
     <meta name="theme-color" content="#f4efe6" />
+    <script>
+      // O tema antes da primeira pintura: a escolha guardada neste aparelho ou, sem ela, a do
+      // sistema. O botão e as mudanças ficam em src/tema.js.
+      (function () {
+        var tema = null;
+        try {
+          tema = localStorage.getItem('tema');
+        } catch (erro) {
+          tema = null;
+        }
+        if (tema !== 'claro' && tema !== 'escuro') {
+          tema = matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro';
+        }
+        document.documentElement.dataset.tema = tema;
+        if (tema === 'escuro') {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#191714');
+        }
+      })();
+    </script>
     <!-- pdl:head -->
     <link
       rel="preload"
@@ -40,6 +59,13 @@
           <li class="menu-extra"><a href="#perguntas">Perguntas</a></li>
         </ul>
       </nav>
+      <button class="tema" type="button" aria-pressed="false" data-tema-botao hidden>
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+          <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M10 1.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" />
+        </svg>
+        <span class="visualmente-oculto">Modo escuro</span>
+      </button>
     </header>
 
     <main id="conteudo">
@@ -136,28 +162,24 @@
                 <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
               </div>
               <p class="passo-nome">Você chama no WhatsApp.</p>
-              <p class="passo-apoio">Conta a data, o local e o tipo de evento.</p>
             </li>
             <li class="passo">
               <div class="passo-quadro" aria-hidden="true">
                 <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
               </div>
-              <p class="passo-nome">Combinamos o preço.</p>
-              <p class="passo-apoio">Ele depende da data, do local e da duração.</p>
+              <p class="passo-nome">Combinamos o orçamento.</p>
             </li>
             <li class="passo">
               <div class="passo-quadro" aria-hidden="true">
                 <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
               </div>
               <p class="passo-nome">No dia, eu fotografo.</p>
-              <p class="passo-apoio">Festas, eventos e jogos em {{atendimento}}, de perto.</p>
             </li>
             <li class="passo">
               <div class="passo-quadro" aria-hidden="true">
                 <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
               </div>
               <p class="passo-nome">Você recebe as fotos.</p>
-              <p class="passo-apoio">Em {{prazoEntrega}} depois do evento.</p>
             </li>
           </ol>
         </div>
@@ -255,6 +277,13 @@
         <h2 id="perguntas-titulo" data-foco>Perguntas</h2>
         <div class="perguntas-lista" data-entrada>
           <details>
+            <summary>Quanto custa uma cobertura?</summary>
+            <p>
+              Depende da data, do local e da duração. O preço é combinado pelo WhatsApp: comece pelo
+              <a href="#orcamento">pedido de orçamento</a>.
+            </p>
+          </details>
+          <details>
             <summary>Onde vejo o preço das fotos?</summary>
             <p>No álbum do evento, no Fotto, antes de pagar.</p>
           </details>
@@ -268,13 +297,6 @@
           <details>
             <summary>Quando as fotos ficam prontas?</summary>
             <p>Em {{prazoEntrega}} depois do evento.</p>
-          </details>
-          <details>
-            <summary>Quanto custa uma cobertura?</summary>
-            <p>
-              Depende da data, do local e da duração. O preço é combinado pelo WhatsApp: comece pelo
-              <a href="#orcamento">pedido de orçamento</a>.
-            </p>
           </details>
           <details>
             <summary>Posso pedir para tirar uma foto minha do ar?</summary>

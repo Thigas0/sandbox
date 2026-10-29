@@ -20,6 +20,8 @@ pedem.
 - Menu, centralizado: Fotos · Trabalho · Cobertura · Orçamento · Perguntas (no celular, só "Fotos"
   e "Orçamento")
 - Na página de privacidade: o logo vetorizado, que leva ao início, e o botão Pedir orçamento.
+- Nas duas páginas, o botão do tema (um círculo meio cheio). O leitor de tela ouve "Modo escuro,
+  botão de alternância", ligado ou desligado.
 
 ## Abertura (primeira tela)
 
@@ -56,12 +58,11 @@ A frase também é a descrição do negócio nos dados estruturados.
 ## Cobertura do seu evento
 
 - Título: Cobertura do seu evento
-- Um rolo de filme com quatro quadros numerados; embaixo de cada quadro, o passo e uma linha de
-  apoio:
-  - **Você chama no WhatsApp.** Conta a data, o local e o tipo de evento.
-  - **Combinamos o preço.** Ele depende da data, do local e da duração.
-  - **No dia, eu fotografo.** Festas, eventos e jogos em Campinas e região, de perto.
-  - **Você recebe as fotos.** Em {prazoEntrega} depois do evento.
+- Um rolo de filme com quatro quadros numerados; embaixo de cada quadro, só o passo:
+  1. Você chama no WhatsApp.
+  2. Combinamos o orçamento.
+  3. No dia, eu fotografo.
+  4. Você recebe as fotos.
 
 ## Peça um orçamento
 
@@ -83,25 +84,27 @@ A frase também é a descrição do negócio nos dados estruturados.
 
 ## Perguntas
 
+- **Quanto custa uma cobertura?** Depende da data, do local e da duração. O preço é combinado pelo
+  WhatsApp: comece pelo pedido de orçamento.
 - **Onde vejo o preço das fotos?** No álbum do evento, no Fotto, antes de pagar.
 - **Como acho a minha foto?** Abra o evento na lista acima. No Fotto, uma selfie mostra só as fotos
   em que você aparece; você também pode navegar pelo álbum inteiro.
 - **Quando as fotos ficam prontas?** Em {prazoEntrega} depois do evento.
-- **Quanto custa uma cobertura?** Depende da data, do local e da duração. O preço é combinado pelo
-  WhatsApp: comece pelo pedido de orçamento.
 - **Posso pedir para tirar uma foto minha do ar?** Pode. Mande o link da foto pelo WhatsApp ou para
   {email} e ela sai deste site e do Fotto.
 
 ## Rodapé
 
-- Links: Instagram · Behance · Fotto, e Encontrar minhas fotos · Pedir orçamento · Privacidade
+- Links, centralizados: Instagram · Behance · Fotto, e Encontrar minhas fotos · Pedir orçamento ·
+  Privacidade
 - O logo de ponta a ponta, em cores invertidas
-- Fotos de Pedro De Lucca. © {ano} PDL Fotografia & Imagem, Campinas e região.
+- Centralizado: Fotos de Pedro De Lucca. © {ano} PDL Fotografia & Imagem, Campinas e região.
 
 ## Página de privacidade
 
 - **Privacidade.** Este site não usa cookies, não tem rastreamento e não guarda dados de quem
-  visita. As fontes e as imagens vêm do próprio site, sem serviços de terceiros.
+  visita. Ele só lembra, no seu próprio aparelho, se você escolheu o modo claro ou o escuro. As
+  fontes e as imagens vêm do próprio site, sem serviços de terceiros.
 - **Pedido de orçamento.** O formulário não envia nada para este site. Ele só monta uma mensagem e
   abre o WhatsApp no seu aparelho, e você decide se envia. A conversa fica no WhatsApp, e Pedro De
   Lucca usa esses dados apenas para responder ao seu pedido.

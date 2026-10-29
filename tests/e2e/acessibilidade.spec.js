@@ -11,6 +11,14 @@ for (const caminho of PAGINAS) {
     expect((await analisar(page)).violations).toEqual([]);
   });
 
+  test(`axe não acusa violações em ${caminho} no modo escuro`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto(caminho);
+    await expect(page.locator('html')).toHaveAttribute('data-tema', 'escuro');
+    await percorrer(page);
+    expect((await analisar(page)).violations).toEqual([]);
+  });
+
   test(`axe não acusa violações em ${caminho} com movimento reduzido`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(caminho);
@@ -49,16 +57,23 @@ test('axe não acusa violações com um título entrando em foco', async ({ page
   await expect(page.locator('#fotos-titulo .foco-letra').first()).toBeAttached();
 });
 
-test('axe não acusa violações com as perguntas abertas e os erros do formulário à mostra', async ({
-  page,
-}) => {
-  await page.goto('/');
-  await percorrer(page);
-  for (const pergunta of await page.locator('summary').all()) await pergunta.click();
-  await page.getByRole('button', { name: 'Enviar pelo WhatsApp' }).click();
-  await expect(page.getByText('Informe o seu nome.')).toBeVisible();
-  expect((await analisar(page)).violations).toEqual([]);
-});
+for (const esquema of ['light', 'dark']) {
+  test(`axe não acusa violações com as perguntas abertas e os erros do formulário à mostra (${esquema === 'dark' ? 'escuro' : 'claro'})`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme: esquema });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-tema',
+      esquema === 'dark' ? 'escuro' : 'claro',
+    );
+    await percorrer(page);
+    for (const pergunta of await page.locator('summary').all()) await pergunta.click();
+    await page.getByRole('button', { name: 'Enviar pelo WhatsApp' }).click();
+    await expect(page.getByText('Informe o seu nome.')).toBeVisible();
+    expect((await analisar(page)).violations).toEqual([]);
+  });
+}
 
 test('o primeiro Tab mostra "Pular para o conteúdo", que leva ao conteúdo', async ({ page }) => {
   await page.goto('/');

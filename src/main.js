@@ -8,7 +8,9 @@ import {
   iniciarVisor,
 } from './movimento.js';
 import { iniciarOrcamento } from './orcamento.js';
+import { iniciarTema } from './tema.js';
 
+iniciarTema(document);
 iniciarBuscaDeEventos(document);
 
 const formulario = document.querySelector('[data-orcamento]');

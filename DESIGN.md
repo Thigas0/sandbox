@@ -30,6 +30,35 @@ linhas finas. O losango dourado da peça saiu em 2026-10-27, a pedido do cliente
 O botão principal é tinta com letra marfim (14,0:1) e escurece para `#4a4032` ao passar o mouse; o
 secundário tem só o contorno. As cores fortes vêm das fotos.
 
+### Modo escuro: a câmara escura
+
+Desde 2026-10-29, o site tem um modo escuro: quase preto quente, como um laboratório de revelação,
+com texto marfim. Ele segue o tema do sistema até alguém escolher no botão do topo (um círculo meio
+cheio, ao lado do menu); a escolha fica guardada no aparelho e vale nas duas páginas. A troca abre o
+tema novo num círculo que cresce a partir do botão, como a lente (`src/tema.js`); com movimento
+reduzido, é imediata. Sem JavaScript, o site fica no claro. Os passos de tom entre o chão, as faixas
+e o paspatur são os mesmos do claro.
+
+| Nome | Claro | Escuro | Contraste no escuro |
+| --- | --- | --- | --- |
+| Chão (`--chao`) | `#f4efe6` | `#191714` | |
+| Papel (`--papel`) | `#faf7f1` | `#302c26` | |
+| Areia (`--superficie`) | `#ebe4d6` | `#211e1a` | |
+| Linha (`--linha`) | `#b3a385` | `#7a6d58` | Decorativa, 3,5:1 sobre o chão |
+| Tinta (`--tinta`) | `#24211d` | `#ede6d9` | 14,4:1 sobre o chão; 12,9:1 sobre o papel |
+| Tinta suave (`--tinta-suave`) | `#5f574b` | `#b3a894` | 7,6:1 sobre o chão; 6,8:1 sobre o papel |
+| Botão (`--acao` e `--acao-tinta`) | tinta, letra marfim | marfim, letra quase preta | 14,4:1 |
+| Campo (`--campo`) | `#fffdf9` | `#110f0d` | Letra 15,4:1 |
+| Erro (`--erro`) | `#9e2a14` | `#ff8f6b` | 7,2:1 sobre o papel |
+| Rodapé (`--rodape`) | `#24211d` | `#0f0e0c` | Letra marfim 15,6:1 |
+| Filme (`--filme`) | `#24211d` | `#0b0a09` | Perfurações `#4a443a` no escuro |
+| Lente de Trabalho (`--lente-cor`) | `#d9cebb` | `#34302a` | Decorativa |
+
+No escuro, o logo (um SVG com a cor gravada) fica marfim por um filtro, o grão de papel vira um
+pontilhado claro, e as fotos de Trabalho e do filme saem da sombra em vez do branco. A régua do
+fotômetro, as perfurações do filme e a lente de Trabalho são desenhadas por máscara, para pegar a
+cor do tema.
+
 ## Profundidade, sem perder a calma
 
 - **Grão de papel:** um ruído fino e quente (`--grao` em `src/style.css`) sobre o marfim e as faixas
@@ -39,9 +68,9 @@ secundário tem só o contorno. As cores fortes vêm das fotos.
   faixa acima da moldura, para não cruzar a linha quando a página rola. É uma exceção pedida pelo
   cliente à regra da taste-skill que proíbe linhas finas.
 - **Faixas de tom:** Trabalho e Orçamento ficam sobre areia; o resto, sobre marfim; o rodapé, na
-  tinta.
-- **Paspatur:** em Trabalho e na página de privacidade, cada foto vem montada num papel mais claro,
-  como numa exposição. É um passo de tom, sem linha e sem sombra.
+  tinta, com os textos centralizados.
+- **Paspatur:** em Trabalho e nas duas fotos da página de privacidade, cada foto vem montada num
+  papel mais claro, como numa exposição. É um passo de tom, sem linha e sem sombra.
 - **A lente ao fundo de Trabalho:** a lente do logo (`public/marca/pdl-lente.svg`, recortada do
   logo traçado), enorme e um tom mais escura que a parede de areia, fica presa no meio da tela
   enquanto as fotos passam na frente dela. As fotos andam em velocidades diferentes (umas parecem
@@ -95,10 +124,10 @@ A lente no miolo do D. Os arquivos:
 | Abertura | Quadro de moldura dupla: logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
 | Encontre suas fotos | O título, uma frase que conta como comprar e um visor de câmera: um vidro fosco de areia com as marcas de foco nos cantos e a busca no meio (sem eventos, o aviso com o link do Fotto); embaixo, a régua do fotômetro com a contagem, e a lista. Duas fontes só: Bodoni no título e Source Sans, num tamanho e numa cor, no resto | O trabalho nº 1: achar o álbum, com a busca como o centro da cena |
 | Trabalho | Pares desencontrados sobre uma parede de areia, como numa exposição (`gallery-staggered-pairs`), com a lente do logo ao fundo | Fotos protagonistas, cada uma com espaço e profundidade |
-| Cobertura | Um rolo de filme escuro, com perfurações, que passa de lado com a rolagem; cada quadro 3:2 é um passo numerado, e a mesma foto vem mais revelada a cada quadro. Parado, o filme fica deitado de ponta a ponta (em pé no celular) | O processo como um filme que avança, até a foto pronta |
+| Cobertura | Um rolo de filme escuro, com perfurações, que passa de lado com a rolagem; cada quadro 3:2 é um passo numerado, só com o nome do passo, e a mesma foto vem mais revelada a cada quadro. Parado, o filme fica deitado de ponta a ponta (em pé no celular) | O processo como um filme que avança, até a foto pronta |
 | Orçamento | Cupom com o mini-formulário do WhatsApp | O trabalho nº 2 |
 | Perguntas | Título largo, perguntas recuadas | Responde preço, prazo e remoção de foto |
-| Rodapé | Links em cima, logo de ponta a ponta embaixo, cores invertidas | Fecha com a marca |
+| Rodapé | Links centralizados em cima, logo de ponta a ponta embaixo e o crédito centralizado, cores invertidas | Fecha com a marca |
 
 ## Movimento
 
@@ -109,8 +138,9 @@ A lente no miolo do D. Os arquivos:
   lavada e um pouco quente e ganha contraste e cor até ficar como é, ao chegar a 60% da tela. Ela
   também passeia um pouco dentro do paspatur, como vista por uma janela, e anda até 100 px a mais
   ou a menos que a página (metade no celular), o que separa as fotos em camadas. A lente do fundo
-  gira até 160° e cresce de 78% para 190%, até passar das bordas da tela. As quatro fotos da página
-  de privacidade se revelam do mesmo jeito, com um terço do desvio.
+  gira até 160° e cresce de 78% para 190%, até passar das bordas da tela. As duas fotos da página
+  de privacidade se revelam do mesmo jeito, com um terço do desvio. No modo escuro, a foto sai da
+  sombra (escura e sem cor) em vez do branco.
 - **Visor de Fotos** (`iniciarVisor`): ao chegar à tela, as marcas de foco vêm de fora e se fecham
   nos cantos (700 ms) e o ponteiro do fotômetro corre até o zero; quando a busca (ou o link do aviso)
   recebe o foco, as marcas se apertam em volta dela, como a lente focando.
@@ -125,6 +155,8 @@ A lente no miolo do D. Os arquivos:
   as letras exatamente onde estavam (o ajuste entre pares de letras da fonte é medido antes).
 - **Entradas:** o texto e o conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
   depois do título, uma vez só.
+- **Troca de tema** (`src/tema.js`): o tema novo se abre num círculo que cresce a partir do botão
+  até cobrir a tela, em 700 ms, e o círculo do botão gira meia volta.
 - **Resposta ao toque:** o botão encolhe 3% (140 ms) e o sublinhado do link engrossa (180 ms).
 - **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas, sem foco da lente,
   com Trabalho parado e revelado e o filme parado e inteiro, com todo o conteúdo visível.

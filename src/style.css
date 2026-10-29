@@ -21,7 +21,6 @@
   --chao: #f4efe6;
   --papel: #faf7f1;
   --superficie: #ebe4d6;
-  --pedra: #ddd3c1;
   --linha: #b3a385;
   --tinta: #24211d;
   --tinta-suave: #5f574b;
@@ -31,9 +30,24 @@
   --acao-tinta: #f4efe6;
   --campo: #fffdf9;
   --erro: #9e2a14;
+  /* As peças escuras nos dois temas (o rodapé e o filme da Cobertura), o texto sobre elas, as
+     perfurações do filme e a lente do fundo de Trabalho. */
+  --rodape: #24211d;
+  --filme: #24211d;
+  --sobre-escuro: #f4efe6;
+  --furo-cor: #f4efe6;
+  --lente-cor: #d9cebb;
+  /* O logo é um SVG com a cor gravada (grafite); no escuro, este filtro o deixa marfim. */
+  --logo-filtro: none;
 
   /* Grão de papel: um ruído fino e quente sobre o marfim, que tira o fundo do branco chapado. */
   --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .16 0 0 0 0 .1 .11 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
+  /* Formas desenhadas por máscara, para pegar a cor do tema: a régua do fotômetro (um traço grande a
+     cada 60 px e quatro pequenos entre eles) e as perfurações do filme, deitado e em pé. */
+  --mascara-regua: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='14'%3E%3Cg%3E%3Crect width='1' height='14'/%3E%3Crect x='12' y='8' width='1' height='6'/%3E%3Crect x='24' y='8' width='1' height='6'/%3E%3Crect x='36' y='8' width='1' height='6'/%3E%3Crect x='48' y='8' width='1' height='6'/%3E%3C/g%3E%3C/svg%3E");
+  --mascara-furo-deitado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='14'%3E%3Crect x='4.5' y='2.5' width='12' height='9' rx='2'/%3E%3C/svg%3E");
+  --mascara-furo-em-pe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='21'%3E%3Crect x='2.5' y='4.5' width='9' height='12' rx='2'/%3E%3C/svg%3E");
 
   --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
   --texto: 'Source Sans 3', 'Source Sans Pro', 'Segoe UI', system-ui, sans-serif;
@@ -62,6 +76,32 @@
   --t-passar: 180ms;
   --t-entrada: 700ms;
   color-scheme: light;
+}
+
+/* Modo escuro, a câmara escura: quase preto quente e texto marfim, com os mesmos passos de tom do
+   claro entre o chão, as faixas e o paspatur. O tema vem da escolha guardada ou do sistema; o
+   script do <head> põe data-tema no <html> antes da primeira pintura (src/tema.js cuida do botão).
+   Contrastes em DESIGN.md. */
+:root[data-tema='escuro'] {
+  --chao: #191714;
+  --papel: #302c26;
+  --superficie: #211e1a;
+  --linha: #7a6d58;
+  --tinta: #ede6d9;
+  --tinta-suave: #b3a894;
+  --acao: #ede6d9;
+  --acao-forte: #d6ccb9;
+  --acao-tinta: #191714;
+  --campo: #110f0d;
+  --erro: #ff8f6b;
+  --rodape: #0f0e0c;
+  --filme: #0b0a09;
+  --sobre-escuro: #ede6d9;
+  --furo-cor: #4a443a;
+  --lente-cor: #34302a;
+  --logo-filtro: brightness(0) invert(0.92) sepia(0.1);
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .93 0 0 0 0 .9 0 0 0 0 .84 .07 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  color-scheme: dark;
 }
 
 *,
@@ -246,6 +286,51 @@ a:hover {
 .marca img {
   width: auto;
   height: 2.25rem;
+  filter: var(--logo-filtro);
+}
+
+/* O botão do tema: um círculo meio cheio, como a lente meio fechada; no escuro, o lado cheio gira
+   para o outro lado. Na abertura, fica na ponta direita da faixa do menu. */
+.tema {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--tinta);
+  cursor: pointer;
+  transition: background-color var(--t-passar) ease;
+}
+
+.tema:hover {
+  background: var(--superficie);
+}
+
+.tema svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:root[data-tema='escuro'] .tema svg {
+  transform: rotate(180deg);
+}
+
+.topo-sobre .tema {
+  position: absolute;
+  top: 50%;
+  right: var(--m);
+  transform: translateY(-50%);
+}
+
+/* A troca de tema abre como a lente: o tema novo cresce num círculo a partir do botão
+   (src/tema.js); sem o esmaecido padrão por baixo. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 /* Abertura: um quadro de moldura dupla, como as peças da marca, com o logo no centro. A capa
@@ -323,6 +408,7 @@ a:hover {
 
 .monumento-logo {
   width: 100%;
+  filter: var(--logo-filtro);
 }
 
 .abertura-frase {
@@ -473,9 +559,16 @@ a:hover {
   flex: 1;
   height: 14px;
   container-type: inline-size;
-  /* Um traço grande a cada 60 px e quatro pequenos entre eles, na cor de --linha. */
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='14'%3E%3Cg fill='%23b3a385'%3E%3Crect width='1' height='14'/%3E%3Crect x='12' y='8' width='1' height='6'/%3E%3Crect x='24' y='8' width='1' height='6'/%3E%3Crect x='36' y='8' width='1' height='6'/%3E%3Crect x='48' y='8' width='1' height='6'/%3E%3C/g%3E%3C/svg%3E")
-    0 0 / 60px 14px repeat-x;
+}
+
+/* Os traços, na cor da moldura; o ponteiro fica num ::after à parte, fora da máscara. */
+.fotometro-regua::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--linha);
+  -webkit-mask: var(--mascara-regua) 0 0 / 60px 14px repeat-x;
+  mask: var(--mascara-regua) 0 0 / 60px 14px repeat-x;
 }
 
 .fotometro-regua::after {
@@ -557,7 +650,9 @@ a:hover {
   content: '';
   width: min(96vmin, 60rem);
   aspect-ratio: 1;
-  background: url('/marca/pdl-lente.svg') center / contain no-repeat;
+  background: var(--lente-cor);
+  -webkit-mask: url('/marca/pdl-lente.svg') center / contain no-repeat;
+  mask: url('/marca/pdl-lente.svg') center / contain no-repeat;
   transform: rotate(var(--giro, 0deg)) scale(var(--escala, 1));
 }
 
@@ -702,11 +797,11 @@ a:hover {
   margin: 0 var(--m);
   padding: 2rem calc(var(--furo) + 1.75rem);
   list-style: none;
-  background: var(--tinta);
-  color: var(--chao);
+  background: var(--filme);
+  color: var(--sobre-escuro);
 }
 
-/* As perfurações, da cor da página: em pé, dos lados; deitado, em cima e embaixo. */
+/* As perfurações: em pé, dos lados; deitado, em cima e embaixo. */
 .filme::before,
 .filme::after {
   content: '';
@@ -714,8 +809,9 @@ a:hover {
   top: 0;
   bottom: 0;
   width: var(--furo);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='21'%3E%3Crect x='2.5' y='4.5' width='9' height='12' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
-    0 0 / 14px 21px repeat-y;
+  background: var(--furo-cor);
+  -webkit-mask: var(--mascara-furo-em-pe) 0 0 / 14px 21px repeat-y;
+  mask: var(--mascara-furo-em-pe) 0 0 / 14px 21px repeat-y;
 }
 
 .filme::before {
@@ -743,7 +839,8 @@ a:hover {
 }
 
 /* A foto um pouco mais revelada a cada passo, com a mesma receita da revelação de Trabalho
-   (src/movimento.js) em 15%, 45% e 75%; no último quadro, pronta. */
+   (src/movimento.js) em 15%, 45% e 75%; no último quadro, pronta. No escuro, a receita é a do
+   escuro: a foto sai da sombra em vez do branco. */
 .passo:nth-child(1) img {
   filter: contrast(0.389) brightness(1.798) saturate(0.061) sepia(0.329);
 }
@@ -754,6 +851,18 @@ a:hover {
 
 .passo:nth-child(3) img {
   filter: contrast(0.898) brightness(1.133) saturate(0.844) sepia(0.055);
+}
+
+:root[data-tema='escuro'] .passo:nth-child(1) img {
+  filter: contrast(0.624) brightness(0.343) saturate(0.061) sepia(0.329);
+}
+
+:root[data-tema='escuro'] .passo:nth-child(2) img {
+  filter: contrast(0.77) brightness(0.598) saturate(0.425) sepia(0.201);
+}
+
+:root[data-tema='escuro'] .passo:nth-child(3) img {
+  filter: contrast(0.938) brightness(0.891) saturate(0.844) sepia(0.055);
 }
 
 .passo-nome {
@@ -771,11 +880,6 @@ a:hover {
   font-variant-numeric: tabular-nums;
 }
 
-.passo-apoio {
-  margin: 0;
-  color: var(--tinta-clara);
-}
-
 /* Parado e em tela larga, o filme fica deitado de ponta a ponta, com os quatro quadros à vista. */
 @media (min-width: 48.01em) {
   .filme {
@@ -790,8 +894,8 @@ a:hover {
     left: 0;
     width: auto;
     height: var(--furo);
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='14'%3E%3Crect x='4.5' y='2.5' width='12' height='9' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
-      0 0 / 21px 14px repeat-x;
+    -webkit-mask: var(--mascara-furo-deitado) 0 0 / 21px 14px repeat-x;
+    mask: var(--mascara-furo-deitado) 0 0 / 21px 14px repeat-x;
   }
 
   .filme::before {
@@ -837,8 +941,8 @@ a:hover {
   left: 0;
   width: auto;
   height: var(--furo);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='14'%3E%3Crect x='4.5' y='2.5' width='12' height='9' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
-    0 0 / 21px 14px repeat-x;
+  -webkit-mask: var(--mascara-furo-deitado) 0 0 / 21px 14px repeat-x;
+  mask: var(--mascara-furo-deitado) 0 0 / 21px 14px repeat-x;
 }
 
 .cobertura.rolando .filme::before {
@@ -1005,25 +1109,28 @@ details p {
   margin: 0.75rem 0 0.25rem;
 }
 
-/* Rodapé: colunas em cima, o logo de ponta a ponta embaixo, em cores invertidas. */
+/* Rodapé: os links centralizados em cima, o logo de ponta a ponta embaixo e o crédito
+   centralizado, em cores invertidas. */
 .rodape {
   display: grid;
   grid-template-rows: auto 1fr auto auto;
   min-height: 100svh;
   margin-top: var(--secao);
   padding: 2.5rem var(--m) 1.25rem;
-  background: var(--tinta);
-  color: var(--chao);
+  background: var(--rodape);
+  color: var(--sobre-escuro);
 }
 
 .rodape :focus-visible {
-  outline-color: var(--chao);
+  outline-color: var(--sobre-escuro);
 }
 
 .rodape-colunas {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem 4rem;
+  text-align: center;
 }
 
 .rodape-colunas ul {
@@ -1043,6 +1150,7 @@ details p {
 .rodape-credito {
   max-width: none;
   margin: 1.25rem 0 0;
+  text-align: center;
   color: var(--tinta-clara);
   font-size: var(--t-pequeno);
 }
@@ -1061,7 +1169,7 @@ details p {
   font-size: var(--t-linha);
 }
 
-/* Privacidade: o texto à esquerda e, ao lado, quatro fotos de eventos, que são o assunto dela. */
+/* Privacidade: o texto à esquerda e, ao lado, duas fotos de eventos, que são o assunto dela. */
 .privacidade {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1111,6 +1219,10 @@ details p {
 
   html.foco [data-foco]:not(.focado) {
     opacity: 0;
+  }
+
+  .tema svg {
+    transition: transform 500ms var(--ease-out);
   }
 
   /* O visor chega mirando: as marcas vêm de fora e se fecham no lugar, e o ponteiro do fotômetro
