@@ -20,12 +20,11 @@ linhas finas. O losango dourado da peça saiu em 2026-10-27, a pedido do cliente
 | --- | --- | --- | --- |
 | Marfim | `#f4efe6` | Fundo da página, com grão de papel | |
 | Papel | `#faf7f1` | Paspatur das fotos, cartão do orçamento | |
-| Areia | `#ebe4d6` | Faixas de Trabalho e do orçamento, pergunta aberta | |
-| Areia escura | `#ddd3c1` | Segundo quadro da Cobertura | |
-| Linha | `#b3a385` | A moldura dupla (abertura e orçamento): filete de 2 px por fora e de 1 px por dentro | Decorativa |
-| Tinta | `#24211d` | Texto, botão principal, fundo do rodapé | 14,0:1 sobre marfim; 12,7:1 sobre areia |
-| Tinta suave | `#5f574b` | Texto secundário (local e data, legendas, apoio) | 6,2:1 sobre marfim; 5,6:1 sobre areia |
-| Tinta clara | `#cfc6b5` | Texto secundário no rodapé escuro | 9,5:1 sobre tinta |
+| Areia | `#ebe4d6` | Faixas de Trabalho e do orçamento, vidro do visor de Fotos, pergunta aberta | |
+| Linha | `#b3a385` | A moldura dupla (abertura e orçamento): filete de 2 px por fora e de 1 px por dentro; a régua do fotômetro | Decorativa |
+| Tinta | `#24211d` | Texto, botão principal, fundo do rodapé e do filme da Cobertura | 14,0:1 sobre marfim; 12,7:1 sobre areia |
+| Tinta suave | `#5f574b` | Texto secundário (legendas, apoio) | 6,2:1 sobre marfim; 5,6:1 sobre areia |
+| Tinta clara | `#cfc6b5` | Texto secundário no rodapé e no filme, escuros | 9,5:1 sobre tinta |
 | Erro | `#9e2a14` | Mensagens de erro do formulário | 6,6:1 sobre marfim |
 
 O botão principal é tinta com letra marfim (14,0:1) e escurece para `#4a4032` ao passar o mouse; o
@@ -64,8 +63,8 @@ Cinco tamanhos de texto, numa escala de razão 1,25 a partir do corpo, mais o lo
 | --- | --- | --- |
 | Pequeno | 14–15 px (corpo ÷ 1,25) | Menu, rótulos, legendas, último evento |
 | Corpo | 17–19 px | Texto, botões, apoio da abertura |
-| Destaque | 19–24 px (corpo × 1,25) | Os passos da Cobertura |
-| Linha | 21–30 px (corpo × 1,25²) | Eventos, perguntas, frase da abertura, frase de Fotos |
+| Destaque | 19–24 px (corpo × 1,25) | Todo o texto de Encontre suas fotos (frase, busca, lista, avisos) e os passos da Cobertura |
+| Linha | 21–30 px (corpo × 1,25²) | Perguntas, frase da abertura |
 | Título | 34–72 px (corpo × 1,25⁶) | Títulos de seção |
 | Logo | até 60% da largura e 40svh de altura | Abertura, no centro (84% da largura no celular); rodapé, de ponta a ponta |
 
@@ -94,9 +93,9 @@ A lente no miolo do D. Os arquivos:
 | Seção | Forma | Por quê |
 | --- | --- | --- |
 | Abertura | Quadro de moldura dupla: logo com a foto na lente, frase, apoio, "Encontrar minhas fotos" e "Pedir orçamento", último evento; tudo centralizado | Diz quem é e leva às duas ações |
-| Encontre suas fotos | Tudo a partir da margem esquerda: o título, uma frase corrida que conta como comprar ("Abra o seu evento na lista. No Fotto, uma selfie mostra só as fotos em que você aparece: escolha as suas e pague ali mesmo."), a busca e uma linha por evento | O trabalho nº 1: achar o álbum, lendo de cima para baixo, sem tópicos numerados |
+| Encontre suas fotos | O título, uma frase que conta como comprar e um visor de câmera: um vidro fosco de areia com as marcas de foco nos cantos e a busca no meio (sem eventos, o aviso com o link do Fotto); embaixo, a régua do fotômetro com a contagem, e a lista. Duas fontes só: Bodoni no título e Source Sans, num tamanho e numa cor, no resto | O trabalho nº 1: achar o álbum, com a busca como o centro da cena |
 | Trabalho | Pares desencontrados sobre uma parede de areia, como numa exposição (`gallery-staggered-pairs`), com a lente do logo ao fundo | Fotos protagonistas, cada uma com espaço e profundidade |
-| Cobertura | Quatro quadros que crescem; a mesma foto vista por uma lente cada vez mais aberta (`how-it-works-tiles-that-grow`) | O processo pela ordem do tamanho, sem numerar |
+| Cobertura | Um rolo de filme escuro, com perfurações, que passa de lado com a rolagem; cada quadro 3:2 é um passo numerado, e a mesma foto vem mais revelada a cada quadro. Parado, o filme fica deitado de ponta a ponta (em pé no celular) | O processo como um filme que avança, até a foto pronta |
 | Orçamento | Cupom com o mini-formulário do WhatsApp | O trabalho nº 2 |
 | Perguntas | Título largo, perguntas recuadas | Responde preço, prazo e remoção de foto |
 | Rodapé | Links em cima, logo de ponta a ponta embaixo, cores invertidas | Fecha com a marca |
@@ -106,23 +105,29 @@ A lente no miolo do D. Os arquivos:
 - **Cena da abertura:** a lente cresce com a rolagem até cobrir a tela; o logo encolhe até 6% e
   some (`src/movimento.js`).
 - **Fotos de Trabalho** (`iniciarFotos` em `src/movimento.js`, em todo navegador): ligadas à
-  rolagem, cada foto se abre num círculo a partir do seu ponto de foco enquanto entra na tela e
-  passeia um pouco dentro do paspatur, como vista por uma janela. Cada uma anda até 100 px a mais
-  ou a menos que a página (metade no celular), o que as separa em camadas, e a lente do fundo gira
-  até 160° e cresce de 92% para 108%. As quatro fotos da página de privacidade se abrem do mesmo
-  jeito, com um terço do desvio.
-- **Cobertura:** a lente de cada quadro termina de abrir ao chegar à tela.
-- **Texto que sobe** (`iniciarPalavras` em `src/movimento.js`): na primeira vez que a página desce
-  até eles, os títulos das seções e a frase de Fotos aparecem com cada palavra subindo de trás da
-  própria linha, como numa máscara, em 800 ms. As linhas sobem uma depois da outra (120 ms). Nos
-  títulos, as palavras de cada linha vêm da esquerda para a direita (40 ms); a frase de Fotos sobe
-  linha a linha, 200 ms depois do título, para ser lida logo. O leitor de tela ouve cada texto
-  inteiro, e no fim o elemento volta a ser só texto, no mesmo lugar.
+  rolagem, cada foto se revela enquanto entra na tela, como o papel no revelador: começa clara,
+  lavada e um pouco quente e ganha contraste e cor até ficar como é, ao chegar a 60% da tela. Ela
+  também passeia um pouco dentro do paspatur, como vista por uma janela, e anda até 100 px a mais
+  ou a menos que a página (metade no celular), o que separa as fotos em camadas. A lente do fundo
+  gira até 160° e cresce de 78% para 190%, até passar das bordas da tela. As quatro fotos da página
+  de privacidade se revelam do mesmo jeito, com um terço do desvio.
+- **Visor de Fotos** (`iniciarVisor`): ao chegar à tela, as marcas de foco vêm de fora e se fecham
+  nos cantos (700 ms) e o ponteiro do fotômetro corre até o zero; quando a busca (ou o link do aviso)
+  recebe o foco, as marcas se apertam em volta dela, como a lente focando.
+- **Filme da Cobertura** (`iniciarFilme`): a seção fica presa na tela e o filme passa de lado na
+  medida da rolagem, do primeiro ao último quadro. Os quadros trazem a foto em 15%, 45%, 75% e
+  100% da revelação de Trabalho.
+- **Foco da lente** (`iniciarFoco`): na primeira vez que a página desce até eles, os títulos das
+  seções e a frase de Fotos entram em foco. Cada linha começa desfocada e com as letras afastadas
+  do meio (30% a mais); as letras se aproximam e ficam nítidas do centro para as pontas (380 ms a
+  mais nas pontas), em 1 s, e as linhas seguem 110 ms uma da outra. Afastadas, as letras nunca saem
+  da tela. O leitor de tela ouve cada texto inteiro, e no fim o elemento volta a ser só texto, com
+  as letras exatamente onde estavam (o ajuste entre pares de letras da fonte é medido antes).
 - **Entradas:** o texto e o conteúdo de cada seção sobem 24 px em 700 ms, com 80 ms entre eles,
   depois do título, uma vez só.
 - **Resposta ao toque:** o botão encolhe 3% (140 ms) e o sublinhado do link engrossa (180 ms).
-- **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas, sem texto que sobe e
-  com Trabalho parado, com todo o conteúdo visível.
+- **Movimento reduzido** (`prefers-reduced-motion`): sem cena, sem entradas, sem foco da lente,
+  com Trabalho parado e revelado e o filme parado e inteiro, com todo o conteúdo visível.
 - **WCAG 2.2.2:** não há nada que se mova sozinho.
 
 ## Provisório

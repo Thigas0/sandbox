@@ -89,10 +89,14 @@ function blocoFotoCobertura({ fotos, gerado }, { sizes = '100vw' }) {
   return foto ? picture(foto, gerado[foto.id], { sizes, decorativa: true }) : '';
 }
 
-function blocoEventos({ eventos, site }) {
-  if (!eventos.length) {
-    return `<p class="eventos-vazio">Os álbuns aparecem aqui assim que as fotos entram no Fotto. Enquanto isso, veja <a href="${escapar(site.fotto)}">todos os álbuns no Fotto</a>.</p>`;
-  }
+// Enquanto não há eventos, o visor de Fotos mostra este aviso no lugar da busca, e a lista some.
+function blocoEventosVazio({ eventos, site }) {
+  if (eventos.length) return '';
+  return `<p class="eventos-vazio">Os álbuns aparecem aqui assim que as fotos entram no Fotto. Enquanto isso, veja <a href="${escapar(site.fotto)}">todos os álbuns no Fotto</a>.</p>`;
+}
+
+function blocoEventos({ eventos }) {
+  if (!eventos.length) return '';
   const itens = eventos.map(
     (evento) =>
       `<li class="evento" data-evento><a class="evento-link" href="${escapar(evento.fotto)}"><span class="evento-nome">${escapar(evento.nome)}</span> <span class="evento-local">${escapar(evento.local)}</span> <time class="evento-data" datetime="${evento.data}">${dataPorExtenso(evento.data)}</time><span class="visualmente-oculto">, ver fotos no Fotto</span></a></li>`,
@@ -201,6 +205,7 @@ const BLOCOS = {
   selecao: blocoSelecao,
   'foto-cobertura': blocoFotoCobertura,
   eventos: blocoEventos,
+  'eventos-vazio': blocoEventosVazio,
   'ultimo-evento': blocoUltimoEvento,
 };
 

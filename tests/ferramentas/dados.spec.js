@@ -136,6 +136,22 @@ test('o HTML gerado traz cada evento com o link exato, do mais recente ao mais a
   expect(html).toContain('<time datetime="2026-10-18">18 de outubro de 2026</time>');
 });
 
+test('sem eventos, o visor mostra o aviso e a lista não aparece; com eventos, o contrário', () => {
+  const dados = lerDados(new URL('../..', import.meta.url).pathname);
+  const pagina = '<!-- pdl:eventos-vazio --><!-- pdl:eventos -->';
+  const vazio = renderizarPagina(pagina, { ...dados, eventos: [] });
+  expect(vazio).toContain('<p class="eventos-vazio">Os álbuns aparecem aqui');
+  expect(vazio).not.toContain('class="eventos"');
+  const comEventos = renderizarPagina(pagina, {
+    ...dados,
+    eventos: [
+      evento({ nome: 'Novo', data: '2026-10-18', fotto: 'https://www.fotto.com.br/x/novo' }),
+    ],
+  });
+  expect(comEventos).not.toContain('eventos-vazio');
+  expect(comEventos).toContain('<ol class="eventos" data-eventos>');
+});
+
 test('a capa vai para a lente, uma foto para a Cobertura e as outras para Trabalho', () => {
   const dados = lerDados(new URL('../..', import.meta.url).pathname);
   const info = { larguras: [640, 960], largura: 960, altura: 640, cor: '#123456' };

@@ -61,7 +61,6 @@
   --t-toque: 140ms;
   --t-passar: 180ms;
   --t-entrada: 700ms;
-  --t-palavra: 800ms;
   color-scheme: light;
 }
 
@@ -355,44 +354,151 @@ a:hover {
   font-size: var(--t-pequeno);
 }
 
-/* Encontre suas fotos: o título e, embaixo, uma frase corrida que conta como comprar, no tamanho
-   das linhas de evento; depois a busca e uma linha por evento. Tudo parte da margem esquerda. */
+/* Encontre suas fotos: o título, uma frase que conta como comprar e um visor de câmera com a busca
+   (um vidro fosco de areia com as marcas de foco nos cantos); embaixo do visor, a régua do
+   fotômetro com a contagem, e depois a lista de eventos. Duas fontes só: Bodoni no título e Source
+   Sans, num tamanho e numa cor, em todo o resto. */
 .fotos {
   padding: var(--secao) var(--m) 0;
+  font-size: var(--t-destaque);
+  line-height: 1.4;
 }
 
 .fotos h2 {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Três linhas no computador, que quebram onde a frase respira: depois da selfie e depois dos
-   dois-pontos. */
+/* Três linhas no computador, que quebram onde a frase respira. */
 .fotos-frase {
   max-width: 40ch;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  font-size: var(--t-linha);
-  line-height: 1.35;
+}
+
+.visor {
+  --canto: clamp(1.5rem, 3vw, 2.75rem);
+  --margem-canto: clamp(0.75rem, 1.6vw, 1.25rem);
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(13rem, 26vw, 20rem);
+  padding: calc(var(--margem-canto) + var(--canto));
+  background: var(--grao) var(--superficie);
+}
+
+/* Sem busca nem aviso (sem JavaScript, com eventos), o visor não tem o que mostrar. */
+.visor:not(:has(.busca:not([hidden]), .eventos-vazio)),
+.visor:not(:has(.busca:not([hidden]), .eventos-vazio)) + .fotometro {
+  display: none;
+}
+
+/* As marcas de foco, um L em cada canto. --x e --y apontam para fora do canto; --d é quanto a marca
+   está fora do lugar (para fora, positivo; para dentro, negativo). */
+.visor-canto {
+  --d: 0rem;
+  position: absolute;
+  width: var(--canto);
+  height: var(--canto);
+  border: 0 solid var(--tinta); /* taste-skill-ignore */
+  transform: translate(calc(var(--x) * var(--d)), calc(var(--y) * var(--d)));
+}
+
+.visor-canto:nth-of-type(1) {
+  --x: -1;
+  --y: -1;
+  top: var(--margem-canto);
+  left: var(--margem-canto);
+  border-width: 2px 0 0 2px;
+}
+
+.visor-canto:nth-of-type(2) {
+  --x: 1;
+  --y: -1;
+  top: var(--margem-canto);
+  right: var(--margem-canto);
+  border-width: 2px 2px 0 0;
+}
+
+.visor-canto:nth-of-type(3) {
+  --x: -1;
+  --y: 1;
+  bottom: var(--margem-canto);
+  left: var(--margem-canto);
+  border-width: 0 0 2px 2px;
+}
+
+.visor-canto:nth-of-type(4) {
+  --x: 1;
+  --y: 1;
+  right: var(--margem-canto);
+  bottom: var(--margem-canto);
+  border-width: 0 2px 2px 0;
+}
+
+/* A busca com foco é a lente focando: as marcas se fecham em volta dela. */
+.visor:focus-within .visor-canto {
+  --d: -0.75rem;
 }
 
 .busca {
   display: grid;
-  gap: 0.4rem;
-  max-width: 26rem;
-  margin-bottom: 2rem;
-  font-size: var(--t-pequeno);
+  gap: 0.75rem;
+  width: min(100%, 36rem);
+}
+
+.busca label,
+.busca input {
+  font-size: inherit;
+}
+
+.busca input {
+  min-height: 3.5rem;
+  padding: 0.45em 0.7em;
+}
+
+.eventos-vazio {
+  max-width: 34rem;
+  margin: 0;
+}
+
+/* O fotômetro: a régua de exposição, com o ponteiro no zero, e a contagem da busca ao lado. */
+.fotometro {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1rem 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.fotometro-regua {
+  position: relative;
+  flex: 1;
+  height: 14px;
+  container-type: inline-size;
+  /* Um traço grande a cada 60 px e quatro pequenos entre eles, na cor de --linha. */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='14'%3E%3Cg fill='%23b3a385'%3E%3Crect width='1' height='14'/%3E%3Crect x='12' y='8' width='1' height='6'/%3E%3Crect x='24' y='8' width='1' height='6'/%3E%3Crect x='36' y='8' width='1' height='6'/%3E%3Crect x='48' y='8' width='1' height='6'/%3E%3C/g%3E%3C/svg%3E")
+    0 0 / 60px 14px repeat-x;
+}
+
+.fotometro-regua::after {
+  content: '';
+  position: absolute;
+  top: -0.3rem;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--tinta);
+  transform: translateX(50cqw);
 }
 
 .busca-contagem {
   margin: 0;
-  min-height: 1.5em;
-  color: var(--tinta-suave);
+  min-height: 1.4em;
+  white-space: nowrap;
 }
 
 .eventos {
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: var(--t-linha);
   line-height: 1.5;
 }
 
@@ -401,13 +507,8 @@ a:hover {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 0.75fr);
   gap: 0 2rem;
-  padding: 0.1em 0;
+  padding: 0.2em 0;
   text-decoration: none;
-}
-
-.evento-local,
-.evento-data {
-  color: var(--tinta-suave);
 }
 
 .evento-data {
@@ -420,19 +521,8 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
-/* Os avisos da lista, em tinta suave e com a entrelinha da frase, para não competir com ela; o
-   link, que é a saída, fica em tinta cheia. */
-.eventos-vazio,
 .busca-vazia {
   max-width: 44rem;
-  color: var(--tinta-suave);
-  font-size: var(--t-linha);
-  line-height: 1.35;
-}
-
-.eventos-vazio a,
-.busca-vazia a {
-  color: var(--tinta);
 }
 
 /* Trabalho: uma parede de areia com as fotos montadas em paspatur, em pares desencontrados,
@@ -461,8 +551,14 @@ a:hover {
   pointer-events: none;
 }
 
-.trabalho-lente {
+/* A lente, desenhada no fundo (é só decoração); src/movimento.js a gira e aumenta por --giro e
+   --escala. */
+.trabalho-fundo::before {
+  content: '';
   width: min(96vmin, 60rem);
+  aspect-ratio: 1;
+  background: url('/marca/pdl-lente.svg') center / contain no-repeat;
+  transform: rotate(var(--giro, 0deg)) scale(var(--escala, 1));
 }
 
 .galeria {
@@ -577,87 +673,182 @@ a:hover {
   margin-top: calc(var(--par) + 30svh);
 }
 
-/* Cobertura: quatro quadros que crescem, um por passo. A mesma foto aparece por uma lente cada vez
-   mais aberta, até a foto inteira no último. */
+/* Cobertura: um rolo de filme. A base escura, com as perfurações dos dois lados, leva quatro
+   quadros 3:2, um por passo, com o texto embaixo de cada um; a mesma foto vem mais revelada a cada
+   quadro, até estar pronta no último. Sem JavaScript, ou com movimento reduzido, o filme fica em pé
+   e inteiro. Com movimento, a seção fica presa na tela e o filme passa de lado (.rolando, em
+   src/movimento.js). */
 .cobertura {
-  --mais-alto: 64svh;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--m);
-  padding: var(--secao) var(--m) 0;
+  --quadro: min(clamp(13rem, 42svh, 26rem), 54vw);
+  --furo: 14px;
+  padding-top: var(--secao);
+  counter-reset: passo;
 }
 
-/* O título divide a linha da grade com os quadros; align-self: start deixa a caixa dele do tamanho
-   do texto, sem cobrir os nomes dos passos embaixo. */
+.cobertura-palco {
+  display: grid;
+  gap: clamp(2rem, 5svh, 3.5rem);
+}
+
 .cobertura h2 {
+  margin: 0;
+  padding-inline: var(--m);
+}
+
+.filme {
   position: relative;
-  z-index: 1;
-  grid-column: 1 / 6;
-  grid-row: 1;
-  align-self: start;
-  margin: 0;
-}
-
-.passos {
-  grid-column: 1 / -1;
-  grid-row: 1;
   display: grid;
-  grid-template-columns: subgrid;
-  align-items: start;
-  margin: 0;
-  padding: 0;
+  gap: 2.5rem;
+  margin: 0 var(--m);
+  padding: 2rem calc(var(--furo) + 1.75rem);
   list-style: none;
+  background: var(--tinta);
+  color: var(--chao);
 }
 
-.passo:nth-child(1) {
-  grid-column: 1 / 3;
-  --alto: 26svh;
-  --lente: 24%;
-  --fundo: var(--superficie);
+/* As perfurações, da cor da página: em pé, dos lados; deitado, em cima e embaixo. */
+.filme::before,
+.filme::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--furo);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='21'%3E%3Crect x='2.5' y='4.5' width='9' height='12' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
+    0 0 / 14px 21px repeat-y;
 }
 
-.passo:nth-child(2) {
-  grid-column: 3 / 6;
-  --alto: 36svh;
-  --lente: 36%;
-  --fundo: var(--pedra);
+.filme::before {
+  left: 0.75rem;
 }
 
-.passo:nth-child(3) {
-  grid-column: 6 / 9;
-  --alto: 48svh;
-  --lente: 40%;
-  --fundo: var(--tinta);
+.filme::after {
+  right: 0.75rem;
 }
 
-.passo:nth-child(4) {
-  grid-column: 9 / 13;
-  --alto: var(--mais-alto);
-  --lente: 142%;
-  --fundo: var(--tinta);
+.passo {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  counter-increment: passo;
 }
 
 .passo-quadro {
-  height: var(--alto);
-  margin-top: calc(var(--mais-alto) - var(--alto));
-  background: var(--fundo);
+  aspect-ratio: 3 / 2;
+  margin-bottom: 0.9rem;
 }
 
 .passo-quadro .foto {
   height: 100%;
-  clip-path: circle(var(--lente) at var(--foco, 50% 50%));
+}
+
+/* A foto um pouco mais revelada a cada passo, com a mesma receita da revelação de Trabalho
+   (src/movimento.js) em 15%, 45% e 75%; no último quadro, pronta. */
+.passo:nth-child(1) img {
+  filter: contrast(0.389) brightness(1.798) saturate(0.061) sepia(0.329);
+}
+
+.passo:nth-child(2) img {
+  filter: contrast(0.626) brightness(1.489) saturate(0.425) sepia(0.201);
+}
+
+.passo:nth-child(3) img {
+  filter: contrast(0.898) brightness(1.133) saturate(0.844) sepia(0.055);
 }
 
 .passo-nome {
-  margin: 1.25rem 0 0;
+  margin: 0;
   font-size: var(--t-destaque);
   font-weight: 500;
   line-height: 1.25;
 }
 
+/* O número do quadro, como o contador da câmera; o leitor de tela já ouve o número da lista. */
+.passo-nome::before {
+  content: counter(passo) / '';
+  margin-right: 0.6em;
+  color: var(--tinta-clara);
+  font-variant-numeric: tabular-nums;
+}
+
 .passo-apoio {
-  margin: 0.35rem 0 0;
-  color: var(--tinta-suave);
+  margin: 0;
+  color: var(--tinta-clara);
+}
+
+/* Parado e em tela larga, o filme fica deitado de ponta a ponta, com os quatro quadros à vista. */
+@media (min-width: 48.01em) {
+  .filme {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: calc(var(--furo) + 1.75rem) var(--m);
+  }
+
+  .filme::before,
+  .filme::after {
+    right: 0;
+    left: 0;
+    width: auto;
+    height: var(--furo);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='14'%3E%3Crect x='4.5' y='2.5' width='12' height='9' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
+      0 0 / 21px 14px repeat-x;
+  }
+
+  .filme::before {
+    top: 0.75rem;
+    bottom: auto;
+  }
+
+  .filme::after {
+    top: auto;
+    bottom: 0.75rem;
+  }
+}
+
+/* O filme passando: a seção ganha a altura do caminho do filme (--percurso) e o palco fica preso
+   enquanto ele anda. */
+.cobertura.rolando {
+  height: calc(100svh + var(--percurso, 0px));
+  padding-top: 0;
+}
+
+.cobertura.rolando .cobertura-palco {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  align-content: center;
+  overflow: hidden;
+}
+
+.cobertura.rolando .filme {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: calc(var(--furo) + 1.75rem) var(--m);
+}
+
+.cobertura.rolando .passo {
+  width: calc(var(--quadro) * 1.5);
+}
+
+.cobertura.rolando .filme::before,
+.cobertura.rolando .filme::after {
+  right: 0;
+  left: 0;
+  width: auto;
+  height: var(--furo);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='14'%3E%3Crect x='4.5' y='2.5' width='12' height='9' rx='2' fill='%23f4efe6'/%3E%3C/svg%3E")
+    0 0 / 21px 14px repeat-x;
+}
+
+.cobertura.rolando .filme::before {
+  top: 0.75rem;
+  bottom: auto;
+}
+
+.cobertura.rolando .filme::after {
+  top: auto;
+  bottom: 0.75rem;
 }
 
 /* Orçamento: um cartão de papel com a moldura dupla da marca, sobre uma faixa de areia. */
@@ -894,22 +1085,18 @@ details p {
   justify-self: end;
 }
 
-/* Texto que sobe (src/movimento.js): cada palavra ganha uma máscara do tamanho da linha, com folga
-   em cima e embaixo para acentos e descendentes (a margem negativa devolve a folga, e o texto fica
-   onde estava), e a tinta sobe de trás dela. No fim, o texto volta a ser só texto. */
-.palavra {
-  display: inline-block;
-  padding: 0.15em 0.06em 0.25em;
-  margin: -0.15em -0.06em -0.25em;
-  clip-path: inset(0);
+/* Foco da lente (src/movimento.js): enquanto as letras chegam, cada uma é uma caixa própria, e as
+   linhas quebram onde quebrava o texto comum. No fim, o texto volta a ser só texto. */
+.foco-linhas {
+  white-space: nowrap;
 }
 
-.palavra > span {
+.foco-letra {
   display: inline-block;
 }
 
 /* Entradas: o texto e o conteúdo de cada seção sobem ao aparecer, uma vez; os títulos e a frase de
-   Fotos sobem palavra por palavra. */
+   Fotos entram em foco. */
 @media (prefers-reduced-motion: no-preference) {
   html.entradas [data-entrada] {
     transition:
@@ -922,41 +1109,30 @@ details p {
     transform: translateY(24px);
   }
 
-  .palavra > span {
-    transition: transform var(--t-palavra) var(--ease-out) var(--atraso, 0ms);
+  html.foco [data-foco]:not(.focado) {
+    opacity: 0;
   }
 
-  [data-palavras]:not(.subiu) .palavra > span {
-    transform: translateY(calc(100% + 0.5em));
+  /* O visor chega mirando: as marcas vêm de fora e se fecham no lugar, e o ponteiro do fotômetro
+     corre até o zero. Depois, a busca com foco aperta as marcas do mesmo jeito. A transição só vale
+     depois de mirar, para o visor não se apagar animado ao carregar. */
+  .visor.mirou .visor-canto {
+    transition:
+      transform 700ms var(--ease-out),
+      opacity 300ms ease;
   }
 
-  /* Na Cobertura, ligado à rolagem onde o navegador permite (os outros mostram os quadros prontos):
-     a lente de cada passo termina de abrir ao chegar. As fotos de Trabalho são movidas por
-     src/movimento.js, que funciona em todo navegador. */
-  @supports (animation-timeline: view()) {
-    .passo:last-child img {
-      animation: assentar linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 60%;
-    }
-
-    .passo-quadro .foto {
-      animation: abrir-passo linear both;
-      animation-timeline: view();
-      animation-range: entry 20% cover 55%;
-    }
+  html.visores .visor:not(.mirou) .visor-canto {
+    --d: 2.5rem;
+    opacity: 0;
   }
-}
 
-@keyframes abrir-passo {
-  from {
-    clip-path: circle(calc(var(--lente) * 0.55) at var(--foco, 50% 50%));
+  .visor.mirou + .fotometro .fotometro-regua::after {
+    transition: transform 1100ms var(--ease-out) 250ms;
   }
-}
 
-@keyframes assentar {
-  from {
-    transform: scale(1.12);
+  html.visores .visor:not(.mirou) + .fotometro .fotometro-regua::after {
+    transform: translateX(6cqw);
   }
 }
 
@@ -1012,12 +1188,10 @@ details p {
 
   .evento-link {
     grid-template-columns: minmax(0, 1fr);
-    padding: 0.35rem 0;
+    padding: 0.5rem 0;
   }
 
-  .evento-local,
   .evento-data {
-    font-size: var(--t-pequeno);
     text-align: left;
   }
 
@@ -1056,50 +1230,6 @@ details p {
 
   .galeria > .galeria-foto:nth-of-type(4n + 4) figcaption {
     padding-inline: var(--m);
-  }
-
-  /* Cobertura no celular: os quadros um embaixo do outro, crescendo em altura. */
-  .cobertura {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .cobertura h2,
-  .passos {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .cobertura h2 {
-    margin-bottom: 2.5rem;
-  }
-
-  .passos {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
-  }
-
-  .passo:nth-child(n) {
-    grid-column: 1;
-  }
-
-  .passo:nth-child(1) {
-    --alto: 34vw;
-  }
-
-  .passo:nth-child(2) {
-    --alto: 46vw;
-  }
-
-  .passo:nth-child(3) {
-    --alto: 62vw;
-  }
-
-  .passo:nth-child(4) {
-    --alto: 80vw;
-  }
-
-  .passo-quadro {
-    margin-top: 0;
   }
 
   .perguntas-lista {

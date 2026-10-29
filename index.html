@@ -75,17 +75,29 @@
         </div>
       </section>
 
-      <!-- O título e uma frase corrida que conta como comprar; embaixo, a busca e a lista de
-           eventos. Tudo alinhado à esquerda, como se lê. -->
+      <!-- O título, uma frase que conta como comprar e um visor de câmera com a busca. As marcas
+           de foco dos cantos se fecham quando o visor chega à tela e quando a busca recebe o foco;
+           embaixo, a régua do fotômetro e a contagem. Depois, a lista de eventos. Duas fontes só:
+           Bodoni no título e Source Sans, num tamanho e numa cor, no resto. -->
       <section id="fotos" class="fotos" aria-labelledby="fotos-titulo">
-        <h2 id="fotos-titulo" data-palavras>Encontre suas fotos</h2>
-        <p class="fotos-frase" data-palavras="linhas">
+        <h2 id="fotos-titulo" data-foco>Encontre suas fotos</h2>
+        <p class="fotos-frase" data-foco>
           Abra o seu evento na lista. No Fotto, uma selfie mostra só as fotos em que você aparece:
           escolha as suas e pague ali mesmo.
         </p>
-        <div class="busca" data-busca hidden>
-          <label for="busca-eventos">Nome do evento, local ou mês</label>
-          <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
+        <div class="visor" data-visor>
+          <span class="visor-canto" aria-hidden="true"></span>
+          <span class="visor-canto" aria-hidden="true"></span>
+          <span class="visor-canto" aria-hidden="true"></span>
+          <span class="visor-canto" aria-hidden="true"></span>
+          <div class="busca" data-busca hidden>
+            <label for="busca-eventos">Nome do evento, local ou mês</label>
+            <input id="busca-eventos" type="search" autocomplete="off" data-busca-campo />
+          </div>
+          <!-- pdl:eventos-vazio -->
+        </div>
+        <div class="fotometro">
+          <span class="fotometro-regua" aria-hidden="true"></span>
           <p class="busca-contagem" data-busca-contagem aria-live="polite"></p>
         </div>
         <!-- pdl:eventos -->
@@ -95,23 +107,13 @@
         </p>
       </section>
 
-      <!-- Uma parede de exposição: a lente do logo, ao fundo, gira com a rolagem como o anel de
-           foco, e as fotos ficam a distâncias diferentes dela (src/movimento.js). -->
+      <!-- Uma parede de exposição: a lente do logo, ao fundo, gira e cresce com a rolagem como o
+           anel de foco, e as fotos ficam a distâncias diferentes dela (src/movimento.js). -->
       <section id="trabalho" class="trabalho" aria-labelledby="trabalho-titulo" data-galeria>
-        <div class="trabalho-fundo" aria-hidden="true">
-          <img
-            class="trabalho-lente"
-            src="/marca/pdl-lente.svg"
-            alt=""
-            width="472"
-            height="472"
-            loading="lazy"
-            data-lente-fundo
-          />
-        </div>
+        <div class="trabalho-fundo" aria-hidden="true" data-lente-fundo></div>
         <div class="galeria" data-revelar>
           <div class="trabalho-topo">
-            <h2 id="trabalho-titulo" data-palavras>Trabalho</h2>
+            <h2 id="trabalho-titulo" data-foco>Trabalho</h2>
             <p data-entrada>
               Uma seleção de festas e jogos. O portfólio completo está no
               <a href="{{behance}}">Behance</a>.
@@ -121,47 +123,50 @@
         </div>
       </section>
 
-      <!-- Quatro passos, a mesma foto vista por uma lente cada vez mais aberta. -->
-      <section id="cobertura" class="cobertura" aria-labelledby="cobertura-titulo">
-        <h2 id="cobertura-titulo" data-palavras>Cobertura do seu evento</h2>
-        <ol class="passos">
-          <li class="passo">
-            <div class="passo-quadro" aria-hidden="true">
-              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
-            </div>
-            <p class="passo-nome" data-entrada>Você chama no WhatsApp.</p>
-            <p class="passo-apoio" data-entrada>Conta a data, o local e o tipo de evento.</p>
-          </li>
-          <li class="passo">
-            <div class="passo-quadro" aria-hidden="true">
-              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
-            </div>
-            <p class="passo-nome" data-entrada>Combinamos o preço.</p>
-            <p class="passo-apoio" data-entrada>Ele depende da data, do local e da duração.</p>
-          </li>
-          <li class="passo">
-            <div class="passo-quadro" aria-hidden="true">
-              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
-            </div>
-            <p class="passo-nome" data-entrada>No dia, eu fotografo.</p>
-            <p class="passo-apoio" data-entrada>
-              Festas, eventos e jogos em {{atendimento}}, de perto.
-            </p>
-          </li>
-          <li class="passo">
-            <div class="passo-quadro" aria-hidden="true">
-              <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 30vw, 100vw" -->
-            </div>
-            <p class="passo-nome" data-entrada>Você recebe as fotos.</p>
-            <p class="passo-apoio" data-entrada>Em {{prazoEntrega}} depois do evento.</p>
-          </li>
-        </ol>
+      <!-- Um rolo de filme. A seção fica presa na tela e o filme passa de lado enquanto a página
+           desce (src/movimento.js); cada quadro é um passo, e a mesma foto vem mais revelada a cada
+           quadro, até estar pronta no último. Sem JavaScript, ou com movimento reduzido, o filme
+           fica parado e inteiro, de cima para baixo. -->
+      <section id="cobertura" class="cobertura" aria-labelledby="cobertura-titulo" data-filme>
+        <div class="cobertura-palco">
+          <h2 id="cobertura-titulo" data-foco>Cobertura do seu evento</h2>
+          <ol class="filme">
+            <li class="passo">
+              <div class="passo-quadro" aria-hidden="true">
+                <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
+              </div>
+              <p class="passo-nome">Você chama no WhatsApp.</p>
+              <p class="passo-apoio">Conta a data, o local e o tipo de evento.</p>
+            </li>
+            <li class="passo">
+              <div class="passo-quadro" aria-hidden="true">
+                <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
+              </div>
+              <p class="passo-nome">Combinamos o preço.</p>
+              <p class="passo-apoio">Ele depende da data, do local e da duração.</p>
+            </li>
+            <li class="passo">
+              <div class="passo-quadro" aria-hidden="true">
+                <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
+              </div>
+              <p class="passo-nome">No dia, eu fotografo.</p>
+              <p class="passo-apoio">Festas, eventos e jogos em {{atendimento}}, de perto.</p>
+            </li>
+            <li class="passo">
+              <div class="passo-quadro" aria-hidden="true">
+                <!-- pdl:foto-cobertura sizes="(min-width: 48.01em) 42vw, 82vw" -->
+              </div>
+              <p class="passo-nome">Você recebe as fotos.</p>
+              <p class="passo-apoio">Em {{prazoEntrega}} depois do evento.</p>
+            </li>
+          </ol>
+        </div>
       </section>
 
       <section id="orcamento" class="orcamento" aria-labelledby="orcamento-titulo">
         <div class="cupom" data-entrada>
           <div class="cupom-texto">
-            <h2 id="orcamento-titulo" data-palavras>Peça um orçamento</h2>
+            <h2 id="orcamento-titulo" data-foco>Peça um orçamento</h2>
             <p>Preencha e o WhatsApp abre com a mensagem pronta. Nada fica guardado neste site.</p>
             <p class="cupom-email">Prefere e-mail? <a href="{{mailto}}">{{email}}</a></p>
           </div>
@@ -247,7 +252,7 @@
       </section>
 
       <section id="perguntas" class="perguntas" aria-labelledby="perguntas-titulo">
-        <h2 id="perguntas-titulo" data-palavras>Perguntas</h2>
+        <h2 id="perguntas-titulo" data-foco>Perguntas</h2>
         <div class="perguntas-lista" data-entrada>
           <details>
             <summary>Onde vejo o preço das fotos?</summary>

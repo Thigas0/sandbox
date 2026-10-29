@@ -118,6 +118,18 @@ Na rodada seguinte (2026-10-28), também a pedido do cliente:
 - **Texto que sobe:** os títulos das seções e a frase de Fotos aparecem com as palavras subindo de
   trás da linha, na primeira vez que a página desce até eles.
 
+Na rodada seguinte (2026-10-29), também a pedido do cliente, que escolheu cada caminho entre três:
+
+- **Compra:** "Encontre suas fotos" virou um visor de câmera com a busca no meio, com duas fontes
+  só (antes, o aviso cinza parecia uma terceira). As outras opções eram uma folha de contato e
+  ingressos.
+- **Trabalho:** as fotos se revelam como no laboratório, em vez de abrir num círculo, e a lente do
+  fundo cresce até quase o dobro enquanto gira.
+- **Cobertura:** um rolo de filme que passa de lado com a rolagem. As outras ideias eram uma conversa
+  no WhatsApp, o dia contado em horários e fotos espalhadas na mesa.
+- **Texto:** o foco da lente no lugar das palavras que subiam: as letras chegam desfocadas e
+  afastadas e entram em foco do centro para as pontas.
+
 As pranchas usam molduras coloridas no lugar das fotos, porque as fotos do Behance ainda não
 puderam ser baixadas. As capturas e os GIFs ficaram fora do repositório e foram enviados na
 conversa.

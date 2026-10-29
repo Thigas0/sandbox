@@ -16,14 +16,25 @@ const problemasDeLayout = (page) =>
     }
     const descrever = (el) =>
       `${el.tagName.toLowerCase()}${el.className ? '.' + String(el.className).split(' ')[0] : ''} "${el.textContent.trim().slice(0, 30)}"`;
+    // A parte de um elemento que aparece: a caixa dele recortada pelos ancestrais que cortam o que
+    // passa (uma foto ampliada no quadro, o filme da Cobertura no palco).
+    const visivel = (el) => {
+      const caixa = el.getBoundingClientRect();
+      let { left, right } = caixa;
+      for (let pai = el.parentElement; pai && pai !== document.body; pai = pai.parentElement) {
+        if (!/hidden|clip/.test(getComputedStyle(pai).overflowX)) continue;
+        const corte = pai.getBoundingClientRect();
+        left = Math.max(left, corte.left);
+        right = Math.min(right, corte.right);
+      }
+      return { left, right, vazia: right <= left };
+    };
     for (const el of document.body.querySelectorAll('*')) {
       if (el.closest('.visualmente-oculto, .pular, [hidden], noscript')) continue;
       const caixa = el.getBoundingClientRect();
       if (caixa.width === 0 || caixa.height === 0) continue;
-      // Uma foto ampliada dentro de uma moldura que a recorta não aparece fora da moldura.
-      const moldura = el.parentElement?.closest('picture');
-      const recortada = moldura && /hidden|clip/.test(getComputedStyle(moldura).overflow);
-      if (!recortada && (caixa.right > largura + 1 || caixa.left < -1)) {
+      const parte = visivel(el);
+      if (!parte.vazia && (parte.right > largura + 1 || parte.left < -1)) {
         problemas.push(
           `${descrever(el)} sai da tela (${Math.round(caixa.left)}–${Math.round(caixa.right)})`,
         );
@@ -52,12 +63,12 @@ for (const tamanho of TAMANHOS) {
       await page.goto(caminho);
       await percorrer(page);
       expect(await problemasDeLayout(page)).toEqual([]);
-      // Só para a captura de página inteira: a abertura vira um bloco comum e as fotos ligadas à
-      // rolagem aparecem abertas e no lugar, como ficam quando chegam à tela. As medições acima
-      // foram feitas na página como ela é.
+      // Só para a captura de página inteira: a abertura e a Cobertura viram blocos comuns e as fotos
+      // ligadas à rolagem aparecem reveladas e no lugar, como ficam quando chegam à tela. As
+      // medições acima foram feitas na página como ela é.
       await page.addStyleTag({
         content:
-          '.abertura{height:auto}.abertura-palco{position:relative}.galeria-foto,.galeria-foto .foto,.galeria-foto img,.passo-quadro .foto,.passo-quadro img{animation:none;transform:none!important;clip-path:none!important}',
+          '.abertura{height:auto}.abertura-palco{position:relative}.cobertura.rolando{height:auto}.cobertura.rolando .cobertura-palco{position:relative;height:auto}.galeria-foto,.galeria-foto img{transform:none!important;filter:none!important}',
       });
       await percorrer(page);
       const nome = `${caminho === '/' ? 'inicio' : 'privacidade'}-${tamanho.nome}-${info.project.name}.png`;

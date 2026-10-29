@@ -36,15 +36,15 @@ A frase também é a descrição do negócio nos dados estruturados.
 ## Encontre suas fotos
 
 - Título: Encontre suas fotos
-- Embaixo do título, uma frase corrida (no lugar dos três passos numerados): Abra o seu evento na
-  lista. No Fotto, uma selfie mostra só as fotos em que você aparece: escolha as suas e pague ali
-  mesmo.
-- Campo de busca, acima da lista: "Nome do evento, local ou mês"
+- Embaixo do título, uma frase: Abra o seu evento na lista. No Fotto, uma selfie mostra só as fotos
+  em que você aparece: escolha as suas e pague ali mesmo.
+- Visor de câmera com a busca: "Nome do evento, local ou mês". Embaixo do visor, a contagem da
+  busca ("4 eventos encontrados.").
 - Cada linha da lista: nome do evento · local · data por extenso. A linha inteira é o link do
   álbum.
 - Sem resultado: Nenhum evento com esse nome. Veja todos os álbuns no Fotto ou pergunte pelo WhatsApp.
-- Lista vazia (enquanto não houver eventos): Os álbuns aparecem aqui assim que as fotos entram no
-  Fotto. Enquanto isso, veja todos os álbuns no Fotto.
+- Lista vazia (enquanto não houver eventos), dentro do visor: Os álbuns aparecem aqui assim que as
+  fotos entram no Fotto. Enquanto isso, veja todos os álbuns no Fotto.
 
 ## Trabalho
 
@@ -56,7 +56,8 @@ A frase também é a descrição do negócio nos dados estruturados.
 ## Cobertura do seu evento
 
 - Título: Cobertura do seu evento
-- Quatro passos, cada um sob um quadro em que a lente se abre mais, com uma linha de apoio:
+- Um rolo de filme com quatro quadros numerados; embaixo de cada quadro, o passo e uma linha de
+  apoio:
   - **Você chama no WhatsApp.** Conta a data, o local e o tipo de evento.
   - **Combinamos o preço.** Ele depende da data, do local e da duração.
   - **No dia, eu fotografo.** Festas, eventos e jogos em Campinas e região, de perto.

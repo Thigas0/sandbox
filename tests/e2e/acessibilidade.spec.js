@@ -19,30 +19,34 @@ for (const caminho of PAGINAS) {
   });
 }
 
-// Antes de a página descer, os títulos estão divididos em palavras escondidas (src/movimento.js):
-// o leitor de tela ouve cada título inteiro uma vez, e as seções continuam com nome. O contraste
-// fica com os testes acima, com a página parada: para medi-lo, o axe rola a página, o que dispararia
-// as entradas no meio da medição.
-test('axe não acusa violações antes de os títulos subirem', async ({ page }) => {
+// Enquanto um título entra em foco (src/movimento.js), as letras soltas ficam escondidas do leitor
+// de tela, que ouve o título inteiro numa cópia oculta, e a seção continua com nome. As animações
+// param assim que o título se divide, para o axe ver esse estado. O contraste fica com os testes
+// acima, com a página parada: as letras ainda transparentes reprovariam, e para medi-lo o axe rola a
+// página, o que dispararia as outras entradas no meio da medição.
+test('axe não acusa violações com um título entrando em foco', async ({ page }) => {
   await page.goto('/');
-  await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator('#cobertura-titulo .palavra').first()).toBeAttached();
-  for (const nome of [
-    'Encontre suas fotos',
-    'Trabalho',
-    'Cobertura do seu evento',
-    'Peça um orçamento',
-    'Perguntas',
-  ]) {
-    await expect(page.getByRole('heading', { name: nome, exact: true })).toHaveCount(1);
-    await expect(page.getByRole('region', { name: nome, exact: true })).toHaveCount(1);
-  }
+  await page.evaluate(() => {
+    const titulo = document.querySelector('#fotos-titulo');
+    new MutationObserver((_, observador) => {
+      if (!titulo.querySelector('.foco-letra')) return;
+      document.getAnimations().forEach((animacao) => animacao.pause());
+      observador.disconnect();
+    }).observe(titulo, { childList: true });
+  });
+  await page
+    .locator('#fotos')
+    .evaluate((secao) => window.scrollTo({ top: secao.offsetTop, behavior: 'instant' }));
+  await expect(page.locator('#fotos-titulo .foco-letra').first()).toBeAttached();
+  const nome = { name: 'Encontre suas fotos', exact: true };
+  await expect(page.getByRole('heading', nome)).toHaveCount(1);
+  await expect(page.getByRole('region', nome)).toHaveCount(1);
   const resultado = await new AxeBuilder({ page })
     .withTags(REGRAS)
     .disableRules(['color-contrast'])
     .analyze();
   expect(resultado.violations).toEqual([]);
-  await expect(page.locator('#cobertura-titulo .palavra').first()).toBeAttached();
+  await expect(page.locator('#fotos-titulo .foco-letra').first()).toBeAttached();
 });
 
 test('axe não acusa violações com as perguntas abertas e os erros do formulário à mostra', async ({
