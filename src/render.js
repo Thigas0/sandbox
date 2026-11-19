@@ -145,9 +145,15 @@ export function agrupar(itens) {
     // "Cheddar Burg Especial tradicional" (90 g) é o mesmo lanche do de 120 g.
     const nome = nomeLimpo(item.nome).replace(/\s+tradicional$/i, '');
     const chave = nome.toLowerCase();
-    if (!grupos.has(chave)) grupos.set(chave, { ...item, nome, precos: [] });
+    if (!grupos.has(chave)) {
+      grupos.set(chave, { ...item, nome, chave: `p${item.id_bsfood}`, precos: [] });
+    }
     const grupo = grupos.get(chave);
-    grupo.precos.push({ rotulo: gramas(item.variante), centavos: item.preco_centavos });
+    grupo.precos.push({
+      rotulo: gramas(item.variante),
+      centavos: item.preco_centavos,
+      id: item.id_bsfood,
+    });
     grupo.mais_vendido ||= item.mais_vendido;
     if (!grupo.fotoId && temFoto(item)) grupo.fotoId = item.id_bsfood;
   }
@@ -192,6 +198,7 @@ function renderCardapio(dados) {
             <p class="prato__nome">${esc(item.nome)}${item.mais_vendido ? ' <span class="prato__selo">mais pedido</span>' : ''}</p>
             <p class="prato__precos">${linhaPreco(item.precos)}</p>
             ${item.descricao ? `<p class="prato__desc">${esc(descricaoLimpa(item.descricao))}</p>` : ''}
+            <button type="button" class="prato__add" data-adicionar="${item.chave}" aria-label="Adicionar ${esc(item.nome)} ao pedido">Adicionar</button>
           </li>`,
             )
             .join('')}
@@ -211,17 +218,59 @@ function renderAbas(dados) {
 }
 
 function renderMaisVendidos(dados) {
+  const indice = indicePedido(dados);
   const itens = dados.categorias.flatMap((c) => c.itens).filter((i) => i.mais_vendido);
   return itens
-    .map(
-      (item) => `
+    .map((item) => {
+      const ref = indice.porId[item.id_bsfood];
+      return `
         <li class="tabela__linha">
           <img src="/img/cliente/cardapio/${item.id_bsfood}.webp" width="400" height="400" loading="lazy" alt="${esc(nomeLimpo(item.nome))} cortado ao meio, com batata frita" />
           <p class="tabela__nome">${esc(nomeLimpo(item.nome))}${gramas(item.variante) ? ` <span class="tabela__peso">${gramas(item.variante)}</span>` : ''}</p>
           <p class="tabela__preco">${preco(item.preco_centavos)}</p>
-        </li>`,
-    )
+          <button type="button" class="tabela__add" data-adicionar="${ref.chave}" data-variante="${ref.variante}" aria-label="Adicionar ${esc(nomeLimpo(item.nome))} ao pedido">Adicionar</button>
+        </li>`;
+    })
     .join('');
+}
+
+// Tudo o que o pedido precisa saber, indexado pela chave de cada lanche.
+export function indicePedido(dados) {
+  const grupos = {};
+  for (const [id, g] of Object.entries(dados.grupos_adicionais)) {
+    const vistos = new Set();
+    grupos[id] = {
+      titulo: g.titulo,
+      minimo: g.minimo,
+      maximo: g.maximo,
+      opcoes: g.opcoes
+        .filter((o) => {
+          const nome = o.nome.toLowerCase();
+          if (vistos.has(nome)) return false;
+          vistos.add(nome);
+          return true;
+        })
+        .map((o) => ({ ...o, nome: o.nome.charAt(0).toUpperCase() + o.nome.slice(1) })),
+    };
+  }
+  const itens = {};
+  const porId = {};
+  for (const secao of secoesDoCardapio(dados)) {
+    for (const item of secao.itens) {
+      itens[item.chave] = {
+        nome: item.nome,
+        secao: secao.titulo,
+        descricao: item.descricao ? descricaoLimpa(item.descricao) : '',
+        foto: item.fotoId ? `/img/cliente/cardapio/${item.fotoId}-p.webp` : null,
+        precos: item.precos.map(({ rotulo, centavos }) => ({ rotulo, centavos })),
+        grupos: item.adicionais.filter((g) => grupos[g]),
+      };
+      item.precos.forEach((p, i) => {
+        porId[p.id] = { chave: item.chave, variante: i };
+      });
+    }
+  }
+  return { itens, grupos, porId };
 }
 
 function bairrosOrdenados(dados) {
@@ -290,8 +339,17 @@ function renderJsonLd(dados) {
 }
 
 function renderDadosLoja(dados) {
-  const loja = { horarios: dados.loja.horarios, entregaMin: dados.loja.tempo_medio_entrega_min };
-  return `<script type="application/json" id="dados-loja">${JSON.stringify(loja)}</script>`;
+  const { itens, grupos } = indicePedido(dados);
+  const loja = {
+    horarios: dados.loja.horarios,
+    entregaMin: dados.loja.tempo_medio_entrega_min,
+    retiradaMin: dados.loja.tempo_medio_retirada_min,
+    whatsapp: '5519971681738',
+    bairros: bairrosOrdenados(dados).map((b) => ({ nome: b.nome, taxa: b.taxa_centavos })),
+    pagamentos: ['PIX', 'Cartão de crédito', 'Cartão de débito', 'Dinheiro'],
+    cardapio: { itens, grupos },
+  };
+  return `<script type="application/json" id="dados-loja">${JSON.stringify(loja).replaceAll('<', '\\u003c')}</script>`;
 }
 
 function contarItens(dados) {

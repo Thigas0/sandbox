@@ -1,3 +1,5 @@
+import { iniciarPedido } from './pedido/ui.js';
+
 // O que muda a cada visita: o letreiro aceso ou apagado, a taxa do bairro e o peso do hambúrguer.
 // Sem este script a página continua completa: o cardápio, os bairros e os horários vêm no HTML.
 
@@ -113,7 +115,14 @@ function abasDoCardapio() {
   if (!abas.length || !grupos.length) return;
 
   const mostrar = (id) => {
-    for (const grupo of grupos) grupo.hidden = grupo.id !== id;
+    for (const grupo of grupos) {
+      grupo.hidden = grupo.id !== id;
+      if (!grupo.hidden) {
+        grupo.classList.remove('chega');
+        void grupo.offsetWidth;
+        grupo.classList.add('chega');
+      }
+    }
     for (const aba of abas) {
       if (aba.dataset.aba === id) aba.setAttribute('aria-current', 'true');
       else aba.removeAttribute('aria-current');
@@ -136,12 +145,35 @@ function abasDoCardapio() {
   mostrar(inicial);
 }
 
+// Movimento: entrada do topo, revelações ao rolar e o nome do rodapé.
 function entradas() {
+  const raiz = document.documentElement;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const alvos = [...document.querySelectorAll('[data-entra]')];
-  if (!alvos.length || !('IntersectionObserver' in window)) return;
-  document.documentElement.classList.add('movimento');
-  alvos.forEach((el, i) => el.style.setProperty('--ordem', String(i % 4)));
+  raiz.classList.add('movimento');
+
+  // Ordem de chegada dentro de cada grupo (cartões, letras, itens).
+  const ordenar = (seletor) =>
+    document.querySelectorAll(seletor).forEach((pai) => {
+      [...pai.children].forEach((filho, i) => filho.style.setProperty('--i', String(i)));
+    });
+  ordenar('.monumento__nome');
+  ordenar('[data-rodape-marca]');
+  ordenar('.tabela');
+  ordenar('.pesos__linhas');
+  ordenar('.cardapio__itens');
+  document
+    .querySelectorAll('[data-sobe]')
+    .forEach((el, i) => el.style.setProperty('--i', String(i)));
+
+  requestAnimationFrame(() => raiz.classList.add('carregou'));
+
+  const alvos = [
+    ...document.querySelectorAll('[data-entra], .tabela, [data-rodape-marca], .faixa'),
+  ];
+  if (!('IntersectionObserver' in window)) {
+    alvos.forEach((el) => el.classList.add('visto'));
+    return;
+  }
   const observador = new IntersectionObserver(
     (vistas) => {
       for (const v of vistas) {
@@ -151,7 +183,7 @@ function entradas() {
         }
       }
     },
-    { rootMargin: '0px 0px -10% 0px' },
+    { rootMargin: '0px 0px -12% 0px' },
   );
   alvos.forEach((el) => observador.observe(el));
 }
@@ -161,3 +193,4 @@ mostrarLetreiro(dados);
 calcularBairro(dados);
 abasDoCardapio();
 entradas();
+if (dados) iniciarPedido(dados, () => situacao(dados.horarios, agoraEmSerraNegra()));

@@ -6,13 +6,13 @@
     <title>Hugão Lanches & Burgers | Lanches e hambúrgueres em Serra Negra-SP</title>
     <meta
       name="description"
-      content="Lanches, hambúrgueres e hot dogs com batata frita na R. Irmã Dulce, 153, em Serra Negra-SP. Cardápio com preços, entrega em <!-- bairros-total --> bairros, aberto a partir das 18h."
+      content="Peça lanches, hambúrgueres e hot dogs com batata frita pelo site do Hugão, na R. Irmã Dulce, 153, em Serra Negra-SP. Entrega em <!-- bairros-total --> bairros, aberto a partir das 18h."
     />
     <meta name="theme-color" content="#1b1510" />
     <meta property="og:title" content="Hugão Lanches & Burgers, Serra Negra-SP" />
     <meta
       property="og:description"
-      content="Lanches e hambúrgueres com batata frita. Peça pelo bsfood ou pelo WhatsApp."
+      content="Lanches e hambúrgueres com batata frita. Monte o pedido no site e envie pelo WhatsApp."
     />
     <meta property="og:image" content="/img/cliente/fachada-letreiro.webp" />
     <meta property="og:locale" content="pt_BR" />
@@ -39,41 +39,32 @@
         <a href="#cardapio">Cardápio</a>
         <a href="#entrega">Entrega e endereço</a>
       </nav>
-      <a class="botao botao--acao barra__pedir" href="https://hugaolanches.bsfood.com.br">Pedir</a>
+      <a class="botao botao--acao barra__pedir" href="#cardapio" data-abrir-pedido>
+        Pedido <span class="barra__conta" data-conta hidden>0</span>
+      </a>
     </header>
 
     <main>
       <section class="topo" id="topo" aria-labelledby="topo-titulo">
         <div class="topo__texto">
-          <p class="topo__status">
+          <p class="topo__status" data-sobe>
+            <span class="ponto" aria-hidden="true"></span>
             <span class="letreiro-status" data-status>Abre todo dia às 18h.</span>
           </p>
           <h1 class="monumento" id="topo-titulo" data-monumento>
-            Hugão<span class="monumento__sub">Lanches & Burgers</span>
+            <span class="monumento__nome" aria-hidden="true"
+              ><span>H</span><span>u</span><span>g</span><span>ã</span><span>o</span></span
+            ><span class="sr-only">Hugão</span>
+            <span class="monumento__sub" data-sobe>Lanches & Burgers</span>
           </h1>
-          <p class="topo__frase">
-            Lanche caprichado com batata frita, na R. Irmã Dulce, em Serra Negra. Peça para entregar
-            ou venha comer no pergolado.
+          <p class="topo__frase" data-sobe>
+            Lanche caprichado com batata frita, nota 4,5 no Google. Monte o pedido aqui, escolha os
+            adicionais e mande direto para o WhatsApp da loja.
           </p>
-          <p class="topo__acoes">
-            <a class="botao botao--acao" href="https://hugaolanches.bsfood.com.br"
-              >Pedir no bsfood</a
-            >
-            <a
-              class="botao botao--claro"
-              href="https://wa.me/5519971681738?text=Ol%C3%A1%2C%20Hug%C3%A3o!%20Quero%20fazer%20um%20pedido."
-              >Pedir pelo WhatsApp</a
-            >
+          <p class="topo__acoes" data-sobe>
+            <a class="botao botao--acao" href="#cardapio">Montar meu pedido</a>
+            <a class="botao botao--claro" href="#entrega">Ver taxa de entrega</a>
           </p>
-          <ul class="topo__fatos" role="list">
-            <li><strong>4,5</strong> no Google, mais de 300 avaliações</li>
-            <li>
-              <strong><!-- bairros-total --></strong> bairros com entrega, cerca de 50 min
-            </li>
-            <li>
-              <strong><!-- itens-total --></strong> itens no cardápio
-            </li>
-          </ul>
         </div>
         <figure class="topo__foto">
           <img
@@ -87,9 +78,9 @@
       </section>
 
       <section class="mais" id="mais-pedidos" aria-labelledby="mais-titulo">
-        <div class="mais__cabeca">
+        <div class="mais__cabeca" data-entra>
           <h2 class="titulo-secao" id="mais-titulo">Os dez que mais saem</h2>
-          <p>Da aba de mais vendidos do bsfood. Arraste para ver todos.</p>
+          <p>Da aba de mais vendidos do bsfood. Toque para adicionar ao pedido.</p>
         </div>
         <ol class="tabela" role="list" data-lista tabindex="0" aria-label="Os dez mais pedidos">
           <!-- mais-vendidos -->
@@ -97,16 +88,18 @@
       </section>
 
       <section class="pesos" id="pesos" aria-labelledby="pesos-titulo">
-        <h2 class="titulo-secao" id="pesos-titulo">Três tamanhos de hambúrguer</h2>
+        <h2 class="titulo-secao" id="pesos-titulo" data-entra>Três tamanhos de hambúrguer</h2>
         <div class="pesos__linhas">
           <article class="peso" data-entra>
-            <img
-              src="/img/cliente/cardapio/12740.webp"
-              width="400"
-              height="400"
-              loading="lazy"
-              alt="X-Salada de 90 g cortado ao meio com batata frita"
-            />
+            <div class="peso__foto">
+              <img
+                src="/img/cliente/cardapio/12740.webp"
+                width="400"
+                height="400"
+                loading="lazy"
+                alt="X-Salada de 90 g cortado ao meio com batata frita"
+              />
+            </div>
             <h3><span class="peso__g">90 g</span> Linha tradicional</h3>
             <p>X-Salada, X-Bacon, X-Tudo e os clássicos de lanchonete, com batata frita.</p>
             <p class="peso__preco">
@@ -115,13 +108,15 @@
             </p>
           </article>
           <article class="peso" data-entra>
-            <img
-              src="/img/cliente/cardapio/33146.webp"
-              width="400"
-              height="400"
-              loading="lazy"
-              alt="X-Tudo de 120 g cortado ao meio sobre o papel Eu amo bacon, com batata frita"
-            />
+            <div class="peso__foto">
+              <img
+                src="/img/cliente/cardapio/33146.webp"
+                width="400"
+                height="400"
+                loading="lazy"
+                alt="X-Tudo de 120 g cortado ao meio sobre o papel Eu amo bacon, com batata frita"
+              />
+            </div>
             <h3><span class="peso__g">120 g</span> Artesanal da casa</h3>
             <p>Os mesmos lanches com o hambúrguer maior, como diz o cardápio, e batata frita.</p>
             <p class="peso__preco">
@@ -130,13 +125,15 @@
             </p>
           </article>
           <article class="peso" data-entra>
-            <img
-              src="/img/cliente/cardapio/12725.webp"
-              width="400"
-              height="400"
-              loading="lazy"
-              alt="Burguer Bacon Gourmet no pão brioche, com queijo, bacon e cebola caramelizada"
-            />
+            <div class="peso__foto">
+              <img
+                src="/img/cliente/cardapio/12725.webp"
+                width="400"
+                height="400"
+                loading="lazy"
+                alt="Burguer Bacon Gourmet no pão brioche, com queijo, bacon e cebola caramelizada"
+              />
+            </div>
             <h3><span class="peso__g">160 g</span> Gourmet no brioche</h3>
             <p>Pão brioche, maionese defumada e queijos como cheddar, provolone e coalho.</p>
             <p class="peso__preco">
@@ -148,11 +145,11 @@
       </section>
 
       <section class="cardapio" id="cardapio" aria-labelledby="cardapio-titulo">
-        <div class="cardapio__cabeca-geral">
+        <div class="cardapio__cabeca-geral" data-entra>
           <h2 class="titulo-secao" id="cardapio-titulo">Cardápio com preço</h2>
           <p>
-            Copiado do bsfood em 19/11/2026. Bacon, cheddar, ovo e hambúrguer extra são escolhidos
-            na hora do pedido.
+            Toque em Adicionar para escolher o tamanho, os adicionais e a quantidade. Preços do
+            bsfood em 19/11/2026.
           </p>
         </div>
         <nav class="abas" aria-label="Partes do cardápio" data-abas><!-- cardapio-abas --></nav>
@@ -161,6 +158,10 @@
         </div>
       </section>
 
+      <div class="faixa" aria-hidden="true">
+        <div class="faixa__trilho"><!-- bairros-faixa --></div>
+      </div>
+
       <section class="entrega" id="entrega" aria-labelledby="entrega-titulo">
         <div class="entrega__pedido" data-entra>
           <h2 class="titulo-secao" id="entrega-titulo">
@@ -168,7 +169,7 @@
             <!-- bairros-total -->
             bairros
           </h2>
-          <form class="calculo" data-ui action="https://hugaolanches.bsfood.com.br">
+          <form class="calculo" data-ui action="#cardapio">
             <label for="bairro">Escolha seu bairro para ver a taxa</label>
             <select id="bairro" name="bairro" data-bairro>
               <option value="">Bairro</option>
@@ -223,7 +224,9 @@
     </main>
 
     <footer class="rodape">
-      <p class="rodape__marca" aria-hidden="true">Hugão</p>
+      <p class="rodape__marca" aria-hidden="true" data-rodape-marca>
+        <span>H</span><span>u</span><span>g</span><span>ã</span><span>o</span>
+      </p>
       <div class="rodape__colunas">
         <p>
           <a href="https://hugaolanches.bsfood.com.br">Cardápio no bsfood</a>
@@ -234,11 +237,187 @@
           >
         </p>
         <p class="rodape__legal">
-          Site demonstrativo. Cardápio, preços, horários e taxas copiados do bsfood em 19/11/2026;
-          confirme no pedido. Fotos publicadas pelo Hugão no bsfood e no Instagram.
+          Site demonstrativo. Cardápio, preços, horários e taxas copiados do bsfood em 19/11/2026. O
+          pedido é enviado pelo WhatsApp da loja; o pagamento é feito na entrega ou na retirada.
         </p>
       </div>
     </footer>
+
+    <!-- Pedido: só aparece com JavaScript. Sem ele, os botões de pedir levam ao cardápio e ao WhatsApp. -->
+    <button type="button" class="sacola" data-sacola hidden>
+      <span class="sacola__conta" data-sacola-conta>0 itens</span>
+      <span class="sacola__ver">Ver pedido</span>
+      <span class="sacola__total" data-sacola-total>R$ 0,00</span>
+    </button>
+
+    <dialog class="janela" data-item-janela aria-labelledby="item-nome">
+      <form class="item" method="dialog" data-item-form novalidate>
+        <button type="button" class="fechar" data-fechar aria-label="Fechar">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" fill="none" />
+          </svg>
+        </button>
+        <div class="item__topo">
+          <img class="item__foto" data-item-foto alt="" width="160" height="160" />
+          <div>
+            <p class="item__secao" data-item-secao></p>
+            <h2 class="item__nome" id="item-nome" data-item-nome></h2>
+            <p class="item__desc" data-item-desc></p>
+          </div>
+        </div>
+        <div class="item__opcoes" data-item-opcoes></div>
+        <label class="campo">
+          <span>Observação</span>
+          <textarea
+            name="obs"
+            rows="2"
+            maxlength="140"
+            placeholder="Ex.: sem cebola, ponto da carne"
+          ></textarea>
+        </label>
+        <p class="item__erro" data-item-erro role="alert"></p>
+        <div class="item__rodape">
+          <div class="qtd" data-qtd>
+            <button type="button" data-qtd-menos aria-label="Diminuir quantidade">−</button>
+            <output data-qtd-valor aria-live="polite">1</output>
+            <button type="button" data-qtd-mais aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button type="submit" class="botao botao--acao item__adicionar" data-item-adicionar>
+            Adicionar <span data-item-total>R$ 0,00</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="janela janela--gaveta" data-gaveta aria-labelledby="gaveta-titulo">
+      <div class="gaveta">
+        <div class="gaveta__topo">
+          <h2 id="gaveta-titulo">Seu pedido</h2>
+          <button type="button" class="fechar" data-fechar aria-label="Fechar">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" fill="none" />
+            </svg>
+          </button>
+        </div>
+
+        <div data-etapa-pedido>
+          <ul class="gaveta__itens" role="list" data-gaveta-itens></ul>
+          <p class="gaveta__vazio" data-gaveta-vazio>
+            O pedido está vazio. Escolha um lanche no cardápio.
+          </p>
+
+          <form class="checkout" data-checkout novalidate>
+            <fieldset class="escolha">
+              <legend>Como você quer receber?</legend>
+              <label><input type="radio" name="tipo" value="entrega" checked /> Entrega</label>
+              <label><input type="radio" name="tipo" value="retirada" /> Retirar no balcão</label>
+            </fieldset>
+
+            <div class="checkout__entrega" data-so-entrega>
+              <label class="campo">
+                <span>Bairro</span>
+                <select name="bairro" data-checkout-bairro>
+                  <option value="">Escolha o bairro</option>
+                </select>
+                <small class="campo__erro" data-erro="bairro"></small>
+              </label>
+              <div class="campo-linha">
+                <label class="campo campo--largo">
+                  <span>Rua</span>
+                  <input name="rua" autocomplete="address-line1" />
+                  <small class="campo__erro" data-erro="rua"></small>
+                </label>
+                <label class="campo">
+                  <span>Número</span>
+                  <input name="numero" inputmode="numeric" />
+                  <small class="campo__erro" data-erro="numero"></small>
+                </label>
+              </div>
+              <label class="campo">
+                <span>Complemento <em>(opcional)</em></span>
+                <input name="complemento" autocomplete="address-line2" />
+              </label>
+              <label class="campo">
+                <span>Ponto de referência <em>(opcional)</em></span>
+                <input name="referencia" />
+              </label>
+            </div>
+
+            <div class="campo-linha">
+              <label class="campo campo--largo">
+                <span>Seu nome</span>
+                <input name="nome" autocomplete="name" />
+                <small class="campo__erro" data-erro="nome"></small>
+              </label>
+              <label class="campo campo--largo">
+                <span>Telefone</span>
+                <input
+                  name="telefone"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="(19) 90000-0000"
+                />
+                <small class="campo__erro" data-erro="telefone"></small>
+              </label>
+            </div>
+
+            <fieldset class="escolha" data-pagamentos>
+              <legend>Pagamento, na entrega ou na retirada</legend>
+              <small class="campo__erro" data-erro="pagamento"></small>
+            </fieldset>
+            <label class="campo" data-troco hidden>
+              <span>Troco para quanto? <em>(opcional)</em></span>
+              <input name="troco" inputmode="decimal" placeholder="Ex.: R$ 100" />
+            </label>
+
+            <label class="campo">
+              <span>Observações do pedido <em>(opcional)</em></span>
+              <textarea name="obs" rows="2" maxlength="200"></textarea>
+            </label>
+
+            <dl class="resumo" data-resumo>
+              <div>
+                <dt>Subtotal</dt>
+                <dd data-resumo-subtotal>R$ 0,00</dd>
+              </div>
+              <div data-so-entrega>
+                <dt>Entrega</dt>
+                <dd data-resumo-taxa>escolha o bairro</dd>
+              </div>
+              <div class="resumo__total">
+                <dt>Total</dt>
+                <dd data-resumo-total>R$ 0,00</dd>
+              </div>
+            </dl>
+            <p class="checkout__aviso" data-checkout-aviso></p>
+            <button type="submit" class="botao botao--acao checkout__enviar">
+              Enviar pedido pelo WhatsApp
+            </button>
+            <p class="checkout__nota">
+              O WhatsApp abre com o pedido escrito. É só enviar a mensagem para a loja confirmar.
+            </p>
+          </form>
+        </div>
+
+        <div class="confirmacao" data-confirmacao hidden tabindex="-1">
+          <p class="confirmacao__selo" aria-hidden="true">✓</p>
+          <h3>Pedido <span data-confirmacao-codigo></span> pronto</h3>
+          <p>
+            Abrimos o WhatsApp do Hugão com o seu pedido. Envie a mensagem para a loja confirmar o
+            pedido e o tempo de entrega.
+          </p>
+          <a class="botao botao--acao" data-confirmacao-link href="#" target="_blank" rel="noopener"
+            >Abrir o WhatsApp de novo</a
+          >
+          <button type="button" class="botao botao--claro" data-novo-pedido>
+            Fazer outro pedido
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="aviso" data-aviso role="status" aria-live="polite"></div>
 
     <!-- dados-loja -->
     <script type="module" src="/src/main.js"></script>

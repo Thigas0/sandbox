@@ -10,7 +10,10 @@ same change.
 - `vite.config.js` and `src/render.js`: at build time, a small plugin fills the `<!-- name -->`
   markers in `index.html` with the menu, delivery areas, hours and JSON-LD from
   `docs/cliente/cardapio.json`, so the page works without JavaScript. `src/main.js` only adds the
-  live parts (open-now sign, delivery fee by area, burger-size tabs, entrances).
+  live parts (open-now sign, delivery fee by area, menu tabs, motion) and starts the order system.
+- `src/pedido/`: the order system. `regras.js` holds the pure rules (prices, add-on limits, totals,
+  form checks, the WhatsApp message) and is tested directly; `ui.js` is the item dialog, cart,
+  checkout drawer and the hand-off to the shop's WhatsApp. The cart is kept in `localStorage`.
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,

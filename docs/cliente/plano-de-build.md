@@ -10,8 +10,10 @@ Base: `dossie.md`, `cardapio.json`, `avaliacoes.md` e o `DESIGN.md` da raiz. Pre
 - **Objetivo:** mostrar ao Hugo que o Hugão merece um site à altura da nota 4,5 com mais de 300
   avaliações. A página deve parecer dele: o selo, a fachada nova, os lanches reais e "vem com
   batata".
-- **Ação principal:** pedir, pelo bsfood ou pelo WhatsApp. **Ação secundária:** saber como chegar,
-  com endereço, mapa e horário.
+- **Ação principal:** montar o pedido no próprio site (tamanho, adicionais, observação, entrega
+  ou retirada, pagamento) e enviá-lo pronto para o WhatsApp da loja. Decisão do desenvolvedor em
+  19/11/2026. Não há pagamento online: o cliente paga na entrega ou na retirada. **Ação
+  secundária:** saber como chegar, com endereço, mapa e horário.
 
 ## Mapa do site
 
