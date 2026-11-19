@@ -24,12 +24,20 @@ O que cada coluna quer dizer:
 
 ## Versões usadas na página
 
-O site usa versões WebP (qualidade 82), geradas a partir dos arquivos acima, sem nenhuma outra
-alteração. A exceção é `fachada-letreiro.webp`, um recorte (962 × 960) da parte de cima de
-`fachada-nova-instagram.jpg`, que tira a arte com texto e deixa só a foto do letreiro, do selo
-iluminado e do cordão de luzes. Ficam `lanche-america-bacon`, `lanche-burguer-bacon-gourmet`,
-`lanche-caipira`, `lanche-churraskito`, `lanche-hot-dog-prensadinho`, `lanche-x-salada` e
-`lanche-x-tudo`.
+O site usa versões WebP geradas a partir das fotos do próprio bsfood, sem nenhuma alteração além do
+tamanho:
+
+- **Miniaturas:** `cardapio/<id>-p.webp`, com 160 px, para cada item do cardápio que tem foto real
+  ou provável IA ou render (69 itens). Ficam de fora as fotos genéricas de banco de imagem e as
+  embalagens de bebida.
+- **Versões grandes:** `cardapio/<id>.webp`, com 400 px, para os 10 mais pedidos e as 3 fotos da
+  seção de tamanhos (90 g: X-Salada 12740; 120 g: X-Tudo 33146; 160 g: Burguer Bacon Gourmet
+  12725).
+- **Topo:** `fachada-letreiro.webp`, um recorte (962 × 960) da parte de cima de
+  `fachada-nova-instagram.jpg`, que tira a arte com texto.
+
+O `<id>` é o `id_bsfood` do item em `cardapio.json`. A URL de origem de cada foto está no campo
+`foto_url` do mesmo item.
 
 ## Lanches
 

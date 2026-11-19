@@ -106,67 +106,48 @@ function calcularBairro(dados) {
   });
 }
 
-function trocarPeso() {
-  const abas = [...document.querySelectorAll('[role="tab"][data-peso]')];
-  const modelo = document.querySelector('template[data-pesos]');
-  const foto = document.querySelector('[data-peso-foto]');
-  const titulo = document.querySelector('[data-peso-titulo]');
-  const desc = document.querySelector('[data-peso-desc]');
-  const painel = document.querySelector('[data-painel]');
-  if (!abas.length || !modelo || !foto || !titulo || !desc) return;
-  const opcoes = new Map(
-    [...modelo.content.querySelectorAll('[data-peso]')].map((el) => [el.dataset.peso, el]),
-  );
+// Cardápio em abas: mostra uma categoria por vez. Sem script, todas ficam visíveis.
+function abasDoCardapio() {
+  const abas = [...document.querySelectorAll('[data-aba]')];
+  const grupos = [...document.querySelectorAll('[data-cardapio] > .cardapio__grupo')];
+  if (!abas.length || !grupos.length) return;
 
-  const escolher = (aba, focar = false) => {
-    const dados = opcoes.get(aba.dataset.peso);
-    if (!dados) return;
-    for (const a of abas) {
-      const ativa = a === aba;
-      a.setAttribute('aria-selected', String(ativa));
-      a.tabIndex = ativa ? 0 : -1;
+  const mostrar = (id) => {
+    for (const grupo of grupos) grupo.hidden = grupo.id !== id;
+    for (const aba of abas) {
+      if (aba.dataset.aba === id) aba.setAttribute('aria-current', 'true');
+      else aba.removeAttribute('aria-current');
     }
-    painel?.setAttribute('aria-labelledby', aba.id);
-    titulo.textContent = dados.dataset.titulo;
-    desc.textContent = dados.textContent.replace(/\s+/g, ' ').trim();
-    foto.src = dados.dataset.foto;
-    foto.alt = dados.dataset.alt;
-    if (focar) aba.focus();
   };
 
-  abas.forEach((aba, i) => {
-    aba.addEventListener('click', () => escolher(aba));
-    aba.addEventListener('keydown', (evento) => {
-      const passo = { ArrowRight: 1, ArrowLeft: -1 }[evento.key];
-      if (!passo) return;
+  for (const aba of abas) {
+    aba.addEventListener('click', (evento) => {
       evento.preventDefault();
-      escolher(abas[(i + passo + abas.length) % abas.length], true);
+      mostrar(aba.dataset.aba);
+      aba.scrollIntoView({ block: 'nearest', inline: 'center' });
+      const cardapio = document.getElementById('cardapio');
+      if (cardapio && cardapio.getBoundingClientRect().top < 0) {
+        cardapio.scrollIntoView({ block: 'start' });
+      }
     });
-  });
+  }
+
+  const inicial = grupos.find((g) => `#${g.id}` === location.hash)?.id ?? grupos[0].id;
+  mostrar(inicial);
 }
 
 function entradas() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const alvos = [...document.querySelectorAll('[data-entra]')];
+  if (!alvos.length || !('IntersectionObserver' in window)) return;
   document.documentElement.classList.add('movimento');
-  const alvos = [...document.querySelectorAll('[data-entra], [data-lista], .cardapio__itens')];
-  for (const lista of document.querySelectorAll('[data-lista], .cardapio__itens')) {
-    [...lista.children].forEach((item, i) => item.style.setProperty('--ordem', String(i % 8)));
-  }
-  for (const secao of document.querySelectorAll('main > section')) {
-    [...secao.querySelectorAll('[data-entra]')].forEach((el, i) =>
-      el.style.setProperty('--ordem', String(i)),
-    );
-  }
-  if (!('IntersectionObserver' in window)) {
-    alvos.forEach((el) => el.classList.add('visto'));
-    return;
-  }
+  alvos.forEach((el, i) => el.style.setProperty('--ordem', String(i % 4)));
   const observador = new IntersectionObserver(
-    (entradasVistas) => {
-      for (const entrada of entradasVistas) {
-        if (entrada.isIntersecting) {
-          entrada.target.classList.add('visto');
-          observador.unobserve(entrada.target);
+    (vistas) => {
+      for (const v of vistas) {
+        if (v.isIntersecting) {
+          v.target.classList.add('visto');
+          observador.unobserve(v.target);
         }
       }
     },
@@ -178,5 +159,5 @@ function entradas() {
 const dados = lerDados();
 mostrarLetreiro(dados);
 calcularBairro(dados);
-trocarPeso();
+abasDoCardapio();
 entradas();

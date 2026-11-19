@@ -59,14 +59,22 @@ test('depois de fechar no sábado, o letreiro avisa que acende amanhã', async (
   await expect(page.locator('[data-status]')).toHaveText('Apagado agora: acende amanhã às 18h.');
 });
 
-test('as abas de peso trocam a linha do hambúrguer, também pelo teclado', async ({ page }) => {
+test('o cardápio mostra uma categoria por vez e troca pela aba', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('tab', { name: '160 g' }).click();
-  await expect(page.locator('[data-peso-titulo]')).toHaveText('Gourmet no brioche');
-  await expect(page.getByRole('tab', { name: '160 g' })).toHaveAttribute('aria-selected', 'true');
-  await page.keyboard.press('ArrowLeft');
-  await expect(page.locator('[data-peso-titulo]')).toHaveText('Artesanal da casa');
-  await expect(page.getByRole('tab', { name: '120 g' })).toBeFocused();
+  await expect(page.locator('#classicos')).toBeVisible();
+  await expect(page.locator('#bebidas')).toBeHidden();
+  await page.locator('[data-aba="bebidas"]').click();
+  await expect(page.locator('#bebidas')).toBeVisible();
+  await expect(page.locator('#classicos')).toBeHidden();
+  await expect(page.locator('[data-aba="bebidas"]')).toHaveAttribute('aria-current', 'true');
+});
+
+test('os lanches com foto do bsfood mostram a foto no cardápio', async ({ page }) => {
+  await page.goto('/');
+  const foto = page.locator('#classicos .prato__foto').first();
+  await foto.scrollIntoViewIfNeeded();
+  await expect(foto).toHaveJSProperty('complete', true);
+  expect(await foto.evaluate((img) => img.naturalWidth)).toBeGreaterThan(0);
 });
 
 test('os botões de WhatsApp e de ligar apontam para o número da loja', async ({ page }) => {

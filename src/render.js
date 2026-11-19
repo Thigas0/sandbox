@@ -126,6 +126,12 @@ export function descricaoLimpa(texto) {
     .trim();
 }
 
+// Fotos do próprio bsfood copiadas para public/img/cliente/cardapio/ (sem as genéricas de banco
+// de imagem e sem as embalagens de bebida).
+export function temFoto(item) {
+  return ['real', 'provavel-ia-ou-render'].includes(item.foto_tipo) && !item.duplicado_de;
+}
+
 function gramas(variante) {
   const m = /(\d+)\s*g/.exec(variante || '');
   return m ? `${m[1]} g` : null;
@@ -143,6 +149,7 @@ export function agrupar(itens) {
     const grupo = grupos.get(chave);
     grupo.precos.push({ rotulo: gramas(item.variante), centavos: item.preco_centavos });
     grupo.mais_vendido ||= item.mais_vendido;
+    if (!grupo.fotoId && temFoto(item)) grupo.fotoId = item.id_bsfood;
   }
   for (const grupo of grupos.values()) {
     grupo.precos.sort((a, b) => a.centavos - b.centavos);
@@ -180,7 +187,8 @@ function renderCardapio(dados) {
           ${secao.itens
             .map(
               (item) => `
-          <li class="prato">
+          <li class="prato${item.fotoId ? ' prato--foto' : ''}">
+            ${item.fotoId ? `<img class="prato__foto" src="/img/cliente/cardapio/${item.fotoId}-p.webp" width="160" height="160" loading="lazy" alt="" />` : ''}
             <p class="prato__nome">${esc(item.nome)}${item.mais_vendido ? ' <span class="prato__selo">mais pedido</span>' : ''}</p>
             <p class="prato__precos">${linhaPreco(item.precos)}</p>
             ${item.descricao ? `<p class="prato__desc">${esc(descricaoLimpa(item.descricao))}</p>` : ''}
@@ -193,15 +201,24 @@ function renderCardapio(dados) {
     .join('');
 }
 
+function renderAbas(dados) {
+  return secoesDoCardapio(dados)
+    .map(
+      (s, i) =>
+        `<a href="#${s.id}" data-aba="${s.id}"${i === 0 ? ' aria-current="true"' : ''}>${esc(s.titulo)} <span class="aba__n">${s.itens.length}</span></a>`,
+    )
+    .join('');
+}
+
 function renderMaisVendidos(dados) {
   const itens = dados.categorias.flatMap((c) => c.itens).filter((i) => i.mais_vendido);
   return itens
     .map(
       (item) => `
         <li class="tabela__linha">
-          <span class="tabela__nome">${esc(nomeLimpo(item.nome))}${gramas(item.variante) ? ` <span class="tabela__peso">${gramas(item.variante)}</span>` : ''}</span>
-          <span class="tabela__desc">${esc(descricaoLimpa(item.descricao || ''))}</span>
-          <span class="tabela__preco">${preco(item.preco_centavos)}</span>
+          <img src="/img/cliente/cardapio/${item.id_bsfood}.webp" width="400" height="400" loading="lazy" alt="${esc(nomeLimpo(item.nome))} cortado ao meio, com batata frita" />
+          <p class="tabela__nome">${esc(nomeLimpo(item.nome))}${gramas(item.variante) ? ` <span class="tabela__peso">${gramas(item.variante)}</span>` : ''}</p>
+          <p class="tabela__preco">${preco(item.preco_centavos)}</p>
         </li>`,
     )
     .join('');
@@ -290,6 +307,7 @@ export function renderPage(html, dados) {
   const trocas = {
     'mais-vendidos': renderMaisVendidos(dados),
     cardapio: renderCardapio(dados),
+    'cardapio-abas': renderAbas(dados),
     'bairros-opcoes': renderBairrosOpcoes(dados),
     'bairros-lista': renderBairrosLista(dados),
     'bairros-faixa': renderBairrosFaixa(dados),
