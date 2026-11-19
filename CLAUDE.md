@@ -15,6 +15,9 @@ same change.
   `.claude/skills/SOURCES.md`.
 - `.mcp.json`: project MCP servers (Playwright browser control, Figma). Each session asks once to enable them.
 - `docs/design-library/`: DESIGN.md references of well-known sites, to draw a visual direction from.
+- `docs/cliente/`: the current client's research and content: dossier, menu JSON (`cardapio.json`,
+  which feeds the site), review excerpts, questions for the owner, image credits, and the build plan.
+  `DESIGN.md` at the root is the client's brand draft; `public/img/cliente/` holds the client's images.
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.
 - `scripts/setup-wsl.sh`: one-time WSL 2 setup (packages, sandbox check, full verification).
