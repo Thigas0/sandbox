@@ -111,27 +111,64 @@ residenciais ficaram de fora de propósito.
 
 ## O que os clientes dizem
 
-> **Pendente.** As avaliações do Google e do Facebook não puderam ser lidas: o Maps abriu em
-> visualização limitada, a busca pediu captcha e o Facebook pede login. O desenvolvedor vai mandar
-> prints, e então a skill `research-synthesis` roda sobre eles e esta seção é refeita. As hipóteses
-> abaixo usam só o material disponível, que é divulgação e não avaliação de cliente. A evidência é
-> fraca.
+Síntese feita com a skill `research-synthesis` em 2026-11-19. A **amostra é pequena**: o Google
+tem 313 avaliações, mas só 3 foram lidas (prints enviados pelo desenvolvedor). Somam-se as
+respostas do dono, os 4 temas que o próprio Google marca (bacon 9, maionese 7, picanha 4, mercado
+3) e 3 posts de parceria do @serranegra, que são divulgação. A nota 4,5, com a grande maioria das
+barras em 5★, mostra que as notas baixas são minoria. Mesmo assim, as duas lidas tratam do mesmo
+ponto.
 
-Hipóteses de motivos (a confirmar com as avaliações):
+### Motivos para gostar
 
-1. **Capricho e lanche bem recheado.**
+1. **Atendimento e ambiente.** Até as duas avaliações negativas elogiam, segundo as respostas do
+   dono.
+   - "ficamos felizes em saber que gostaram do ambiente, do atendimento e da nossa maionese verde"
+     (resposta do dono a Brenda P., 3★)
+   - "O atendimento foi excelente" (Moises C., 5★, há 5 meses)
+2. **A maionese verde da casa.** É o tema "maionese", marcado 7 vezes pelo Google. Não aparece no
+   cardápio do bsfood.
+   - "a nossa maionese verde" (resposta do dono a Brenda P.)
+   - Também citada nas resenhas da Hamburgueria da Serra no Wanderlog. É preciso confirmar com o
+     Hugo se a receita é dele.
+3. **Lanche caprichado, com bacon.** Corresponde aos temas "bacon" (9) e "picanha" (4).
+   - "Lanche muito saboroso, ingredientes de qualidade e tudo muito bem preparado." (Moises C., 5★)
    - "Tudo lá é muito bem feito, no capricho e com ingredientes de qualidade." (@serranegra,
      29/05/2026)
-   - "Aquele pão macio, hambúrguer suculento, ingredientes de qualidade" (@serranegra, 01/07/2026)
-2. **Vem com batata frita.**
-   - "E o melhor: todos os lanches acompanham batata frita" (@serranegra, 14/03/2026)
-   - 59 dos 70 lanches dizem "(ACOMPANHA BATATA FRITA)" no cardápio do bsfood.
-3. **Variedade.** São 70 lanches em 9 categorias, do clássico ao gourmet, com opções vegetarianas e
-   kids.
-   - "O cardápio tem várias opções de lanches, porções deliciosas e bebidas" (@serranegra,
-     14/03/2026)
+4. **Delivery rápido e quente.**
+   - "o delivery foi rápido, chegando tudo quentinho" (Moises C., 5★)
+   - O bsfood informa entrega média de 50 min.
+5. **Vem com batata frita.**
+   - "todos os lanches acompanham batata frita" (@serranegra, 14/03/2026)
+   - 59 dos 70 lanches dizem isso no bsfood.
 
-Reclamações recorrentes: nenhuma levantada ainda. Isso depende das avaliações.
+### Reclamação recorrente
+
+- **"Hambúrguer de mercado" na linha tradicional.** São 2 das 3 avaliações lidas, e o Google marca
+  o tema "mercado" 3 vezes.
+  - "No cardápio diz que os hambúrgueres são artesanais, porém o hambúrguer é comercial (hambúrguer
+    de mercado)" (Brenda P., 3★, há 4 meses)
+  - "pareciam de um produto industrializado bem simples, tipo aqueles hambúrgueres congelados de
+    supermercado" (Matheus H., 2★, há 3 meses, sobre o Hambúrguer Dog)
+  - O dono responde que a linha tradicional usa hambúrguer industrializado de fornecedor e a gourmet
+    usa hambúrguer artesanal. Diz também que "em breve, todos os nossos lanches […] passarão a ser
+    preparados com hambúrguer artesanal de produção própria, feito aqui na casa".
+
+### O que isso muda no site
+
+- **Não prometer "artesanal" de forma genérica.** O cardápio deve deixar visível a diferença entre
+  as linhas, com as gramaturas: tradicional de 90 g; "artesanal da casa" de 120 g; gourmet de 160 g
+  no brioche. A expectativa errada é a causa das notas baixas.
+  - Conflito a resolver: o bsfood chama o de 120 g de "artesanal da casa", e a resposta do dono fala
+    só em linhas "tradicional" e "gourmet".
+- **Destacar o que todo mundo elogia:** atendimento, ambiente, maionese verde, bacon, batata
+  inclusa e entrega quente.
+- **A "nova fase"** (hambúrguer artesanal de produção própria em tudo) pode virar a história do site,
+  se o Hugo confirmar que já começou. Ela combina com o "Nosso Recomeço".
+- **Público de fora:** Brenda veio de São Paulo por um vídeo do Instagram. O site precisa funcionar
+  para o turista, com endereço, horário e "como chegar".
+
+Para perguntar ao Hugo: a maionese verde (é receita da casa? está à venda à parte?), a picanha (que
+não aparece no bsfood) e a data da troca para hambúrguer próprio.
 
 ## Presença digital
 

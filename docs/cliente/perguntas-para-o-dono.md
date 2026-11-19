@@ -38,7 +38,13 @@ para uma conversa de 15 minutos ou uma troca de mensagens no WhatsApp. As respos
   Churrasco, o Churraskito, o Hot Dog Prensadinho, o X-Bacon, o X-Burguer, o X-Especial, o X-Frango
   e o X-Salada.
   - Sondagem: qual é o lanche que "é a cara do Hugão"? É o Super Hugão?
-- Tem receita ou ingrediente da casa: molho, pão, blend do hambúrguer, maionese defumada?
+- Tem receita ou ingrediente da casa? As avaliações elogiam a **maionese verde**, que não está no
+  bsfood. Ela é receita sua? Vende à parte?
+- O Google marca "picanha" em 4 avaliações, mas não há picanha no bsfood. Ainda existe?
+- Na resposta a uma avaliação, você disse que todos os lanches vão passar a usar hambúrguer
+  artesanal de produção própria. Isso já começou? O site pode contar essa "nova fase"?
+- O bsfood chama o hambúrguer de 120 g de "artesanal da casa". Ele é artesanal mesmo, ou só o de
+  160 g, da linha gourmet?
   - Sondagem: o hambúrguer de 90 g, de 120 g e de 160 g é feito aí?
 - "Todos os lanches vêm com batata frita": isso vale para todos? Dá para usar como chamada?
 - Os sorvetes da bio do Instagram ainda existem? Eles não aparecem no bsfood.

@@ -35,7 +35,7 @@ reordenar as seções no passo 2 se o argumento pedir.
 | :- | :- | :- | :- | :- |
 | 1 | Direção de arte | `taste-skill`, com `pro-design` §1–2 e `frontend-design` | `DESIGN.md`, inventário do assunto (selo, fachada nova, cordão de luzes, papel "EU AMO BACON", R. Irmã Dulce, "vem com batata", linhas de 90, 120 e 160 g) e as seções acima | Direção escolhida entre as 3 do `draw.mjs`, o argumento da página e os tokens finais em `:root` |
 | 2 | Texto | `ux-copy` | Direção, `cardapio.json` e `dossie.md` (voz da marca) | Títulos, textos dos botões, microtexto de entrega e horário e o texto do "Sobre", sem prometer o que o dono não confirmou |
-| 3 | Imagens | `higgsfield-product-photoshoot` e `higgsfield-generate`, só se faltar algo e com aval por lote | Lacunas: foto horizontal do topo e fundo de seção. Referência: fotos reais | Até 4 imagens, listadas em `creditos-imagens.md` como "gerada por IA". Nunca um lanche que não exista ou com outra aparência |
+| 3 | Imagens | sem IA, por decisão de 2026-11-19 | `public/img/cliente/` | Recortes e versões AVIF/WebP das fotos reais, e a fachada nova recortada sem o texto da arte |
 | 4 | Construção | `pro-design` §4 e `impeccable` (craft-floor) | Direção, texto e imagens | `index.html`, `src/style.css` e `src/main.js`, com o cardápio renderizado a partir do JSON e todas as cores e fontes em variáveis |
 | 5 | Movimento | `animate` e `emil-design-eng` | Página construída | Um momento orquestrado no topo (600 a 900 ms), respostas a hover, foco e abertura de 150 a 250 ms, e `prefers-reduced-motion` respeitado |
 | 6 | Celular | `mobile-native` | Página em 390 px | Botão de pedir fixo, área segura, `100dvh`, alvos de 44 px e nada de zoom em campo de busca |
@@ -104,11 +104,7 @@ All checks passed.   (10,2 s)
   prometer "a melhor hamburgueria". Pode citar o @serranegra, com aval.
 - **Endereço antigo em diretórios.** O Google mistura o histórico. Vale oferecer a correção dos
   perfis no TripAdvisor e no Guia Pinzon como serviço extra.
-- **Higgsfield:**
-  - o CLI 1.2.2 está instalado, mas o login não está feito;
-  - o login é OAuth, com retorno para `localhost:8765` dentro do container da sessão na nuvem, e o
-    navegador do desenvolvedor não alcança esse endereço;
-  - o CLI não aceita chave por variável de ambiente;
-  - caminhos possíveis: fazer o login numa sessão local do Claude Code, ou o desenvolvedor colar
-    aqui a URL de retorno do login. Esta segunda opção expõe um código de uso único: decidir antes
-    de gerar qualquer imagem.
+- **Imagens geradas por IA:** não serão usadas. O desenvolvedor não conseguiu conectar o
+  Higgsfield, e a decisão de 2026-11-19 foi não buscar substituto. O topo usa a foto da fachada nova
+  do Instagram e as fotos reais do bsfood, e as lacunas são cobertas com tipografia e forma (a
+  cúpula do pão), não com foto inventada.

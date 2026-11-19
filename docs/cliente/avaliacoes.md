@@ -6,18 +6,28 @@
 
 Coleta em 2026-11-19. Cada trecho tem nota, data, autor e link.
 
-## Google: pendente
+## Google
 
-- **Situação:** o perfil tem 4,5 estrelas, com 313 avaliações no painel e 312 na aba de avaliações.
-  O Google Maps abriu só em visualização limitada, sem a lista de avaliações, e a busca do Google
-  pediu captcha (HTTP 429). Por isso nenhuma avaliação foi lida ainda.
-- **Próximo passo:** o desenvolvedor vai mandar prints das avaliações, ordenadas por "Mais
-  recentes", e da página do Facebook. Os trechos entram aqui no formato abaixo e alimentam a
-  síntese do `dossie.md`.
+Lidas em prints enviados pelo desenvolvedor em 2026-11-19, com a busca "hugão lanches avaliações"
+ordenada por "Mais relevantes". São 3 de 313. As datas são relativas ao dia do print. O link é o do
+perfil, porque o print não traz o link de cada avaliação.
 
-| Nota | Data | Autor | Lanche citado | Trecho | Link |
-| :- | :- | :- | :- | :- | :- |
-| a preencher | | | | | https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx |
+| Nota | Data | Autor | Lanche citado | Trecho | Candidata ao site? | Link |
+| :- | :- | :- | :- | :- | :- | :- |
+| 5★ | há 5 meses (≈jun/2026) | Moises C. | não cita | "Lanche muito saboroso, ingredientes de qualidade e tudo muito bem preparado. O atendimento foi excelente e o delivery foi rápido, chegando tudo quentinho" | **sim**, a melhor candidata | [perfil no Google](https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx) |
+| 3★ | há 4 meses (≈jul/2026) | Brenda P. | hambúrguer | "Viemos de São Paulo por um vídeo que vimos no Instagram […] o hambúrguer é comercial (hambúrguer de mercado)" | não, é crítica. Serve para a síntese | [perfil no Google](https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx) |
+| 2★ | há 3 meses (≈ago/2026) | Matheus H. | Hambúrguer Dog | "O sabor e a qualidade da carne pareciam de um produto industrializado bem simples" | não, é crítica. Serve para a síntese | [perfil no Google](https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx) |
+
+**Resumo do perfil:** 4,5, com 313 comentários e a grande maioria das barras em 5★. Temas marcados
+pelo Google: bacon (9), maionese (7), picanha (4) e mercado (3). Preço por pessoa de R$ 40–60,
+segundo 17 pessoas.
+
+**Respostas do dono:** ele responde às críticas em até 1 mês, explicando as linhas tradicional e
+gourmet e anunciando o hambúrguer artesanal de produção própria para todos os lanches. É um sinal de
+cuidado que pode aparecer no site, com aval.
+
+**Ainda falta:** para escolher 2 ou 3 trechos fortes de clientes, seria bom ler mais avaliações 5★
+recentes ("Mais recentes" ou "Mais alta"). Por ora, o demo usa a de Moises C. e a do @serranegra.
 
 ## Depoimentos públicos do perfil @serranegra
 
@@ -36,5 +46,5 @@ devem aparecer como "o que o @serranegra disse", nunca como nota.
   Expedicionários, 247B). A página bloqueou a leitura (403). Os números vêm só do trecho mostrado
   pela busca, e nenhum texto foi lido:
   https://www.tripadvisor.com/Restaurant_Review-g675020-d12539664-Reviews-Hugao_Lanches-Serra_Negra_State_of_Sao_Paulo.html
-- **Facebook:** o print mostra 5,0, com 1 avaliação, na página "Hugão Lanches | Serra Negra SP". A
-  página pede login. Pendente de prints.
+- **Facebook:** o Google mostra "5/5, Facebook, 1 voto". O desenvolvedor não achou a página, e por
+  decisão dele o Facebook não é usado.

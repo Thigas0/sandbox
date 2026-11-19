@@ -22,6 +22,15 @@ O que cada coluna quer dizer:
 | `logo-selo-instagram.jpg` | avatar do Instagram @hugao_lanches_oficial: https://www.instagram.com/hugao_lanches_oficial/ | 150 × 150 | arte do logo | O mesmo selo, sem transparência. |
 | `fachada-nova-instagram.jpg` | post de 18/06/2026: https://www.instagram.com/hugao_lanches_oficial/p/DZu-t2vxcfo/ | 1402 × 1753 | foto real com arte por cima | Fachada nova à noite, com texto aplicado na parte de baixo. É uma arte de post: serve de referência ou recortada. |
 
+## Versões usadas na página
+
+O site usa versões WebP (qualidade 82), geradas a partir dos arquivos acima, sem nenhuma outra
+alteração. A exceção é `fachada-letreiro.webp`, um recorte (962 × 960) da parte de cima de
+`fachada-nova-instagram.jpg`, que tira a arte com texto e deixa só a foto do letreiro, do selo
+iluminado e do cordão de luzes. Ficam `lanche-america-bacon`, `lanche-burguer-bacon-gourmet`,
+`lanche-caipira`, `lanche-churraskito`, `lanche-hot-dog-prensadinho`, `lanche-x-salada` e
+`lanche-x-tudo`.
+
 ## Lanches
 
 | Arquivo | Item do cardápio | Origem (bsfood, `imageUrl` do produto) | Tamanho | Real ou IA | Marcada como ilustrativa |
@@ -61,13 +70,25 @@ Ficam só como referência, porque pertencem a terceiros ou têm origem incerta:
 - **Foto de cliente no Google Maps**, de set/2017. Pertence a quem postou e não pode ser usada.
 - **Reels do perfil @serranegra** (14/03, 29/05 e 01/07/2026). São conteúdo do perfil da cidade,
   feito em parceria. Para usar, é preciso o aval do @serranegra e do Hugo.
+- **12 fotos do perfil do Google** (zip enviado pelo desenvolvedor em 2026-11-19, guardado só no
+  scratchpad da sessão). O perfil do Google mistura fotos do dono e de clientes, e não dá para saber
+  de quem é cada uma. Pela regra do projeto, todas ficam só como referência. Mostram:
+  - a fachada antiga com o mascote (723 × 548);
+  - o salão vermelho com balcão "HUGÃO";
+  - o pergolado novo com bandeirinhas e mesas;
+  - o cardápio impresso, com Chicken Supreme a R$ 17,90, anéis de cebola a R$ 19,90 e porção de
+    tilápia a R$ 69,90;
+  - vários lanches;
+  - uma foto com 2 clientes de rosto visível, que nunca deve ser usada.
+
+  Se o Hugo confirmar que alguma é dele, ela pode entrar.
 - **Artes do Instagram com texto aplicado** (posts de 09 a 17/06/2026, guardados no scratchpad da
   sessão). São referência de paleta e tipografia, não foto para o site.
 
 ## Imagens geradas por IA
 
-Nenhuma até agora. O CLI do Higgsfield está instalado, mas o login não foi concluído (ver
-`plano-de-build.md`). Toda imagem gerada entra nesta lista com:
+Nenhuma. O desenvolvedor não conseguiu conectar o Higgsfield, e por decisão de 2026-11-19 o demo
+não usa imagem gerada por IA. Toda imagem gerada entra nesta lista com:
 
 - o modelo e o modo;
 - o prompt ou a referência usada;

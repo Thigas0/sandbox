@@ -15,3 +15,7 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+
+# Working output of the design and browser tools
+.taste-skill/
+.playwright-mcp/

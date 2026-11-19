@@ -7,6 +7,10 @@ same change.
 ## Map
 
 - `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
+- `vite.config.js` and `src/render.js`: at build time, a small plugin fills the `<!-- name -->`
+  markers in `index.html` with the menu, delivery areas, hours and JSON-LD from
+  `docs/cliente/cardapio.json`, so the page works without JavaScript. `src/main.js` only adds the
+  live parts (open-now sign, delivery fee by area, burger-size tabs, entrances).
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,

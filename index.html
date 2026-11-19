@@ -2,27 +2,370 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ponto de partida para os meus sites." />
-    <title>Meu site</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Hugão Lanches & Burgers | Lanches e hambúrgueres em Serra Negra-SP</title>
+    <meta
+      name="description"
+      content="Lanches, hambúrgueres e hot dogs com batata frita na R. Irmã Dulce, 153, em Serra Negra-SP. Cardápio com preços, entrega em <!-- bairros-total --> bairros, aberto a partir das 18h."
+    />
+    <meta name="theme-color" content="#1b1510" />
+    <meta property="og:title" content="Hugão Lanches & Burgers, Serra Negra-SP" />
+    <meta
+      property="og:description"
+      content="Lanches e hambúrgueres com batata frita. Peça pelo bsfood ou pelo WhatsApp."
+    />
+    <meta property="og:image" content="/img/cliente/fachada-letreiro.webp" />
+    <meta property="og:locale" content="pt_BR" />
+    <link rel="icon" href="/img/cliente/logo-selo-bsfood.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&family=Lilita+One&display=swap"
+    />
+    <link rel="preload" as="image" href="/img/cliente/fachada-letreiro.webp" />
     <link rel="stylesheet" href="/src/style.css" />
+    <!-- jsonld -->
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">Meu site</a>
+    <a class="pular" href="#cardapio">Pular para o cardápio</a>
+
+    <header class="topo" id="topo">
+      <figure class="topo__foto">
+        <img
+          src="/img/cliente/fachada-letreiro.webp"
+          width="962"
+          height="960"
+          alt="Fachada do Hugão à noite: o letreiro Hugão Lanches & Burgers aceso sobre o pergolado com cordão de lâmpadas"
+          fetchpriority="high"
+        />
+      </figure>
+      <nav class="topo__nav" aria-label="Seções">
+        <a href="#cardapio">Cardápio</a>
+        <a href="#entrega">Entrega</a>
+        <a href="#como-chegar">Como chegar</a>
+        <a
+          href="https://wa.me/5519971681738?text=Ol%C3%A1%2C%20Hug%C3%A3o!%20Quero%20fazer%20um%20pedido."
+          >WhatsApp</a
+        >
+      </nav>
+      <div class="topo__faixa">
+        <div class="topo__linha">
+          <p class="topo__frase">
+            <span class="letreiro-status" data-status>Abre todo dia às 18h.</span>
+            Lanches e burgers com batata frita, na R. Irmã Dulce, em Serra Negra.
+          </p>
+          <a class="botao botao--acao" href="https://hugaolanches.bsfood.com.br">Pedir no bsfood</a>
+        </div>
+        <h1 class="monumento" data-monumento>
+          Hugão<span class="sr-only"> Lanches & Burgers, Serra Negra</span>
+        </h1>
+      </div>
     </header>
-    <main id="conteudo">
-      <h1>Olá, mundo!</h1>
-      <p>
-        Edite <code>index.html</code>, <code>src/style.css</code> e <code>src/main.js</code> para
-        começar.
-      </p>
-      <button type="button" id="contador">Cliques: 0</button>
+
+    <main>
+      <section class="mais" id="mais-pedidos" aria-labelledby="mais-titulo">
+        <h2 class="titulo-secao" id="mais-titulo" data-entra>Os dez que mais saem do balcão</h2>
+        <div class="mais__grade">
+          <figure class="mais__foto" data-entra>
+            <img
+              src="/img/cliente/lanche-caipira.webp"
+              width="400"
+              height="400"
+              loading="lazy"
+              alt="Caipira cortado ao meio na tábua: frango picado com requeijão, milho e bacon, com batata frita"
+            />
+            <figcaption>Caipira, um dos mais pedidos.</figcaption>
+          </figure>
+          <div class="mais__tabela">
+            <p class="mais__rotulo">Na aba de mais vendidos do bsfood</p>
+            <ol class="tabela" role="list" data-lista>
+              <!-- mais-vendidos -->
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="entrega" id="entrega" aria-labelledby="entrega-titulo">
+        <h2 class="sr-only" id="entrega-titulo">Entrega</h2>
+        <div class="faixa" aria-hidden="true">
+          <div class="faixa__trilho"><!-- bairros-faixa --></div>
+        </div>
+        <div class="entrega__corpo">
+          <p class="entrega__frase" data-entra>
+            Os
+            <!-- bairros-total -->
+            bairros de Serra Negra onde o Hugão entrega, em cerca de 50 minutos.
+          </p>
+          <form
+            class="calculo"
+            data-ui
+            data-calculo
+            action="https://hugaolanches.bsfood.com.br"
+            data-entra
+          >
+            <label for="bairro">Escolha seu bairro</label>
+            <div class="calculo__linha">
+              <select id="bairro" name="bairro" data-bairro>
+                <option value="">Bairro</option>
+                <!-- bairros-opcoes -->
+              </select>
+              <p class="calculo__resultado" data-resultado aria-live="polite">
+                Taxa de R$ 3,00 a R$ 20,00, conforme o bairro.
+              </p>
+            </div>
+            <p class="calculo__acoes">
+              <a class="botao botao--acao" href="https://hugaolanches.bsfood.com.br"
+                >Pedir no bsfood</a
+              >
+              <a
+                class="botao botao--claro"
+                href="https://wa.me/5519971681738?text=Ol%C3%A1%2C%20Hug%C3%A3o!%20Quero%20fazer%20um%20pedido."
+                >Pedir pelo WhatsApp</a
+              >
+            </p>
+          </form>
+          <details class="bairros" data-ui>
+            <summary>Ver todos os bairros e taxas</summary>
+            <ul class="bairros__lista" role="list">
+              <!-- bairros-lista -->
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section class="pesos" id="pesos" aria-labelledby="pesos-titulo">
+        <figure class="pesos__prato" data-entra>
+          <img
+            data-peso-foto
+            src="/img/cliente/lanche-x-salada.webp"
+            width="400"
+            height="400"
+            loading="lazy"
+            alt="X-Salada de 90 g cortado ao meio com batata frita"
+          />
+        </figure>
+        <div class="pesos__texto">
+          <div class="pesos__abas" role="tablist" aria-label="Tamanho do hambúrguer">
+            <button
+              type="button"
+              role="tab"
+              id="aba-90"
+              aria-controls="painel-pesos"
+              aria-selected="true"
+              data-peso="90"
+            >
+              90 g
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="aba-120"
+              aria-controls="painel-pesos"
+              aria-selected="false"
+              tabindex="-1"
+              data-peso="120"
+            >
+              120 g
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="aba-160"
+              aria-controls="painel-pesos"
+              aria-selected="false"
+              tabindex="-1"
+              data-peso="160"
+            >
+              160 g
+            </button>
+          </div>
+          <div id="painel-pesos" role="tabpanel" aria-labelledby="aba-90" data-painel>
+            <h2 class="pesos__titulo" id="pesos-titulo" data-peso-titulo>Linha tradicional</h2>
+            <p class="pesos__desc" data-peso-desc>
+              Hambúrguer de 90 g no pão de hambúrguer: X-Salada, X-Bacon, X-Tudo e os outros
+              clássicos de lanchonete. A partir de
+              <!-- preco-90 -->, com batata frita.
+            </p>
+          </div>
+          <template data-pesos>
+            <div
+              data-peso="90"
+              data-foto="/img/cliente/lanche-x-salada.webp"
+              data-alt="X-Salada de 90 g cortado ao meio com batata frita"
+              data-titulo="Linha tradicional"
+            >
+              Hambúrguer de 90 g no pão de hambúrguer: X-Salada, X-Bacon, X-Tudo e os outros
+              clássicos de lanchonete. A partir de
+              <!-- preco-90 -->, com batata frita.
+            </div>
+            <div
+              data-peso="120"
+              data-foto="/img/cliente/lanche-america-bacon.webp"
+              data-alt="América Bacon de 120 g, com dois hambúrgueres, queijo prato e bacon"
+              data-titulo="Artesanal da casa"
+            >
+              O mesmo lanche com o hambúrguer de 120 g, que o cardápio chama de artesanal da casa. A
+              partir de
+              <!-- preco-120 -->, com batata frita.
+            </div>
+            <div
+              data-peso="160"
+              data-foto="/img/cliente/lanche-burguer-bacon-gourmet.webp"
+              data-alt="Burguer Bacon Gourmet no pão brioche, com queijo, bacon e cebola caramelizada"
+              data-titulo="Gourmet no brioche"
+            >
+              Hambúrguer de 160 g no pão brioche, com maionese defumada e queijos como cheddar,
+              provolone e coalho. A partir de
+              <!-- preco-160 -->.
+            </div>
+          </template>
+          <p class="pesos__acoes">
+            <a class="celula celula--escura" href="#cardapio">Ver o cardápio</a>
+            <a class="celula celula--tom" href="https://hugaolanches.bsfood.com.br"
+              >Pedir no bsfood</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <section class="cardapio" id="cardapio" aria-labelledby="cardapio-titulo">
+        <div class="cardapio__topo">
+          <h2 class="titulo-secao" id="cardapio-titulo" data-entra>
+            O cardápio inteiro, com preço
+          </h2>
+          <p class="cardapio__nota" data-entra>
+            <!-- itens-total -->
+            lanches, porções e bebidas, copiados do bsfood em 19/11/2026. Adicionais como bacon,
+            cheddar, ovo e hambúrguer extra são escolhidos na hora do pedido.
+          </p>
+          <nav class="cardapio__atalhos" aria-label="Partes do cardápio">
+            <a href="#classicos">Clássicos</a>
+            <a href="#gourmet">Gourmet</a>
+            <a href="#tradicionais">Tradicionais</a>
+            <a href="#hot-dogs-e-vegetarianos">Hot dogs</a>
+            <a href="#kids">Kids</a>
+            <a href="#porcoes">Porções</a>
+            <a href="#bebidas">Bebidas</a>
+          </nav>
+        </div>
+        <div class="cardapio__fotos" aria-hidden="false">
+          <img
+            src="/img/cliente/lanche-churraskito.webp"
+            width="400"
+            height="400"
+            loading="lazy"
+            alt="Churraskito: contra-filé com queijo, requeijão, palmito e bacon no pão francês"
+          />
+          <img
+            src="/img/cliente/lanche-x-tudo.webp"
+            width="400"
+            height="400"
+            loading="lazy"
+            alt="X-Tudo cortado ao meio sobre o papel Eu amo bacon, com batata frita"
+          />
+          <img
+            src="/img/cliente/lanche-hot-dog-prensadinho.webp"
+            width="400"
+            height="400"
+            loading="lazy"
+            alt="Hot Dog Prensadinho com batata frita"
+          />
+        </div>
+        <div class="cardapio__corpo">
+          <!-- cardapio -->
+        </div>
+      </section>
+
+      <section class="voz" aria-labelledby="voz-titulo">
+        <h2 class="sr-only" id="voz-titulo">O que dizem</h2>
+        <figure class="voz__citacao" data-entra>
+          <blockquote>
+            <p>Lanche muito saboroso, ingredientes de qualidade e tudo muito bem preparado.</p>
+          </blockquote>
+          <figcaption>
+            Moises C., 5 estrelas no Google, que completa: “o atendimento foi excelente e o delivery
+            foi rápido, chegando tudo quentinho”.
+          </figcaption>
+        </figure>
+        <p class="voz__nota" data-entra>
+          Nota 4,5 no Google, com mais de 300 avaliações.
+          <a
+            href="https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx"
+            >Ler as avaliações</a
+          >
+        </p>
+      </section>
+
+      <section class="chegar" id="como-chegar" aria-labelledby="chegar-titulo">
+        <h2 class="sr-only" id="chegar-titulo">Como chegar</h2>
+        <p class="chegar__linha">Hugão Lanches & Burgers</p>
+        <p class="chegar__linha">
+          <a
+            href="https://www.google.com/maps/place/Hug%C3%A3o+Lanches/@-22.6140673,-46.6972452,17z/data=!3m1!4b1!4m6!3m5!1s0x94c91879d2927499:0x7ddee9830273a063!8m2!3d-22.6140673!4d-46.6972452!16s%2Fg%2F11c2y3y2gx"
+            >R. Irmã Dulce, 153</a
+          >
+        </p>
+        <p class="chegar__linha">Serra Negra, SP</p>
+        <p class="chegar__linha chegar__horas">
+          <span>Todo dia, 18h às 23h</span> <span>Sex e sáb até 23h30</span>
+        </p>
+        <p class="chegar__linha"><a href="tel:+5519971681738">(19) 97168-1738</a></p>
+        <p class="chegar__linha chegar__fome">
+          Bateu a fome?
+          <a
+            class="chegar__seta"
+            href="https://hugaolanches.bsfood.com.br"
+            aria-label="Pedir no bsfood"
+          >
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path
+                d="M5 12h12M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              />
+            </svg>
+          </a>
+        </p>
+      </section>
     </main>
-    <footer class="site-footer">
-      <p>Feito com Vite.</p>
+
+    <footer class="rodape">
+      <div class="rodape__colunas">
+        <div>
+          <p class="rodape__forte">Endereço</p>
+          <p>R. Irmã Dulce, 153</p>
+          <p>Serra Negra, SP, 13930-000</p>
+        </div>
+        <div>
+          <p class="rodape__forte">Pedidos</p>
+          <p><a href="https://hugaolanches.bsfood.com.br">Cardápio no bsfood</a></p>
+          <p>
+            <a
+              href="https://wa.me/5519971681738?text=Ol%C3%A1%2C%20Hug%C3%A3o!%20Quero%20fazer%20um%20pedido."
+              >WhatsApp (19) 97168-1738</a
+            >
+          </p>
+        </div>
+        <div>
+          <p class="rodape__forte">Redes</p>
+          <p><a href="https://www.instagram.com/hugao_lanches_oficial/">Instagram</a></p>
+        </div>
+        <div>
+          <p class="rodape__forte">Horário</p>
+          <p>Domingo a quinta, 18h às 23h</p>
+          <p>Sexta e sábado, 18h às 23h30</p>
+        </div>
+      </div>
+      <p class="rodape__marca" aria-hidden="true">Hugão</p>
+      <p class="rodape__legal">
+        Site demonstrativo. Cardápio, preços, horários e taxas copiados do bsfood em 19/11/2026;
+        confirme no pedido. Fotos publicadas pelo Hugão no bsfood e no Instagram.
+      </p>
     </footer>
+
+    <!-- dados-loja -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
