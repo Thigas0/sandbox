@@ -182,7 +182,7 @@ test('pedido completo: escolher, ajustar e enviar pelo WhatsApp', async ({ page,
     gaveta.getByRole('button', { name: 'Enviar pedido pelo WhatsApp' }).click(),
   ]);
   const texto = decodeURIComponent(new URL(popup.url()).searchParams.get('text'));
-  expect(popup.url()).toContain('wa.me/5519971681738');
+  expect(popup.url()).toContain('wa.me/5511988107510');
   expect(texto).toContain('1x América Bacon');
   expect(texto).toContain('120 g, + Bacon');
   expect(texto).toContain('Entregar em: R. das Flores, 42 — Centro');

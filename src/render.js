@@ -4,6 +4,10 @@
 const DIAS = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
 const DIAS_SCHEMA = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+// Número que recebe os pedidos feitos no site (demonstração). Os contatos da loja continuam no
+// telefone do Hugão.
+export const WHATSAPP_PEDIDOS = '5511988107510';
+
 export const LINKS = {
   bsfood: 'https://hugaolanches.bsfood.com.br',
   whatsapp:
@@ -344,7 +348,7 @@ function renderDadosLoja(dados) {
     horarios: dados.loja.horarios,
     entregaMin: dados.loja.tempo_medio_entrega_min,
     retiradaMin: dados.loja.tempo_medio_retirada_min,
-    whatsapp: '5519971681738',
+    whatsapp: WHATSAPP_PEDIDOS,
     bairros: bairrosOrdenados(dados).map((b) => ({ nome: b.nome, taxa: b.taxa_centavos })),
     pagamentos: ['PIX', 'Cartão de crédito', 'Cartão de débito', 'Dinheiro'],
     cardapio: { itens, grupos },
