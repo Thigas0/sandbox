@@ -10,10 +10,12 @@ same change.
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,
-  and performance tooling (taste-skill, impeccable, Emil Kowalski's motion skills, frontend-design,
-  searchfit-seo, and others), vendored so plugin-less sessions load them. Sources and licenses:
-  `.claude/skills/SOURCES.md`.
-- `.mcp.json`: project MCP servers (Playwright browser control, Figma). Each session asks once to enable them.
+  security-review, and performance tooling (taste-skill, impeccable, Emil Kowalski's motion skills,
+  GSAP's official skills, frontend-design, searchfit-seo, webapp-testing, Trail of Bits'
+  differential-review, and others), vendored so plugin-less sessions load them. Sources and
+  licenses: `.claude/skills/SOURCES.md`.
+- `.mcp.json`: project MCP servers (Playwright browser control, Chrome DevTools, Context7 library
+  docs, Figma), pinned to exact versions. Each session asks once to enable them.
 - `docs/design-library/`: DESIGN.md references of well-known sites, to draw a visual direction from.
 - `.claude/settings.json`: enforced permission rules and sandbox settings, shared by everyone.
 - `scripts/verify.sh`: the single verification entry point. Stack checks get added here.

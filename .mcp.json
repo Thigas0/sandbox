@@ -2,7 +2,15 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@0.0.83", "--browser", "chromium"]
+      "args": ["-y", "@playwright/mcp@0.0.86", "--browser", "chromium"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.13.0", "--isolated"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@4.7.3"]
     },
     "figma": {
       "type": "http",

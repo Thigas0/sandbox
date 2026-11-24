@@ -9,25 +9,52 @@ copy the folder again from a newer commit, read the diff, and update this table.
 
 | Skills | Source | Commit | License |
 | :- | :- | :- | :- |
-| taste-skill, redesign-skill, minimalist-skill, soft-skill, brutalist-skill, output-skill | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `f624f37a8c650b9cc550253104925efe4c8de246` | MIT |
-| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (`.claude/skills/impeccable`) | `8a0e198da34ebc5b936a9d5975fb7a3b1cf353b7` | Apache-2.0 |
-| emil-design-eng, animate, review-animations, improve-animations, animation-performance, animation-vocabulary, find-animation-opportunities, apple-design, break-ui, mobile-native | [emilkowalski/skills](https://github.com/emilkowalski/skills) | `2d228630ba1446365f614a108cb8252f1feda202` | MIT |
-| web-design-guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `063bee94c3f4df8453406c830b0a7df0f2860278` | MIT |
+| taste-skill, redesign-skill, minimalist-skill, soft-skill, brutalist-skill | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `f624f37a8c650b9cc550253104925efe4c8de246` | MIT |
+| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (`.claude/skills/impeccable`) | `b49177d32788f2dc585c42831d845dacf1ebed2c` (4.10.0) | Apache-2.0 |
+| emil-design-eng, animate, review-animations, improve-animations, animation-performance, animation-vocabulary, find-animation-opportunities, apple-design, break-ui, mobile-native, pick-ui-library, choreograph, gestures, remove-animations | [emilkowalski/skills](https://github.com/emilkowalski/skills) | `64eb3deb9a5fbfa041faf783e0bc3fd635872e9c` | MIT |
+| web-design-guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `5a37a6329fbad3666c3207392a6a7c0110e92efb` | MIT |
 | frontend-design | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) plugin `frontend-design` | as synced 2026-10-15 | Apache-2.0 |
 | accessibility-review, design-critique, design-handoff, design-system, research-synthesis, user-research, ux-copy | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins) plugin `design` 1.2.0 | as synced 2026-10-15 | Apache-2.0 |
 | e2e-test-generator (+ `/e2e-map`, `/e2e-write`), perf-profiler (+ `/perf-audit`, `/perf-compare`) | [petrovicistefan/claude-code-plugins](https://github.com/petrovicistefan/claude-code-plugins) 1.0.0 | as synced 2026-10-15 | MIT |
 | ai-visibility, broken-links, content-brief, content-strategy, content-translation, internal-linking, keyword-clustering, on-page-seo, schema-markup, seo-audit, technical-seo (+ 6 commands in `.claude/commands/`, 3 agents in `.claude/agents/`) | [searchfit/searchfit-seo](https://github.com/searchfit/searchfit-seo) 1.0.0 | as synced 2026-10-15 | MIT |
-| higgsfield-generate, higgsfield-brandkit, higgsfield-marketplace-cards, higgsfield-product-photoshoot, higgsfield-soul-id, higgsfield-video-explainer, higgsfield-websites, higgsfield-youtube-thumbnail | [higgsfield-ai/skills](https://github.com/higgsfield-ai/skills) | `f83af0bc1d937c8119099a11f8ebbf5e6fb99819` | MIT |
-| pro-design | "The Pro Design Skill" by Automation Academy, a public [claude.ai artifact](https://claude.ai/artifact/JdP16M6VtUjBxY8o2qU91A) | as copied 2026-10-21 (`SKILL.md` sha256 `0d7382c2fb2980d1…`) | None stated; the page offers the text to copy into a skills folder |
+| higgsfield-generate, higgsfield-brandkit, higgsfield-faceless-video, higgsfield-marketplace-cards, higgsfield-product-photoshoot, higgsfield-soul-id, higgsfield-video-explainer, higgsfield-websites, higgsfield-youtube-thumbnail | [higgsfield-ai/skills](https://github.com/higgsfield-ai/skills) | `27000402070db19d958789d05b3b52b6f4718d7c` | MIT |
+| gsap-core, gsap-timeline, gsap-scrolltrigger, gsap-plugins, gsap-utils, gsap-performance, gsap-react, gsap-frameworks | [greensock/gsap-skills](https://github.com/greensock/gsap-skills) | `aed9cfd3277740755f6bfc1155c7aa645403b760` | MIT |
+| extract-design-md | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) (`plugins/stitch-design/skills/extract-design-md`) | `9f4e828e77634e230978be45fec5501554dbe4b2` | Apache-2.0 |
+| webapp-testing, skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | `e4bb5d960d87126ff3b3a8af1a104b7db67560ba` | Apache-2.0 (`LICENSE.txt` in each folder) |
+| differential-review (+ `/diff-review` in `.claude/commands/`, agent `adversarial-modeler` in `.claude/agents/`) | [trailofbits/skills](https://github.com/trailofbits/skills) plugin `differential-review` | `149d7b21f4067765b82e67029730b42d228ef4b4` | CC BY-SA 4.0 |
+
+Local changes to upstream files, kept on each update:
+
+- `extract-design-md/SKILL.md`: `name` is `extract-design-md` (upstream: `stitch::extract-design-md`, a
+  plugin-namespaced name that a project skill cannot use).
+- `differential-review/SKILL.md`: refers to the agent as `adversarial-modeler`, the name it is
+  registered under here, instead of the plugin name `differential-review:adversarial-modeler`.
+
+Checked and not taken (2026-11-24):
+
+- taste-skill 2.5.x (upstream `6c0b5c78f5d31776e2210305abaa210cdc0030bf`) is a rebuild of about 40 MB
+  (1,631 files, mostly photographs) that adds a `Stop` hook running `scripts/gate.mjs` after every
+  turn, and drops the redesign, minimalist, soft, brutalist and output variants. The 2.1 copy above stays.
+- Removed: `pro-design` (no license stated) and `output-skill` (`full-output-enforcement`), both
+  covered by taste-skill and impeccable.
+- awesome-design-md at `fcc70284932276d085f01ef9f83edde90b1258cb` has the same DESIGN.md files as the
+  copy below; it only adds a README per folder.
+
+MCP servers in `.mcp.json` are pinned: `@playwright/mcp@0.0.86` (Apache-2.0),
+`chrome-devtools-mcp@1.13.0` (Apache-2.0, run with `--isolated` so it uses a temporary profile) and
+`@upstash/context7-mcp@4.7.3` (MIT). Newer releases of the last two came out the day of the update
+and were skipped until they have been out for a while.
 
 `docs/design-library/` holds the DESIGN.md files from
 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) at
 `3b605329240ce735b510037cca322f1831fdd7f8` (MIT).
 
-Network use: `web-design-guidelines` fetches its rules from raw.githubusercontent.com on each run.
+Network use: `web-design-guidelines` now reads a bundled, hash-pinned copy of its rules
+(`references/command.md`) and no longer fetches them.
 `impeccable` downloads its engine binary from the project's GitHub releases on first run and checks
-it against the published sha256. `taste-skill/scripts/assets.mjs` searches public-domain image
+it against the sha256 in its own `scripts/engine-checksums.txt`. `taste-skill/scripts/assets.mjs` searches public-domain image
 archives (Openverse, Wikimedia, the Met, Art Institute of Chicago, Internet Archive, NASA).
-`pro-design` opens the built site in a browser for screenshots and may first browse two or three
-sites in the same industry. The `higgsfield-*` skills call the `higgsfield` CLI (`npm i -g @higgsfield/cli`), which needs
-`higgsfield auth login` and Higgsfield credits.
+The `higgsfield-*` skills call the `higgsfield` CLI (`npm i -g @higgsfield/cli`), which needs
+`higgsfield auth login` and Higgsfield credits; `higgsfield-faceless-video` scripts download the generated clips with `curl`.
+`context7` sends library names and queries to context7.com. `skill-creator`'s eval viewer loads
+Google Fonts and SheetJS from a CDN.
