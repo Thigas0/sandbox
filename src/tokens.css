@@ -1,0 +1,74 @@
+/*
+ * Tokens de design da Casa do Anfitrião (direção A, "O cartão da casa").
+ * Fonte: docs/clients/casa-do-anfitriao/direcoes.md e plano-motion.md.
+ * Todo componente usa estes tokens; nenhum valor de cor, tipo ou espaço fica solto no CSS.
+ */
+:root {
+  /* Cor. Contraste medido (WCAG): ink-on-paper 16,3:1; gold-on-ink 8,1:1; sepia-on-paper 6,5:1.
+     O dourado NUNCA é usado como texto sobre o papel (2,0:1). */
+  --color-ink: #14110d;
+  --color-paper: #f2eee6;
+  --color-gold: #c9a55a;
+  --color-sepia: #5c5346;
+  --color-painting: #2a241c; /* fundo enquanto a imagem do hero carrega */
+
+  /* Papéis */
+  --ground: var(--color-ink);
+  --surface: var(--color-paper);
+  --text: var(--color-ink);
+  --text-soft: var(--color-sepia);
+  --text-on-ground: var(--color-paper);
+  --accent: var(--color-gold);
+  --action-bg: var(--color-ink);
+  --action-text: var(--color-paper);
+  --action-hover-bg: var(--color-gold);
+  --action-hover-text: var(--color-ink);
+  --focus: var(--color-gold);
+
+  /* Tipografia. Imbue (display, caixa alta) e Albert Sans (texto), auto-hospedadas na Fase 5. */
+  --font-display: 'Imbue', 'Didot', 'Bodoni 72', serif;
+  --font-text: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
+  --step-mark: clamp(4.5rem, 2rem + 9vw, 9.5rem);
+  --leading-display: 0.9;
+  --leading-text: 1.55;
+  --tracking-display: -0.01em;
+  --measure: 36ch;
+
+  /* Espaço e forma */
+  --gap: 12px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 28px;
+  --space-4: 48px;
+  --space-section: clamp(120px, 14vw, 200px);
+  --radius-card: 16px;
+  --radius-button: 0;
+  --awning-height: 56px;
+  --awning-bar: 28px;
+  --awning-height-small: 40px;
+  --awning-height-footer: 8px;
+  --perforation: 4px dotted var(--color-ink);
+
+  /* Motion (plano-motion.md) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 120ms;
+  --dur-ui: 200ms;
+  --dur-reveal: 600ms;
+  --dur-hero: 900ms;
+  --stagger: 70ms;
+  --rise: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-reveal: 200ms;
+    --dur-hero: 200ms;
+    --stagger: 0ms;
+    --rise: 0px;
+  }
+}

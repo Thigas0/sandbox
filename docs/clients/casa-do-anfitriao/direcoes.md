@@ -1,5 +1,8 @@
 # Direções visuais — Casa do Anfitrião (Fase 3)
 
+**Escolhida: A — O cartão da casa** (Thigas0, 24/11/2026). Prévia publicada em
+https://casa-do-anfitriao-direcoes.vercel.app (`noindex`).
+
 24/11/2026. As 3 direções seguem a marca observada: **preto, dourado e flor-de-lis**, com o conceito
 "a Casa mais Francesa da Cidade". O que muda entre elas é a composição, a tipografia e o motion. As
 composições foram sorteadas com o `taste-skill` (setor `restaurant`, paleta fixa) e depois ajustadas
