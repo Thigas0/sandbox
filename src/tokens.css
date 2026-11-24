@@ -52,6 +52,7 @@
   --awning-height-small: 40px;
   --awning-height-footer: 8px;
   --perforation: 4px dotted var(--color-ink);
+  --color-rule: #d8d0c0; /* linhas da tabela de horário, sobre o papel */
 
   /* Motion (plano-motion.md) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);

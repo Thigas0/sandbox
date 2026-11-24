@@ -24,9 +24,9 @@ e da rodada de 24/11:
 /404              Página de erro no mesmo cartão
 ```
 
-Navegação: a marca e 4 links (Cardápio, Encomendas, Eventos, Visite), com um único botão "Pedir pelo
-WhatsApp". No celular, a barra mostra só a marca e o botão; os links vão para um menu `<details>`
-(sem JavaScript obrigatório).
+Navegação (como construída na Fase 5): os 4 links (Cardápio, Encomendas, Eventos, Visite) ficam
+no pé do cartão do hero, como no blueprint da direção A, e quebram linha no celular. O botão
+"Pedir pelo WhatsApp" fica no cartão. Não há barra fixa nem menu escondido.
 
 ## 2. Argumento da página (afirmação → prova)
 

@@ -3,26 +3,452 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ponto de partida para os meus sites." />
-    <title>Meu site</title>
+    <title>Casa do Anfitrião · Confeitaria e café francês em Itapira</title>
+    <meta
+      name="description"
+      content="Confeitaria, cafeteria e delicatessen francesa na Av. Getúlio Vargas, 100, em Itapira-SP. Tortas, crème brûlée, croissant e café de barista. Terça a sexta 12h–19h, sábado 9h–18h."
+    />
+    <link rel="canonical" href="https://casa-do-anfitriao.vercel.app/" />
+    <meta name="theme-color" content="#14110d" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Casa do Anfitrião" />
+    <meta property="og:title" content="Casa do Anfitrião · a casa mais francesa da cidade" />
+    <meta
+      property="og:description"
+      content="Confeitaria, café e delicatessen na Getúlio Vargas, 100, em Itapira-SP."
+    />
+    <meta property="og:url" content="https://casa-do-anfitriao.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://casa-do-anfitriao.vercel.app/assets/og-casa-do-anfitriao.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Natureza-morta de Manet com uma brioche e uma rosa" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/fonts/imbue-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/brioche-1200.webp"
+      imagesrcset="/assets/brioche-800.webp 800w, /assets/brioche-1200.webp 1200w, /assets/brioche-1600.webp 1600w"
+      imagesizes="(max-width: 760px) 100vw, 50vw"
+      type="image/webp"
+    />
     <link rel="stylesheet" href="/src/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "@id": "https://casa-do-anfitriao.vercel.app/#casa",
+        "name": "Casa do Anfitrião",
+        "description": "Confeitaria, cafeteria e delicatessen em Itapira. A casa mais francesa da cidade.",
+        "url": "https://casa-do-anfitriao.vercel.app/",
+        "telephone": "+55 19 99727-3330",
+        "image": "https://casa-do-anfitriao.vercel.app/assets/og-casa-do-anfitriao.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Getúlio Vargas, 100 - Bela Vista",
+          "addressLocality": "Itapira",
+          "addressRegion": "SP",
+          "postalCode": "13974-110",
+          "addressCountry": "BR"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": -22.4322134, "longitude": -46.8348838 },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "12:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "servesCuisine": ["Confeitaria", "Cafeteria", "Francesa"],
+        "paymentAccepted": "Cartão de crédito, cartão de débito, pagamento por aproximação",
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Casa+do+Anfitri%C3%A3o+Itapira",
+        "sameAs": ["https://www.instagram.com/casadoanfitriao/"],
+        "amenityFeature": [
+          { "@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuito", "value": true },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Estacionamento no local",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Acessível para cadeira de rodas",
+            "value": true
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">Meu site</a>
+    <a class="skip-link" href="#a-casa">Pular para o conteúdo</a>
+
+    <header class="hero" id="inicio">
+      <div class="hero-card">
+        <div class="awning" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-body">
+          <svg class="fleur" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <use href="#fleur-de-lis" />
+          </svg>
+          <h1 class="wordmark">Casa do Anfitrião</h1>
+          <p class="wordmark-tagline">a casa mais francesa da cidade</p>
+          <p class="lead">
+            Confeitaria, café e delicatessen na Getúlio Vargas, 100. Torta Cappuccino, crème brûlée
+            e croissant francês, servidos como numa casa que recebe.
+          </p>
+          <a
+            class="button"
+            href="https://wa.me/5519997273330?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido."
+            rel="noopener noreferrer"
+            target="_blank"
+            >Pedir pelo WhatsApp</a
+          >
+          <p class="open-status" data-open-status>Terça a sexta, 12h às 19h. Sábado, 9h às 18h.</p>
+        </div>
+        <nav class="hero-nav" aria-label="Seções">
+          <a href="#cardapio">Cardápio</a>
+          <a href="#encomendas">Encomendas</a>
+          <a href="#eventos">Eventos</a>
+          <a href="#visite">Visite</a>
+        </nav>
+      </div>
+      <figure class="hero-painting">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="
+              /assets/brioche-800.webp   800w,
+              /assets/brioche-1200.webp 1200w,
+              /assets/brioche-1600.webp 1600w
+            "
+            sizes="(max-width: 760px) 100vw, 50vw"
+          />
+          <img
+            src="/assets/brioche-1200.jpg"
+            srcset="
+              /assets/brioche-800.jpg   800w,
+              /assets/brioche-1200.jpg 1200w,
+              /assets/brioche-1600.jpg 1600w
+            "
+            sizes="(max-width: 760px) 100vw, 50vw"
+            width="1600"
+            height="1298"
+            fetchpriority="high"
+            data-parallax
+            alt="Natureza-morta de Manet: uma brioche com uma rosa no topo, ameixas, pêssegos e uma caixa vermelha sobre um guardanapo branco"
+          />
+        </picture>
+        <figcaption>Édouard Manet, A brioche, 1870</figcaption>
+      </figure>
     </header>
-    <main id="conteudo">
-      <h1>Olá, mundo!</h1>
-      <p>
-        Edite <code>index.html</code>, <code>src/style.css</code> e <code>src/main.js</code> para
-        começar.
-      </p>
-      <button type="button" id="contador">Cliques: 0</button>
+
+    <main>
+      <section class="letter" id="a-casa" aria-labelledby="a-casa-titulo">
+        <div class="letter-sheet reveal">
+          <h2 id="a-casa-titulo">Receber é o que a gente faz</h2>
+          <p>
+            A Casa do Anfitrião começou dentro de casa, em São Paulo, com mesa posta, música ao vivo
+            e amigos à volta. Em 11 de abril de 2025 ganhou endereço próprio em Itapira, na Getúlio
+            Vargas, 100: uma casa com cara francesa e toques de brasilidade, com jardim.
+          </p>
+          <p>
+            Quem recebe é um anfitrião vindo da hotelaria, que cuida da cozinha e da confeitaria, e
+            um barista que tira cada café. O que se pede aqui é o que serviríamos em casa.
+          </p>
+          <h3>Receita para viver bem</h3>
+          <ul class="recipe">
+            <li>Família</li>
+            <li>Amigos</li>
+            <li>Aprender algo novo</li>
+            <li>Comer bem</li>
+            <li>Mesas bonitas</li>
+            <li>Decorar a casa</li>
+            <li>Viajar</li>
+          </ul>
+          <p class="signature">Os anfitriões</p>
+        </div>
+        <figure class="letter-picture reveal">
+          <picture>
+            <source type="image/webp" srcset="/assets/cafe-de-la-paix-1200.webp" />
+            <img
+              src="/assets/cafe-de-la-paix-1200.jpg"
+              width="1200"
+              height="863"
+              loading="lazy"
+              decoding="async"
+              alt="Pintura de um terraço de café em Paris, com toldo vermelho e mesas cheias de gente"
+            />
+          </picture>
+          <figcaption>János Vaszary, Terraço do Café de la Paix, 1925</figcaption>
+        </figure>
+      </section>
+
+      <section class="carte" id="cardapio" aria-labelledby="cardapio-titulo">
+        <div class="carte-sheet reveal">
+          <h2 id="cardapio-titulo">Cardápio da confeitaria e do café</h2>
+          <div class="carte-columns">
+            <div class="carte-group">
+              <h3>Tortas e sobremesas</h3>
+              <ul>
+                <li>
+                  Torta Cappuccino <span>base crocante, creme de cappuccino e doce de leite</span>
+                </li>
+                <li>Torta rústica de chocolate</li>
+                <li>Crème brûlée</li>
+                <li>Brigadeiro com café expresso</li>
+                <li>Caracol de canela</li>
+              </ul>
+            </div>
+            <div class="carte-group">
+              <h3>Padaria e café</h3>
+              <ul>
+                <li>Croissant francês</li>
+                <li>Bolo de fubá com erva-doce</li>
+                <li>Quiche</li>
+                <li>Cappuccino</li>
+                <li>Café expresso</li>
+              </ul>
+            </div>
+            <div class="carte-group">
+              <h3>À mesa</h3>
+              <ul>
+                <li>
+                  Salada de folhas com queijo boursin
+                  <span>tomate grape, mostarda dijon com mel e granola salgada</span>
+                </li>
+                <li>Refeição do dia, no almoço</li>
+              </ul>
+              <h3>Da estação</h3>
+              <ul>
+                <li>Torta Dubai <span>na Páscoa</span></li>
+                <li>Fleur de Mãe <span>no Dia das Mães</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="carte-note">
+            Preços e o que tem na vitrine hoje:
+            <a
+              href="https://wa.me/5519997273330?text=Ol%C3%A1!%20O%20que%20tem%20na%20vitrine%20hoje%3F"
+              rel="noopener noreferrer"
+              target="_blank"
+              >pergunte pelo WhatsApp</a
+            >.
+          </p>
+        </div>
+        <figure class="carte-plate reveal">
+          <picture>
+            <source type="image/webp" srcset="/assets/patisserie-bosse-1400.webp" />
+            <img
+              src="/assets/patisserie-bosse-1400.jpg"
+              width="1400"
+              height="1084"
+              loading="lazy"
+              decoding="async"
+              alt="Gravura francesa do século 17 de uma confeitaria, com tortas no balcão, forno ao fundo e clientes à direita"
+            />
+          </picture>
+          <figcaption>Abraham Bosse, A confeitaria, c. 1633</figcaption>
+        </figure>
+      </section>
+
+      <section class="order" id="encomendas" aria-labelledby="encomendas-titulo">
+        <div class="order-ticket reveal">
+          <div class="order-main">
+            <h2 id="encomendas-titulo">Leve a casa para a sua mesa</h2>
+            <p>
+              Páscoa, Dia das Mães, Dia dos Pais e Natal: tortas, ceia e enxoval de mesa artesanal
+              sob encomenda. Conte a data e o número de pessoas que a gente monta com você.
+            </p>
+          </div>
+          <div class="order-stub">
+            <figure class="order-picture">
+              <picture>
+                <source type="image/webp" srcset="/assets/vendedor-de-pasteis-800.webp" />
+                <img
+                  src="/assets/vendedor-de-pasteis-800.jpg"
+                  width="800"
+                  height="1075"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Gravura do século 18 de um vendedor de pastéis carregando uma bandeja de doces"
+                />
+              </picture>
+            </figure>
+            <a
+              class="button"
+              href="https://wa.me/5519997273330?text=Ol%C3%A1!%20Quero%20fazer%20uma%20encomenda%20para%20o%20dia%20"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Fazer uma encomenda</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="events" id="eventos" aria-labelledby="eventos-titulo">
+        <div class="events-intro reveal">
+          <h2 id="eventos-titulo">A casa também é palco</h2>
+          <p>
+            Aulas, vinhos e música, com lugares contados. As datas saem primeiro no WhatsApp e no
+            Instagram.
+          </p>
+          <a
+            class="button button-on-ground"
+            href="https://wa.me/5519997273330?text=Ol%C3%A1!%20Quero%20saber%20do%20pr%C3%B3ximo%20evento."
+            rel="noopener noreferrer"
+            target="_blank"
+            >Quero saber do próximo</a
+          >
+        </div>
+        <ul class="invitations">
+          <li class="invitation reveal">
+            <h3>Aula-show de risotto</h3>
+            <p>O chef cozinha na sua frente e a sobremesa sai da vitrine.</p>
+          </li>
+          <li class="invitation reveal">
+            <h3>Wine Class</h3>
+            <p>Uma noite de vinhos para provar devagar, à mesa da casa.</p>
+          </li>
+          <li class="invitation reveal">
+            <h3>Jantares temáticos</h3>
+            <p>Dia dos Namorados, almoço italiano em quatro tempos e outras datas.</p>
+          </li>
+          <li class="invitation reveal">
+            <h3>Música ao vivo</h3>
+            <p>Como no começo da casa, com café e torta no intervalo.</p>
+          </li>
+        </ul>
+        <figure class="events-picture reveal">
+          <picture>
+            <source type="image/webp" srcset="/assets/the-e-cafe-900.webp" />
+            <img
+              src="/assets/the-e-cafe-900.jpg"
+              width="900"
+              height="1311"
+              loading="lazy"
+              decoding="async"
+              alt="Litografia colorida do século 19 com duas figuras vestidas de flores servindo chá e café"
+            />
+          </picture>
+          <figcaption>J. J. Grandville, Chá e café, 1847</figcaption>
+        </figure>
+      </section>
+
+      <section class="reviews" id="avaliacoes" aria-labelledby="avaliacoes-titulo">
+        <div class="reviews-inner reveal">
+          <p class="rating" aria-hidden="true">4,9</p>
+          <h2 id="avaliacoes-titulo">Nota 4,9 no Google</h2>
+          <p>
+            Quem vem fala do atendimento, do ambiente aconchegante e dos produtos de primeira.
+            <a
+              href="https://www.google.com/maps/search/?api=1&amp;query=Casa+do+Anfitri%C3%A3o+Itapira"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Ler as avaliações no Google</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <section class="visit" id="visite" aria-labelledby="visite-titulo">
+        <div class="visit-card reveal">
+          <h2 id="visite-titulo">Visite a casa</h2>
+          <address class="visit-address">
+            Av. Getúlio Vargas, 100<br />
+            Bela Vista, Itapira – SP<br />
+            13974-110<br />
+            <a href="tel:+5519997273330">(19) 99727-3330</a>
+          </address>
+          <table class="hours">
+            <caption>
+              Horário
+            </caption>
+            <tbody>
+              <tr>
+                <th scope="row">Terça a sexta</th>
+                <td>12h às 19h</td>
+              </tr>
+              <tr>
+                <th scope="row">Sábado</th>
+                <td>9h às 18h</td>
+              </tr>
+              <tr>
+                <th scope="row">Domingo e segunda</th>
+                <td>Fechado</td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="amenities">
+            <li>Estacionamento no local</li>
+            <li>Wi-Fi gratuito</li>
+            <li>Acessível para cadeira de rodas</li>
+            <li>Aceita cães</li>
+            <li>Cartão e pagamento por aproximação</li>
+          </ul>
+          <p class="visit-links">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&amp;destination=-22.4322134,-46.8348838"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Como chegar</a
+            >
+            <a
+              href="https://www.instagram.com/casadoanfitriao/"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Instagram</a
+            >
+          </p>
+        </div>
+      </section>
     </main>
+
     <footer class="site-footer">
-      <p>Feito com Vite.</p>
+      <div class="awning awning-thin" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span
+        ><span></span><span></span><span></span><span></span><span></span><span></span><span></span
+        ><span></span><span></span><span></span><span></span><span></span><span></span><span></span
+        ><span></span><span></span><span></span>
+      </div>
+      <p class="footer-name">Casa do Anfitrião</p>
+      <p class="footer-line">
+        <span>Casa do Anfitrião Confeitaria e Cafeteria LTDA</span>
+        <span>CNPJ 40.350.897/0001-06</span>
+        <a href="/privacidade.html">Política de privacidade</a>
+      </p>
+      <p class="footer-credits">
+        Imagens em domínio público: Édouard Manet, A brioche, 1870 (The Met); János Vaszary, Terraço
+        do Café de la Paix, 1925 (Wikimedia Commons); Abraham Bosse, A confeitaria, c. 1633 (The
+        Met); conde de Caylus, Vendedor de pastéis, 1738 (The Met); J. J. Grandville, Chá e café,
+        1847 (The Met). As obras mostram o mundo francês que inspira a casa, não os produtos da
+        casa.
+      </p>
     </footer>
+
+    <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+      <symbol id="fleur-de-lis" viewBox="0 0 100 100">
+        <path
+          fill="currentColor"
+          d="M50 3C59 15 66 28 62 42C60 50 55 55 50 61C45 55 40 50 38 42C34 28 41 15 50 3ZM53 62C58 50 66 40 77 38C88 36 96 44 94 54C92 62 84 65 79 60C76 57 78 52 82 52C80 47 72 47 66 52C61 56 58 60 57 64ZM47 62C42 50 34 40 23 38C12 36 4 44 6 54C8 62 16 65 21 60C24 57 22 52 18 52C20 47 28 47 34 52C39 56 42 60 43 64ZM30 63H70V70H30ZM50 72C47 80 42 87 35 93H65C58 87 53 80 50 72Z"
+        />
+      </symbol>
+    </svg>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

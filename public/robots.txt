@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://casa-do-anfitriao.vercel.app/sitemap.xml

@@ -6,7 +6,14 @@ same change.
 
 ## Map
 
-- `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
+- `index.html`, `privacidade.html`, `404.html`, `src/`, `public/`: the site (Casa do Anfitrião).
+  `src/tokens.css` holds every design token; `public/` is served as is (self-hosted fonts in
+  `public/fonts/` with their OFL licences, optimized images in `public/assets/`, robots, sitemap).
+- `vite.config.js`: lists the three HTML pages as build inputs. Add any new page here.
+- `vercel.json`: Vercel build settings and security headers (CSP, HSTS, `X-Robots-Tag: noindex`
+  until launch). The CSP only allows same-origin scripts, styles, fonts and images.
+- `docs/clients/casa-do-anfitriao/`: research, decisions, visual directions, architecture and motion
+  plan for this site.
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,
