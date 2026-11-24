@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Direção A · O cartão da casa · Casa do Anfitrião</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,400&family=Albert+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --noir: #14110d;
+        --or: #c9a55a;
+        --ivoire: #f2eee6;
+        --sepia: #5c5346;
+        --font-display: 'Imbue', 'Didot', serif;
+        --font-text: 'Albert Sans', system-ui, sans-serif;
+        --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+        --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+        --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+        --step-head: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
+        --step-mark: clamp(4.5rem, 2rem + 9vw, 9.5rem);
+        --gap: 12px;
+        --radius: 16px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--noir);
+        color: var(--noir);
+        font: 400 var(--step-body) / 1.55 var(--font-text);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--or);
+        outline-offset: 3px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--gap);
+        padding: var(--gap);
+        min-height: 100svh;
+      }
+      .card {
+        background: var(--ivoire);
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+      }
+      /* A faixa do toldo: barras alternadas de tinta e papel. */
+      .awning {
+        display: flex;
+        width: 100%;
+        height: 56px;
+        flex: none;
+      }
+      .awning span {
+        flex: 1 0 28px;
+        background: var(--noir);
+      }
+      .awning span:nth-child(even) {
+        background: var(--or);
+      }
+      .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 48px 32px 32px;
+      }
+      .mark {
+        width: 64px;
+        height: 64px;
+        color: var(--noir);
+      }
+      .wordmark {
+        margin: 0;
+        font: 400 var(--step-mark) / 0.9 var(--font-display);
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+      }
+      .wordmark small {
+        display: block;
+        font-size: 0.42em;
+        letter-spacing: 0;
+      }
+      .lead {
+        margin: 0;
+        max-width: 36ch;
+        font-size: var(--step-lead);
+        line-height: 1.35;
+      }
+      .button {
+        display: inline-block;
+        padding: 18px 32px;
+        background: var(--noir);
+        color: var(--ivoire);
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 0;
+        transition:
+          background-color 200ms ease-out,
+          color 200ms ease-out;
+      }
+      .button:hover {
+        background: var(--or);
+        color: var(--noir);
+      }
+      .facts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 28px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: var(--step-small);
+        color: var(--sepia);
+      }
+      .open-now {
+        font-weight: 500;
+        color: var(--noir);
+      }
+      figure {
+        margin: 0;
+        position: sticky;
+        top: var(--gap);
+        height: calc(100svh - 2 * var(--gap));
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #2a241c;
+      }
+      figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 40% 50%;
+        display: block;
+      }
+      figcaption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        right: 16px;
+        color: var(--ivoire);
+        font-size: var(--step-small);
+        text-align: right;
+      }
+      @media (max-width: 760px) {
+        .hero {
+          grid-template-columns: 1fr;
+          min-height: 0;
+        }
+        figure {
+          position: relative;
+          top: 0;
+          height: 48svh;
+          order: -1;
+        }
+        figcaption {
+          bottom: 48px;
+        }
+        .card {
+          margin-top: -36px;
+          position: relative;
+        }
+        .awning {
+          height: 40px;
+        }
+        .card-body {
+          padding: 36px 20px 28px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .button {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero">
+      <section class="card" aria-labelledby="titulo">
+        <div class="awning" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span><span></span
+          ><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="card-body">
+          <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M50 3C59 15 66 28 62 42C60 50 55 55 50 61C45 55 40 50 38 42C34 28 41 15 50 3ZM53 62C58 50 66 40 77 38C88 36 96 44 94 54C92 62 84 65 79 60C76 57 78 52 82 52C80 47 72 47 66 52C61 56 58 60 57 64ZM47 62C42 50 34 40 23 38C12 36 4 44 6 54C8 62 16 65 21 60C24 57 22 52 18 52C20 47 28 47 34 52C39 56 42 60 43 64ZM30 63H70V70H30ZM50 72C47 80 42 87 35 93H65C58 87 53 80 50 72Z"
+            />
+          </svg>
+          <h1 class="wordmark" id="titulo">
+            Casa do Anfitrião
+            <small>a casa mais francesa da cidade</small>
+          </h1>
+          <p class="lead">
+            Confeitaria, café e delicatessen na Getúlio Vargas, 100. Torta Cappuccino, crème brûlée
+            e croissant francês, servidos como numa casa que recebe.
+          </p>
+          <a
+            class="button"
+            href="https://wa.me/5519997273330?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido."
+            rel="noopener noreferrer"
+            target="_blank"
+            >Pedir pelo WhatsApp</a
+          >
+          <ul class="facts">
+            <li class="open-now" data-open-status>Terça a sexta, 12h às 19h</li>
+            <li>Sábado, 9h às 18h</li>
+            <li>Bela Vista, Itapira</li>
+          </ul>
+        </div>
+      </section>
+      <figure>
+        <img
+          src="../assets/the-brioche.jpg"
+          width="1600"
+          height="1298"
+          alt="Natureza-morta de Manet: uma brioche com uma rosa no topo, ameixas, pêssegos e uma caixa vermelha sobre um guardanapo branco"
+        />
+        <figcaption>Édouard Manet, A brioche, 1870. The Met, domínio público.</figcaption>
+      </figure>
+    </main>
+    <script>
+      // Diz se a casa está aberta agora, no fuso de Itapira. Sem script, fica o horário fixo.
+      (function () {
+        var el = document.querySelector('[data-open-status]');
+        if (!el || !window.Intl) return;
+        var parts = new Intl.DateTimeFormat('pt-BR', {
+          timeZone: 'America/Sao_Paulo',
+          weekday: 'short',
+          hour: 'numeric',
+          minute: 'numeric',
+          hourCycle: 'h23',
+        }).formatToParts(new Date());
+        var get = function (t) {
+          return (
+            parts.find(function (p) {
+              return p.type === t;
+            }) || {}
+          ).value;
+        };
+        var day = (get('weekday') || '').slice(0, 3).toLowerCase();
+        var mins = +get('hour') * 60 + +get('minute');
+        var hours = {
+          ter: [720, 1140],
+          qua: [720, 1140],
+          qui: [720, 1140],
+          sex: [720, 1140],
+          sáb: [540, 1080],
+        };
+        var h = hours[day];
+        if (h && mins >= h[0] && mins < h[1]) {
+          el.textContent = 'Aberto agora, até as ' + h[1] / 60 + 'h';
+        } else {
+          el.textContent = 'Fechado agora. Abrimos de terça a sábado';
+        }
+      })();
+    </script>
+  </body>
+</html>

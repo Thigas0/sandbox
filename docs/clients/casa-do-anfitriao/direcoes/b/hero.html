@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Direção B · A flor-de-lis · Casa do Anfitrião</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --noir: #14110d;
+        --or: #c9a55a;
+        --creme: #ede6d6;
+        --font-display: 'Young Serif', Georgia, serif;
+        --font-text: 'Source Serif 4', Georgia, serif;
+        --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+        --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+        --step-head: clamp(3rem, 0.4rem + 4.4vw, 4.75rem);
+        --margin: clamp(20px, 8vw, 128px);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--noir);
+        color: var(--creme);
+        font: 400 var(--step-body) / 1.55 var(--font-text);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--or);
+        outline-offset: 3px;
+      }
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+      .bar {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        gap: 56px;
+        padding: 28px var(--margin);
+      }
+      .brand {
+        font: 400 2rem/1 var(--font-display);
+        text-decoration: none;
+      }
+      .bar nav {
+        display: flex;
+        gap: 28px;
+        font-size: var(--step-small);
+      }
+      .bar nav a {
+        text-decoration: none;
+      }
+      .bar nav a:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      /* O motivo: a flor-de-lis da marca, enorme e cortada pela tela. */
+      .motif {
+        position: absolute;
+        z-index: 1;
+        width: 120vh;
+        height: 120vh;
+        left: 78%;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        color: var(--or);
+      }
+      .copy {
+        position: relative;
+        z-index: 2;
+        align-self: center;
+        width: min(62%, 960px);
+        padding: 0 0 72px var(--margin);
+      }
+      h1 {
+        margin: 0 0 28px;
+        font: 400 var(--step-head) / 0.95 var(--font-display);
+        letter-spacing: -0.02em;
+      }
+      .lead {
+        margin: 0 0 36px;
+        max-width: 34ch;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        flex-wrap: wrap;
+      }
+      /* O botão leva a mesma forma: a pétala central da flor-de-lis. */
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 60px;
+        padding: 0 40px;
+        background: var(--or);
+        color: var(--noir);
+        font-weight: 600;
+        text-decoration: none;
+        clip-path: polygon(
+          14px 0,
+          calc(100% - 14px) 0,
+          100% 50%,
+          calc(100% - 14px) 100%,
+          14px 100%,
+          0 50%
+        );
+        transition: background-color 200ms ease-out;
+      }
+      .button:hover {
+        background: var(--creme);
+      }
+      .status {
+        font-size: var(--step-small);
+      }
+      @media (max-width: 760px) {
+        .motif {
+          width: 130vw;
+          height: 130vw;
+          left: 50%;
+          top: calc(72svh + 65vw);
+        }
+        .copy {
+          width: 100%;
+          align-self: start;
+          padding: 7svh var(--margin) 64vw;
+        }
+        h1 {
+          font-size: 9vw;
+        }
+        .bar {
+          justify-content: space-between;
+        }
+        .bar nav a:not(:last-child) {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .button {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <header class="bar">
+        <a class="brand" href="#">Casa do Anfitrião</a>
+        <nav aria-label="Principal">
+          <a href="#cardapio">Cardápio</a>
+          <a href="#eventos">Eventos</a>
+          <a href="#visite">Visite</a>
+        </nav>
+      </header>
+      <svg class="motif" viewBox="0 0 100 100" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M50 3C59 15 66 28 62 42C60 50 55 55 50 61C45 55 40 50 38 42C34 28 41 15 50 3ZM53 62C58 50 66 40 77 38C88 36 96 44 94 54C92 62 84 65 79 60C76 57 78 52 82 52C80 47 72 47 66 52C61 56 58 60 57 64ZM47 62C42 50 34 40 23 38C12 36 4 44 6 54C8 62 16 65 21 60C24 57 22 52 18 52C20 47 28 47 34 52C39 56 42 60 43 64ZM30 63H70V70H30ZM50 72C47 80 42 87 35 93H65C58 87 53 80 50 72Z"
+        />
+      </svg>
+      <main class="copy">
+        <h1>A casa mais francesa da cidade</h1>
+        <p class="lead">
+          Confeitaria, café e delicatessen em Itapira. Crème brûlée, Torta Cappuccino e um barista
+          que recebe você pelo nome.
+        </p>
+        <div class="actions">
+          <a
+            class="button"
+            href="https://wa.me/5519997273330?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido."
+            rel="noopener noreferrer"
+            target="_blank"
+            >Pedir pelo WhatsApp</a
+          >
+          <p class="status" data-open-status>Terça a sexta, 12h às 19h. Sábado, 9h às 18h.</p>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Diz se a casa está aberta agora, no fuso de Itapira. Sem script, fica o horário fixo.
+      (function () {
+        var el = document.querySelector('[data-open-status]');
+        if (!el || !window.Intl) return;
+        var parts = new Intl.DateTimeFormat('pt-BR', {
+          timeZone: 'America/Sao_Paulo',
+          weekday: 'short',
+          hour: 'numeric',
+          minute: 'numeric',
+          hourCycle: 'h23',
+        }).formatToParts(new Date());
+        var get = function (t) {
+          return (
+            parts.find(function (p) {
+              return p.type === t;
+            }) || {}
+          ).value;
+        };
+        var day = (get('weekday') || '').slice(0, 3).toLowerCase();
+        var mins = +get('hour') * 60 + +get('minute');
+        var hours = {
+          ter: [720, 1140],
+          qua: [720, 1140],
+          qui: [720, 1140],
+          sex: [720, 1140],
+          sáb: [540, 1080],
+        };
+        var h = hours[day];
+        el.textContent =
+          h && mins >= h[0] && mins < h[1]
+            ? 'Aberto agora, até as ' + h[1] / 60 + 'h'
+            : 'Fechado agora. Abrimos de terça a sábado';
+      })();
+    </script>
+  </body>
+</html>
