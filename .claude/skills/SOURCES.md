@@ -22,6 +22,12 @@ copy the folder again from a newer commit, read the diff, and update this table.
 | extract-design-md | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) (`plugins/stitch-design/skills/extract-design-md`) | `9f4e828e77634e230978be45fec5501554dbe4b2` | Apache-2.0 |
 | webapp-testing, skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | `e4bb5d960d87126ff3b3a8af1a104b7db67560ba` | Apache-2.0 (`LICENSE.txt` in each folder) |
 | differential-review (+ `/diff-review` in `.claude/commands/`, agent `adversarial-modeler` in `.claude/agents/`) | [trailofbits/skills](https://github.com/trailofbits/skills) plugin `differential-review` | `149d7b21f4067765b82e67029730b42d228ef4b4` | CC BY-SA 4.0 |
+| semgrep, sharp-edges (+ agent `sharp-edges-analyzer` in `.claude/agents/`), supply-chain-risk-auditor, agentic-actions-auditor | [trailofbits/skills](https://github.com/trailofbits/skills) plugins `static-analysis`, `sharp-edges`, `supply-chain-risk-auditor`, `agentic-actions-auditor` | `149d7b21f4067765b82e67029730b42d228ef4b4` | CC BY-SA 4.0 |
+| supabase, supabase-postgres-best-practices | [supabase/agent-skills](https://github.com/supabase/agent-skills) | `c9be0e931b7930f7d02126d04774d904c381e7d7` | MIT |
+| cloudflare, wrangler, workers-best-practices, frameworks-on-cloudflare, web-perf, turnstile-spin | [cloudflare/skills](https://github.com/cloudflare/skills) | `ff191de7d903788eceaf516a514ae7d3b56b924a` | Apache-2.0 |
+| prisma-orm-setup, prisma-client-api, prisma-cli, prisma-postgres-setup | [prisma/skills](https://github.com/prisma/skills) | `a6f192959cf43b08aa330fe1ffca090267215812` | MIT |
+| stripe-best-practices, stripe-docs, stripe-implementation-planner | [stripe/ai](https://github.com/stripe/ai) (`skills/`) | `f10dc33c434e1daf5e001ec1c50594a6cde1bdbb` | MIT |
+| deploy-to-vercel, react-best-practices, composition-patterns, react-view-transitions | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `5a37a6329fbad3666c3207392a6a7c0110e92efb` | MIT |
 
 Local changes to upstream files, kept on each update:
 
@@ -37,8 +43,25 @@ Checked and not taken (2026-11-24):
   turn, and drops the redesign, minimalist, soft, brutalist and output variants. The 2.1 copy above stays.
 - Removed: `pro-design` (no license stated) and `output-skill` (`full-output-enforcement`), both
   covered by taste-skill and impeccable.
+- better-auth/skills (`20c9e88a5c007461a703f1c213572b073196113e`) states no license, so it is not copied.
+  Install it per user with `npx skills add better-auth/skills` if wanted.
+- semgrep/skills (`68177b8830f96cd9d10dacbb14dde2566360503d`) is under the Semgrep Rules License,
+  which does not clearly allow republishing in a public repository. Trail of Bits' `semgrep` skill
+  covers the scan. `/static-analysis:semgrep-scan`, which that skill mentions, is a plugin workflow
+  that is not vendored; follow the skill's own five steps instead.
+- Some vendored skills point to sibling skills that are not copied (Cloudflare's
+  `nextjs-on-cloudflare`, `gateway-workers`, `workers-profiling`; Prisma's upgrade skills). Copy
+  them from the same commit if a task needs them.
 - awesome-design-md at `fcc70284932276d085f01ef9f83edde90b1258cb` has the same DESIGN.md files as the
   copy below; it only adds a README per folder.
+
+Remote MCP servers in `.mcp.json` from the vendors themselves, each signed in with OAuth on first
+use: Hugging Face (`https://huggingface.co/mcp?login`, free account; image generation runs on
+Gradio Spaces such as FLUX.1-schnell within the account's free GPU quota), Supabase, Stripe,
+Vercel, and Cloudflare's documentation server (no sign-in). `pollinations` (`@pollinations/mcp@2.5.0`,
+MIT) generates images, video and audio with a key from enter.pollinations.ai read from the
+`POLLINATIONS_API_KEY` environment variable; it uploads results unlisted to media.pollinations.ai,
+so do not send private material. Both are free-tier alternatives to the `higgsfield-*` skills.
 
 MCP servers in `.mcp.json` are pinned: `@playwright/mcp@0.0.86` (Apache-2.0),
 `chrome-devtools-mcp@1.13.0` (Apache-2.0, run with `--isolated` so it uses a temporary profile) and

@@ -15,6 +15,33 @@
     "figma": {
       "type": "http",
       "url": "https://mcp.figma.com/mcp"
+    },
+    "huggingface": {
+      "type": "http",
+      "url": "https://huggingface.co/mcp?login"
+    },
+    "pollinations": {
+      "command": "npx",
+      "args": ["-y", "@pollinations/mcp@2.5.0"],
+      "env": {
+        "POLLINATIONS_API_KEY": "${POLLINATIONS_API_KEY:-}"
+      }
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp"
+    },
+    "stripe": {
+      "type": "http",
+      "url": "https://mcp.stripe.com"
+    },
+    "cloudflare-docs": {
+      "type": "http",
+      "url": "https://docs.mcp.cloudflare.com/mcp"
+    },
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com"
     }
   }
 }
