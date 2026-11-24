@@ -219,7 +219,18 @@ depois com o Google Search Console e com o Planejador de palavras-chave.
 | S17 | https://itapira.sp.gov.br/                                                                                             | Sem menção                       |
 | S18 | Google Maps: buscas "confeitaria Itapira SP", "cafeteria Itapira SP", "confeitaria cafeteria Mogi Mirim / Mogi Guaçu / Amparo SP" e as fichas de cada concorrente | Concorrentes                     |
 
-## 11. Pendências (para você completar com links e prints, ou o cliente fornecer)
+## 11. Decisões do projeto (Thigas0, 24/11/2026)
+
+A visita foi descartada. Estas decisões substituem as respostas do cliente até nova informação:
+
+1. **Objetivo nº 1:** pedidos e encomendas pelo WhatsApp (`wa.me/5519997273330` com mensagem
+   pronta).
+2. **NAP:** igual ao Google: "Casa do Anfitrião", Av. Getúlio Vargas, 100 – Bela Vista, Itapira – SP,
+   13974-110, (19) 99727-3330.
+3. **Domínio:** placeholder em uma constante única até a definição. Nada será registrado.
+4. **Cardápio:** publicado sem preços, com "ver preços no WhatsApp".
+
+## 12. Pendências (para você completar com links e prints, ou o cliente fornecer)
 
 1. Avaliações do Google: número total e os ~30 textos mais recentes (prints ou exportação pelo
    Perfil da Empresa).
