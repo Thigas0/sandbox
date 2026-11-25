@@ -1,4 +1,4 @@
-/* Direção A, "Caderno anotado". Os valores e as regras de uso estão em DESIGN.md. */
+/* Paleta de Atena: azul-noite e dourado. Os valores e as regras de uso estão em DESIGN.md. */
 @font-face {
   font-family: 'Newsreader';
   font-style: normal;
@@ -27,40 +27,63 @@
 :root {
   color-scheme: light;
 
-  /* Cor */
-  --papel: #f5f1e8;
-  --papel-2: #ede6d6;
-  --papel-3: #e4dbc6;
-  --tinta: #1b1a17;
-  --grafite: #55524b;
-  --regua: #d3c9b3;
-  --ambar: #c9822b; /* só decoração, traços e realce; nunca texto pequeno */
-  --ambar-texto: #8a5414; /* âmbar para texto (contraste AA sobre o papel) */
-  --marca: rgb(201 130 43 / 0.28);
-  --verde: #2f6f5e;
+  /* Paleta base */
+  --azul-noite: #0f1d3d;
+  --azul-noite-2: #172a55;
+  --azul: #1d3a7a;
+  --azul-nevoa: #eef2fa;
+  --branco: #fbfbfd;
+  --ouro: #d9b75a; /* decoração e texto sobre o azul-noite (9:1) */
+  --ouro-escuro: #7a5c12; /* dourado para texto sobre fundo claro (AA) */
+
+  /* Tokens semânticos (redefinidos nas superfícies escuras) */
+  --fundo: var(--branco);
+  --superficie: #ffffff;
+  --superficie-2: var(--azul-nevoa);
+  --borda: #d8deeb;
+  --texto: #0d1630;
+  --texto-2: #4a5370;
+  --acento: var(--ouro);
+  --acento-texto: var(--ouro-escuro);
+  --marca: rgb(217 183 90 / 0.38);
+  --sucesso: #1f6b52;
 
   /* Tipo */
   --serifa: 'Newsreader', 'Newsreader Fallback', Georgia, serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  --t-titulo: clamp(4rem, 3rem + 9vw, 10rem);
-  --t-h2: clamp(2rem, 1.5rem + 2.4vw, 3.5rem);
+  --t-h1: clamp(2.75rem, 1.6rem + 4.8vw, 5.5rem);
+  --t-h2: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
   --t-h3: 1.25rem;
-  --t-lede: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --t-lede: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
   --t-corpo: 1.0625rem;
-  --t-fonte: 0.8rem;
+  --t-fonte: 0.78rem;
 
   /* Espaço e grade */
   --gutter: 1rem;
   --largura: 72rem;
-  --secao-y: clamp(5rem, 3rem + 8vw, 9rem);
-  --raio: 6px;
+  --secao-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --raio: 10px;
+  --sombra: 0 1px 2px rgb(15 29 61 / 0.06), 0 8px 24px rgb(15 29 61 / 0.08);
 
   /* Movimento */
   --sair: cubic-bezier(0.22, 1, 0.36, 1);
   --rapido: 160ms;
   --medio: 420ms;
   --lento: 700ms;
+}
+
+/* Superfícies escuras: o mesmo vocabulário, outros valores. */
+.heroi,
+.secao--escura {
+  --fundo: var(--azul-noite);
+  --superficie: var(--azul-noite-2);
+  --superficie-2: #1d3363;
+  --borda: #2c4277;
+  --texto: #eef1f8;
+  --texto-2: #b9c3dc;
+  --acento-texto: var(--ouro);
+  --marca: rgb(217 183 90 / 0.32);
 }
 
 @media (min-width: 48rem) {

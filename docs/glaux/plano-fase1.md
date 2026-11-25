@@ -412,3 +412,21 @@ Pendente:
 - Captura da demo pelo time.
 - Ligar o `ORQUESTRADOR_NO_GRAFO` quando o nó estiver no grafo.
 - Deploy na Vercel, quando o usuário pedir.
+
+### 25/11: redesenho para o produto
+Pedido do usuário: focar no produto final, mantendo só o essencial da apresentação, com as cores do
+Canvas ou de Atena. Escolhida a paleta de Atena (azul-noite e dourado). As cores do Canvas ficaram de
+fora para o site não parecer um produto oficial da Instructure.
+
+Seções agora: Início, Recursos, Como funciona, Integrações, Resultados, Demo e Roadmap, mais o rodapé
+com a equipe. Saíram as seções de hipótese, de limites (a principal limitação ficou em Resultados) e a
+de equipe, que foi para o rodapé.
+
+O que se mantém do roteiro de 10 minutos (P6):
+- os 4 agentes e as duas respostas do entregável (Como funciona);
+- as APIs (Integrações);
+- os números (Resultados);
+- a demo.
+A navegação por ← → continua.
+
+Detalhes em `DESIGN.md`.

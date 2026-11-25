@@ -1,10 +1,10 @@
-// Marca-texto: as citações e os trechos marcados ganham o realce quando entram na tela.
+// Marca-texto: os trechos marcados ganham o realce quando entram na tela.
 // Sem JavaScript, ou com movimento reduzido, o realce já aparece completo.
 export function iniciarRevelar(documento = document) {
   if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const alvos = [...documento.querySelectorAll('.marca, cite.fonte')];
+  const alvos = [...documento.querySelectorAll('.marca')];
   const observador = new IntersectionObserver(
     (entradas) => {
       for (const entrada of entradas) {

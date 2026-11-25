@@ -6,33 +6,29 @@ import AxeBuilder from '@axe-core/playwright';
 import { CSP, CSP_META } from '../../src/seguranca.js';
 
 const ORDEM = [
-  'abertura',
-  'problema',
-  'hipotese',
-  'agentes',
-  'colaboracao',
-  'apis',
+  'inicio',
+  'recursos',
+  'como-funciona',
+  'integracoes',
+  'resultados',
   'demo',
-  'evidencias',
-  'limites',
-  'proximos',
-  'equipe',
+  'roadmap',
 ];
 
-test('as 11 seções aparecem na ordem do roteiro, cada uma com seu título', async ({ page }) => {
+test('as seções aparecem na ordem, cada uma com seu título', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/^Glaux/);
   const ids = await page.locator('[data-secao]').evaluateAll((secoes) => secoes.map((s) => s.id));
   expect(ids).toEqual(ORDEM);
-  await expect(page.locator('#abertura h1')).toHaveText('Glaux');
+  await expect(page.locator('#inicio h1')).toHaveText('Seu Canvas vira um plano de estudos.');
   for (const id of ORDEM.slice(1)) {
     await expect(page.locator(`#${id} h2`)).toHaveCount(1);
   }
 });
 
-test('os quatro agentes estão na seção de agentes', async ({ page }) => {
+test('os quatro agentes estão em como funciona', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('#agentes .cartao h3')).toHaveText([
+  await expect(page.locator('#como-funciona .cartao h3')).toHaveText([
     'Canvas',
     'Tutor',
     'Gerador',
@@ -43,22 +39,22 @@ test('os quatro agentes estão na seção de agentes', async ({ page }) => {
 test('a navegação leva às seções, por link e pelas setas do teclado', async ({ page }) => {
   await page.goto('/');
   await page.keyboard.press('ArrowRight');
-  await expect(page).toHaveURL(/#problema$/);
-  await expect(page.locator('#titulo-problema')).toBeFocused();
+  await expect(page).toHaveURL(/#recursos$/);
+  await expect(page.locator('#titulo-recursos')).toBeFocused();
   await page.keyboard.press('ArrowRight');
-  await expect(page).toHaveURL(/#hipotese$/);
-  await expect(page.locator('#hipotese')).toBeInViewport();
+  await expect(page).toHaveURL(/#como-funciona$/);
+  await expect(page.locator('#titulo-como-funciona')).toBeInViewport();
   await page.keyboard.press('ArrowLeft');
-  await expect(page).toHaveURL(/#problema$/);
+  await expect(page).toHaveURL(/#recursos$/);
 
   const nav = page.getByRole('navigation', { name: 'Seções' });
-  await nav.getByRole('link', { name: 'Evidências' }).click();
-  await expect(page).toHaveURL(/#evidencias$/);
-  await expect(page.locator('#titulo-evidencias')).toBeInViewport();
+  await nav.getByRole('link', { name: 'Resultados' }).click();
+  await expect(page).toHaveURL(/#resultados$/);
+  await expect(page.locator('#titulo-resultados')).toBeInViewport();
 });
 
 test('o simulador reproduz as rotas do Orquestrador', async ({ page }) => {
-  await page.goto('/#colaboracao');
+  await page.goto('/#como-funciona');
   const rota = page.locator('[data-rota]');
   const dadosLocais = page.getByLabel(/PDFs e tarefas/);
   const resumo = page.getByLabel('Resumo já no estado');
@@ -104,7 +100,7 @@ test.describe('com movimento reduzido', () => {
 
   test('o diagrama aparece completo e parado', async ({ page }) => {
     await page.goto('/');
-    await page.locator('#colaboracao').scrollIntoViewIfNeeded();
+    await page.locator('#como-funciona').scrollIntoViewIfNeeded();
     const figura = page.locator('[data-fluxo]');
     await expect(figura).not.toHaveClass(/montando/);
     const estilos = await figura.locator('.aresta, .no').evaluateAll((elementos) =>

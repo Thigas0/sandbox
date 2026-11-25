@@ -5,15 +5,15 @@
 }
 
 html {
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: 3.75rem; /* altura do topo fixo */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--papel);
-  color: var(--tinta);
+  background: var(--fundo);
+  color: var(--texto);
   font-family: var(--sans);
   font-size: var(--t-corpo);
   line-height: 1.6;
@@ -54,7 +54,7 @@ p {
 
 a {
   color: inherit;
-  text-decoration-color: var(--ambar);
+  text-decoration-color: var(--acento);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.2em;
 }
@@ -74,19 +74,8 @@ code {
   overflow-wrap: anywhere;
 }
 
-kbd {
-  display: inline-block;
-  min-width: 1.6em;
-  padding: 0 0.35em;
-  border: 1px solid var(--regua);
-  border-bottom-width: 2px;
-  border-radius: 4px;
-  background: var(--papel-2);
-  text-align: center;
-}
-
 :focus-visible {
-  outline: 3px solid var(--ambar-texto);
+  outline: 3px solid var(--acento-texto);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -108,10 +97,10 @@ kbd {
   position: absolute;
   left: var(--gutter);
   top: -3rem;
-  z-index: 20;
+  z-index: 40;
   padding: 0.5rem 0.75rem;
-  background: var(--tinta);
-  color: var(--papel);
+  background: var(--azul-noite);
+  color: #fff;
 }
 
 .pular:focus {

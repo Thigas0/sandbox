@@ -1,4 +1,157 @@
-/* ---------- Topo, progresso e rodapé ---------- */
+/* ---------- Estrutura: seções de largura total, conteúdo centrado ---------- */
+.secao,
+.heroi,
+.topo,
+.rodape {
+  padding-inline: max(var(--gutter), calc((100% - var(--largura)) / 2));
+}
+
+.secao {
+  padding-block: var(--secao-y);
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+.secao--clara {
+  --fundo: var(--azul-nevoa);
+  --superficie: #ffffff;
+  --superficie-2: #ffffff;
+}
+
+.secao h2 {
+  font-size: var(--t-h2);
+  max-width: 22ch;
+  margin-bottom: 1.25rem;
+}
+
+.sobrelinha {
+  margin: 0 0 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acento-texto);
+}
+
+.secao__lede {
+  max-width: 56ch;
+  margin-bottom: 3rem;
+  color: var(--texto-2);
+  font-size: var(--t-lede);
+  line-height: 1.5;
+}
+
+.nota {
+  color: var(--texto-2);
+  font-size: 0.9375rem;
+}
+
+.colunas {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 56rem) {
+  .colunas {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* Itens de grid não podem crescer além da coluna (o <pre> do terminal rola por dentro). */
+.colunas > *,
+.roteiro > *,
+.heroi__grade > * {
+  min-width: 0;
+}
+
+.secao a,
+.rodape a {
+  overflow-wrap: anywhere;
+}
+
+/* Citação no formato do Glaux: mono, pequena e discreta; quem quiser conferir encontra. */
+.fonte {
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  font-style: normal;
+  color: var(--texto-2);
+  overflow-wrap: anywhere;
+}
+
+cite.fonte {
+  opacity: 0.85;
+}
+
+.marca {
+  background-image: linear-gradient(var(--marca), var(--marca));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.42em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size var(--lento) var(--sair);
+}
+
+.marca.pendente {
+  background-size: 0% 0.42em;
+}
+
+/* ---------- Botões ---------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0 1.4rem;
+  border: 1px solid var(--ouro);
+  border-radius: 999px;
+  background: var(--ouro);
+  color: var(--azul-noite);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform var(--rapido) var(--sair),
+    background-color var(--rapido) var(--sair);
+}
+
+.botao:hover {
+  background: #e6c874;
+}
+
+.botao:active {
+  transform: scale(0.97);
+}
+
+.botao--fantasma {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--borda);
+}
+
+.botao--fantasma:hover {
+  background: var(--superficie);
+}
+
+.botao--topo {
+  min-height: 2.25rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+}
+
+/* ---------- Topo, progresso e rodapé (superfícies escuras) ---------- */
+.topo,
+.rodape {
+  --texto: #eef1f8;
+  --texto-2: #b9c3dc;
+  --acento-texto: var(--ouro);
+  --borda: #2c4277;
+  background: var(--azul-noite);
+  color: var(--texto);
+}
+
 .progresso {
   position: fixed;
   inset: 0 0 auto;
@@ -10,7 +163,7 @@
 .progresso__barra {
   display: block;
   height: 100%;
-  background: var(--ambar);
+  background: var(--ouro);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -18,24 +171,41 @@
 .topo {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  min-height: 3.5rem;
-  padding: 0 var(--gutter);
-  background: var(--papel);
-  border-bottom: 1px solid var(--regua);
+  min-height: 3.75rem;
+  border-bottom: 1px solid var(--borda);
 }
 
 .topo__marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--serifa);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 600;
   text-decoration: none;
 }
 
+.coruja {
+  width: 1.9rem;
+  height: 1.9rem;
+  fill: none;
+  stroke: var(--ouro);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.coruja__pupila {
+  fill: var(--ouro);
+  stroke: none;
+}
+
 .topo__nav {
+  flex: 1;
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
@@ -43,9 +213,9 @@
 
 .topo__nav ol {
   display: flex;
-  gap: 1.1rem;
+  gap: 1.25rem;
   margin: 0;
-  padding: 0.25rem 0;
+  padding: 0;
   list-style: none;
   white-space: nowrap;
   font-size: 0.875rem;
@@ -54,216 +224,317 @@
 .topo__nav a {
   display: inline-block;
   padding: 0.6rem 0;
-  color: var(--grafite);
+  color: var(--texto-2);
   text-decoration: none;
 }
 
 .topo__nav a:hover {
-  color: var(--tinta);
+  color: var(--texto);
 }
 
-.rodape {
-  max-width: var(--largura);
-  margin: 0 auto;
-  padding: 2rem var(--gutter) 3rem;
-  border-top: 1px solid var(--regua);
-  color: var(--grafite);
-  font-size: 0.875rem;
-}
-
-/* ---------- Seções ---------- */
-.secao {
-  max-width: var(--largura);
-  margin: 0 auto;
-  padding: var(--secao-y) var(--gutter);
-  border-top: 1px solid var(--regua);
-}
-
-.secao h2 {
-  font-size: var(--t-h2);
-  max-width: 20ch;
-  margin-bottom: 2.5rem;
-}
-
-.secao__numero {
-  margin: 0 0 1rem;
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  color: var(--ambar-texto);
-  letter-spacing: 0.08em;
-}
-
-.colunas {
-  display: grid;
-  gap: 2.5rem;
-}
-
-/* Itens de grid não podem crescer além da coluna (o <pre> do terminal rola por dentro). */
-.colunas > *,
-.roteiro > * {
-  min-width: 0;
-}
-
-.secao a {
-  overflow-wrap: anywhere;
-}
-
-@media (min-width: 56rem) {
-  .colunas {
-    grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-}
-
-.destaque {
-  font-family: var(--serifa);
-  font-size: var(--t-lede);
-  line-height: 1.35;
-}
-
-.nota {
-  color: var(--grafite);
-  font-size: 0.9375rem;
-}
-
-/* Citação no formato do Glaux: mono, pequena, com marca-texto. */
-.fonte {
-  font-family: var(--mono);
-  font-size: var(--t-fonte);
-  font-style: normal;
-  color: var(--grafite);
-  overflow-wrap: anywhere;
-  background-image: linear-gradient(var(--marca), var(--marca));
-  background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 100% 0.55em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition: background-size var(--lento) var(--sair);
-}
-
-.fonte--grande {
-  font-size: 1em;
-  color: var(--tinta);
-}
-
-.marca {
-  background-image: linear-gradient(var(--marca), var(--marca));
-  background-repeat: no-repeat;
-  background-position: 0 85%;
-  background-size: 100% 0.45em;
-  transition: background-size var(--lento) var(--sair);
-}
-
-.fonte.pendente,
-.marca.pendente {
-  background-size: 0% 0.5em;
-}
-
-/* ---------- 0 · Abertura ---------- */
-.abertura {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: calc(100svh - 3.5rem);
-  border-top: 0;
-}
-
-.sobrelinha {
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  color: var(--grafite);
-  letter-spacing: 0.04em;
-}
-
-.abertura__titulo {
-  font-size: var(--t-titulo);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.035em;
-  margin: 0.1em 0 0.25em;
-}
-
-.abertura__lede {
-  font-family: var(--serifa);
-  font-size: var(--t-lede);
-  line-height: 1.35;
-  max-width: 36ch;
-}
-
-.abertura__exemplo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.75rem;
-  align-items: baseline;
-  margin-top: 1.5rem;
-  color: var(--grafite);
-}
-
-.abertura__dica {
-  margin-top: 2.5rem;
-  color: var(--grafite);
-  font-size: 0.875rem;
-}
-
-@media (hover: none) {
-  .abertura__dica {
+@media (max-width: 40rem) {
+  .botao--topo {
     display: none;
   }
 }
 
-/* ---------- 1 · Problema ---------- */
-.ficha div {
-  padding: 1rem 0;
-  border-top: 1px solid var(--regua);
+.rodape {
+  padding-block: 3.5rem 2.5rem;
+  border-top: 1px solid var(--borda);
+  font-size: 0.9375rem;
 }
 
-.ficha dt,
-.cartao dt,
-.resposta__pergunta {
+.rodape__grade {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .rodape__grade {
+    grid-template-columns: 1.2fr 1.4fr 1fr;
+  }
+}
+
+.rodape__marca {
+  margin-bottom: 0.25rem;
+  font-family: var(--serifa);
+  font-size: 1.5rem;
+  color: var(--ouro);
+}
+
+.rodape__titulo {
+  margin-bottom: 0.25rem;
   font-family: var(--mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--grafite);
+  color: var(--ouro);
 }
 
-.ficha dd {
-  margin: 0.25rem 0 0;
+.rodape p {
+  color: var(--texto-2);
 }
 
-/* ---------- 2 · Hipótese ---------- */
-.citacao {
-  margin: 0;
-  padding-left: 1.25rem;
-  border-left: 3px solid var(--ambar);
+.rodape__nota {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+  font-size: 0.8125rem;
+  max-width: none;
 }
 
-.citacao p {
-  font-family: var(--serifa);
+/* ---------- Início (herói) ---------- */
+.heroi {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4rem, 2rem + 7vw, 7.5rem);
+  background:
+    radial-gradient(60rem 30rem at 85% 10%, rgb(217 183 90 / 0.13), transparent 60%),
+    var(--azul-noite);
+  color: var(--texto);
+}
+
+.heroi__grade {
+  display: grid;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (min-width: 64rem) {
+  .heroi__grade {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+  }
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  color: var(--texto-2);
+  max-width: 100%;
+}
+
+.selo__ponto {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--ouro);
+}
+
+.heroi h1 {
+  font-size: var(--t-h1);
+  font-weight: 450;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+
+.heroi__lede {
+  max-width: 46ch;
+  color: var(--texto-2);
   font-size: var(--t-lede);
-  line-height: 1.35;
+  line-height: 1.55;
 }
 
-.citacao footer {
-  color: var(--grafite);
+.heroi__lede .marca {
+  color: var(--texto);
+}
+
+.heroi__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+/* Ilustração: três painéis claros sobre o azul-noite. */
+.heroi__ilustracao {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.painel {
+  --texto: #0d1630;
+  --texto-2: #4a5370;
+  --acento-texto: var(--ouro-escuro);
+  --marca: rgb(217 183 90 / 0.45);
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--raio);
+  background: #ffffff;
+  color: var(--texto);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.28);
+  animation: subir var(--lento) var(--sair) both;
+}
+
+.painel p {
+  margin: 0;
+}
+
+.painel--resumo {
+  animation-delay: 120ms;
+}
+
+.painel--questoes {
+  animation-delay: 240ms;
+}
+
+@media (min-width: 64rem) {
+  .heroi__ilustracao {
+    min-height: 26rem;
+  }
+
+  .painel {
+    position: absolute;
+    width: 80%;
+  }
+
+  .painel--cronograma {
+    top: 0;
+    left: 0;
+  }
+
+  .painel--resumo {
+    top: 9.25rem;
+    right: 0;
+  }
+
+  .painel--questoes {
+    top: 17.5rem;
+    left: 6%;
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.painel__rotulo {
+  margin-bottom: 0.6rem !important;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acento-texto);
+}
+
+.painel__linha {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.painel__nota {
+  margin: 0.2rem 0 0.7rem !important;
+  color: var(--texto-2);
   font-size: 0.875rem;
 }
 
-.evolucao {
-  padding-left: 1.25rem;
+.painel__titulo {
+  font-family: var(--serifa);
+  font-size: 1.25rem;
 }
 
-.evolucao li {
-  margin-bottom: 0.4rem;
+.painel__texto {
+  color: var(--texto-2);
+  font-size: 0.9375rem;
 }
 
-/* ---------- 3 · Agentes ---------- */
+.painel__alternativas {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.6rem !important;
+}
+
+.painel__alternativas span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #d8deeb;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.painel__alternativas .correta {
+  border-color: var(--sucesso);
+  background: var(--sucesso);
+  color: #fff;
+}
+
+.prioridade {
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  background: var(--azul-nevoa);
+  color: #4a5370;
+}
+
+.prioridade--alta {
+  background: #fbe3d6;
+  color: #8a2a10;
+}
+
+.prioridade--média {
+  background: #f6ebc8;
+  color: #5e4108;
+}
+
+/* ---------- Recursos ---------- */
+.recursos {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recurso {
+  padding: 1.5rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+}
+
+.recurso__icone {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--acento-texto);
+}
+
+.recurso h3 {
+  font-size: 1.4rem;
+}
+
+.recurso p {
+  margin: 0;
+  color: var(--texto-2);
+}
+
+/* ---------- Como funciona ---------- */
 .cartoes {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  margin: 2.5rem 0 4rem;
   padding: 0;
   list-style: none;
 }
@@ -272,25 +543,33 @@
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  background: var(--papel-2);
-  border: 1px solid var(--regua);
+  border: 1px solid var(--borda);
   border-radius: var(--raio);
+  background: var(--superficie);
+}
+
+.cartao--destaque {
+  border-color: var(--ouro);
+}
+
+.cartao__papel {
+  margin-bottom: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acento-texto);
 }
 
 .cartao h3 {
   font-size: 1.75rem;
 }
 
-.cartao dl {
+.cartao p:not(.cartao__papel) {
   flex: 1;
-  margin-top: 0.5rem;
+  color: var(--texto-2);
 }
 
-.cartao dd {
-  margin: 0.15rem 0 0.75rem;
-}
-
-/* ---------- 4 · Colaboração ---------- */
 .respostas {
   display: grid;
   gap: 2rem;
@@ -305,22 +584,31 @@
 
 .resposta {
   padding-left: 1.25rem;
-  border-left: 3px solid var(--ambar);
+  border-left: 3px solid var(--ouro);
+}
+
+.resposta__pergunta {
+  margin-bottom: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acento-texto);
 }
 
 .resposta__texto {
   font-family: var(--serifa);
   font-size: 1.375rem;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .estado {
   padding: 0.6rem 0.8rem;
-  background: var(--papel-2);
-  border-radius: var(--raio);
+  border-radius: 6px;
+  background: var(--superficie);
   font-family: var(--mono);
   font-size: var(--t-fonte);
-  color: var(--grafite);
+  color: var(--texto-2);
 }
 
 .estado:empty {
@@ -334,11 +622,11 @@
 
 .fluxo {
   position: sticky;
-  top: 3.5rem;
+  top: 3.75rem;
   z-index: 1;
   margin: 0;
   padding: 0.75rem 0;
-  background: var(--papel);
+  background: var(--fundo);
   overflow: hidden;
 }
 
@@ -353,7 +641,7 @@
   margin-top: 0.5rem;
   font-family: var(--mono);
   font-size: var(--t-fonte);
-  color: var(--grafite);
+  color: var(--texto-2);
 }
 
 @media (min-width: 64rem) {
@@ -364,7 +652,7 @@
   }
 
   .fluxo {
-    top: 6rem;
+    top: 6.5rem;
   }
 
   .fluxo__svg {
@@ -373,8 +661,8 @@
 }
 
 .no rect {
-  fill: var(--papel-2);
-  stroke: var(--regua);
+  fill: var(--superficie);
+  stroke: var(--borda);
   stroke-width: 1.5;
 }
 
@@ -382,16 +670,16 @@
   font-family: var(--serifa);
   font-size: 20px;
   text-anchor: middle;
-  fill: var(--tinta);
+  fill: var(--texto);
 }
 
 .no--orquestrador rect {
-  stroke: var(--ambar);
+  stroke: var(--ouro);
   stroke-width: 2.5;
 }
 
 .no--estado rect {
-  fill: var(--papel-3);
+  fill: var(--superficie-2);
 }
 
 .no--estado text {
@@ -401,29 +689,30 @@
 .no .estado__nome {
   font-family: var(--mono);
   font-size: 15px;
+  fill: var(--ouro);
 }
 
 .no .estado__campo {
   font-family: var(--mono);
   font-size: 13px;
-  fill: var(--grafite);
+  fill: var(--texto-2);
 }
 
 .aresta {
   fill: none;
-  stroke: var(--tinta);
+  stroke: var(--ouro);
   stroke-width: 1.6;
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
 }
 
 .aresta.tracejada {
-  stroke: var(--grafite);
+  stroke: var(--texto-2);
   stroke-dasharray: 0.04 0.03;
 }
 
 .seta {
-  fill: var(--tinta);
+  fill: var(--ouro);
 }
 
 /* Montagem: só vale quando o JavaScript assume (classe "montando"). Sem ela, tudo fica visível. */
@@ -466,11 +755,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 9rem;
-  height: 9rem;
-  margin: -4.5rem 0 0 -4.5rem;
+  width: 10rem;
+  height: 10rem;
+  margin: -5rem 0 0 -5rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(201 130 43 / 0.2), transparent 70%);
+  background: radial-gradient(circle, rgb(217 183 90 / 0.22), transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity var(--medio) var(--sair);
@@ -487,12 +776,16 @@
 }
 
 .passo {
-  min-height: 55svh;
+  min-height: 50svh;
   padding: 2rem 0;
 }
 
 .passo h3 {
   font-size: 1.6rem;
+}
+
+.passo p {
+  color: var(--texto-2);
 }
 
 .passo--simulador {
@@ -507,7 +800,7 @@
 .simulador fieldset {
   margin: 0;
   padding: 0.75rem 1rem 1rem;
-  border: 1px solid var(--regua);
+  border: 1px solid var(--borda);
   border-radius: var(--raio);
 }
 
@@ -515,9 +808,9 @@
   padding: 0 0.35rem;
   font-family: var(--mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--grafite);
+  color: var(--acento-texto);
 }
 
 .simulador label {
@@ -532,7 +825,7 @@
   width: 1.15rem;
   height: 1.15rem;
   margin: 0;
-  accent-color: var(--ambar-texto);
+  accent-color: var(--ouro);
 }
 
 .simulador__saida {
@@ -543,17 +836,19 @@
   margin-bottom: 0.25rem;
   font-family: var(--serifa);
   font-size: 1.75rem;
+  color: var(--ouro);
 }
 
 .simulador__motivo {
-  color: var(--grafite);
+  color: var(--texto-2);
   font-size: 0.9375rem;
 }
 
-/* ---------- 5 · APIs ---------- */
+/* ---------- Integrações ---------- */
 .apis {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
+  margin: 2.5rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -565,21 +860,31 @@
 }
 
 .apis li {
-  padding-top: 1rem;
-  border-top: 2px solid var(--tinta);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--borda);
+  border-top: 3px solid var(--azul);
+  border-radius: var(--raio);
+  background: var(--superficie);
 }
 
 .apis h3 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
-/* ---------- 6 · Demo ---------- */
+.apis p {
+  flex: 1;
+  color: var(--texto-2);
+}
+
+/* ---------- Demo ---------- */
 .terminal {
   margin: 0 0 1rem;
   padding: 1rem 1.25rem;
-  background: var(--tinta);
-  color: var(--papel);
   border-radius: var(--raio);
+  background: var(--azul-noite);
+  color: #eef1f8;
   overflow-x: auto;
   line-height: 1.5;
 }
@@ -590,15 +895,16 @@
 
 .demo {
   padding: 1.25rem;
-  border: 1px dashed var(--regua);
+  border: 1px dashed var(--borda);
   border-radius: var(--raio);
+  background: var(--superficie);
 }
 
 .demo__estado {
   margin: 0;
   font-family: var(--mono);
   font-size: var(--t-fonte);
-  color: var(--grafite);
+  color: var(--texto-2);
 }
 
 .demo__video {
@@ -606,7 +912,7 @@
   width: 100%;
   margin-top: 1rem;
   border-radius: var(--raio);
-  background: var(--tinta);
+  background: var(--azul-noite);
 }
 
 .demo__bloco {
@@ -625,7 +931,7 @@
   gap: 0.75rem;
   align-items: baseline;
   padding: 0.5rem 0;
-  border-top: 1px solid var(--regua);
+  border-top: 1px solid var(--borda);
 }
 
 .demo__tarefa {
@@ -635,26 +941,7 @@
 .demo__dias {
   font-family: var(--mono);
   font-size: var(--t-fonte);
-  color: var(--grafite);
-}
-
-.prioridade {
-  padding: 0.05rem 0.45rem;
-  border-radius: 4px;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  background: var(--papel-3);
-  color: var(--grafite);
-}
-
-.prioridade--alta {
-  background: #f3d9c9;
-  color: #7a2410;
-}
-
-.prioridade--média {
-  background: #f4e6c4;
-  color: #5e4108;
+  color: var(--texto-2);
 }
 
 .demo__resumo h4 {
@@ -676,15 +963,15 @@
 }
 
 .demo__alternativas .correta {
-  color: var(--verde);
+  color: var(--sucesso);
   font-weight: 600;
 }
 
-/* ---------- 7 · Evidências ---------- */
+/* ---------- Resultados ---------- */
 .metricas {
   display: grid;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin: 2.5rem 0 1.5rem;
 }
 
 @media (min-width: 40rem) {
@@ -700,56 +987,71 @@
 }
 
 .metrica {
-  padding-top: 1rem;
-  border-top: 2px solid var(--tinta);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--raio);
+  background: var(--superficie);
+  box-shadow: var(--sombra);
 }
 
 .metrica__valor {
   margin: 0 0 0.5rem;
   font-family: var(--serifa);
-  font-size: clamp(2.75rem, 2rem + 2.5vw, 4rem);
+  font-size: clamp(2.75rem, 2rem + 2.5vw, 3.75rem);
   line-height: 1;
+  color: var(--azul);
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- 8 · Limites e 9 · Próximos passos ---------- */
-.lista-limites {
+.metrica__rotulo {
+  flex: 1;
+  color: var(--texto-2);
+}
+
+/* ---------- Roadmap ---------- */
+.roadmap {
+  display: grid;
+  gap: 1rem;
+  margin: 2.5rem 0 1rem;
   padding: 0;
   list-style: none;
-  max-width: 52rem;
+  counter-reset: roadmap;
 }
 
-.lista-limites li {
-  padding: 1rem 0;
-  border-top: 1px solid var(--regua);
+@media (min-width: 48rem) {
+  .roadmap {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.roadmap {
-  max-width: 52rem;
-  padding-left: 1.5rem;
+@media (min-width: 64rem) {
+  .roadmap {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .roadmap li {
+  padding: 1.5rem;
+  border-radius: var(--raio);
+  background: var(--superficie);
+  counter-increment: roadmap;
+}
+
+.roadmap li::before {
+  content: counter(roadmap, decimal-leading-zero);
+  display: block;
   margin-bottom: 1rem;
-  padding-left: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--acento-texto);
 }
 
-.roadmap li::marker {
-  font-family: var(--serifa);
-  font-weight: 600;
-  color: var(--ambar-texto);
+.roadmap h3 {
+  font-size: 1.35rem;
 }
 
-/* ---------- 10 · Equipe ---------- */
-.equipe {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 2rem;
-  padding: 0;
-  list-style: none;
-}
-
-.equipe li {
-  font-family: var(--serifa);
-  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+.roadmap p {
+  margin: 0;
+  color: var(--texto-2);
 }

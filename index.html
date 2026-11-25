@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Glaux: sistema multiagente que lê o Canvas LMS, organiza prazos e gera resumos e questões só com o material das aulas, citando a página de cada fonte."
+      content="Glaux é um sistema de agentes de IA que lê suas disciplinas no Canvas, prioriza seus prazos e gera resumos e questões só com o material das aulas, citando a página de cada fonte."
     />
-    <meta name="theme-color" content="#f5f1e8" />
-    <title>Glaux · sistema multiagente para estudantes do Canvas</title>
+    <meta name="theme-color" content="#0f1d3d" />
+    <title>Glaux · seu Canvas vira um plano de estudos</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
@@ -24,423 +24,457 @@
     <div class="progresso" aria-hidden="true"><span class="progresso__barra"></span></div>
 
     <header class="topo">
-      <a class="topo__marca" href="#abertura">Glaux</a>
+      <a class="topo__marca" href="#inicio" aria-label="Glaux, início">
+        <svg class="coruja" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M7 9 L11 12 M25 9 L21 12" />
+          <circle cx="11.5" cy="16" r="5" />
+          <circle cx="20.5" cy="16" r="5" />
+          <circle class="coruja__pupila" cx="11.5" cy="16" r="1.8" />
+          <circle class="coruja__pupila" cx="20.5" cy="16" r="1.8" />
+          <path d="M14.5 22 L16 24.5 L17.5 22" />
+        </svg>
+        <span>Glaux</span>
+      </a>
       <nav class="topo__nav" aria-label="Seções">
         <ol>
-          <li><a href="#problema">Problema</a></li>
-          <li><a href="#hipotese">Hipótese</a></li>
-          <li><a href="#agentes">Agentes</a></li>
-          <li><a href="#colaboracao">Colaboração</a></li>
-          <li><a href="#apis">APIs</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#integracoes">Integrações</a></li>
+          <li><a href="#resultados">Resultados</a></li>
           <li><a href="#demo">Demo</a></li>
-          <li><a href="#evidencias">Evidências</a></li>
-          <li><a href="#limites">Limites</a></li>
-          <li><a href="#proximos">Próximos passos</a></li>
-          <li><a href="#equipe">Equipe</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
         </ol>
       </nav>
+      <a class="botao botao--topo" href="https://github.com/minneh8/Residence_AI_Challenge-2"
+        >Código</a
+      >
     </header>
 
     <main id="conteudo" tabindex="-1">
-      <!-- 0 · Abertura -->
-      <section class="secao abertura" id="abertura" data-secao aria-labelledby="titulo-abertura">
-        <p class="sobrelinha">Residência em IA · Instituto Eldorado · Challenge 2</p>
-        <h1 id="titulo-abertura" class="abertura__titulo">Glaux</h1>
-        <p class="abertura__lede">
-          Agentes que leem o seu Canvas, organizam os prazos e estudam com você usando
-          <span class="marca">só o material das aulas</span>, citando a página de onde tiraram cada
-          frase.
-        </p>
-        <p class="abertura__exemplo">
-          <span class="exemplo__frase"
-            >Cada frase do resumo termina com a sua fonte, no formato</span
+      <!-- Início -->
+      <section class="heroi" id="inicio" data-secao aria-labelledby="titulo-inicio">
+        <div class="heroi__grade">
+          <div class="heroi__texto">
+            <p class="selo">
+              <span class="selo__ponto" aria-hidden="true"></span> Em desenvolvimento · Residência
+              em IA · Instituto Eldorado
+            </p>
+            <h1 id="titulo-inicio">Seu Canvas vira um plano de estudos.</h1>
+            <p class="heroi__lede">
+              O Glaux é um sistema de agentes de IA que lê suas disciplinas no Canvas, prioriza seus
+              prazos e gera resumos e questões
+              <span class="marca">só com o material das aulas</span>, citando a página de cada
+              fonte.
+            </p>
+            <div class="heroi__acoes">
+              <a class="botao" href="#como-funciona">Veja como funciona</a>
+              <a
+                class="botao botao--fantasma"
+                href="https://github.com/minneh8/Residence_AI_Challenge-2"
+                >Código no GitHub</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="heroi__ilustracao"
+            aria-label="Ilustração das três saídas do Glaux"
+            role="img"
           >
-          <code class="fonte fonte--grande">[arquivo, p.X-Y]</code>
-          <cite class="fonte">[prompts/agente_tutor_prompts.py:10-12]</cite>
+            <div class="painel painel--cronograma">
+              <p class="painel__rotulo">Cronograma</p>
+              <p class="painel__linha">
+                <span class="prioridade prioridade--alta">ALTA</span> Entrega em 2 dias
+              </p>
+              <p class="painel__nota">Foco total na entrega até o prazo.</p>
+              <p class="painel__linha">
+                <span class="prioridade prioridade--média">MÉDIA</span> Entrega em 6 dias
+              </p>
+            </div>
+            <div class="painel painel--resumo">
+              <p class="painel__rotulo">Resumo</p>
+              <p class="painel__titulo">Conceitos-chave</p>
+              <p class="painel__texto">
+                Cada frase termina com a sua fonte
+                <span class="fonte">[arquivo, p.X-Y]</span>
+              </p>
+            </div>
+            <div class="painel painel--questoes">
+              <p class="painel__rotulo">Questões</p>
+              <p class="painel__texto">4 alternativas, uma correta, presa a um trecho real.</p>
+              <p class="painel__alternativas">
+                <span>A</span><span class="correta">B</span><span>C</span><span>D</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recursos -->
+      <section class="secao" id="recursos" data-secao aria-labelledby="titulo-recursos">
+        <p class="sobrelinha">Para quem estuda pelo Canvas</p>
+        <h2 id="titulo-recursos">Menos tempo organizando, mais tempo estudando.</h2>
+        <p class="secao__lede">
+          Prazos espalhados, material demais e pouca certeza do que estudar fazem o estudo render
+          menos e aumentam o estresse. O Glaux cuida da parte chata.
         </p>
-        <p class="abertura__dica">Use <kbd>→</kbd> e <kbd>←</kbd> para passar de seção.</p>
-      </section>
-
-      <!-- 1 · Problema -->
-      <section class="secao" id="problema" data-secao aria-labelledby="titulo-problema">
-        <p class="secao__numero" aria-hidden="true">01</p>
-        <h2 id="titulo-problema">O problema</h2>
-        <div class="colunas">
-          <div>
-            <p class="destaque">
-              Os estudos rendem menos por um cronograma mal estruturado, pela falta de feedback
-              rápido, por material insuficiente e pela incerteza de quais assuntos abordar.
-              <cite class="fonte">[Doc, p.3]</cite>
-            </p>
-            <p>
-              Estudo que rende menos vira mais estresse, e isso limita o bem-estar do estudante, a
-              Big Idea do desafio. <cite class="fonte">[Doc, p.3]</cite>
-            </p>
-          </div>
-          <dl class="ficha">
-            <div>
-              <dt>Para quem</dt>
-              <dd>
-                Estudantes do ensino técnico e superior que usam o Canvas LMS.
-                <cite class="fonte">[Doc, p.3-4]</cite>
-              </dd>
-            </div>
-            <div>
-              <dt>Dor</dt>
-              <dd>
-                Priorizar prazos, saber o que estudar e ter correção rápida.
-                <cite class="fonte">[Doc, p.4]</cite>
-              </dd>
-            </div>
-            <div>
-              <dt>Pergunta essencial</dt>
-              <dd>
-                “A IA vai substituir o humano ou ampliar seu potencial?”
-                <cite class="fonte">[Doc, p.3]</cite>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <!-- 2 · Hipótese -->
-      <section class="secao" id="hipotese" data-secao aria-labelledby="titulo-hipotese">
-        <p class="secao__numero" aria-hidden="true">02</p>
-        <h2 id="titulo-hipotese">A hipótese, e como ela evoluiu</h2>
-        <div class="colunas">
-          <blockquote class="citacao">
-            <p>
-              Integrar a API do Canvas LMS a dois agentes com funções diferentes: o primeiro faria a
-              ponte com o Canvas e planejaria cronogramas; o segundo funcionaria como tutor, gerando
-              questões e resumos.
-            </p>
-            <footer><cite class="fonte">[Doc, p.3-4]</cite> hipótese original</footer>
-          </blockquote>
-          <div>
-            <p>
-              Ao construir, o tutor se dividiu em dois papéis e a coordenação ganhou um agente
-              próprio. Hoje são quatro:
-            </p>
-            <ol class="evolucao">
-              <li><strong>Canvas</strong> traz cursos, tarefas e PDFs.</li>
-              <li><strong>Tutor</strong> monta o cronograma e escreve resumos citados.</li>
-              <li><strong>Gerador</strong> cria questões ancoradas no material.</li>
-              <li><strong>Orquestrador</strong> decide quais agentes cada pedido aciona.</li>
-            </ol>
-            <p class="nota">
-              <cite class="fonte">[src/graph.py:40-43]</cite>
-              <cite class="fonte">[branch orquestrador, agente_orquestrador/service.py]</cite>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Agentes -->
-      <section class="secao" id="agentes" data-secao aria-labelledby="titulo-agentes">
-        <p class="secao__numero" aria-hidden="true">03</p>
-        <h2 id="titulo-agentes">Os quatro agentes</h2>
-        <ul class="cartoes" role="list">
-          <li class="cartao">
-            <h3>Canvas</h3>
-            <p>Sincroniza cursos, tarefas e PDFs e dispara a indexação do material.</p>
-            <dl>
-              <dt>Recebe</dt>
-              <dd>o token do próprio estudante</dd>
-              <dt>Entrega</dt>
-              <dd>cursos, <code>assignments.json</code> e os PDFs por disciplina</dd>
-              <dt>Usa</dt>
-              <dd>API do Canvas, com retentativas e modo offline; sem LLM</dd>
-            </dl>
-            <cite class="fonte">[src/agente_canvas/node.py:71-113]</cite>
+        <ul class="recursos" role="list">
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true">01</span>
+            <h3>Sincroniza com o Canvas</h3>
+            <p>Busca suas disciplinas, tarefas e os PDFs das aulas com o seu próprio token.</p>
           </li>
-          <li class="cartao">
-            <h3>Tutor</h3>
-            <p>Prioriza entregas por prazo e escreve um resumo em que cada frase cita a fonte.</p>
-            <dl>
-              <dt>Recebe</dt>
-              <dd>cursos, tarefas e o tema pedido</dd>
-              <dt>Entrega</dt>
-              <dd>cronograma (alta até 2 dias, média até 7) e resumos citados</dd>
-              <dt>Usa</dt>
-              <dd>busca no material (RAG) e Groq <code>gpt-oss-20b</code>, temperatura 0</dd>
-            </dl>
-            <cite class="fonte">[src/agente_tutor/service.py:94-170]</cite>
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true">02</span>
+            <h3>Prioriza seus prazos</h3>
+            <p>Monta o cronograma das entregas pendentes: alta até 2 dias, média até 7.</p>
           </li>
-          <li class="cartao">
-            <h3>Gerador</h3>
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true">03</span>
+            <h3>Resume com fonte</h3>
             <p>
-              Cria questões de múltipla escolha e dissertativas, cada uma presa a um trecho real.
+              Resumos baseados só nos slides, com a citação no fim de cada frase. Se o material não
+              cobre, ele diz.
             </p>
-            <dl>
-              <dt>Recebe</dt>
-              <dd>tema, disciplina e quantidade (1 a 10)</dd>
-              <dt>Entrega</dt>
-              <dd>questões validadas, ou “sem material” quando o conteúdo não sustenta</dd>
-              <dt>Usa</dt>
-              <dd>RAG com score mínimo 0,80, validação Pydantic e Groq em modo JSON</dd>
-            </dl>
-            <cite class="fonte">[src/agente_gerador/service.py:37-55]</cite>
           </li>
-          <li class="cartao">
-            <h3>Orquestrador</h3>
-            <p>Lê a ação pedida e o que já existe localmente, e monta a menor rota de agentes.</p>
-            <dl>
-              <dt>Recebe</dt>
-              <dd>a ação (sincronizar, cronograma, resumo, questões ou fluxo completo)</dd>
-              <dt>Entrega</dt>
-              <dd>a fila de agentes a executar e o motivo da escolha</dd>
-              <dt>Usa</dt>
-              <dd>regras determinísticas; sem LLM</dd>
-            </dl>
-            <cite class="fonte">[agente_orquestrador/service.py:82-153]</cite>
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true">04</span>
+            <h3>Gera questões para praticar</h3>
+            <p>
+              Múltipla escolha e dissertativas sobre o tema que você escolher, cada uma presa a um
+              trecho real da aula.
+            </p>
           </li>
         </ul>
       </section>
 
-      <!-- 4 · Colaboração -->
-      <section class="secao" id="colaboracao" data-secao aria-labelledby="titulo-colaboracao">
-        <p class="secao__numero" aria-hidden="true">04</p>
-        <h2 id="titulo-colaboracao">Como os agentes trabalham juntos</h2>
+      <!-- Como funciona -->
+      <section
+        class="secao secao--escura"
+        id="como-funciona"
+        data-secao
+        aria-labelledby="titulo-como-funciona"
+      >
+        <div class="secao__interna">
+          <p class="sobrelinha">Como funciona</p>
+          <h2 id="titulo-como-funciona">Quatro agentes, coordenados por um orquestrador.</h2>
 
-        <div class="respostas">
-          <div class="resposta">
-            <p class="resposta__pergunta">Vai ter um orquestrador?</p>
-            <p class="resposta__texto">
-              <strong>Sim.</strong> Um orquestrador sem LLM escolhe, para cada ação, a menor
-              sequência de agentes.
-            </p>
-            <p class="estado" data-estado-orquestrador></p>
-          </div>
-          <div class="resposta">
-            <p class="resposta__pergunta">Vão conversar um com o outro diretamente?</p>
-            <p class="resposta__texto">
-              <strong>Não.</strong> Cada agente lê e escreve num estado compartilhado do LangGraph,
-              o <code>GlauxState</code>. O próximo agente parte do que o anterior deixou.
-              <cite class="fonte">[src/state.py:32-48]</cite>
-            </p>
-          </div>
-        </div>
-
-        <div class="roteiro">
-          <figure class="fluxo" data-fluxo aria-labelledby="legenda-fluxo">
-            <svg
-              class="fluxo__svg"
-              viewBox="0 0 640 400"
-              role="img"
-              aria-labelledby="fluxo-titulo fluxo-desc"
-            >
-              <title id="fluxo-titulo">Fluxo do Glaux</title>
-              <desc id="fluxo-desc">
-                A ação do estudante chega ao Orquestrador, que aciona Canvas, Tutor e Gerador em
-                sequência. Todos leem e escrevem no estado compartilhado GlauxState.
-              </desc>
-              <defs>
-                <marker
-                  id="seta"
-                  viewBox="0 0 10 10"
-                  refX="9"
-                  refY="5"
-                  markerWidth="7"
-                  markerHeight="7"
-                  orient="auto-start-reverse"
-                >
-                  <path d="M0 0 L10 5 L0 10 z" class="seta" />
-                </marker>
-              </defs>
-
-              <path class="aresta p1" pathLength="1" d="M190 48 H232" marker-end="url(#seta)" />
-              <path
-                class="aresta p2"
-                data-para="canvas_agent"
-                pathLength="1"
-                d="M300 76 C300 120 105 120 105 166"
-                marker-end="url(#seta)"
-              />
-              <path
-                class="aresta p2"
-                data-para="tutor_agent"
-                pathLength="1"
-                d="M320 76 V166"
-                marker-end="url(#seta)"
-              />
-              <path
-                class="aresta p2"
-                data-para="question_generator_agent"
-                pathLength="1"
-                d="M340 76 C340 120 535 120 535 166"
-                marker-end="url(#seta)"
-              />
-              <path class="aresta p3" pathLength="1" d="M190 198 H232" marker-end="url(#seta)" />
-              <path class="aresta p3" pathLength="1" d="M405 198 H447" marker-end="url(#seta)" />
-              <path class="aresta tracejada p4" pathLength="1" d="M105 230 V316" />
-              <path class="aresta tracejada p4" pathLength="1" d="M320 230 V316" />
-              <path class="aresta tracejada p4" pathLength="1" d="M535 230 V316" />
-
-              <g class="no p1" data-no="acao">
-                <rect x="20" y="20" width="170" height="56" rx="6" />
-                <text x="105" y="54">Ação do estudante</text>
-              </g>
-              <g class="no no--orquestrador p1" data-no="orquestrador">
-                <title>Orquestrador · agente_orquestrador/service.py:82-153</title>
-                <rect x="235" y="20" width="170" height="56" rx="6" />
-                <text x="320" y="54">Orquestrador</text>
-              </g>
-              <g class="no p3" data-no="canvas_agent">
-                <title>Canvas · src/agente_canvas/node.py</title>
-                <rect x="20" y="170" width="170" height="56" rx="6" />
-                <text x="105" y="204">Canvas</text>
-              </g>
-              <g class="no p3" data-no="tutor_agent">
-                <title>Tutor · src/agente_tutor/node.py</title>
-                <rect x="235" y="170" width="170" height="56" rx="6" />
-                <text x="320" y="204">Tutor</text>
-              </g>
-              <g class="no p3" data-no="question_generator_agent">
-                <title>Gerador · src/agente_gerador/node.py</title>
-                <rect x="450" y="170" width="170" height="56" rx="6" />
-                <text x="535" y="204">Gerador</text>
-              </g>
-              <g class="no no--estado p4" data-no="estado">
-                <title>GlauxState · src/state.py:32-48</title>
-                <rect x="20" y="320" width="600" height="60" rx="6" />
-                <text class="estado__nome" x="40" y="356">GlauxState</text>
-                <text class="estado__campo" x="190" y="356">courses</text>
-                <text class="estado__campo" x="290" y="356">assignments</text>
-                <text class="estado__campo" x="410" y="356">summaries</text>
-                <text class="estado__campo" x="520" y="356">questões</text>
-              </g>
-            </svg>
-            <figcaption id="legenda-fluxo" class="fluxo__legenda" aria-live="polite">
-              O fluxo completo: pedido, rota, agentes e estado compartilhado.
-            </figcaption>
-          </figure>
-
-          <ol class="passos" role="list">
-            <li class="passo" data-passo="1">
-              <h3>1. O pedido</h3>
+          <ul class="cartoes" role="list" id="agentes">
+            <li class="cartao">
+              <p class="cartao__papel">Coleta</p>
+              <h3>Canvas</h3>
               <p>
-                O estudante escolhe uma ação: sincronizar, cronograma, resumo, questões ou fluxo
-                completo. O pedido vai para o Orquestrador.
+                Sincroniza cursos, tarefas e PDFs e indexa o material. Sem LLM; tenta de novo e
+                segue offline se o Canvas cair.
               </p>
-              <cite class="fonte">[agente_orquestrador/service.py:87-147]</cite>
+              <cite class="fonte">[src/agente_canvas/node.py:71-113]</cite>
             </li>
-            <li class="passo" data-passo="2">
-              <h3>2. A rota</h3>
+            <li class="cartao">
+              <p class="cartao__papel">Organização</p>
+              <h3>Tutor</h3>
               <p>
-                O Orquestrador olha o que já existe em <code>data/raw</code> e no estado e chama só
-                os agentes necessários. Se os PDFs já estão no disco, o Canvas fica de fora.
+                Prioriza as entregas por prazo e escreve resumos em que cada frase cita a página de
+                origem.
               </p>
-              <cite class="fonte">[agente_orquestrador/service.py:36-80]</cite>
+              <cite class="fonte">[src/agente_tutor/service.py:119-310]</cite>
             </li>
-            <li class="passo" data-passo="3">
-              <h3>3. Os agentes, em sequência</h3>
+            <li class="cartao">
+              <p class="cartao__papel">Prática</p>
+              <h3>Gerador</h3>
               <p>
-                Canvas baixa e indexa, Tutor resume e prioriza, Gerador cria as questões. A ordem é
-                fixa; a rota só decide quem entra.
+                Cria questões validadas no código. Recusa o tema quando o material não sustenta, em
+                vez de inventar.
               </p>
-              <cite class="fonte">[src/graph.py:45-48]</cite>
+              <cite class="fonte">[src/agente_gerador/service.py:274-331]</cite>
             </li>
-            <li class="passo" data-passo="4">
-              <h3>4. O estado compartilhado</h3>
+            <li class="cartao cartao--destaque">
+              <p class="cartao__papel">Coordenação</p>
+              <h3>Orquestrador</h3>
               <p>
-                Ninguém manda mensagem para ninguém: cada agente grava seu resultado no
-                <code>GlauxState</code>, e o seguinte lê dali.
+                Lê a ação pedida e o que já existe, e chama só os agentes necessários. Regras
+                determinísticas, sem LLM.
               </p>
-              <cite class="fonte">[src/state.py:32-48]</cite>
-            </li>
-            <li class="passo passo--simulador" data-passo="5">
-              <h3>Experimente a rota</h3>
-              <form class="simulador" data-simulador>
-                <fieldset>
-                  <legend>Ação</legend>
-                  <label
-                    ><input type="radio" name="acao" value="SINCRONIZAR_CANVAS" /> Sincronizar
-                    Canvas</label
-                  >
-                  <label
-                    ><input type="radio" name="acao" value="GERAR_CRONOGRAMA" /> Gerar
-                    cronograma</label
-                  >
-                  <label
-                    ><input type="radio" name="acao" value="GERAR_RESUMO" /> Gerar resumo</label
-                  >
-                  <label
-                    ><input type="radio" name="acao" value="GERAR_QUESTOES" checked /> Gerar
-                    questões</label
-                  >
-                  <label
-                    ><input type="radio" name="acao" value="FLUXO_COMPLETO" /> Fluxo completo</label
-                  >
-                </fieldset>
-                <fieldset>
-                  <legend>O que já existe</legend>
-                  <label
-                    ><input type="checkbox" name="dadosLocais" checked /> PDFs e tarefas em
-                    <code>data/raw</code></label
-                  >
-                  <label><input type="checkbox" name="resumoNoEstado" /> Resumo já no estado</label>
-                  <label><input type="checkbox" name="forcarSync" /> Forçar sincronização</label>
-                </fieldset>
-              </form>
-              <div class="simulador__saida" aria-live="polite">
-                <p class="simulador__rota" data-rota></p>
-                <p class="simulador__motivo" data-motivo></p>
-              </div>
               <cite class="fonte">[agente_orquestrador/service.py:82-153]</cite>
             </li>
-          </ol>
+          </ul>
+
+          <div class="respostas">
+            <div class="resposta">
+              <p class="resposta__pergunta">Existe um orquestrador?</p>
+              <p class="resposta__texto">
+                <strong>Sim.</strong> Para cada ação, ele monta a menor sequência de agentes.
+              </p>
+              <p class="estado" data-estado-orquestrador></p>
+            </div>
+            <div class="resposta">
+              <p class="resposta__pergunta">Os agentes conversam entre si?</p>
+              <p class="resposta__texto">
+                <strong>Não diretamente.</strong> Eles compartilham um estado do LangGraph, o
+                <code>GlauxState</code>: cada um grava o seu resultado e o próximo parte dali.
+              </p>
+              <cite class="fonte">[src/state.py:32-48]</cite>
+            </div>
+          </div>
+
+          <div class="roteiro">
+            <figure class="fluxo" data-fluxo aria-labelledby="legenda-fluxo">
+              <svg
+                class="fluxo__svg"
+                viewBox="0 0 640 400"
+                role="img"
+                aria-labelledby="fluxo-titulo fluxo-desc"
+              >
+                <title id="fluxo-titulo">Fluxo do Glaux</title>
+                <desc id="fluxo-desc">
+                  A ação do estudante chega ao Orquestrador, que aciona Canvas, Tutor e Gerador em
+                  sequência. Todos leem e escrevem no estado compartilhado GlauxState.
+                </desc>
+                <defs>
+                  <marker
+                    id="seta"
+                    viewBox="0 0 10 10"
+                    refX="9"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0 L10 5 L0 10 z" class="seta" />
+                  </marker>
+                </defs>
+
+                <path class="aresta p1" pathLength="1" d="M190 48 H232" marker-end="url(#seta)" />
+                <path
+                  class="aresta p2"
+                  data-para="canvas_agent"
+                  pathLength="1"
+                  d="M300 76 C300 120 105 120 105 166"
+                  marker-end="url(#seta)"
+                />
+                <path
+                  class="aresta p2"
+                  data-para="tutor_agent"
+                  pathLength="1"
+                  d="M320 76 V166"
+                  marker-end="url(#seta)"
+                />
+                <path
+                  class="aresta p2"
+                  data-para="question_generator_agent"
+                  pathLength="1"
+                  d="M340 76 C340 120 535 120 535 166"
+                  marker-end="url(#seta)"
+                />
+                <path class="aresta p3" pathLength="1" d="M190 198 H232" marker-end="url(#seta)" />
+                <path class="aresta p3" pathLength="1" d="M405 198 H447" marker-end="url(#seta)" />
+                <path class="aresta tracejada p4" pathLength="1" d="M105 230 V316" />
+                <path class="aresta tracejada p4" pathLength="1" d="M320 230 V316" />
+                <path class="aresta tracejada p4" pathLength="1" d="M535 230 V316" />
+
+                <g class="no p1" data-no="acao">
+                  <rect x="20" y="20" width="170" height="56" rx="8" />
+                  <text x="105" y="54">Ação do estudante</text>
+                </g>
+                <g class="no no--orquestrador p1" data-no="orquestrador">
+                  <title>Orquestrador · agente_orquestrador/service.py:82-153</title>
+                  <rect x="235" y="20" width="170" height="56" rx="8" />
+                  <text x="320" y="54">Orquestrador</text>
+                </g>
+                <g class="no p3" data-no="canvas_agent">
+                  <title>Canvas · src/agente_canvas/node.py</title>
+                  <rect x="20" y="170" width="170" height="56" rx="8" />
+                  <text x="105" y="204">Canvas</text>
+                </g>
+                <g class="no p3" data-no="tutor_agent">
+                  <title>Tutor · src/agente_tutor/node.py</title>
+                  <rect x="235" y="170" width="170" height="56" rx="8" />
+                  <text x="320" y="204">Tutor</text>
+                </g>
+                <g class="no p3" data-no="question_generator_agent">
+                  <title>Gerador · src/agente_gerador/node.py</title>
+                  <rect x="450" y="170" width="170" height="56" rx="8" />
+                  <text x="535" y="204">Gerador</text>
+                </g>
+                <g class="no no--estado p4" data-no="estado">
+                  <title>GlauxState · src/state.py:32-48</title>
+                  <rect x="20" y="320" width="600" height="60" rx="8" />
+                  <text class="estado__nome" x="40" y="356">GlauxState</text>
+                  <text class="estado__campo" x="190" y="356">courses</text>
+                  <text class="estado__campo" x="290" y="356">assignments</text>
+                  <text class="estado__campo" x="410" y="356">summaries</text>
+                  <text class="estado__campo" x="520" y="356">questões</text>
+                </g>
+              </svg>
+              <figcaption id="legenda-fluxo" class="fluxo__legenda" aria-live="polite">
+                O fluxo completo: pedido, rota, agentes e estado compartilhado.
+              </figcaption>
+            </figure>
+
+            <ol class="passos" role="list">
+              <li class="passo" data-passo="1">
+                <h3>1. Você pede</h3>
+                <p>
+                  Sincronizar, montar o cronograma, resumir, gerar questões ou rodar tudo. O pedido
+                  vai para o Orquestrador.
+                </p>
+              </li>
+              <li class="passo" data-passo="2">
+                <h3>2. O Orquestrador escolhe a rota</h3>
+                <p>
+                  Ele confere o que já está no disco e no estado. Se os PDFs já foram baixados, o
+                  Canvas nem é chamado.
+                </p>
+              </li>
+              <li class="passo" data-passo="3">
+                <h3>3. Os agentes trabalham em sequência</h3>
+                <p>Canvas baixa e indexa, Tutor resume e prioriza, Gerador cria as questões.</p>
+              </li>
+              <li class="passo" data-passo="4">
+                <h3>4. Tudo passa pelo estado compartilhado</h3>
+                <p>
+                  Nenhum agente manda mensagem ao outro: cada resultado fica no
+                  <code>GlauxState</code>, pronto para o próximo.
+                </p>
+              </li>
+              <li class="passo passo--simulador" data-passo="5">
+                <h3>Experimente a rota</h3>
+                <form class="simulador" data-simulador>
+                  <fieldset>
+                    <legend>Ação</legend>
+                    <label
+                      ><input type="radio" name="acao" value="SINCRONIZAR_CANVAS" /> Sincronizar
+                      Canvas</label
+                    >
+                    <label
+                      ><input type="radio" name="acao" value="GERAR_CRONOGRAMA" /> Gerar
+                      cronograma</label
+                    >
+                    <label
+                      ><input type="radio" name="acao" value="GERAR_RESUMO" /> Gerar resumo</label
+                    >
+                    <label
+                      ><input type="radio" name="acao" value="GERAR_QUESTOES" checked /> Gerar
+                      questões</label
+                    >
+                    <label
+                      ><input type="radio" name="acao" value="FLUXO_COMPLETO" /> Fluxo
+                      completo</label
+                    >
+                  </fieldset>
+                  <fieldset>
+                    <legend>O que já existe</legend>
+                    <label
+                      ><input type="checkbox" name="dadosLocais" checked /> PDFs e tarefas em
+                      <code>data/raw</code></label
+                    >
+                    <label
+                      ><input type="checkbox" name="resumoNoEstado" /> Resumo já no estado</label
+                    >
+                    <label><input type="checkbox" name="forcarSync" /> Forçar sincronização</label>
+                  </fieldset>
+                </form>
+                <div class="simulador__saida" aria-live="polite">
+                  <p class="simulador__rota" data-rota></p>
+                  <p class="simulador__motivo" data-motivo></p>
+                </div>
+                <cite class="fonte">[agente_orquestrador/service.py:82-153]</cite>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
 
-      <!-- 5 · APIs externas -->
-      <section class="secao" id="apis" data-secao aria-labelledby="titulo-apis">
-        <p class="secao__numero" aria-hidden="true">05</p>
-        <h2 id="titulo-apis">APIs externas integradas</h2>
+      <!-- Integrações -->
+      <section class="secao" id="integracoes" data-secao aria-labelledby="titulo-integracoes">
+        <p class="sobrelinha">Integrações</p>
+        <h2 id="titulo-integracoes">Conectado ao que você já usa.</h2>
         <ul class="apis" role="list">
           <li>
             <h3>Canvas LMS</h3>
             <p>
               API REST com o token do estudante: cursos ativos, tarefas e PDFs. Repete a chamada
-              após 2, 5 e 10 s e, se o Canvas cair, segue em modo offline com o que já está no
-              disco.
+              após 2, 5 e 10 s e, se o Canvas cair, segue offline com o que já está no disco.
             </p>
             <cite class="fonte">[src/agente_canvas/service.py:32,87-112]</cite>
           </li>
           <li>
             <h3>Groq</h3>
             <p>
-              Modelo <code>openai/gpt-oss-20b</code> para os resumos do Tutor e as questões do
-              Gerador, em modo JSON e com saída validada no código.
+              Modelo <code>openai/gpt-oss-20b</code> para os resumos e as questões, com saída em
+              JSON validada no código antes de chegar a você.
             </p>
             <cite class="fonte">[src/agente_gerador/service.py:50-55,234-271]</cite>
           </li>
           <li>
             <h3>Hugging Face</h3>
             <p>
-              Fonte do modelo de embeddings <code>multilingual-e5-base</code>, que roda localmente e
-              alimenta o índice ChromaDB, filtrado por disciplina.
+              Modelo de embeddings <code>multilingual-e5-base</code>, que roda localmente e indexa o
+              material num ChromaDB separado por disciplina.
             </p>
             <cite class="fonte">[docs/DECISOES.md:5-7]</cite>
           </li>
         </ul>
       </section>
 
-      <!-- 6 · Demo -->
+      <!-- Resultados -->
+      <section
+        class="secao secao--clara"
+        id="resultados"
+        data-secao
+        aria-labelledby="titulo-resultados"
+      >
+        <p class="sobrelinha">Resultados</p>
+        <h2 id="titulo-resultados">Medido, não prometido.</h2>
+        <div class="metricas">
+          <div class="metrica">
+            <p class="metrica__valor">14/18</p>
+            <p class="metrica__rotulo">
+              perguntas com a página certa entre os 5 primeiros trechos da busca (0,778).
+            </p>
+            <cite class="fonte">[avaliacao/resultados.md, rodada 10/11 15:06]</cite>
+          </div>
+          <div class="metrica">
+            <p class="metrica__valor">6/6</p>
+            <p class="metrica__rotulo">
+              temas de fora da disciplina recusados como “sem material”, sem inventar questão.
+            </p>
+            <cite class="fonte">[avaliacao/gerador_resultados.md:28]</cite>
+          </div>
+          <div class="metrica">
+            <p class="metrica__valor">1,8 s</p>
+            <p class="metrica__rotulo">de média para gerar um conjunto de questões validadas.</p>
+            <cite class="fonte">[avaliacao/gerador_resultados.md:31]</cite>
+          </div>
+          <div class="metrica">
+            <p class="metrica__valor">6/10</p>
+            <p class="metrica__rotulo">
+              temas da disciplina com questões geradas e validadas na primeira avaliação.
+            </p>
+            <cite class="fonte">[avaliacao/gerador_resultados.md:27]</cite>
+          </div>
+        </div>
+        <p class="nota">
+          Avaliado em uma disciplina por agente. Perguntas reformuladas com outras palavras ainda
+          são o ponto mais difícil (0,714 contra 1,000 nas diretas).
+          <cite class="fonte">[docs/DECISOES.md:30-31]</cite>
+        </p>
+      </section>
+
+      <!-- Demo -->
       <section class="secao" id="demo" data-secao aria-labelledby="titulo-demo">
-        <p class="secao__numero" aria-hidden="true">06</p>
-        <h2 id="titulo-demo">Demonstração</h2>
+        <p class="sobrelinha">Veja em ação</p>
+        <h2 id="titulo-demo">Uma execução, do Canvas às questões.</h2>
         <div class="colunas">
           <div>
-            <p>Ao vivo, no terminal, a esteira completa numa disciplina:</p>
+            <p>Hoje o Glaux roda pela linha de comando:</p>
             <pre
               class="terminal"
               tabindex="0"
               aria-label="Comando da demonstração"
             ><code>python src/graph.py --curso &lt;id&gt; --tema "&lt;tema&gt;" --questoes 3</code></pre>
             <p class="nota">
-              Imprime o cronograma, os resumos com as frases sem citação marcadas e as questões, e
-              grava tudo em <code>data/processed/</code>.
-              <cite class="fonte">[src/graph.py:53-166]</cite>
+              Imprime o cronograma, os resumos e as questões, e grava tudo em
+              <code>data/processed/</code>. <cite class="fonte">[src/graph.py:53-166]</cite>
             </p>
           </div>
           <div class="demo" data-demo>
@@ -449,134 +483,53 @@
         </div>
       </section>
 
-      <!-- 7 · Evidências -->
-      <section class="secao" id="evidencias" data-secao aria-labelledby="titulo-evidencias">
-        <p class="secao__numero" aria-hidden="true">07</p>
-        <h2 id="titulo-evidencias">Evidências</h2>
-        <div class="metricas">
-          <div class="metrica">
-            <p class="metrica__valor">0,778</p>
-            <p class="metrica__rotulo">
-              Acerto da busca no top-5: a página certa veio em 14 de 18 perguntas.
-            </p>
-            <cite class="fonte">[avaliacao/resultados.md, rodada 10/11 15:06]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">0,657</p>
-            <p class="metrica__rotulo">
-              MRR da configuração escolhida (1 página por trecho), contra 0,611 da janela de 3.
-            </p>
-            <cite class="fonte">[docs/DECISOES.md:12-18]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">6 de 6</p>
-            <p class="metrica__rotulo">
-              Temas de fora da disciplina recusados como “sem material”, sem inventar questão.
-            </p>
-            <cite class="fonte">[avaliacao/gerador_resultados.md:28]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">6 de 10</p>
-            <p class="metrica__rotulo">
-              Temas da disciplina com questões geradas e validadas, em 1,8 s de média.
-            </p>
-            <cite class="fonte">[avaliacao/gerador_resultados.md:27,31]</cite>
-          </div>
-        </div>
-        <p class="nota">
-          Embaralhar no código tirou o viés da letra correta: antes, B em 8 de 12 questões; depois,
-          A 2 · B 2 · C 5 · D 3. <cite class="fonte">[avaliacao/gerador_resultados.md:32-33]</cite>
-        </p>
-      </section>
-
-      <!-- 8 · Limites -->
-      <section class="secao" id="limites" data-secao aria-labelledby="titulo-limites">
-        <p class="secao__numero" aria-hidden="true">08</p>
-        <h2 id="titulo-limites">Limites e riscos, sem maquiagem</h2>
-        <ul class="lista-limites">
-          <li>
-            Perguntas reformuladas com outras palavras são as mais difíceis: acerto de 0,714 contra
-            1,000 nas diretas. <cite class="fonte">[docs/DECISOES.md:30-31]</cite>
-          </li>
-          <li>
-            A busca sempre devolve os trechos mais próximos, mesmo fora do tema; o Gerador filtra
-            com score mínimo e deixa o modelo recusar.
-            <cite class="fonte">[docs/DECISOES.md:21-24]</cite>
-            <cite class="fonte">[src/agente_gerador/service.py:38-43]</cite>
-          </li>
-          <li>
-            2 de 10 temas da disciplina terminaram em erro por quantidade errada de questões.
-            <cite class="fonte">[avaliacao/gerador_resultados.md:16-17]</cite>
-          </li>
-          <li>
-            Sem OCR: imagens e PDFs escaneados não são lidos; <code>.pptx</code> e
-            <code>.docx</code> ficam fora da base. <cite class="fonte">[Doc, p.15]</cite>
-          </li>
-          <li>Cada avaliação cobriu uma disciplina só. <cite class="fonte">[Doc, p.15]</cite></li>
-          <li>
-            Risco de alucinação, mitigado por citação obrigatória e validação no código.
-            <cite class="fonte">[Doc, p.4]</cite>
-            <cite class="fonte">[prompts/agente_tutor_prompts.py:7-14]</cite>
-          </li>
-        </ul>
-      </section>
-
-      <!-- 9 · Próximos passos -->
-      <section class="secao" id="proximos" data-secao aria-labelledby="titulo-proximos">
-        <p class="secao__numero" aria-hidden="true">09</p>
-        <h2 id="titulo-proximos">Próximos passos</h2>
-        <p>O que a documentação prevê e o código ainda não faz:</p>
-        <ol class="roadmap">
+      <!-- Roadmap -->
+      <section class="secao secao--clara" id="roadmap" data-secao aria-labelledby="titulo-roadmap">
+        <p class="sobrelinha">Roadmap</p>
+        <h2 id="titulo-roadmap">O que vem aí.</h2>
+        <ol class="roadmap" role="list">
           <li data-roadmap-orquestrador>
-            Ligar o Orquestrador ao grafo, com rotas condicionais.
-            <cite class="fonte">[agente_orquestrador/node.py]</cite>
+            <h3>Orquestrador no grafo</h3>
+            <p>Rotas condicionais no LangGraph, escolhidas a cada pedido.</p>
           </li>
           <li>
-            Corrigir as respostas dissertativas com uma rede neural e devolver diagnóstico por
-            tópico. <cite class="fonte">[Doc, p.4, p.8]</cite>
+            <h3>Interface web</h3>
+            <p>Botão “Sincronizar” e login no Canvas por OAuth2, sem copiar token.</p>
           </li>
           <li>
-            Fechar o laço: o desempenho nas questões pede revisão reforçada ao planejamento.
-            <cite class="fonte">[Doc, p.5-6]</cite>
+            <h3>Correção das respostas</h3>
+            <p>Avaliação das dissertativas e diagnóstico de desempenho por tópico.</p>
           </li>
           <li>
-            Interface web com o botão “Sincronizar” e login no Canvas por OAuth2.
-            <cite class="fonte">[Doc, p.4-5, p.15]</cite>
-          </li>
-          <li>
-            Download incremental com catálogo por arquivo e busca filtrada por tipo de material.
-            <cite class="fonte">[Doc, p.14-15]</cite>
-            <cite class="fonte">[docs/canvas-incremental.md]</cite>
+            <h3>Plano que se ajusta</h3>
+            <p>O desempenho nas questões pede revisão reforçada ao cronograma.</p>
           </li>
         </ol>
-      </section>
-
-      <!-- 10 · Equipe -->
-      <section class="secao" id="equipe" data-secao aria-labelledby="titulo-equipe">
-        <p class="secao__numero" aria-hidden="true">10</p>
-        <h2 id="titulo-equipe">Equipe</h2>
-        <ul class="equipe" role="list">
-          <li>Caio Peccinato</li>
-          <li>Douglas Juvêncio</li>
-          <li>João Antônio</li>
-          <li>Guilherme Leal</li>
-          <li>Lucas Minneh</li>
-        </ul>
-        <p class="nota"><cite class="fonte">[Doc, p.3]</cite></p>
-        <p>
-          Código:
-          <a href="https://github.com/minneh8/Residence_AI_Challenge-2"
-            >github.com/minneh8/Residence_AI_Challenge-2</a
-          >
-        </p>
+        <p class="nota"><cite class="fonte">[Doc, p.4-6, p.15]</cite></p>
       </section>
     </main>
 
     <footer class="rodape">
-      <p>Glaux · Residência em IA · Instituto Eldorado · 2026</p>
-      <p>
-        Fontes tipográficas: Newsreader e IBM Plex Mono, sob a SIL Open Font License. Citações
-        <code>[Doc, p.N]</code> referem-se à documentação do grupo, v1.0.
+      <div class="rodape__grade">
+        <div>
+          <p class="rodape__marca">Glaux</p>
+          <p>Projeto da Residência em IA · Instituto Eldorado · 2026.</p>
+        </div>
+        <div>
+          <p class="rodape__titulo">Equipe</p>
+          <p>Caio Peccinato, Douglas Juvêncio, João Antônio, Guilherme Leal e Lucas Minneh.</p>
+        </div>
+        <div>
+          <p class="rodape__titulo">Código</p>
+          <p>
+            <a href="https://github.com/minneh8/Residence_AI_Challenge-2">Repositório no GitHub</a>
+          </p>
+        </div>
+      </div>
+      <p class="rodape__nota">
+        As citações entre colchetes apontam para o código do projeto ou para a documentação do grupo
+        (<code>[Doc, p.N]</code>, v1.0). Fontes tipográficas Newsreader e IBM Plex Mono, sob a SIL
+        Open Font License.
       </p>
     </footer>
 

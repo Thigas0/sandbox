@@ -1,46 +1,62 @@
-# DESIGN.md · Glaux, direção A "Caderno anotado"
+# DESIGN.md · Glaux, site de produto com a paleta de Atena
 
-Referências: `docs/design-library/claude/DESIGN.md` (canvas creme, serifa editorial) e o rigor de grade
-de `docs/design-library/wired/DESIGN.md`. Referência, não cópia: nenhuma marca, nome ou logo de terceiros.
+Substitui a direção A ("Caderno anotado") a pedido do usuário em 25/11: o foco passa a ser o produto,
+com só o essencial da apresentação, nas cores de Atena (azul e dourado). As cores do Canvas não foram
+usadas para o site não parecer um produto oficial da Instructure. A coruja do logo é o símbolo de Atena,
+uma escolha criativa que conversa com o nome Glaux.
 
-## Ideia
+## Estrutura
 
-O diferencial comprovado do Glaux é citar a fonte de cada frase (`[arquivo, p.X-Y]`). O site é um
-caderno anotado: texto editorial em papel, e cada fato carrega a sua citação em mono, com marca-texto.
+1. Início (herói escuro): promessa, selo "em desenvolvimento", botões "Veja como funciona" e
+   "Código no GitHub"; ilustração das três saídas (cronograma, resumo, questões).
+2. Recursos: o problema numa frase e os quatro benefícios.
+3. Como funciona (seção escura): os 4 agentes; as duas respostas do entregável (há orquestrador; os
+   agentes não conversam diretamente); o fluxo que se monta na rolagem e o simulador de rotas.
+4. Integrações: Canvas LMS, Groq e Hugging Face.
+5. Resultados: 4 números medidos e a principal limitação.
+6. Demo: o comando e a execução gravada.
+7. Roadmap: o que a documentação prevê e o código ainda não faz.
+8. Rodapé: equipe, repositório e nota sobre as citações.
+
+Regra de honestidade: o site não diz que existe interface web nem login. O produto aparece como "em
+desenvolvimento", e as promessas da documentação ficam no roadmap.
 
 ## Tokens (fonte da verdade: `src/styles/tokens.css`)
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--papel` | `#f5f1e8` | fundo |
-| `--papel-2` / `--papel-3` | `#ede6d6` / `#e4dbc6` | cartões, nós do diagrama, estado |
-| `--tinta` | `#1b1a17` | texto, traços do diagrama |
-| `--grafite` | `#55524b` | texto secundário, citações (6,9:1 sobre o papel) |
-| `--regua` | `#d3c9b3` | linhas e bordas |
-| `--ambar` | `#c9822b` | só decoração: barra de progresso, bordas, realces. Nunca texto pequeno |
-| `--ambar-texto` | `#8a5414` | âmbar para texto e foco (AA sobre o papel) |
-| `--marca` | âmbar a 28% | marca-texto das citações |
-| `--verde` | `#2f6f5e` | alternativa correta na demo |
+| `--azul-noite` | `#0f1d3d` | topo, herói, "Como funciona", rodapé |
+| `--azul-noite-2` | `#172a55` | cartões sobre o azul-noite |
+| `--azul` | `#1d3a7a` | números dos resultados, filete das integrações |
+| `--azul-nevoa` | `#eef2fa` | seções claras alternadas |
+| `--branco` | `#fbfbfd` | fundo padrão |
+| `--ouro` | `#d9b75a` | botões, traços do diagrama, rótulos sobre o escuro (9:1) |
+| `--ouro-escuro` | `#7a5c12` | dourado para texto sobre o claro (AA) |
+| `--sucesso` | `#1f6b52` | alternativa correta |
+
+Os componentes usam tokens semânticos (`--fundo`, `--superficie`, `--borda`, `--texto`, `--texto-2`,
+`--acento-texto`). As superfícies escuras (`.heroi`, `.secao--escura`, `.topo`, `.rodape`) os
+redefinem, então o mesmo componente funciona no claro e no escuro.
 
 Tipografia:
-- Newsreader variável (títulos e destaques, auto-hospedada, latin, 58 KB);
-- IBM Plex Mono 400 (citações, rótulos, código, 15 KB);
-- texto corrido em `system-ui`. Ambas as fontes OFL, licenças em `public/fonts/`.
+- Newsreader variável nos títulos (serifa clássica, auto-hospedada);
+- `system-ui` no texto;
+- IBM Plex Mono em rótulos e citações.
+Ambas as fontes são OFL; as licenças estão em `public/fonts/`.
 
 ## Regras
 
-- Todo fato sobre o Glaux tem citação visível: `[arquivo:linha]` para o código e `[Doc, p.N]` para a
-  documentação. O que "funciona hoje" vem só do código; promessas da documentação vão para "Próximos
-  passos".
-- Um acento de cor por tela. Sem gradientes decorativos, sem sombras pesadas.
-- Contraste AA em todo texto. Foco visível com `--ambar-texto`.
-- Sem recursos externos: fontes, imagens e vídeo são servidos pelo próprio site (CSP `'self'`).
+- O dourado é acento, não fundo: botão principal, traços, rótulos. Um dourado forte por tela.
+- Contraste AA em todo texto. Foco visível com `--acento-texto`.
+- As citações (`[arquivo:linha]`, `[Doc, p.N]`) ficam pequenas e discretas: estão lá para quem quiser
+  conferir, sem competir com o texto.
+- Sem recursos externos: tudo é servido pelo próprio site (CSP `'self'`).
 
 ## Movimento
 
 - Só `transform`, `opacity` e o `stroke-dashoffset` do diagrama. Sem biblioteca.
-- Curva `--sair` (`cubic-bezier(0.22, 1, 0.36, 1)`); 160 ms em micro-interações, 420 ms em nós, 700 ms
-  em traços e marca-texto.
-- O diagrama da seção 4 se monta por passos ao rolar. O marca-texto aparece quando a citação entra na
-  tela. A lente segue o cursor só com mouse.
+- Curva `--sair` (`cubic-bezier(0.22, 1, 0.36, 1)`); 160 ms em botões, 420 ms em nós, 700 ms em
+  traços e marca-texto.
+- Painéis do herói sobem em sequência ao carregar (120 ms entre eles). O diagrama se monta por passos
+  ao rolar. A lente dourada segue o cursor só com mouse.
 - Sem JavaScript, ou com `prefers-reduced-motion: reduce`, tudo aparece completo e parado.
