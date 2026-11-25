@@ -375,3 +375,40 @@ explícito.
 - **P5:** permissão para exibir trechos de slides e dados reais na demo. Padrão até a resposta: trechos
   curtos, sem descrição de tarefas nem IDs.
 - **P6:** duração da apresentação e quem opera o terminal. Padrão: 10 a 12 minutos.
+
+## Progresso
+
+### 25/11, noite: direção A e checks aprovados
+Feito:
+- Esqueleto das 11 seções com o conteúdo real.
+- Fluxo do orquestrador montado na rolagem, com o simulador das 5 rotas.
+- Marca-texto, lente do cursor, barra de progresso e setas ← →.
+- Fallback da demo lendo `public/demo/manifest.json`.
+- CSP no build e no `vercel.json`.
+- 3 checks novos no `verify.sh`, com 7 testes do verificador.
+- 13 testes e2e (desktop e celular).
+- `DESIGN.md` e `docs/glaux/demo-captura.md`.
+
+Desvios do plano:
+- **Fontes dos fatos:** aparecem como citações visíveis no próprio HTML (`[arquivo:linha]`,
+  `[Doc, p.N]`), no lugar de `src/content/*.js`. Isso é o conceito da direção A e mantém o LCP em texto
+  estático. Em `src/content/` ficam só os dados interativos (as rotas do orquestrador).
+- **Tipografia:** Newsreader (títulos) e IBM Plex Mono (citações); texto corrido em `system-ui`. Assim
+  ficam só 2 arquivos de fonte.
+- **Movimento:** IntersectionObserver com transições CSS. Não usei scroll-driven animations.
+
+Medições:
+- build: JS 9,4 KB e CSS 12,1 KB, sem gzip;
+- LCP de 272 ms e CLS 0 no preview local, com CPU 4× mais lenta, em 412 px. Não é Lighthouse.
+
+Respostas do usuário (25/11):
+- **P1:** ignorar por enquanto. A seção 10 fica com a lista da Doc p.3.
+- **P5:** permissão concedida para exibir trechos de slides e dados reais na demo. Tokens e `user_id`
+  continuam fora.
+- **P6:** a apresentação dura **10 minutos**. Ensaio cronometrado com meta de ≤ 10 min (substitui o
+  critério 9 da §5.7).
+
+Pendente:
+- Captura da demo pelo time.
+- Ligar o `ORQUESTRADOR_NO_GRAFO` quando o nó estiver no grafo.
+- Deploy na Vercel, quando o usuário pedir.

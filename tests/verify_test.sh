@@ -82,6 +82,30 @@ run_case 'ignored .env in a Git work tree passes' 0 \
 run_case 'whitespace error in an uncommitted change fails' 1 \
   'git -C "$d" init -q && echo "ok" >"$d/a.txt" && git -C "$d" add a.txt && echo "trailing " >"$d/a.txt"'
 
+# Build output (dist/) checks. Fake values are assembled at run time, like the AWS key above.
+fake_groq_key="gsk_""abcdefghijklmnopqrstuvwxyz0123456789ABCD"
+fake_canvas_token="1234~""$(printf 'a%.0s' {1..64})"
+# make_dist DIR: a small, clean build output.
+make_dist() {
+  mkdir -p "$1/dist/assets" &&
+    printf '<!doctype html><link rel="stylesheet" href="/assets/a.css"><script type="module" src="/assets/a.js"></script><a href="https://example.com">link</a>\n' >"$1/dist/index.html" &&
+    echo 'body{font-family:x;src:url(/fonts/a.woff2)}' >"$1/dist/assets/a.css" &&
+    echo 'console.log(1)' >"$1/dist/assets/a.js"
+}
+run_case 'clean dist/ passes' 0 'make_dist "$d"'
+run_case 'Groq key in dist/ fails without being echoed' 1 \
+  'make_dist "$d" && echo "const k=\"$fake_groq_key\"" >>"$d/dist/assets/a.js"' "$fake_groq_key"
+run_case 'Canvas token in dist/ fails without being echoed' 1 \
+  'make_dist "$d" && echo "t=\"$fake_canvas_token\"" >>"$d/dist/assets/a.js"' "$fake_canvas_token"
+run_case 'external script in dist/ fails' 1 \
+  'make_dist "$d" && echo "<script src=\"https://cdn.example.com/x.js\"></script>" >>"$d/dist/index.html"'
+run_case 'protocol-relative stylesheet in dist/ fails' 1 \
+  'make_dist "$d" && echo "<link rel=\"stylesheet\" href=\"//cdn.example.com/x.css\">" >>"$d/dist/index.html"'
+run_case 'external font in dist/ CSS fails' 1 \
+  'make_dist "$d" && echo "@font-face{src:url(\"https://fonts.example.com/f.woff2\")}" >>"$d/dist/assets/a.css"'
+run_case 'JS over the size budget fails' 1 \
+  'make_dist "$d" && head -c 40000 /dev/urandom | base64 >"$d/dist/assets/big.js"'
+
 if [ "$failed" -gt 0 ]; then
   printf '\n%s test(s) failed.\n' "$failed"
   exit 1

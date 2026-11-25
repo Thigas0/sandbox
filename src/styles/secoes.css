@@ -1,0 +1,755 @@
+/* ---------- Topo, progresso e rodapé ---------- */
+.progresso {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.progresso__barra {
+  display: block;
+  height: 100%;
+  background: var(--ambar);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 3.5rem;
+  padding: 0 var(--gutter);
+  background: var(--papel);
+  border-bottom: 1px solid var(--regua);
+}
+
+.topo__marca {
+  font-family: var(--serifa);
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.topo__nav {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topo__nav ol {
+  display: flex;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  white-space: nowrap;
+  font-size: 0.875rem;
+}
+
+.topo__nav a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  color: var(--grafite);
+  text-decoration: none;
+}
+
+.topo__nav a:hover {
+  color: var(--tinta);
+}
+
+.rodape {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 3rem;
+  border-top: 1px solid var(--regua);
+  color: var(--grafite);
+  font-size: 0.875rem;
+}
+
+/* ---------- Seções ---------- */
+.secao {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: var(--secao-y) var(--gutter);
+  border-top: 1px solid var(--regua);
+}
+
+.secao h2 {
+  font-size: var(--t-h2);
+  max-width: 20ch;
+  margin-bottom: 2.5rem;
+}
+
+.secao__numero {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  color: var(--ambar-texto);
+  letter-spacing: 0.08em;
+}
+
+.colunas {
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* Itens de grid não podem crescer além da coluna (o <pre> do terminal rola por dentro). */
+.colunas > *,
+.roteiro > * {
+  min-width: 0;
+}
+
+.secao a {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 56rem) {
+  .colunas {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.destaque {
+  font-family: var(--serifa);
+  font-size: var(--t-lede);
+  line-height: 1.35;
+}
+
+.nota {
+  color: var(--grafite);
+  font-size: 0.9375rem;
+}
+
+/* Citação no formato do Glaux: mono, pequena, com marca-texto. */
+.fonte {
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  font-style: normal;
+  color: var(--grafite);
+  overflow-wrap: anywhere;
+  background-image: linear-gradient(var(--marca), var(--marca));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.55em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size var(--lento) var(--sair);
+}
+
+.fonte--grande {
+  font-size: 1em;
+  color: var(--tinta);
+}
+
+.marca {
+  background-image: linear-gradient(var(--marca), var(--marca));
+  background-repeat: no-repeat;
+  background-position: 0 85%;
+  background-size: 100% 0.45em;
+  transition: background-size var(--lento) var(--sair);
+}
+
+.fonte.pendente,
+.marca.pendente {
+  background-size: 0% 0.5em;
+}
+
+/* ---------- 0 · Abertura ---------- */
+.abertura {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100svh - 3.5rem);
+  border-top: 0;
+}
+
+.sobrelinha {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  color: var(--grafite);
+  letter-spacing: 0.04em;
+}
+
+.abertura__titulo {
+  font-size: var(--t-titulo);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  margin: 0.1em 0 0.25em;
+}
+
+.abertura__lede {
+  font-family: var(--serifa);
+  font-size: var(--t-lede);
+  line-height: 1.35;
+  max-width: 36ch;
+}
+
+.abertura__exemplo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  margin-top: 1.5rem;
+  color: var(--grafite);
+}
+
+.abertura__dica {
+  margin-top: 2.5rem;
+  color: var(--grafite);
+  font-size: 0.875rem;
+}
+
+@media (hover: none) {
+  .abertura__dica {
+    display: none;
+  }
+}
+
+/* ---------- 1 · Problema ---------- */
+.ficha div {
+  padding: 1rem 0;
+  border-top: 1px solid var(--regua);
+}
+
+.ficha dt,
+.cartao dt,
+.resposta__pergunta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grafite);
+}
+
+.ficha dd {
+  margin: 0.25rem 0 0;
+}
+
+/* ---------- 2 · Hipótese ---------- */
+.citacao {
+  margin: 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--ambar);
+}
+
+.citacao p {
+  font-family: var(--serifa);
+  font-size: var(--t-lede);
+  line-height: 1.35;
+}
+
+.citacao footer {
+  color: var(--grafite);
+  font-size: 0.875rem;
+}
+
+.evolucao {
+  padding-left: 1.25rem;
+}
+
+.evolucao li {
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- 3 · Agentes ---------- */
+.cartoes {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: var(--papel-2);
+  border: 1px solid var(--regua);
+  border-radius: var(--raio);
+}
+
+.cartao h3 {
+  font-size: 1.75rem;
+}
+
+.cartao dl {
+  flex: 1;
+  margin-top: 0.5rem;
+}
+
+.cartao dd {
+  margin: 0.15rem 0 0.75rem;
+}
+
+/* ---------- 4 · Colaboração ---------- */
+.respostas {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 48rem) {
+  .respostas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.resposta {
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--ambar);
+}
+
+.resposta__texto {
+  font-family: var(--serifa);
+  font-size: 1.375rem;
+  line-height: 1.35;
+}
+
+.estado {
+  padding: 0.6rem 0.8rem;
+  background: var(--papel-2);
+  border-radius: var(--raio);
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  color: var(--grafite);
+}
+
+.estado:empty {
+  display: none;
+}
+
+.roteiro {
+  display: grid;
+  gap: 2rem;
+}
+
+.fluxo {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 1;
+  margin: 0;
+  padding: 0.75rem 0;
+  background: var(--papel);
+  overflow: hidden;
+}
+
+.fluxo__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 40svh;
+}
+
+.fluxo__legenda {
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  color: var(--grafite);
+}
+
+@media (min-width: 64rem) {
+  .roteiro {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .fluxo {
+    top: 6rem;
+  }
+
+  .fluxo__svg {
+    max-height: none;
+  }
+}
+
+.no rect {
+  fill: var(--papel-2);
+  stroke: var(--regua);
+  stroke-width: 1.5;
+}
+
+.no text {
+  font-family: var(--serifa);
+  font-size: 20px;
+  text-anchor: middle;
+  fill: var(--tinta);
+}
+
+.no--orquestrador rect {
+  stroke: var(--ambar);
+  stroke-width: 2.5;
+}
+
+.no--estado rect {
+  fill: var(--papel-3);
+}
+
+.no--estado text {
+  text-anchor: start;
+}
+
+.no .estado__nome {
+  font-family: var(--mono);
+  font-size: 15px;
+}
+
+.no .estado__campo {
+  font-family: var(--mono);
+  font-size: 13px;
+  fill: var(--grafite);
+}
+
+.aresta {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1.6;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.aresta.tracejada {
+  stroke: var(--grafite);
+  stroke-dasharray: 0.04 0.03;
+}
+
+.seta {
+  fill: var(--tinta);
+}
+
+/* Montagem: só vale quando o JavaScript assume (classe "montando"). Sem ela, tudo fica visível. */
+.fluxo.montando .no,
+.fluxo.montando .aresta {
+  transition:
+    opacity var(--medio) var(--sair),
+    stroke-dashoffset var(--lento) var(--sair);
+}
+
+.fluxo.montando .no {
+  opacity: 0.22;
+}
+
+/* A opacidade também esconde as pontas de seta, que não somem com o dashoffset. */
+.fluxo.montando .aresta {
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.fluxo.montando .aresta.tracejada {
+  stroke-dashoffset: 0;
+  opacity: 0;
+}
+
+.fluxo.montando.ate-1 .p1,
+.fluxo.montando.ate-2 .p2,
+.fluxo.montando.ate-3 .p3,
+.fluxo.montando.ate-4 .p4 {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.fluxo.simulando .fora-da-rota,
+.fluxo.montando.simulando .fora-da-rota {
+  opacity: 0.15;
+}
+
+.lente {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9rem;
+  height: 9rem;
+  margin: -4.5rem 0 0 -4.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(201 130 43 / 0.2), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--medio) var(--sair);
+}
+
+.lente.ativa {
+  opacity: 1;
+}
+
+.passos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.passo {
+  min-height: 55svh;
+  padding: 2rem 0;
+}
+
+.passo h3 {
+  font-size: 1.6rem;
+}
+
+.passo--simulador {
+  min-height: auto;
+}
+
+.simulador {
+  display: grid;
+  gap: 1rem;
+}
+
+.simulador fieldset {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  border: 1px solid var(--regua);
+  border-radius: var(--raio);
+}
+
+.simulador legend {
+  padding: 0 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grafite);
+}
+
+.simulador label {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+
+.simulador input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  accent-color: var(--ambar-texto);
+}
+
+.simulador__saida {
+  margin: 1.25rem 0 0.75rem;
+}
+
+.simulador__rota {
+  margin-bottom: 0.25rem;
+  font-family: var(--serifa);
+  font-size: 1.75rem;
+}
+
+.simulador__motivo {
+  color: var(--grafite);
+  font-size: 0.9375rem;
+}
+
+/* ---------- 5 · APIs ---------- */
+.apis {
+  display: grid;
+  gap: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .apis {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.apis li {
+  padding-top: 1rem;
+  border-top: 2px solid var(--tinta);
+}
+
+.apis h3 {
+  font-size: 1.75rem;
+}
+
+/* ---------- 6 · Demo ---------- */
+.terminal {
+  margin: 0 0 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--tinta);
+  color: var(--papel);
+  border-radius: var(--raio);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.terminal code {
+  overflow-wrap: normal;
+}
+
+.demo {
+  padding: 1.25rem;
+  border: 1px dashed var(--regua);
+  border-radius: var(--raio);
+}
+
+.demo__estado {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  color: var(--grafite);
+}
+
+.demo__video {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: var(--raio);
+  background: var(--tinta);
+}
+
+.demo__bloco {
+  margin-top: 1.5rem;
+}
+
+.demo__tarefas,
+.demo__alternativas {
+  padding: 0;
+  list-style: none;
+}
+
+.demo__tarefas li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--regua);
+}
+
+.demo__tarefa {
+  overflow-wrap: anywhere;
+}
+
+.demo__dias {
+  font-family: var(--mono);
+  font-size: var(--t-fonte);
+  color: var(--grafite);
+}
+
+.prioridade {
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--papel-3);
+  color: var(--grafite);
+}
+
+.prioridade--alta {
+  background: #f3d9c9;
+  color: #7a2410;
+}
+
+.prioridade--média {
+  background: #f4e6c4;
+  color: #5e4108;
+}
+
+.demo__resumo h4 {
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+.demo__questoes li {
+  margin-bottom: 1.25rem;
+}
+
+.demo__enunciado {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.demo__alternativas li {
+  margin: 0.15rem 0;
+}
+
+.demo__alternativas .correta {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+/* ---------- 7 · Evidências ---------- */
+.metricas {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 40rem) {
+  .metricas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .metricas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metrica {
+  padding-top: 1rem;
+  border-top: 2px solid var(--tinta);
+}
+
+.metrica__valor {
+  margin: 0 0 0.5rem;
+  font-family: var(--serifa);
+  font-size: clamp(2.75rem, 2rem + 2.5vw, 4rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 8 · Limites e 9 · Próximos passos ---------- */
+.lista-limites {
+  padding: 0;
+  list-style: none;
+  max-width: 52rem;
+}
+
+.lista-limites li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--regua);
+}
+
+.roadmap {
+  max-width: 52rem;
+  padding-left: 1.5rem;
+}
+
+.roadmap li {
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.roadmap li::marker {
+  font-family: var(--serifa);
+  font-weight: 600;
+  color: var(--ambar-texto);
+}
+
+/* ---------- 10 · Equipe ---------- */
+.equipe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.equipe li {
+  font-family: var(--serifa);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+}

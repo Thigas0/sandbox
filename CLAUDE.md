@@ -7,6 +7,14 @@ same change.
 ## Map
 
 - `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
+  The site is the Glaux presentation (phase 1). `src/style.css` imports `src/styles/`;
+  `src/motion/` holds the scroll and cursor motion; `src/content/` holds data with sources;
+  `src/demo.js` renders the recorded demo from `public/demo/` (see `docs/glaux/demo-captura.md`).
+  `public/fonts/` holds self-hosted OFL fonts and their licenses.
+- `DESIGN.md`: the visual direction (tokens, rules, motion). `docs/glaux/plano-fase1.md`: the plan
+  and the Glaux dossier with sources; read it before working on the site.
+- `vite.config.js`: injects the CSP `<meta>` at build time. `src/seguranca.js`: the CSP itself.
+  `vercel.json`: deploy settings and security headers (its CSP must match `src/seguranca.js`).
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,
@@ -29,7 +37,8 @@ same change.
 - Install: `npm ci`, then `npx playwright install chromium` once.
 - Dev server: `npm run dev` (http://localhost:5173). Build: `npm run build` (to `dist/`).
 - Format: `npm run format`. Lint: `npm run lint`. Browser tests: `npm run test:e2e`.
-- `verify.sh` runs format check, lint, and build; `--full` adds the browser tests.
+- `verify.sh` runs format check, lint, and build, then checks `dist/` for keys or tokens, external
+  resources, and the JS/CSS gzip budget (25 KB each); `--full` adds the browser tests.
 - Requirements: bash 4.4+, git, python3, and Node.js 22+. The intended environment is WSL 2
   (Ubuntu) on Windows, or any Linux.
 - In a cloud session with a preinstalled Chromium, set `PLAYWRIGHT_CHROMIUM_PATH` to it when the

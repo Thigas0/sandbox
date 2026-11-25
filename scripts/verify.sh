@@ -158,12 +158,91 @@ check_lint() { run_npm lint; }
 check_build() { run_npm build; }
 check_e2e() { run_npm test:e2e; }
 
+# Build output checks. dist/ is ignored by Git, so the secret scans above never see it; these do.
+# They run whenever dist/ exists (after the build, or in the verifier's own fixtures).
+dist_budget_js=25600  # bytes of gzip, all JS files together
+dist_budget_css=25600 # bytes of gzip, all CSS files together
+
+check_dist_secrets() {
+  local names=('Groq API key' 'Canvas access token') pattern i line f
+  local patterns=('\bgsk_[A-Za-z0-9]{20,}' '\b[0-9]{1,8}~[A-Za-z0-9]{64}\b')
+  for i in "${!patterns[@]}"; do
+    pattern="${patterns[$i]}"
+    # Keep only file and line, so the matched text is never printed.
+    grep -rnIE -e "$pattern" -- "$root/dist" | cut -d: -f1,2 | while IFS= read -r line; do
+      f="${line#"$root/"}"
+      echo "$f: possible ${names[$i]}"
+    done
+  done
+  return 0
+}
+
+check_dist_external() {
+  command -v python3 >/dev/null 2>&1 || { echo "python3 is required to scan dist/"; return; }
+  python3 -I - "$root/dist" <<'PY'
+import pathlib, re, sys
+from html.parser import HTMLParser
+
+root = pathlib.Path(sys.argv[1])
+external = re.compile(r"^\s*(?:[a-z][a-z0-9+.-]*:)?//", re.I)
+# Attributes that make the browser fetch something. Plain <a href> links are navigation, not loads.
+loads = {
+    "script": ("src",), "img": ("src", "srcset"), "source": ("src", "srcset"),
+    "video": ("src", "poster"), "audio": ("src",), "track": ("src",), "iframe": ("src",),
+    "embed": ("src",), "object": ("data",), "link": ("href",),
+}
+
+class Scan(HTMLParser):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "link" and (attrs.get("rel") or "").lower() in ("canonical", "alternate"):
+            return
+        for attr in loads.get(tag, ()):
+            for value in (attrs.get(attr) or "").split(","):
+                if external.match(value):
+                    line = self.getpos()[0]
+                    print(f"{self.name}:{line}: <{tag} {attr}> loads an external resource")
+
+for path in sorted(root.rglob("*")):
+    name = path.relative_to(root.parent).as_posix()
+    if path.suffix == ".html":
+        Scan(name).feed(path.read_text(encoding="utf-8", errors="replace"))
+    elif path.suffix == ".css":
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r"""(?:url\(\s*['"]?|@import\s+['"])\s*((?:[a-z][a-z0-9+.-]*:)?//)""", text, re.I):
+            line = text.count("\n", 0, m.start()) + 1
+            print(f"{name}:{line}: CSS loads an external resource")
+PY
+}
+
+check_dist_budget() {
+  command -v python3 >/dev/null 2>&1 || { echo "python3 is required to measure dist/"; return; }
+  python3 -I - "$root/dist" "$dist_budget_js" "$dist_budget_css" <<'PY'
+import gzip, pathlib, sys
+
+root, budgets = pathlib.Path(sys.argv[1]), {".js": int(sys.argv[2]), ".css": int(sys.argv[3])}
+for suffix, budget in budgets.items():
+    total = sum(len(gzip.compress(p.read_bytes(), 9)) for p in root.rglob(f"*{suffix}"))
+    if total > budget:
+        print(f"{suffix[1:].upper()} in dist/ is {total} bytes gzipped, over the {budget}-byte budget")
+PY
+}
+
 has_site=0
 [ -f "$root/package.json" ] && has_site=1
 if [ "$has_site" -eq 1 ]; then
   check 'Formatting (prettier --check)' check_format
   check 'Lint (eslint)' check_lint
   check 'Build (vite build)' check_build
+fi
+if [ -d "$root/dist" ]; then
+  check 'No keys or tokens in the build (dist/)' check_dist_secrets
+  check 'No external resources in the build (dist/)' check_dist_external
+  check 'Build within the size budget (JS and CSS gzip)' check_dist_budget
 fi
 
 if [ "$full" -eq 1 ]; then

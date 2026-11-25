@@ -1,0 +1,19 @@
+/* Movimento reduzido: nada se move, tudo fica visível. A navegação continua igual. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fonte.pendente,
+  .marca.pendente {
+    background-size: 100% 0.55em;
+  }
+
+  .lente {
+    display: none;
+  }
+}

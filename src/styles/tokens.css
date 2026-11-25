@@ -1,0 +1,70 @@
+/* Direção A, "Caderno anotado". Os valores e as regras de uso estão em DESIGN.md. */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/newsreader-latin-wght.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-latin-400.woff2') format('woff2');
+}
+
+/* Fallback com métricas próximas da Newsreader, para a troca de fonte não mexer no layout. */
+@font-face {
+  font-family: 'Newsreader Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 96%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Cor */
+  --papel: #f5f1e8;
+  --papel-2: #ede6d6;
+  --papel-3: #e4dbc6;
+  --tinta: #1b1a17;
+  --grafite: #55524b;
+  --regua: #d3c9b3;
+  --ambar: #c9822b; /* só decoração, traços e realce; nunca texto pequeno */
+  --ambar-texto: #8a5414; /* âmbar para texto (contraste AA sobre o papel) */
+  --marca: rgb(201 130 43 / 0.28);
+  --verde: #2f6f5e;
+
+  /* Tipo */
+  --serifa: 'Newsreader', 'Newsreader Fallback', Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --t-titulo: clamp(4rem, 3rem + 9vw, 10rem);
+  --t-h2: clamp(2rem, 1.5rem + 2.4vw, 3.5rem);
+  --t-h3: 1.25rem;
+  --t-lede: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --t-corpo: 1.0625rem;
+  --t-fonte: 0.8rem;
+
+  /* Espaço e grade */
+  --gutter: 1rem;
+  --largura: 72rem;
+  --secao-y: clamp(5rem, 3rem + 8vw, 9rem);
+  --raio: 6px;
+
+  /* Movimento */
+  --sair: cubic-bezier(0.22, 1, 0.36, 1);
+  --rapido: 160ms;
+  --medio: 420ms;
+  --lento: 700ms;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2rem;
+  }
+}
