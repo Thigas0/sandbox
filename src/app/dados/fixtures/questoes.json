@@ -1,0 +1,227 @@
+{
+  "exemplo": true,
+  "aviso": "Questões fictícias no formato do Agente Gerador, presas a trechos de PDFs de exemplo.",
+  "temas": {
+    "9001": {
+      "sistema solar": [
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual destes planetas é rochoso?",
+          "alternativas": { "A": "Júpiter", "B": "Marte", "C": "Saturno", "D": "Netuno" },
+          "correta": "B",
+          "assunto": "planetas rochosos",
+          "trecho_referencia": {
+            "arquivo": "astro_aula01.pdf",
+            "pagina": 5,
+            "pagina_fim": 5,
+            "texto": "Mercúrio, Vênus, Terra e Marte são planetas rochosos, com superfície sólida."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Desde 2006, Plutão é classificado como:",
+          "alternativas": {
+            "A": "Planeta gasoso",
+            "B": "Estrela",
+            "C": "Planeta anão",
+            "D": "Satélite de Netuno"
+          },
+          "correta": "C",
+          "assunto": "planetas anões",
+          "trecho_referencia": {
+            "arquivo": "astro_aula01.pdf",
+            "pagina": 8,
+            "pagina_fim": 8,
+            "texto": "Em 2006, Plutão passou a ser classificado como planeta anão."
+          }
+        },
+        {
+          "tipo": "dissertativa",
+          "enunciado": "Explique a diferença entre os planetas rochosos e os gigantes gasosos do Sistema Solar.",
+          "assunto": "tipos de planeta",
+          "trecho_referencia": {
+            "arquivo": "astro_aula01.pdf",
+            "pagina": 6,
+            "pagina_fim": 6,
+            "texto": "Júpiter e Saturno são gigantes gasosos, formados principalmente por hidrogênio e hélio, sem superfície sólida definida."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual é a única estrela do Sistema Solar?",
+          "alternativas": { "A": "Sirius", "B": "Sol", "C": "Polaris", "D": "Betelgeuse" },
+          "correta": "B",
+          "assunto": "o Sol",
+          "trecho_referencia": {
+            "arquivo": "astro_aula01.pdf",
+            "pagina": 3,
+            "pagina_fim": 3,
+            "texto": "O Sistema Solar é formado pelo Sol, a única estrela do sistema, e pelos corpos que orbitam ao seu redor."
+          }
+        }
+      ],
+      "estrelas": [
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Como as estrelas produzem energia?",
+          "alternativas": {
+            "A": "Queimando carvão na superfície",
+            "B": "Por fusão nuclear no núcleo",
+            "C": "Por fissão de urânio na superfície",
+            "D": "Refletindo a luz de outras estrelas"
+          },
+          "correta": "B",
+          "assunto": "energia das estrelas",
+          "trecho_referencia": {
+            "arquivo": "astro_aula02.pdf",
+            "pagina": 4,
+            "pagina_fim": 4,
+            "texto": "As estrelas produzem energia pela fusão nuclear de hidrogênio em hélio no núcleo."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "O que a cor de uma estrela indica?",
+          "alternativas": {
+            "A": "A distância até a Terra",
+            "B": "A temperatura da superfície",
+            "C": "A quantidade de planetas ao redor",
+            "D": "A idade de quem observa"
+          },
+          "correta": "B",
+          "assunto": "cor das estrelas",
+          "trecho_referencia": {
+            "arquivo": "astro_aula02.pdf",
+            "pagina": 6,
+            "pagina_fim": 6,
+            "texto": "A cor de uma estrela indica a temperatura da sua superfície: estrelas azuis são mais quentes que as vermelhas."
+          }
+        },
+        {
+          "tipo": "dissertativa",
+          "enunciado": "Explique por que as estrelas azuis são consideradas mais quentes que as vermelhas.",
+          "assunto": "cor e temperatura",
+          "trecho_referencia": {
+            "arquivo": "astro_aula02.pdf",
+            "pagina": 6,
+            "pagina_fim": 6,
+            "texto": "A cor de uma estrela indica a temperatura da sua superfície: estrelas azuis são mais quentes que as vermelhas."
+          }
+        }
+      ]
+    },
+    "9002": {
+      "membrana plasmática": [
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual é a principal composição da membrana plasmática?",
+          "alternativas": {
+            "A": "Bicamada de fosfolipídios",
+            "B": "Parede de celulose",
+            "C": "Camada de quitina",
+            "D": "Dupla hélice de DNA"
+          },
+          "correta": "A",
+          "assunto": "estrutura da membrana",
+          "trecho_referencia": {
+            "arquivo": "bio_aula01.pdf",
+            "pagina": 7,
+            "pagina_fim": 7,
+            "texto": "A membrana plasmática é formada por uma bicamada de fosfolipídios com proteínas inseridas."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual destas é uma função da membrana plasmática?",
+          "alternativas": {
+            "A": "Produzir ATP",
+            "B": "Controlar a entrada e a saída de substâncias",
+            "C": "Armazenar o DNA",
+            "D": "Realizar a fotossíntese"
+          },
+          "correta": "B",
+          "assunto": "permeabilidade seletiva",
+          "trecho_referencia": {
+            "arquivo": "bio_aula01.pdf",
+            "pagina": 8,
+            "pagina_fim": 8,
+            "texto": "A membrana é seletiva: controla a entrada e a saída de substâncias da célula."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual tipo de transporte acontece sem gasto de energia da célula?",
+          "alternativas": {
+            "A": "Transporte ativo",
+            "B": "Bomba de sódio e potássio",
+            "C": "Difusão simples",
+            "D": "Endocitose"
+          },
+          "correta": "C",
+          "assunto": "transporte passivo",
+          "trecho_referencia": {
+            "arquivo": "bio_aula01.pdf",
+            "pagina": 9,
+            "pagina_fim": 9,
+            "texto": "Na difusão simples, as substâncias passam a favor do gradiente de concentração, sem gasto de energia."
+          }
+        },
+        {
+          "tipo": "dissertativa",
+          "enunciado": "Explique por que a membrana plasmática é chamada de seletiva.",
+          "assunto": "permeabilidade seletiva",
+          "trecho_referencia": {
+            "arquivo": "bio_aula01.pdf",
+            "pagina": 8,
+            "pagina_fim": 8,
+            "texto": "A membrana é seletiva: controla a entrada e a saída de substâncias da célula."
+          }
+        }
+      ],
+      "mitocôndria": [
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Que processo acontece na mitocôndria?",
+          "alternativas": {
+            "A": "Fotossíntese",
+            "B": "Respiração celular",
+            "C": "Divisão do núcleo",
+            "D": "Síntese da parede celular"
+          },
+          "correta": "B",
+          "assunto": "função da mitocôndria",
+          "trecho_referencia": {
+            "arquivo": "bio_aula02.pdf",
+            "pagina": 4,
+            "pagina_fim": 4,
+            "texto": "A mitocôndria é a organela da respiração celular, processo que produz ATP."
+          }
+        },
+        {
+          "tipo": "multipla_escolha",
+          "enunciado": "Qual molécula a respiração celular produz como fonte imediata de energia?",
+          "alternativas": { "A": "ATP", "B": "DNA", "C": "Glicogênio", "D": "Celulose" },
+          "correta": "A",
+          "assunto": "ATP",
+          "trecho_referencia": {
+            "arquivo": "bio_aula02.pdf",
+            "pagina": 5,
+            "pagina_fim": 5,
+            "texto": "A respiração celular converte a energia da glicose em ATP, usado pela célula como fonte imediata de energia."
+          }
+        },
+        {
+          "tipo": "dissertativa",
+          "enunciado": "Descreva o papel da mitocôndria na obtenção de energia pela célula.",
+          "assunto": "respiração celular",
+          "trecho_referencia": {
+            "arquivo": "bio_aula02.pdf",
+            "pagina": 4,
+            "pagina_fim": 4,
+            "texto": "A mitocôndria é a organela da respiração celular, processo que produz ATP."
+          }
+        }
+      ]
+    }
+  }
+}

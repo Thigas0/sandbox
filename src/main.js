@@ -1,4 +1,3 @@
-import { iniciarDemo } from './demo.js';
 import { iniciarCursor } from './motion/cursor.js';
 import { iniciarFluxo } from './motion/fluxo.js';
 import { iniciarRevelar } from './motion/revelar.js';
@@ -37,8 +36,16 @@ function indiceAtual() {
 }
 
 // Durante a rolagem suave a posição ainda é a antiga: a próxima seta parte do destino anterior.
+// O destino vale até a rolagem terminar (scrollend), ou até um limite para navegadores sem o evento.
 let destino = null;
 let fimDaRolagem = 0;
+const esquecerDestino = () => {
+  destino = null;
+  clearTimeout(fimDaRolagem);
+};
+window.addEventListener('scrollend', esquecerDestino);
+window.addEventListener('wheel', esquecerDestino, { passive: true });
+window.addEventListener('touchstart', esquecerDestino, { passive: true });
 
 function irPara(indice) {
   const alvo = Math.max(0, Math.min(secoes.length - 1, indice));
@@ -46,9 +53,7 @@ function irPara(indice) {
   if (!secao) return;
   destino = alvo;
   clearTimeout(fimDaRolagem);
-  fimDaRolagem = setTimeout(() => {
-    destino = null;
-  }, 900);
+  fimDaRolagem = setTimeout(esquecerDestino, 3000);
   secao.scrollIntoView({ behavior: reduzido() ? 'auto' : 'smooth', block: 'start' });
   history.replaceState(null, '', `#${secao.id}`);
   const titulo = secao.querySelector('h1, h2');
@@ -75,5 +80,3 @@ document.addEventListener('keydown', (evento) => {
 iniciarFluxo();
 iniciarRevelar();
 iniciarCursor();
-const demo = document.querySelector('[data-demo]');
-if (demo) iniciarDemo(demo);

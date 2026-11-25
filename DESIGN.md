@@ -60,3 +60,26 @@ Ambas as fontes são OFL; as licenças estão em `public/fonts/`.
 - Painéis do herói sobem em sequência ao carregar (120 ms entre eles). O diagrama se monta por passos
   ao rolar. A lente dourada segue o cursor só com mouse.
 - Sem JavaScript, ou com `prefers-reduced-motion: reduce`, tudo aparece completo e parado.
+
+## App (/app/)
+
+O app usa os mesmos tokens. Estilos em `src/styles/app.css`; os botões e o chip de prioridade ficam em
+`src/styles/componentes.css`, compartilhado com a landing.
+
+| Componente | Regra |
+|---|---|
+| Botões | primário dourado (`.botao`), fantasma (`.botao--fantasma`), pequeno (`.botao--pequeno`); carregando com `aria-busy="true"` (gira um anel, sem trocar o texto) |
+| Abas | as abas da disciplina são links de rota (`#/disciplina/:id/resumo` e `/questoes`) com `aria-current="page"` e sublinhado dourado. Não usam `role="tablist"`, porque cada aba é uma URL |
+| Cartão de tarefa | `.tarefa`, com a borda esquerda pela prioridade (ALTA terracota, MÉDIA dourada, BAIXA neutra), o título, "disciplina · prazo" e o `action_recommendation` do Tutor |
+| Chip de prioridade | `.prioridade--alta` / `--média`: valores exatos do Tutor (ALTA, MÉDIA, BAIXA) |
+| Campo | rótulo visível, ajuda ligada por `aria-describedby`, entrada com 16 px (sem zoom no iOS); erros como estado de erro logo acima do botão |
+| Toast | `.toast` numa região `role="status"`; some em 3,5 s; no celular fica acima da barra inferior |
+| Barra lateral | azul-noite, item atual em dourado. Abaixo de 48rem vira barra inferior fixa com 4 itens e `safe-area-inset-bottom` |
+| Faixa demo | dourada, fixa no topo, sempre visível no modo demo, com "Sair do modo demo" |
+| Progresso dos agentes | bloco azul-noite: Canvas, Tutor e Gerador, cada um com o estado (na fila, rodando, concluído, fora da rota) e a rota e o motivo do Orquestrador. "Fora da rota" usa borda tracejada, nunca opacidade baixa (contraste) |
+| Citação | `[arquivo, p.X-Y]` vira botão mono; ao clicar, abre abaixo o painel com o arquivo e as páginas |
+| Estados | carregando (anel e texto), vazio (tracejado), erro (terracota, com "Tentar de novo"), sem_material (dourado claro, com a mensagem real do Gerador ou do Tutor) |
+| Prática | alternativas como rótulos grandes; depois de responder, a correta fica verde e a escolhida errada terracota; o trecho de referência aparece num bloco com filete dourado |
+
+Movimento no app: o anel de carregamento, a borda do agente que está rodando e a entrada do toast.
+Tudo some com `prefers-reduced-motion`.

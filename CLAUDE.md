@@ -7,10 +7,15 @@ same change.
 ## Map
 
 - `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
-  The site is the Glaux presentation (phase 1). `src/style.css` imports `src/styles/`;
-  `src/motion/` holds the scroll and cursor motion; `src/content/` holds data with sources;
-  `src/demo.js` renders the recorded demo from `public/demo/` (see `docs/glaux/demo-captura.md`).
+  Two pages (Vite multi-page): `/` is the Glaux landing (`index.html`, `src/main.js`,
+  `src/style.css`), and `/app/` is the app (`app/index.html`, `src/app/`). Shared styles live in
+  `src/styles/` (`tokens.css`, `base.css`, `componentes.css`); `src/motion/` holds the landing's
+  scroll and cursor motion; `src/content/orquestrador.js` replicates the Orchestrator's routes.
   `public/fonts/` holds self-hosted OFL fonts and their licenses.
+- `src/app/`: hash router (`roteador.js`), in-memory session (`sessao.js`), screens (`telas/`), UI
+  helpers (`ui/`, no `innerHTML`), and the data layer (`dados/`): `contrato.js` is the only API the
+  screens use; `demo.js` (fictional fixtures in `dados/fixtures/`) and `api.js` (future HTTP backend,
+  URL from `VITE_GLAUX_API_URL`) implement it. Backend endpoints: `docs/glaux/app-backend.md`.
 - `DESIGN.md`: the visual direction (tokens, rules, motion). `docs/glaux/plano-fase1.md`: the plan
   and the Glaux dossier with sources; read it before working on the site.
 - `vite.config.js`: injects the CSP `<meta>` at build time. `src/seguranca.js`: the CSP itself.

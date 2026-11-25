@@ -37,17 +37,11 @@
       </a>
       <nav class="topo__nav" aria-label="Seções">
         <ol>
-          <li><a href="#recursos">Recursos</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
-          <li><a href="#integracoes">Integrações</a></li>
-          <li><a href="#resultados">Resultados</a></li>
-          <li><a href="#demo">Demo</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="https://github.com/minneh8/Residence_AI_Challenge-2">Código</a></li>
         </ol>
       </nav>
-      <a class="botao botao--topo" href="https://github.com/minneh8/Residence_AI_Challenge-2"
-        >Código</a
-      >
+      <a class="botao botao--topo" href="/app/">Abrir o app</a>
     </header>
 
     <main id="conteudo" tabindex="-1">
@@ -67,12 +61,8 @@
               fonte.
             </p>
             <div class="heroi__acoes">
-              <a class="botao" href="#como-funciona">Veja como funciona</a>
-              <a
-                class="botao botao--fantasma"
-                href="https://github.com/minneh8/Residence_AI_Challenge-2"
-                >Código no GitHub</a
-              >
+              <a class="botao" href="/app/">Abrir o app</a>
+              <a class="botao botao--fantasma" href="#como-funciona">Veja como funciona</a>
             </div>
           </div>
 
@@ -108,44 +98,6 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Recursos -->
-      <section class="secao" id="recursos" data-secao aria-labelledby="titulo-recursos">
-        <p class="sobrelinha">Para quem estuda pelo Canvas</p>
-        <h2 id="titulo-recursos">Menos tempo organizando, mais tempo estudando.</h2>
-        <p class="secao__lede">
-          Prazos espalhados, material demais e pouca certeza do que estudar fazem o estudo render
-          menos e aumentam o estresse. O Glaux cuida da parte chata.
-        </p>
-        <ul class="recursos" role="list">
-          <li class="recurso">
-            <span class="recurso__icone" aria-hidden="true">01</span>
-            <h3>Sincroniza com o Canvas</h3>
-            <p>Busca suas disciplinas, tarefas e os PDFs das aulas com o seu próprio token.</p>
-          </li>
-          <li class="recurso">
-            <span class="recurso__icone" aria-hidden="true">02</span>
-            <h3>Prioriza seus prazos</h3>
-            <p>Monta o cronograma das entregas pendentes: alta até 2 dias, média até 7.</p>
-          </li>
-          <li class="recurso">
-            <span class="recurso__icone" aria-hidden="true">03</span>
-            <h3>Resume com fonte</h3>
-            <p>
-              Resumos baseados só nos slides, com a citação no fim de cada frase. Se o material não
-              cobre, ele diz.
-            </p>
-          </li>
-          <li class="recurso">
-            <span class="recurso__icone" aria-hidden="true">04</span>
-            <h3>Gera questões para praticar</h3>
-            <p>
-              Múltipla escolha e dissertativas sobre o tema que você escolher, cada uma presa a um
-              trecho real da aula.
-            </p>
-          </li>
-        </ul>
       </section>
 
       <!-- Como funciona -->
@@ -384,128 +336,15 @@
         </div>
       </section>
 
-      <!-- Integrações -->
-      <section class="secao" id="integracoes" data-secao aria-labelledby="titulo-integracoes">
-        <p class="sobrelinha">Integrações</p>
-        <h2 id="titulo-integracoes">Conectado ao que você já usa.</h2>
-        <ul class="apis" role="list">
-          <li>
-            <h3>Canvas LMS</h3>
-            <p>
-              API REST com o token do estudante: cursos ativos, tarefas e PDFs. Repete a chamada
-              após 2, 5 e 10 s e, se o Canvas cair, segue offline com o que já está no disco.
-            </p>
-            <cite class="fonte">[src/agente_canvas/service.py:32,87-112]</cite>
-          </li>
-          <li>
-            <h3>Groq</h3>
-            <p>
-              Modelo <code>openai/gpt-oss-20b</code> para os resumos e as questões, com saída em
-              JSON validada no código antes de chegar a você.
-            </p>
-            <cite class="fonte">[src/agente_gerador/service.py:50-55,234-271]</cite>
-          </li>
-          <li>
-            <h3>Hugging Face</h3>
-            <p>
-              Modelo de embeddings <code>multilingual-e5-base</code>, que roda localmente e indexa o
-              material num ChromaDB separado por disciplina.
-            </p>
-            <cite class="fonte">[docs/DECISOES.md:5-7]</cite>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Resultados -->
-      <section
-        class="secao secao--clara"
-        id="resultados"
-        data-secao
-        aria-labelledby="titulo-resultados"
-      >
-        <p class="sobrelinha">Resultados</p>
-        <h2 id="titulo-resultados">Medido, não prometido.</h2>
-        <div class="metricas">
-          <div class="metrica">
-            <p class="metrica__valor">14/18</p>
-            <p class="metrica__rotulo">
-              perguntas com a página certa entre os 5 primeiros trechos da busca (0,778).
-            </p>
-            <cite class="fonte">[avaliacao/resultados.md, rodada 10/11 15:06]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">6/6</p>
-            <p class="metrica__rotulo">
-              temas de fora da disciplina recusados como “sem material”, sem inventar questão.
-            </p>
-            <cite class="fonte">[avaliacao/gerador_resultados.md:28]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">1,8 s</p>
-            <p class="metrica__rotulo">de média para gerar um conjunto de questões validadas.</p>
-            <cite class="fonte">[avaliacao/gerador_resultados.md:31]</cite>
-          </div>
-          <div class="metrica">
-            <p class="metrica__valor">6/10</p>
-            <p class="metrica__rotulo">
-              temas da disciplina com questões geradas e validadas na primeira avaliação.
-            </p>
-            <cite class="fonte">[avaliacao/gerador_resultados.md:27]</cite>
-          </div>
-        </div>
-        <p class="nota">
-          Avaliado em uma disciplina por agente. Perguntas reformuladas com outras palavras ainda
-          são o ponto mais difícil (0,714 contra 1,000 nas diretas).
-          <cite class="fonte">[docs/DECISOES.md:30-31]</cite>
+      <!-- Abrir o app -->
+      <section class="secao secao--clara cta" id="abrir" data-secao aria-labelledby="titulo-abrir">
+        <p class="sobrelinha">Experimente</p>
+        <h2 id="titulo-abrir">Veja o Glaux funcionando.</h2>
+        <p class="secao__lede">
+          Abra o app com disciplinas de exemplo: sincronize, leia um resumo com as fontes e pratique
+          com questões. Sem cadastro e sem enviar nada.
         </p>
-      </section>
-
-      <!-- Demo -->
-      <section class="secao" id="demo" data-secao aria-labelledby="titulo-demo">
-        <p class="sobrelinha">Veja em ação</p>
-        <h2 id="titulo-demo">Uma execução, do Canvas às questões.</h2>
-        <div class="colunas">
-          <div>
-            <p>Hoje o Glaux roda pela linha de comando:</p>
-            <pre
-              class="terminal"
-              tabindex="0"
-              aria-label="Comando da demonstração"
-            ><code>python src/graph.py --curso &lt;id&gt; --tema "&lt;tema&gt;" --questoes 3</code></pre>
-            <p class="nota">
-              Imprime o cronograma, os resumos e as questões, e grava tudo em
-              <code>data/processed/</code>. <cite class="fonte">[src/graph.py:53-166]</cite>
-            </p>
-          </div>
-          <div class="demo" data-demo>
-            <p class="demo__estado" data-demo-estado>Carregando a execução gravada…</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Roadmap -->
-      <section class="secao secao--clara" id="roadmap" data-secao aria-labelledby="titulo-roadmap">
-        <p class="sobrelinha">Roadmap</p>
-        <h2 id="titulo-roadmap">O que vem aí.</h2>
-        <ol class="roadmap" role="list">
-          <li data-roadmap-orquestrador>
-            <h3>Orquestrador no grafo</h3>
-            <p>Rotas condicionais no LangGraph, escolhidas a cada pedido.</p>
-          </li>
-          <li>
-            <h3>Interface web</h3>
-            <p>Botão “Sincronizar” e login no Canvas por OAuth2, sem copiar token.</p>
-          </li>
-          <li>
-            <h3>Correção das respostas</h3>
-            <p>Avaliação das dissertativas e diagnóstico de desempenho por tópico.</p>
-          </li>
-          <li>
-            <h3>Plano que se ajusta</h3>
-            <p>O desempenho nas questões pede revisão reforçada ao cronograma.</p>
-          </li>
-        </ol>
-        <p class="nota"><cite class="fonte">[Doc, p.4-6, p.15]</cite></p>
+        <a class="botao" href="/app/">Abrir o app</a>
       </section>
     </main>
 

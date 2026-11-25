@@ -99,42 +99,7 @@ cite.fonte {
   background-size: 0% 0.42em;
 }
 
-/* ---------- Botões ---------- */
-.botao {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.9rem;
-  padding: 0 1.4rem;
-  border: 1px solid var(--ouro);
-  border-radius: 999px;
-  background: var(--ouro);
-  color: var(--azul-noite);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    transform var(--rapido) var(--sair),
-    background-color var(--rapido) var(--sair);
-}
-
-.botao:hover {
-  background: #e6c874;
-}
-
-.botao:active {
-  transform: scale(0.97);
-}
-
-.botao--fantasma {
-  background: transparent;
-  color: var(--texto);
-  border-color: var(--borda);
-}
-
-.botao--fantasma:hover {
-  background: var(--superficie);
-}
-
+/* Botões: ver src/styles/componentes.css. */
 .botao--topo {
   min-height: 2.25rem;
   padding: 0 1rem;
@@ -473,26 +438,6 @@ cite.fonte {
   border-color: var(--sucesso);
   background: var(--sucesso);
   color: #fff;
-}
-
-.prioridade {
-  padding: 0.05rem 0.45rem;
-  border-radius: 4px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 400;
-  background: var(--azul-nevoa);
-  color: #4a5370;
-}
-
-.prioridade--alta {
-  background: #fbe3d6;
-  color: #8a2a10;
-}
-
-.prioridade--média {
-  background: #f6ebc8;
-  color: #5e4108;
 }
 
 /* ---------- Recursos ---------- */

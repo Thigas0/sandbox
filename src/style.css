@@ -1,5 +1,6 @@
-/* Ponto de entrada dos estilos. A ordem importa: tokens, base, seções e, por último, movimento. */
+/* Estilos da landing. A ordem importa: tokens, base, componentes, seções e, por último, movimento. */
 @import './styles/tokens.css';
 @import './styles/base.css';
+@import './styles/componentes.css';
 @import './styles/secoes.css';
 @import './styles/movimento.css';

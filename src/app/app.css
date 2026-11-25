@@ -1,0 +1,6 @@
+/* Estilos do app (/app/). Mesmos tokens e componentes da landing; ver DESIGN.md. */
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/componentes.css';
+@import '../styles/app.css';
+@import '../styles/movimento.css';

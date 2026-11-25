@@ -430,3 +430,17 @@ O que se mantém do roteiro de 10 minutos (P6):
 A navegação por ← → continua.
 
 Detalhes em `DESIGN.md`.
+
+### 25/11: front-end do app (/app/)
+- O Vite passou a multi-page: `/` (landing reduzida: herói, "Como funciona" e o CTA "Abrir o app") e
+  `/app/` (aplicativo).
+- **Camada de dados trocável** em `src/app/dados/`:
+  - `contrato.js` (tipos dos modelos Python, validação e `ErroDados`);
+  - `demo.js` (fixtures fictícias, com as regras e mensagens reais do Tutor, do Gerador e do
+    Orquestrador);
+  - `api.js` (para o backend HTTP futuro, descrito em `docs/glaux/app-backend.md`).
+- **Telas:** Entrada, Painel (com Sincronizar e o progresso por agente), Disciplinas, Disciplina (abas
+  Resumo e Questões) e Prática.
+- **Removidos com a aprovação do plano:** o fallback da demo gravada (`src/demo.js`,
+  `public/demo/manifest.json`) e as seções Recursos, Integrações, Resultados, Demo e Roadmap da landing.
+  Os números e o roadmap continuam neste plano, nas seções 1.5 e 2.

@@ -106,3 +106,8 @@ code {
 .pular:focus {
   top: 0.5rem;
 }
+
+/* O atributo hidden vence qualquer display definido por componente. */
+[hidden] {
+  display: none !important;
+}

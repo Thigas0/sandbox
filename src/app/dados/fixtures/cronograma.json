@@ -1,0 +1,42 @@
+{
+  "exemplo": true,
+  "aviso": "Tarefas fictícias. due_at é calculado a partir de days_remaining no momento do uso.",
+  "tarefas": [
+    {
+      "course_id": 9001,
+      "title": "Relatório de observação do céu (exemplo)",
+      "description": "Registre três constelações visíveis à noite.",
+      "days_remaining": 1
+    },
+    {
+      "course_id": 9002,
+      "title": "Lista 3 · Membrana plasmática (exemplo)",
+      "description": "Exercícios de transporte pela membrana.",
+      "days_remaining": 2
+    },
+    {
+      "course_id": 9003,
+      "title": "Ensaio sobre o Renascimento (exemplo)",
+      "description": "Texto de duas páginas sobre um artista do período.",
+      "days_remaining": 4
+    },
+    {
+      "course_id": 9001,
+      "title": "Questionário · Estrelas (exemplo)",
+      "description": "Dez perguntas sobre a vida das estrelas.",
+      "days_remaining": 6
+    },
+    {
+      "course_id": 9002,
+      "title": "Seminário · Mitocôndria (exemplo)",
+      "description": "Apresentação em grupo de dez minutos.",
+      "days_remaining": 12
+    },
+    {
+      "course_id": 9003,
+      "title": "Leitura complementar (exemplo)",
+      "description": "Capítulo sobre a arte barroca.",
+      "days_remaining": null
+    }
+  ]
+}

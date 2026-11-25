@@ -1,0 +1,90 @@
+/* Componentes compartilhados pela landing e pelo app. Regras de uso em DESIGN.md. */
+
+/* ---------- Botões ---------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0 1.4rem;
+  border: 1px solid var(--ouro);
+  border-radius: 999px;
+  background: var(--ouro);
+  color: var(--azul-noite);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--rapido) var(--sair),
+    background-color var(--rapido) var(--sair);
+}
+
+.botao:hover {
+  background: #e6c874;
+}
+
+.botao:active {
+  transform: scale(0.97);
+}
+
+.botao--fantasma {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--borda);
+}
+
+.botao--fantasma:hover {
+  background: var(--superficie-2);
+}
+
+.botao--pequeno {
+  min-height: 2.25rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+}
+
+.botao[disabled],
+.botao[aria-busy='true'] {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.botao[aria-busy='true']::before {
+  content: '';
+  width: 0.9em;
+  height: 0.9em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: girar 800ms linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* ---------- Chip de prioridade (valores do Tutor: ALTA, MÉDIA, BAIXA) ---------- */
+.prioridade {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  background: var(--azul-nevoa);
+  color: #4a5370;
+}
+
+.prioridade--alta {
+  background: #fbe3d6;
+  color: #8a2a10;
+}
+
+.prioridade--média {
+  background: #f6ebc8;
+  color: #5e4108;
+}

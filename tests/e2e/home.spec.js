@@ -1,19 +1,11 @@
 // Os callbacks de page.evaluate rodam no navegador.
-/* global window, document, getComputedStyle */
+/* global document, getComputedStyle */
 import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { CSP, CSP_META } from '../../src/seguranca.js';
 
-const ORDEM = [
-  'inicio',
-  'recursos',
-  'como-funciona',
-  'integracoes',
-  'resultados',
-  'demo',
-  'roadmap',
-];
+const ORDEM = ['inicio', 'como-funciona', 'abrir'];
 
 test('as seções aparecem na ordem, cada uma com seu título', async ({ page }) => {
   await page.goto('/');
@@ -39,18 +31,29 @@ test('os quatro agentes estão em como funciona', async ({ page }) => {
 test('a navegação leva às seções, por link e pelas setas do teclado', async ({ page }) => {
   await page.goto('/');
   await page.keyboard.press('ArrowRight');
-  await expect(page).toHaveURL(/#recursos$/);
-  await expect(page.locator('#titulo-recursos')).toBeFocused();
-  await page.keyboard.press('ArrowRight');
   await expect(page).toHaveURL(/#como-funciona$/);
-  await expect(page.locator('#titulo-como-funciona')).toBeInViewport();
+  await expect(page.locator('#titulo-como-funciona')).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(page).toHaveURL(/#abrir$/);
+  await expect(page.locator('#titulo-abrir')).toBeInViewport();
   await page.keyboard.press('ArrowLeft');
-  await expect(page).toHaveURL(/#recursos$/);
+  await expect(page).toHaveURL(/#como-funciona$/);
 
   const nav = page.getByRole('navigation', { name: 'Seções' });
-  await nav.getByRole('link', { name: 'Resultados' }).click();
-  await expect(page).toHaveURL(/#resultados$/);
-  await expect(page.locator('#titulo-resultados')).toBeInViewport();
+  await page.goto('/');
+  await nav.getByRole('link', { name: 'Como funciona' }).click();
+  await expect(page).toHaveURL(/#como-funciona$/);
+  await expect(page.locator('#titulo-como-funciona')).toBeInViewport();
+});
+
+test('a landing leva ao app', async ({ page }) => {
+  await page.goto('/');
+  for (const link of await page.getByRole('link', { name: 'Abrir o app' }).all()) {
+    await expect(link).toHaveAttribute('href', '/app/');
+  }
+  await page.locator('#abrir').getByRole('link', { name: 'Abrir o app' }).click();
+  await expect(page).toHaveURL(/\/app\/#\/entrar$/);
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 });
 
 test('o simulador reproduz as rotas do Orquestrador', async ({ page }) => {
@@ -117,67 +120,6 @@ test.describe('com movimento reduzido', () => {
   });
 });
 
-test('sem execução gravada, a demo avisa que é ao vivo', async ({ page }) => {
-  await page.goto('/#demo');
-  await expect(page.locator('[data-demo-estado]')).toHaveText(/ainda não capturada/);
-});
-
-test('com execução gravada, a demo mostra cronograma, resumo e questões como texto', async ({
-  page,
-}) => {
-  // Dados de teste, não são saídas reais do Glaux.
-  await page.route('**/demo/manifest.json', (rota) =>
-    rota.fulfill({
-      json: { capturadoEm: '26/11/2026', video: null, tutor: 't.json', questoes: 'q.json' },
-    }),
-  );
-  await page.route('**/demo/t.json', (rota) =>
-    rota.fulfill({
-      json: {
-        assignments: [
-          { priority_level: 'ALTA', title: 'Tarefa de teste', days_remaining: 1 },
-          { priority_level: 'BAIXA', title: 'Outra tarefa', days_remaining: null },
-        ],
-        summaries: [
-          {
-            topic_title: 'Tema: teste',
-            summary_text:
-              '# Visão Geral\nUm **conceito** de teste [teste.pdf, p.2-2]\n<img src=x onerror="window.invadido=1">',
-          },
-        ],
-      },
-    }),
-  );
-  await page.route('**/demo/q.json', (rota) =>
-    rota.fulfill({
-      json: {
-        tema: 'teste',
-        generated_questions: [
-          {
-            enunciado: 'Pergunta de teste?',
-            alternativas: { A: 'um', B: 'dois', C: 'três', D: 'quatro' },
-            correta: 'B',
-            trecho_referencia: { arquivo: 'teste.pdf', pagina: 2, pagina_fim: 3 },
-          },
-        ],
-      },
-    }),
-  );
-  await page.goto('/#demo');
-  const demo = page.locator('[data-demo]');
-  await expect(demo.locator('[data-demo-estado]')).toHaveText('Execução gravada em 26/11/2026.');
-  await expect(demo.locator('.demo__tarefas li')).toHaveCount(2);
-  await expect(demo.getByText('Tarefa de teste')).toBeVisible();
-  await expect(demo.locator('.demo__resumo cite.fonte')).toHaveText('[teste.pdf, p.2-2]');
-  await expect(demo.locator('.demo__resumo strong')).toHaveText('conceito');
-  await expect(demo.getByText('Pergunta de teste?')).toBeVisible();
-  await expect(demo.locator('.correta')).toContainText('B) dois');
-  await expect(demo.locator('.demo__questoes cite.fonte')).toHaveText('[teste.pdf, p.2-3]');
-  // HTML vindo do JSON vira texto, nunca elemento.
-  await expect(demo.locator('img')).toHaveCount(0);
-  expect(await page.evaluate(() => window.invadido)).toBeUndefined();
-});
-
 test('não há rolagem horizontal em 360 px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto('/');
@@ -214,6 +156,10 @@ test('a CSP está no build e é a mesma do deploy', async ({ page }) => {
 
 test('não há problemas de acessibilidade detectáveis (WCAG A/AA)', async ({ page }) => {
   await page.goto('/');
+  // Os painéis do herói entram com uma animação de opacidade; o axe mede o contraste final.
+  await page.waitForFunction(() =>
+    document.getAnimations().every((a) => a.playState !== 'running'),
+  );
   const resultado = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();

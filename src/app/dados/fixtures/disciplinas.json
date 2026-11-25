@@ -1,0 +1,13 @@
+{
+  "exemplo": true,
+  "aviso": "Disciplinas fictícias para demonstração. Não são saídas reais do Glaux.",
+  "disciplinas": [
+    { "id": 9001, "name": "Astronomia Básica (exemplo)", "temas": ["sistema solar", "estrelas"] },
+    {
+      "id": 9002,
+      "name": "Biologia Celular (exemplo)",
+      "temas": ["membrana plasmática", "mitocôndria"]
+    },
+    { "id": 9003, "name": "História da Arte (exemplo)", "temas": [], "semMaterial": true }
+  ]
+}

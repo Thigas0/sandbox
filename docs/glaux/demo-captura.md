@@ -1,4 +1,7 @@
-# Captura da demo (fallback da apresentação)
+# Captura da demo (fallback da apresentação) · OBSOLETO
+
+> Obsoleto desde 25/11: o fallback da demo gravada (`src/demo.js`, `public/demo/`) saiu da landing.
+> O app em `/app/` tem o modo demo com dados fictícios. Guardado só como histórico.
 
 O site mostra uma execução gravada da CLI do Glaux caso a demo ao vivo falhe. O site nunca chama o
 Canvas nem o Groq: tudo vem de arquivos estáticos em `public/demo/`.

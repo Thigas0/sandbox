@@ -1,0 +1,27 @@
+{
+  "exemplo": true,
+  "aviso": "Resumos fictícios no formato do Agente Tutor, com citações para PDFs de exemplo.",
+  "resumos": {
+    "9001": {
+      "summary_text": "# 📌 Visão Geral\nO **Sistema Solar** é formado pelo Sol, a única estrela do sistema, e pelos corpos que orbitam ao seu redor. [astro_aula01.pdf, p.3-3]\n\n# 🔑 Conceitos-Chave\n- **Planetas rochosos**: Mercúrio, Vênus, Terra e Marte têm superfície sólida. [astro_aula01.pdf, p.5-5]\n- **Gigantes gasosos**: Júpiter e Saturno são formados principalmente por hidrogênio e hélio. [astro_aula01.pdf, p.6-6]\n- **Fusão nuclear**: as estrelas produzem energia fundindo hidrogênio em hélio no núcleo. [astro_aula02.pdf, p.4-4]\n\n# ⚠️ Pontos de Atenção\n- Desde 2006, Plutão é classificado como **planeta anão**. [astro_aula01.pdf, p.8-8]\n- A cor de uma estrela indica a temperatura da sua superfície. [astro_aula02.pdf, p.6-6]",
+      "sources_used": [
+        { "arquivo": "astro_aula01.pdf", "pagina": 3, "pagina_fim": 3 },
+        { "arquivo": "astro_aula01.pdf", "pagina": 5, "pagina_fim": 5 },
+        { "arquivo": "astro_aula01.pdf", "pagina": 6, "pagina_fim": 6 },
+        { "arquivo": "astro_aula01.pdf", "pagina": 8, "pagina_fim": 8 },
+        { "arquivo": "astro_aula02.pdf", "pagina": 4, "pagina_fim": 4 },
+        { "arquivo": "astro_aula02.pdf", "pagina": 6, "pagina_fim": 6 }
+      ]
+    },
+    "9002": {
+      "summary_text": "# 📌 Visão Geral\nA **célula** é a menor unidade estrutural e funcional dos seres vivos. [bio_aula01.pdf, p.2-2]\n\n# 🔑 Conceitos-Chave\n- **Membrana plasmática**: bicamada de fosfolipídios que controla a entrada e a saída de substâncias. [bio_aula01.pdf, p.7-8]\n- **Mitocôndria**: organela da respiração celular, processo que produz ATP. [bio_aula02.pdf, p.4-4]\n- **Núcleo**: guarda o material genético nas células eucariontes. [bio_aula01.pdf, p.10-10]\n\n# ⚠️ Pontos de Atenção\n- Células procariontes não têm núcleo delimitado por membrana. [bio_aula01.pdf, p.12-12]",
+      "sources_used": [
+        { "arquivo": "bio_aula01.pdf", "pagina": 2, "pagina_fim": 2 },
+        { "arquivo": "bio_aula01.pdf", "pagina": 7, "pagina_fim": 8 },
+        { "arquivo": "bio_aula01.pdf", "pagina": 10, "pagina_fim": 10 },
+        { "arquivo": "bio_aula01.pdf", "pagina": 12, "pagina_fim": 12 },
+        { "arquivo": "bio_aula02.pdf", "pagina": 4, "pagina_fim": 4 }
+      ]
+    }
+  }
+}
