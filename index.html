@@ -2,27 +2,415 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ponto de partida para os meus sites." />
-    <title>Meu site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Catelle | Reforço Escolar e Alfabetização em Jaguariúna</title>
+    <meta
+      name="description"
+      content="Reforço escolar e alfabetização com a Professora Cátia, em sala própria no Centro de Jaguariúna-SP. Nota 5,0 no Google. Conte sobre a criança e converse pelo WhatsApp."
+    />
+    <link rel="canonical" href="https://catelle.com.br/" />
+    <meta name="theme-color" content="#e6dccd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1a17" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Catelle | Reforço Escolar" />
+    <meta property="og:title" content="Catelle | Reforço Escolar e Alfabetização em Jaguariúna" />
+    <meta
+      property="og:description"
+      content="Reforço escolar e alfabetização com a Professora Cátia, no Centro de Jaguariúna-SP."
+    />
+    <meta property="og:url" content="https://catelle.com.br/" />
+    <meta property="og:image" content="https://catelle.com.br/img/og-catelle.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/albert-sans-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/img/c.svg" as="image" type="image/svg+xml" crossorigin />
     <link rel="stylesheet" href="/src/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "EducationalOrganization"],
+        "@id": "https://catelle.com.br/#negocio",
+        "name": "Catelle | Reforço Escolar",
+        "description": "Reforço escolar e alfabetização em Jaguariúna-SP.",
+        "url": "https://catelle.com.br/",
+        "image": "https://catelle.com.br/img/og-catelle.jpg",
+        "telephone": "+55-19-99659-4138",
+        "taxID": "48.987.232/0001-01",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "R. Egas Bueno, 388, sala 02, Centro",
+          "addressLocality": "Jaguariúna",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "areaServed": { "@type": "City", "name": "Jaguariúna" },
+        "founder": {
+          "@type": "Person",
+          "name": "Cátia Adriana Silva Muller",
+          "jobTitle": "Professora"
+        },
+        "knowsAbout": ["Reforço escolar", "Alfabetização", "Leitura", "Matemática"]
+      }
+    </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">Meu site</a>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo">
+      <a class="marca" href="/" aria-label="Catelle, início">Catelle</a>
+      <nav aria-label="Seções">
+        <ul role="list">
+          <li><a href="#quem-cuida">Quem cuida</a></li>
+          <li><a href="#maes">O que as mães dizem</a></li>
+          <li><a href="#onde">Onde fica</a></li>
+        </ul>
+      </nav>
+      <a class="botao botao-pequeno" href="#conversar">Chamar no WhatsApp</a>
     </header>
+
     <main id="conteudo">
-      <h1>Olá, mundo!</h1>
-      <p>
-        Edite <code>index.html</code>, <code>src/style.css</code> e <code>src/main.js</code> para
-        começar.
-      </p>
-      <button type="button" id="contador">Cliques: 0</button>
+      <section class="hero" aria-labelledby="hero-titulo">
+        <div class="hero-foto" data-crossfade>
+          <img
+            class="hero-img is-ativa"
+            src="/img/maria-fumaca-jaguariuna-1600.webp"
+            srcset="
+              /img/maria-fumaca-jaguariuna-800.webp   800w,
+              /img/maria-fumaca-jaguariuna-1200.webp 1200w,
+              /img/maria-fumaca-jaguariuna-1600.webp 1600w
+            "
+            sizes="(min-width: 60em) 50vw, 100vw"
+            width="1600"
+            height="1200"
+            alt="A locomotiva Maria Fumaça na estação de Jaguariúna"
+            fetchpriority="high"
+          />
+          <template data-crossfade-extra>
+            <img
+              class="hero-img"
+              src="/img/estacao-jaguariuna-4-1600.webp"
+              srcset="
+                /img/estacao-jaguariuna-4-800.webp   800w,
+                /img/estacao-jaguariuna-4-1600.webp 1600w
+              "
+              sizes="(min-width: 60em) 50vw, 100vw"
+              width="1600"
+              height="900"
+              alt="A antiga estação ferroviária de Jaguariúna"
+            />
+            <img
+              class="hero-img"
+              src="/img/rio-jaguari-jaguariuna-sp-1600.webp"
+              srcset="
+                /img/rio-jaguari-jaguariuna-sp-800.webp   800w,
+                /img/rio-jaguari-jaguariuna-sp-1600.webp 1600w
+              "
+              sizes="(min-width: 60em) 50vw, 100vw"
+              width="1600"
+              height="1200"
+              alt="O rio Jaguari entre árvores, em Jaguariúna"
+            />
+            <img
+              class="hero-img"
+              src="/img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp"
+              srcset="
+                /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-800.webp   800w,
+                /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp 1600w
+              "
+              sizes="(min-width: 60em) 50vw, 100vw"
+              width="1600"
+              height="1062"
+              alt="A ponte da ferrovia sobre o rio Jaguari"
+            />
+          </template>
+        </div>
+
+        <div class="hero-cartao">
+          <div class="faixa-c" aria-hidden="true"></div>
+          <h1 id="hero-titulo" class="revela">Reforço escolar e alfabetização</h1>
+          <p class="hero-texto revela">
+            Com a Professora Cátia, em sala própria no Centro de Jaguariúna. As mães dão nota
+            <strong>5,0 no Google</strong>.
+          </p>
+          <a class="botao revela" href="#conversar">Chamar no WhatsApp</a>
+          <ul class="hero-links revela" role="list">
+            <li><a href="#maes">Ler o que as mães dizem</a></li>
+            <li><a href="#onde">Ver o endereço</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="quem-cuida" class="painel" aria-labelledby="quem-titulo">
+        <h2 id="quem-titulo" class="painel-titulo revela">Quem cuida é a Professora Cátia</h2>
+
+        <div class="painel-textos">
+          <div class="revela">
+            <h3>O que ela acompanha</h3>
+            <ul class="lista-c" role="list">
+              <li>Alfabetização</li>
+              <li>Leitura</li>
+              <li>Matemática</li>
+              <li>Outras dificuldades da escola</li>
+            </ul>
+          </div>
+          <div class="revela">
+            <h3>Como começa</h3>
+            <p>
+              Você conta a idade, a série e a dificuldade da criança no formulário abaixo. A
+              mensagem abre no seu WhatsApp, e a professora responde para combinar o melhor horário.
+            </p>
+          </div>
+          <a class="botao botao-claro revela" href="#conversar">Contar sobre a criança</a>
+        </div>
+
+        <figure class="painel-figura revela">
+          <img
+            class="mascara-c"
+            src="/img/alfabeto-640.webp"
+            width="640"
+            height="1122"
+            alt="Página de uma cartilha antiga com o alfabeto e as sílabas"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </section>
+
+      <section id="maes" class="maes" aria-labelledby="maes-titulo">
+        <div class="maes-topo">
+          <h2 id="maes-titulo" class="revela">O que as mães dizem</h2>
+          <p class="maes-nota revela">
+            <span class="maes-nota-valor">5,0</span>
+            <span>no Google, em 8 avaliações</span>
+          </p>
+        </div>
+        <!-- DEPOIMENTOS -->
+      </section>
+
+      <section id="onde" class="onde" aria-labelledby="onde-titulo">
+        <div class="faixa-c faixa-c-larga" aria-hidden="true"></div>
+        <div class="onde-grade">
+          <figure class="onde-figura revela">
+            <img
+              class="mascara-c"
+              src="/img/igreja-matriz-1024.webp"
+              width="1024"
+              height="768"
+              alt="A igreja matriz iluminada à noite, no Centro de Jaguariúna"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="onde-texto">
+            <h2 id="onde-titulo" class="revela">Sala 02, no Centro</h2>
+            <address class="revela">
+              R. Egas Bueno, 388, sala 02<br />
+              Centro, Jaguariúna-SP
+            </address>
+            <p class="revela">
+              <a
+                class="link-forte"
+                href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Egas%20Bueno%2C%20388%2C%20Jaguari%C3%BAna%20-%20SP"
+                rel="noopener"
+                target="_blank"
+                >Abrir no mapa<span class="sr-only"> (abre em nova aba)</span></a
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="conversar" class="conversar" aria-labelledby="form-titulo">
+        <div class="cupom">
+          <div class="cupom-lado">
+            <h2 id="form-titulo">Conte sobre a criança</h2>
+            <p>Quatro respostas e a mensagem fica pronta no seu WhatsApp.</p>
+            <div class="previa" aria-live="off">
+              <p class="previa-rotulo" id="previa-rotulo">Mensagem que vai abrir no WhatsApp</p>
+              <p class="previa-texto" data-previa aria-labelledby="previa-rotulo"></p>
+            </div>
+          </div>
+
+          <form class="cupom-form" novalidate data-form-whatsapp aria-labelledby="form-titulo">
+            <div class="erros" data-erros role="alert" tabindex="-1" hidden>
+              <p class="erros-titulo">Faltam algumas respostas:</p>
+              <ul data-erros-lista></ul>
+            </div>
+
+            <div class="campo">
+              <label for="idade">Idade da criança</label>
+              <input
+                id="idade"
+                name="idade"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="2"
+                aria-describedby="idade-erro"
+                required
+              />
+              <p class="campo-erro" id="idade-erro" hidden></p>
+            </div>
+
+            <div class="campo">
+              <label for="serie">Série</label>
+              <select id="serie" name="serie" aria-describedby="serie-erro" required>
+                <option value="">Escolha</option>
+                <option>Educação Infantil</option>
+                <option>1º ano</option>
+                <option>2º ano</option>
+                <option>3º ano</option>
+                <option>4º ano</option>
+                <option>5º ano</option>
+                <option>6º ano</option>
+                <option>7º ano</option>
+                <option>8º ano</option>
+                <option>9º ano</option>
+                <option>Ensino Médio</option>
+              </select>
+              <p class="campo-erro" id="serie-erro" hidden></p>
+            </div>
+
+            <fieldset class="campo" aria-describedby="dificuldade-erro">
+              <legend>Dificuldade principal</legend>
+              <div class="opcoes">
+                <label class="opcao"
+                  ><input
+                    id="dif-alfabetizacao"
+                    type="radio"
+                    name="dificuldade"
+                    value="alfabetizacao"
+                    required
+                  />
+                  Alfabetização</label
+                >
+                <label class="opcao"
+                  ><input type="radio" name="dificuldade" value="leitura" /> Leitura</label
+                >
+                <label class="opcao"
+                  ><input type="radio" name="dificuldade" value="matematica" /> Matemática</label
+                >
+                <label class="opcao"
+                  ><input type="radio" name="dificuldade" value="outra" /> Outra</label
+                >
+              </div>
+              <p class="campo-erro" id="dificuldade-erro" hidden></p>
+              <div class="campo campo-outra" data-outra hidden>
+                <label for="outra">Qual?</label>
+                <input
+                  id="outra"
+                  name="outra"
+                  type="text"
+                  maxlength="80"
+                  autocomplete="off"
+                  aria-describedby="outra-erro"
+                />
+                <p class="campo-erro" id="outra-erro" hidden></p>
+              </div>
+            </fieldset>
+
+            <div class="campo">
+              <label for="horario">Melhor horário</label>
+              <select id="horario" name="horario" aria-describedby="horario-erro" required>
+                <option value="">Escolha</option>
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+              </select>
+              <p class="campo-erro" id="horario-erro" hidden></p>
+            </div>
+
+            <p class="aviso">
+              O site não guarda nem envia nada: a mensagem é montada no seu aparelho e você decide
+              se manda. <a href="#privacidade">Privacidade</a>
+            </p>
+
+            <button class="botao botao-largo" type="submit">Abrir conversa no WhatsApp</button>
+            <p class="fallback" data-fallback hidden>
+              Se o WhatsApp não abrir,
+              <a data-fallback-link href="https://wa.me/5519996594138">toque aqui</a>.
+            </p>
+            <noscript>
+              <p class="aviso">
+                Sem JavaScript, o formulário não monta a mensagem.
+                <a href="https://wa.me/5519996594138">Fale direto no WhatsApp</a>.
+              </p>
+            </noscript>
+          </form>
+        </div>
+      </section>
     </main>
-    <footer class="site-footer">
-      <p>Feito com Vite.</p>
+
+    <footer class="rodape">
+      <p class="marca-blocos" aria-hidden="true">
+        <span>C</span><span>a</span><span>t</span><span>e</span><span>l</span><span>l</span
+        ><span>e</span>
+      </p>
+
+      <div class="rodape-grade">
+        <div>
+          <h2 class="rodape-titulo">Catelle | Reforço Escolar</h2>
+          <p>Professora Cátia Adriana Silva Muller</p>
+          <p>CNPJ 48.987.232/0001-01</p>
+        </div>
+        <div>
+          <h2 class="rodape-titulo">Contato</h2>
+          <p><a href="https://wa.me/5519996594138">WhatsApp (19) 99659-4138</a></p>
+          <address>R. Egas Bueno, 388, sala 02<br />Centro, Jaguariúna-SP</address>
+        </div>
+        <section id="privacidade" class="privacidade" aria-labelledby="privacidade-titulo">
+          <h2 id="privacidade-titulo" class="rodape-titulo">Privacidade</h2>
+          <p>
+            Este site não usa cookies nem ferramentas de medição e não guarda o que você preenche. O
+            formulário só monta uma mensagem no seu aparelho; ela segue pelo WhatsApp (serviço da
+            Meta) para o número da professora, se você decidir enviar. A professora usa essas
+            informações apenas para responder e combinar o atendimento da criança. Para pedir que
+            seus dados sejam apagados da conversa, fale com ela no mesmo número.
+          </p>
+        </section>
+      </div>
+
+      <p class="creditos">
+        Fotos de Jaguariúna, via Wikimedia Commons:
+        <a href="https://commons.wikimedia.org/w/index.php?curid=33674273">Maria Fumaça</a>, de
+        Fabricio de Souza Menegildo (<a href="https://creativecommons.org/licenses/by-sa/3.0/"
+          >CC BY-SA 3.0</a
+        >);
+        <a href="https://commons.wikimedia.org/w/index.php?curid=54046298">Estação Jaguariúna</a>,
+        de Raphael Henrique Figueira (<a href="https://creativecommons.org/licenses/by-sa/4.0/"
+          >CC BY-SA 4.0</a
+        >);
+        <a href="https://commons.wikimedia.org/wiki/File:Rio_Jaguari_-_Jaguari%C3%BAna_-_SP.jpg"
+          >Rio Jaguari</a
+        >, de Odacir Blanco (<a href="https://creativecommons.org/licenses/by-sa/3.0/"
+          >CC BY-SA 3.0</a
+        >);
+        <a
+          href="https://commons.wikimedia.org/wiki/File:Ponte_(ferrovia)_sobre_rio_Jaguari_-_panoramio.jpg"
+          >Ponte sobre o rio Jaguari</a
+        >
+        e
+        <a
+          href="https://commons.wikimedia.org/wiki/File:Igreja_matriz_no_centro_de_Jaguariuna_-_panoramio.jpg"
+          >Igreja matriz</a
+        >, de Isack Ryuji Minowa (<a href="https://creativecommons.org/licenses/by-sa/3.0/"
+          >CC BY-SA 3.0</a
+        >). Cartilha:
+        <a href="https://commons.wikimedia.org/w/index.php?curid=81555899">Alphabet for a Primer</a
+        >, século XVI (<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>). Fotos
+        redimensionadas.
+      </p>
     </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

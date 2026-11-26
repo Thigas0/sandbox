@@ -13,4 +13,9 @@ export default [
     files: ['*.config.js', 'tests/**/*.js'],
     languageOptions: { globals: globals.node },
   },
+  {
+    // Os callbacks de page.evaluate() rodam no navegador.
+    files: ['tests/e2e/**/*.js'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
+  },
 ];

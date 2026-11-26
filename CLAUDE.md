@@ -6,7 +6,11 @@ same change.
 
 ## Map
 
-- `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, images).
+- `index.html`, `src/`, `public/`: the site. `public/` is served as is (favicon, fonts, images).
+  `src/lib/`: form-to-WhatsApp and testimonial logic. `src/data/depoimentos.json`: testimonials,
+  rendered at build time by the plugin in `vite.config.js` (only entries with an `aceite` date).
+- `vercel.json`: hosting and security headers (CSP etc.); `vite preview` serves the same headers.
+- `PRODUCT.md`, `DESIGN.md`: product truth and the visual system. `docs/image-credits.json`: image licences.
 - `tests/e2e/`: Playwright browser tests, including an axe accessibility check (desktop and phone).
 - `playwright.config.js`, `eslint.config.js`, `.prettierrc.json`: test, lint, and format config.
 - `.claude/skills/`, `.claude/commands/`, `.claude/agents/`: third-party design, motion, SEO, testing,

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://catelle.com.br/sitemap.xml
