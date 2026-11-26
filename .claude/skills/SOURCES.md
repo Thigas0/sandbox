@@ -10,7 +10,7 @@ copy the folder again from a newer commit, read the diff, and update this table.
 | Skills | Source | Commit | License |
 | :- | :- | :- | :- |
 | taste-skill, redesign-skill, minimalist-skill, soft-skill, brutalist-skill, output-skill | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `f624f37a8c650b9cc550253104925efe4c8de246` | MIT |
-| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (`.claude/skills/impeccable`) | `8a0e198da34ebc5b936a9d5975fb7a3b1cf353b7` | Apache-2.0 |
+| impeccable (+ 5 `impeccable-*` agents in `.claude/agents/`) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (`.claude/skills/impeccable`) | v4.11.1, via `npx impeccable update` on 2026-11-26 (engine v0.1.31) | Apache-2.0 |
 | emil-design-eng, animate, review-animations, improve-animations, animation-performance, animation-vocabulary, find-animation-opportunities, apple-design, break-ui, mobile-native | [emilkowalski/skills](https://github.com/emilkowalski/skills) | `2d228630ba1446365f614a108cb8252f1feda202` | MIT |
 | web-design-guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `063bee94c3f4df8453406c830b0a7df0f2860278` | MIT |
 | frontend-design | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) plugin `frontend-design` | as synced 2026-10-15 | Apache-2.0 |
