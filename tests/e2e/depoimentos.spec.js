@@ -4,9 +4,10 @@ import { renderDepoimentos, depoimentosAutorizados } from '../../src/lib/depoime
 
 const fonte = 'https://www.google.com/maps/search/?api=1&query=Catelle';
 
-test('só entra depoimento com aceite registrado', () => {
+test('com exigirAceite, só entra depoimento com aceite registrado', () => {
   const dados = {
     fonte,
+    exigirAceite: true,
     depoimentos: [
       { autor: 'Mãe A', texto: 'Texto A', aceite: '2026-11-20' },
       { autor: 'Mãe B', texto: 'Texto B', aceite: null },
@@ -20,6 +21,29 @@ test('só entra depoimento com aceite registrado', () => {
   expect(html).not.toContain('Texto B');
   expect(html).not.toContain('Texto C');
   expect(html).not.toContain('Texto D');
+});
+
+test('sem exigirAceite, entram todos os depoimentos com autor e texto', () => {
+  const dados = {
+    fonte,
+    exigirAceite: false,
+    depoimentos: [
+      { autor: 'Mãe A', texto: 'Texto A' },
+      { autor: 'Mãe B', texto: 'Texto B', nota: 5 },
+      { autor: '', texto: 'Sem autor' },
+      { autor: 'Mãe C', texto: '   ' },
+    ],
+  };
+  expect(depoimentosAutorizados(dados).map((d) => d.autor)).toEqual(['Mãe A', 'Mãe B']);
+  const html = renderDepoimentos(dados);
+  expect(html).toContain(
+    '<span aria-hidden="true">★★★★★</span><span class="sr-only">Nota 5 de 5</span>',
+  );
+  expect(html).not.toContain('Sem autor');
+});
+
+test('sem o campo exigirAceite, o padrão continua exigindo aceite', () => {
+  expect(depoimentosAutorizados({ depoimentos: [{ autor: 'A', texto: 'B' }] })).toEqual([]);
 });
 
 test('o texto entra literal, inteiro e escapado', () => {

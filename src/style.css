@@ -571,6 +571,11 @@ a {
   line-height: 1.35;
 }
 
+.slip-nota {
+  color: var(--acento);
+  letter-spacing: 0.1em;
+}
+
 .slip-autor {
   font-weight: 600;
   overflow-wrap: anywhere;
@@ -645,6 +650,7 @@ a {
 /* Formulário: um cupom para recortar. */
 .conversar {
   padding: 0 var(--margem) var(--respiro);
+  overflow-x: clip; /* a entrada girada do cupom não pode criar rolagem lateral */
 }
 
 .cupom {
@@ -920,9 +926,70 @@ select[aria-invalid='true'] {
 
 /* ---------- Movimento ---------- */
 
-/* Entrada das partes de cada seção. O conteúdo nasce visível: a animação só existe onde o
-   navegador a suporta, e nunca esconde nada se o script falhar. */
+/* Regras gerais: o conteúdo nasce visível (a animação só existe onde o navegador a suporta e
+   nunca esconde nada se o script falhar); só transform, translate, rotate, scale, opacity e
+   clip-path; tudo some com prefers-reduced-motion; o que depende de cursor só roda com mouse. */
+
+.titulo-palavras span {
+  display: inline-block;
+}
+
+.previa {
+  position: relative;
+}
+
+.previa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--acento);
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  /* Título do hero: palavra por palavra, uma vez, ao carregar. */
+  .titulo-palavras span {
+    animation: sobe 800ms var(--ease-out) both;
+  }
+
+  .titulo-palavras span:nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .titulo-palavras span:nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  .titulo-palavras span:nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  /* Foto do hero: aproximação lenta enquanto está em cena (a "luz da tarde"). */
+  .hero-img.is-ativa {
+    animation: aproxima 9s linear both;
+  }
+
+  /* Prévia da mensagem: um brilho curto a cada mudança. */
+  .previa.is-atualizada::after {
+    animation: brilho 500ms var(--ease-out);
+  }
+
+  /* Botões com mouse: o deslocamento magnético volta com mola curta. */
+  @media (hover: hover) and (pointer: fine) {
+    .botao {
+      transition:
+        transform var(--rapido) var(--ease-out),
+        translate var(--medio) var(--ease-out),
+        background-color var(--medio) var(--ease-out);
+    }
+  }
+
+  .slip {
+    transition: transform var(--medio) var(--ease-out);
+  }
+
   @supports (animation-timeline: view()) {
     .revela {
       animation: revela linear both;
@@ -936,63 +1003,256 @@ select[aria-invalid='true'] {
     }
 
     .hero .revela:nth-child(3) {
-      animation-delay: 80ms;
+      animation-delay: 280ms;
     }
 
     .hero .revela:nth-child(4) {
-      animation-delay: 160ms;
+      animation-delay: 360ms;
     }
 
     .hero .revela:nth-child(5) {
-      animation-delay: 240ms;
+      animation-delay: 440ms;
+    }
+
+    /* Títulos de seção: sobem e se revelam da esquerda para a direita. */
+    h2.revela {
+      animation-name: revela-titulo;
+      animation-range: entry 5% entry 70%;
+    }
+
+    /* A faixa de Cs do hero corre com a rolagem da página. */
+    .hero .faixa-c {
+      width: calc(100% + 10rem);
+      animation: corre linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
     }
 
     .faixa-c-larga {
       animation: desliza linear both;
       animation-timeline: view();
     }
+
+    /* As fotos recortadas no C giram até o lugar, como a letra sendo traçada. */
+    .gira-c {
+      animation: gira linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+
+    .gira-c-inversa {
+      animation-name: gira-inversa;
+    }
+
+    /* Lista: cada item entra e o marcador C dá meia-volta. */
+    .lista-c li {
+      view-timeline: --item;
+      animation: desliza-item linear both;
+      animation-timeline: --item;
+      animation-range: entry 0% entry 90%;
+    }
+
+    .lista-c li::before {
+      animation: meia-volta linear both;
+      animation-timeline: --item;
+      animation-range: entry 0% entry 100%;
+    }
+
+    /* Bilhetes: chegam em leque, um depois do outro. */
+    .maes {
+      view-timeline: --maes;
+    }
+
+    .slip,
+    .slips-vazio {
+      animation: bilhete linear both;
+      animation-timeline: --maes;
+      animation-range: entry 20% cover 40%;
+    }
+
+    .slip:nth-child(2) {
+      animation-range: entry 30% cover 45%;
+    }
+
+    .slip:nth-child(3) {
+      animation-range: entry 40% cover 50%;
+    }
+
+    .slip:nth-child(n + 4) {
+      animation-range: entry 50% cover 55%;
+    }
+
+    /* Cupom: o cartão do formulário sobe e se endireita. */
+    .cupom {
+      animation: cupom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+
+    /* Rodapé: a marca se ergue bloco a bloco. */
+    .rodape {
+      view-timeline: --rodape;
+    }
+
+    .marca-blocos span {
+      transform-origin: 50% 100%;
+      animation: ergue linear both;
+      animation-timeline: --rodape;
+      animation-range: entry 0% entry 70%;
+    }
+
+    .marca-blocos span:nth-child(2) {
+      animation-range: entry 5% entry 75%;
+    }
+
+    .marca-blocos span:nth-child(3) {
+      animation-range: entry 10% entry 80%;
+    }
+
+    .marca-blocos span:nth-child(4) {
+      animation-range: entry 15% entry 85%;
+    }
+
+    .marca-blocos span:nth-child(5) {
+      animation-range: entry 20% entry 90%;
+    }
+
+    .marca-blocos span:nth-child(6) {
+      animation-range: entry 25% entry 95%;
+    }
+
+    .marca-blocos span:nth-child(7) {
+      animation-range: entry 30% entry 100%;
+    }
   }
 
   /* Sem scroll-driven animations: o script põe .js-revela e observa a entrada. */
   .js-revela .revela {
     opacity: 0;
-    transform: translateY(24px);
+    translate: 0 24px;
     transition:
       opacity 600ms var(--ease-out),
-      transform 600ms var(--ease-out);
+      translate 600ms var(--ease-out);
     transition-delay: var(--atraso, 0ms);
   }
 
   .js-revela .revela.is-dentro {
     opacity: 1;
-    transform: none;
+    translate: none;
   }
+}
 
-  .slip {
-    transition: transform var(--medio) var(--ease-out);
+@keyframes sobe {
+  from {
+    opacity: 0;
+    translate: 0 0.5em;
+  }
+}
+
+@keyframes aproxima {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.08;
+  }
+}
+
+@keyframes brilho {
+  from {
+    opacity: 0.18;
+  }
+  to {
+    opacity: 0;
   }
 }
 
 @keyframes revela {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    translate: 0 24px;
+  }
+}
+
+@keyframes revela-titulo {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes entra {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    translate: 0 20px;
+  }
+}
+
+@keyframes corre {
+  to {
+    translate: -10rem 0;
   }
 }
 
 @keyframes desliza {
   from {
-    transform: translateX(-4rem);
+    translate: -4rem 0;
   }
   to {
-    transform: translateX(0);
+    translate: 0 0;
+  }
+}
+
+@keyframes gira {
+  from {
+    rotate: -35deg;
+    scale: 0.85;
+  }
+}
+
+@keyframes gira-inversa {
+  from {
+    rotate: 35deg;
+    scale: 0.85;
+  }
+}
+
+@keyframes desliza-item {
+  from {
+    opacity: 0;
+    translate: -1.5rem 0;
+  }
+}
+
+@keyframes meia-volta {
+  from {
+    rotate: -180deg;
+  }
+}
+
+@keyframes bilhete {
+  from {
+    opacity: 0;
+    translate: 0 4rem;
+    rotate: 6deg;
+  }
+}
+
+@keyframes cupom {
+  from {
+    opacity: 0;
+    translate: 0 3rem;
+    rotate: -1.5deg;
+  }
+}
+
+@keyframes ergue {
+  from {
+    scale: 1 0.15;
   }
 }
 

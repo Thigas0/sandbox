@@ -38,11 +38,26 @@ para `testimonial-paper-slips`, porque não existem retratos das mães e não de
 
 ## Movimento
 
-- **Assinatura:** troca lenta das fotos de Jaguariúna no hero (1,6 s de fade, 5,6 s em cada uma), que
-  pausa com a aba oculta ou o hero fora da tela. As fotos extras só baixam depois do `load`.
-- **Entrada das partes de cada seção:** `animation-timeline: view()`, com IntersectionObserver como
-  alternativa. O conteúdo nasce visível.
-- **Faixa de Cs** desliza com o scroll. **Bilhetes** inclinam até 3° sob o cursor, só com
-  `(hover: hover) and (pointer: fine)`. Botões e opções respondem em `:active`.
-- **`prefers-reduced-motion: reduce`:** nada anima e as fotos extras nem são baixadas.
-- **Orçamento:** só `transform` e `opacity`; JS total de 2,5 KB com gzip; nenhuma long task.
+Tudo em `src/style.css` (seção Movimento) e em `src/main.js`. O conteúdo nasce visível; só `transform`,
+`translate`, `rotate`, `scale`, `opacity` e `clip-path`; com `prefers-reduced-motion: reduce`, nada anima.
+
+- **Ao carregar:** o título do hero sobe palavra por palavra (800 ms, 70 ms de intervalo), seguido do texto,
+  do botão e dos links.
+- **Assinatura:** as fotos de Jaguariúna trocam com fade de 1,6 s e aproximam devagar (escala 1 → 1,08 em 9 s)
+  enquanto estão em cena. As fotos extras só carregam 2,5 s depois do `load`.
+- **Com a rolagem** (`animation-timeline`):
+  - a faixa de Cs do hero corre para o lado;
+  - os títulos de seção sobem e se revelam da esquerda para a direita;
+  - as fotos recortadas no C giram até o lugar, como a letra sendo traçada;
+  - cada item da lista entra, e o marcador C dá meia-volta;
+  - os bilhetes chegam em leque, um depois do outro;
+  - o cupom sobe e se endireita;
+  - a faixa larga desliza;
+  - a marca do rodapé se ergue bloco a bloco.
+- **Ao aparecer:** a nota "5,0" conta a partir de 0,0 (900 ms, com ease-out).
+- **Com mouse:** os botões seguem o cursor até 6 px (magnéticos) e os bilhetes inclinam até 3°.
+- **Formulário:** a prévia da mensagem dá um brilho curto a cada mudança. Botões e opções respondem em
+  `:active`.
+- **Medido:** 35 elementos em movimento. A rolagem fica a 60 fps com CPU 4x mais lenta, e o LCP no celular
+  simulado continua em 2,0 s.
+- **Onde não há `animation-timeline`:** fica só a entrada por IntersectionObserver; o conteúdo segue visível.

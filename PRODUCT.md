@@ -26,8 +26,10 @@ de cada uma.
 
 ## Constraints
 
-- Depoimentos: só o texto literal do Google, com o nome como aparece lá e o aceite registrado. Nada criado,
-  parafraseado ou resumido como se fosse depoimento.
+- Depoimentos: só o texto literal do Google, com o nome como aparece lá e o link para a ficha. Nada criado,
+  parafraseado ou resumido como se fosse depoimento. O aceite por escrito deixou de ser exigido por decisão
+  do dono do projeto em 2026-11-27 (`"exigirAceite": false` em `src/data/depoimentos.json`); se alguém
+  pedir para sair, a entrada é apagada.
 - Conteúdo: só os fatos do briefing. Sem faixas de idade, horários, formação ou CEP até a professora confirmar.
 - Sem backend, sem armazenamento de dados, sem cookies e sem analytics. Sem scripts de terceiros.
 - Nunca publicar: o número interno do lead, a classificação comercial e documentos pessoais da professora.
