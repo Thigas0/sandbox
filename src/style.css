@@ -283,16 +283,14 @@ a {
 
 .hero-foto {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-radius: var(--raio);
 }
 
-/* O C do hero é um clipPath SVG inline: não depende de baixar arquivo, então a foto do LCP pinta
-   assim que chega. As máscaras pequenas continuam usando /img/c.svg. */
 .hero-c {
   position: absolute;
   inset: 0;
-  clip-path: url('#c-recorte');
 }
 
 @media (min-width: 60em) {
@@ -300,15 +298,6 @@ a {
     order: 2;
     aspect-ratio: auto;
     min-height: 100%;
-  }
-
-  .hero-c {
-    inset: auto;
-    top: 50%;
-    left: -1.8%;
-    width: 118%;
-    aspect-ratio: 1;
-    transform: translateY(-50%);
   }
 }
 
@@ -413,26 +402,34 @@ a {
 }
 
 @media (min-width: 60em) {
+  /* Duas colunas cheias: título e textos à esquerda, a cartilha grande à direita, sangrando
+     pela borda de baixo. Sem altura mínima, para não sobrar vazio no meio. */
   .painel {
-    grid-template-columns: 1fr 22rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: auto 1fr;
-    column-gap: 4rem;
-    min-height: 100svh;
+    column-gap: clamp(3rem, 2rem + 4vw, 7rem);
+    row-gap: 3rem;
+    padding-bottom: clamp(2rem, 1.2rem + 3vw, 3.5rem);
   }
 
   .painel-titulo {
     grid-column: 1;
+    grid-row: 1;
   }
 
   .painel-textos {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
-
-  .painel-figura {
     grid-column: 1;
     grid-row: 2;
+    max-width: 34rem;
+  }
+
+  .painel .painel-figura {
+    grid-column: 2;
+    grid-row: 1 / span 2;
     align-self: end;
+    justify-self: center;
+    width: min(42rem, 100%);
+    margin-bottom: calc(-16% - clamp(2rem, 1.2rem + 3vw, 3.5rem));
   }
 }
 

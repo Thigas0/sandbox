@@ -25,13 +25,13 @@ decidir enviar.
 - **Tipo:** Albert Sans (OFL), variável 400–600, hospedada em `public/fonts/`. Títulos 600, -0.035em,
   leading 1. Corpo de 17 a 19px. Cinco passos (`--passo-*`).
 - **Forma:** um raio só (`--raio: 12px`). O botão tem a ponta esquerda arredondada (`--raio-c`), a curva
-  do C. No hero, o C é um `<clipPath>` SVG inline (`#c-recorte`), que não espera download e ajuda o LCP. As máscaras pequenas usam `public/img/c.svg`.
+  do C. O C recorta as fotos de "Quem cuida" e "Onde fica" (`public/img/c.svg`); a foto do hero é retangular, com o raio da página (decisão do cliente).
 - **Voz:** fala como uma professora que conhece cada aluno pelo nome: calma, direta, sem promessa
   milagrosa.
 
 ## Seções
 
-hero (cartão de papel + Jaguariúna vista por dentro do C) → quem cuida (painel profundo, cartilha
+hero (cartão de papel com a faixa de Cs + foto de Jaguariúna, retangular) → quem cuida (painel profundo, cartilha
 recortada no C) → o que as mães dizem (bilhetes de papel; redraw de `testimonial-portrait-offset-quote`
 para `testimonial-paper-slips`, porque não existem retratos das mães e não devem existir) → onde fica
 (faixa de Cs + igreja matriz) → cupom-formulário → rodapé com a marca em blocos.
