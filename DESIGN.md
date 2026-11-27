@@ -54,7 +54,6 @@ Tudo em `src/style.css` (seção Movimento) e em `src/main.js`. O conteúdo nasc
   - o cupom sobe e se endireita;
   - a faixa larga desliza;
   - a marca do rodapé se ergue bloco a bloco.
-- **Ao aparecer:** a nota "5,0" conta a partir de 0,0 (900 ms, com ease-out).
 - **Com mouse:** os botões seguem o cursor até 6 px (magnéticos) e os bilhetes inclinam até 3°.
 - **Formulário:** a prévia da mensagem dá um brilho curto a cada mudança. Botões e opções respondem em
   `:active`.

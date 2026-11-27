@@ -38,7 +38,6 @@ for (const quantidade of [1, 8, 20]) {
       const secao = document.querySelector('#maes');
       secao.querySelector('.slips-vazio')?.remove();
       secao.querySelector('.slips')?.remove();
-      secao.querySelector('.slips-fonte')?.remove();
       secao.insertAdjacentHTML('beforeend', conteudo);
     }, html);
 

@@ -62,6 +62,5 @@ export function renderDepoimentos(dados) {
 
   return `<ul class="slips" role="list">
           ${itens}
-        </ul>
-        <p class="slips-fonte"><a href="${fonte}" rel="noopener" target="_blank">Ver todas as avaliações no Google<span class="sr-only"> (abre em nova aba)</span></a></p>`;
+        </ul>`;
 }
