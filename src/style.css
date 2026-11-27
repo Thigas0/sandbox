@@ -43,6 +43,7 @@
 
   /* Movimento */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --rapido: 160ms;
   --medio: 220ms;
 }
@@ -283,8 +284,14 @@ a {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  -webkit-mask: url('/img/c.svg') center / contain no-repeat;
-  mask: url('/img/c.svg') center / contain no-repeat;
+}
+
+/* O C do hero é um clipPath SVG inline: não depende de baixar arquivo, então a foto do LCP pinta
+   assim que chega. As máscaras pequenas continuam usando /img/c.svg. */
+.hero-c {
+  position: absolute;
+  inset: 0;
+  clip-path: url('#c-recorte');
 }
 
 @media (min-width: 60em) {
@@ -292,10 +299,15 @@ a {
     order: 2;
     aspect-ratio: auto;
     min-height: 100%;
-    -webkit-mask-size: 118% auto;
-    mask-size: 118% auto;
-    -webkit-mask-position: 10% 50%;
-    mask-position: 10% 50%;
+  }
+
+  .hero-c {
+    inset: auto;
+    top: 50%;
+    left: -1.8%;
+    width: 118%;
+    aspect-ratio: 1;
+    transform: translateY(-50%);
   }
 }
 
@@ -306,7 +318,7 @@ a {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1600ms ease-in-out;
+  transition: opacity 1600ms var(--ease-in-out);
 }
 
 .hero-img.is-ativa {
@@ -951,7 +963,7 @@ select[aria-invalid='true'] {
   }
 
   .slip {
-    transition: transform 400ms var(--ease-out);
+    transition: transform var(--medio) var(--ease-out);
   }
 }
 

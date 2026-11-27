@@ -122,6 +122,7 @@ function iniciarCrossfade(palco) {
     for (const img of molde.content.querySelectorAll('img')) {
       const copia = document.importNode(img, true);
       copia.decoding = 'async';
+      copia.fetchPriority = 'low';
       palco.append(copia);
       imagens.push(copia);
     }
@@ -157,8 +158,10 @@ function iniciarCrossfade(palco) {
   document.addEventListener('visibilitychange', agendar);
   reduzMovimento.addEventListener('change', agendar);
 
-  if (document.readyState === 'complete') carregar();
-  else window.addEventListener('load', carregar, { once: true });
+  // Espera a página assentar: a primeira troca só acontece depois de 5,6 s, então não há pressa.
+  const adiar = () => setTimeout(carregar, 2500);
+  if (document.readyState === 'complete') adiar();
+  else window.addEventListener('load', adiar, { once: true });
   agendar();
 }
 

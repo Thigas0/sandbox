@@ -32,7 +32,6 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="preload" href="/img/c.svg" as="image" type="image/svg+xml" crossorigin />
     <link rel="stylesheet" href="/src/style.css" />
     <script type="application/ld+json">
       {
@@ -63,6 +62,11 @@
     </script>
   </head>
   <body>
+    <svg class="sr-only" aria-hidden="true" focusable="false">
+      <clipPath id="c-recorte" clipPathUnits="objectBoundingBox">
+        <path d="M0.883 0.179A0.5 0.5 0 1 0 0.883 0.821L0.638 0.616A0.18 0.18 0 1 1 0.638 0.384Z" />
+      </clipPath>
+    </svg>
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="topo">
@@ -79,59 +83,61 @@
 
     <main id="conteudo">
       <section class="hero" aria-labelledby="hero-titulo">
-        <div class="hero-foto" data-crossfade>
-          <img
-            class="hero-img is-ativa"
-            src="/img/maria-fumaca-jaguariuna-1600.webp"
-            srcset="
-              /img/maria-fumaca-jaguariuna-800.webp   800w,
-              /img/maria-fumaca-jaguariuna-1200.webp 1200w,
-              /img/maria-fumaca-jaguariuna-1600.webp 1600w
-            "
-            sizes="(min-width: 60em) 50vw, 100vw"
-            width="1600"
-            height="1200"
-            alt="A locomotiva Maria Fumaça na estação de Jaguariúna"
-            fetchpriority="high"
-          />
-          <template data-crossfade-extra>
+        <div class="hero-foto">
+          <div class="hero-c" data-crossfade>
             <img
-              class="hero-img"
-              src="/img/estacao-jaguariuna-4-1600.webp"
+              class="hero-img is-ativa"
+              src="/img/maria-fumaca-jaguariuna-1600.webp"
               srcset="
-                /img/estacao-jaguariuna-4-800.webp   800w,
-                /img/estacao-jaguariuna-4-1600.webp 1600w
-              "
-              sizes="(min-width: 60em) 50vw, 100vw"
-              width="1600"
-              height="900"
-              alt="A antiga estação ferroviária de Jaguariúna"
-            />
-            <img
-              class="hero-img"
-              src="/img/rio-jaguari-jaguariuna-sp-1600.webp"
-              srcset="
-                /img/rio-jaguari-jaguariuna-sp-800.webp   800w,
-                /img/rio-jaguari-jaguariuna-sp-1600.webp 1600w
+                /img/maria-fumaca-jaguariuna-800.webp   800w,
+                /img/maria-fumaca-jaguariuna-1200.webp 1200w,
+                /img/maria-fumaca-jaguariuna-1600.webp 1600w
               "
               sizes="(min-width: 60em) 50vw, 100vw"
               width="1600"
               height="1200"
-              alt="O rio Jaguari entre árvores, em Jaguariúna"
+              alt="A locomotiva Maria Fumaça na estação de Jaguariúna"
+              fetchpriority="high"
             />
-            <img
-              class="hero-img"
-              src="/img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp"
-              srcset="
-                /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-800.webp   800w,
-                /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp 1600w
-              "
-              sizes="(min-width: 60em) 50vw, 100vw"
-              width="1600"
-              height="1062"
-              alt="A ponte da ferrovia sobre o rio Jaguari"
-            />
-          </template>
+            <template data-crossfade-extra>
+              <img
+                class="hero-img"
+                src="/img/estacao-jaguariuna-4-1600.webp"
+                srcset="
+                  /img/estacao-jaguariuna-4-800.webp   800w,
+                  /img/estacao-jaguariuna-4-1600.webp 1600w
+                "
+                sizes="(min-width: 60em) 50vw, 100vw"
+                width="1600"
+                height="900"
+                alt="A antiga estação ferroviária de Jaguariúna"
+              />
+              <img
+                class="hero-img"
+                src="/img/rio-jaguari-jaguariuna-sp-1600.webp"
+                srcset="
+                  /img/rio-jaguari-jaguariuna-sp-800.webp   800w,
+                  /img/rio-jaguari-jaguariuna-sp-1600.webp 1600w
+                "
+                sizes="(min-width: 60em) 50vw, 100vw"
+                width="1600"
+                height="1200"
+                alt="O rio Jaguari entre árvores, em Jaguariúna"
+              />
+              <img
+                class="hero-img"
+                src="/img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp"
+                srcset="
+                  /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-800.webp   800w,
+                  /img/ponte-ferrovia-sobre-rio-jaguari-panoramio-1600.webp 1600w
+                "
+                sizes="(min-width: 60em) 50vw, 100vw"
+                width="1600"
+                height="1062"
+                alt="A ponte da ferrovia sobre o rio Jaguari"
+              />
+            </template>
+          </div>
         </div>
 
         <div class="hero-cartao">
