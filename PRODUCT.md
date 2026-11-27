@@ -21,8 +21,7 @@ uma conversa iniciada no WhatsApp pelo formulário curto (idade, série, dificul
 ## Positioning
 
 Atendimento de uma professora só, em sala própria (R. Egas Bueno, 388, sala 02, Centro, Jaguariúna-SP), com nota
-5,0 em 8 avaliações no Google. A prova são as palavras das próprias mães, publicadas literalmente e só com o aceite
-de cada uma.
+5,0 em 8 avaliações no Google. A prova são as palavras das próprias mães, publicadas literalmente como estão no Google.
 
 ## Constraints
 
