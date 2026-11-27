@@ -36,7 +36,7 @@ const ESTRELAS = (nota) =>
 
 // O bilhete acompanha o texto: o longo fica mais largo e com letra de leitura, o curto vira citação grande.
 const tamanho = (texto) =>
-  texto.length > 280 ? ' slip-longo' : texto.length < 60 ? ' slip-curto' : '';
+  texto.length > 200 ? ' slip-longo' : texto.length < 60 ? ' slip-curto' : '';
 
 export function renderDepoimentos(dados) {
   const autorizados = depoimentosAutorizados(dados);
@@ -51,7 +51,8 @@ export function renderDepoimentos(dados) {
 
   const itens = autorizados
     .map(
-      (d) => `<li class="slip${tamanho(d.texto)}" data-testid="depoimento">
+      (d) =>
+        `<li class="slip${tamanho(d.texto)}${d.celular === false ? ' slip-so-desktop' : ''}" data-testid="depoimento">
             ${ESTRELAS(d.nota)}
             <blockquote class="slip-texto">${escapeHtml(d.texto)}</blockquote>
             <p class="slip-autor">${escapeHtml(d.autor)}</p>
@@ -59,7 +60,7 @@ export function renderDepoimentos(dados) {
     )
     .join('\n          ');
 
-  return `<ul class="slips" role="list" tabindex="0" aria-label="Avaliações do Google. Role para o lado para ver todas.">
+  return `<ul class="slips" role="list">
           ${itens}
         </ul>
         <p class="slips-fonte"><a href="${fonte}" rel="noopener" target="_blank">Ver todas as avaliações no Google<span class="sr-only"> (abre em nova aba)</span></a></p>`;

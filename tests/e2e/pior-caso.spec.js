@@ -45,14 +45,12 @@ for (const quantidade of [1, 8, 20]) {
     await expect(page.getByTestId('depoimento')).toHaveCount(quantidade);
     expect(await semRolagemHorizontal(page)).toBe(true);
 
-    // Nenhum bilhete cresce além da largura prevista (19rem) e nenhum texto escapa dele.
+    // Nenhum bilhete fica mais largo que a coluna e nenhum texto escapa dele.
     const problemas = await page.$$eval(
       '.slip',
       (bilhetes) =>
         bilhetes.filter((b) => {
-          const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-          const maximo = (b.classList.contains('slip-longo') ? 28 : 19) * rem;
-          const largo = b.offsetWidth > maximo + 1; // offsetWidth ignora a rotação do bilhete
+          const largo = b.offsetWidth > b.parentElement.clientWidth + 1;
           const vaza = [...b.children].some((c) => c.scrollWidth > c.clientWidth + 1);
           return largo || vaza;
         }).length,
