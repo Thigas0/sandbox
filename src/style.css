@@ -510,6 +510,20 @@ a {
   max-width: 12ch;
 }
 
+.maes-nota {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-weight: 500;
+}
+
+.maes-nota-valor {
+  font-size: var(--passo-titulo);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--acento);
+}
+
 /* Grade em colunas (sem rolagem lateral): os bilhetes se encaixam pela altura do texto. */
 .slips {
   columns: 3 18rem;

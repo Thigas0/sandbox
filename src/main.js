@@ -235,6 +235,34 @@ function piscar(el) {
   el.classList.add('is-atualizada');
 }
 
+/* ---------- Nota que conta de 0,0 até o valor quando aparece ---------- */
+
+function iniciarContador() {
+  const el = document.querySelector('[data-contador]');
+  if (!el || reduzMovimento.matches || !('IntersectionObserver' in window)) return;
+  const alvo = Number(el.dataset.contador.replace(',', '.'));
+  const formatar = (v) => v.toFixed(1).replace('.', ',');
+  const DURACAO = 900;
+
+  const observador = new IntersectionObserver(
+    ([entrada]) => {
+      if (!entrada.isIntersecting) return;
+      observador.disconnect();
+      const inicio = performance.now();
+      const passo = (agora) => {
+        const t = Math.min(1, (agora - inicio) / DURACAO);
+        const suave = 1 - (1 - t) ** 3; // ease-out
+        el.textContent = formatar(alvo * suave);
+        if (t < 1) requestAnimationFrame(passo);
+      };
+      el.textContent = formatar(0);
+      requestAnimationFrame(passo);
+    },
+    { threshold: 0.6 },
+  );
+  observador.observe(el);
+}
+
 /* ---------- Botões magnéticos (só com mouse) ---------- */
 
 function iniciarMagnetismo() {
@@ -266,4 +294,5 @@ if (palco) iniciarCrossfade(palco);
 
 iniciarInclinacao();
 iniciarRevelaFallback();
+iniciarContador();
 iniciarMagnetismo();
