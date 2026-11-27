@@ -34,6 +34,10 @@ const ESTRELAS = (nota) =>
     ? `<p class="slip-nota"><span aria-hidden="true">${'★'.repeat(nota)}</span><span class="sr-only">Nota ${nota} de 5</span></p>`
     : '';
 
+// O bilhete acompanha o texto: o longo fica mais largo e com letra de leitura, o curto vira citação grande.
+const tamanho = (texto) =>
+  texto.length > 280 ? ' slip-longo' : texto.length < 60 ? ' slip-curto' : '';
+
 export function renderDepoimentos(dados) {
   const autorizados = depoimentosAutorizados(dados);
   const fonte = escapeHtml(dados?.fonte ?? '');
@@ -47,7 +51,7 @@ export function renderDepoimentos(dados) {
 
   const itens = autorizados
     .map(
-      (d) => `<li class="slip" data-testid="depoimento">
+      (d) => `<li class="slip${tamanho(d.texto)}" data-testid="depoimento">
             ${ESTRELAS(d.nota)}
             <blockquote class="slip-texto">${escapeHtml(d.texto)}</blockquote>
             <p class="slip-autor">${escapeHtml(d.autor)}</p>
@@ -55,7 +59,7 @@ export function renderDepoimentos(dados) {
     )
     .join('\n          ');
 
-  return `<ul class="slips" role="list">
+  return `<ul class="slips" role="list" tabindex="0" aria-label="Avaliações do Google. Role para o lado para ver todas.">
           ${itens}
         </ul>
         <p class="slips-fonte"><a href="${fonte}" rel="noopener" target="_blank">Ver todas as avaliações no Google<span class="sr-only"> (abre em nova aba)</span></a></p>`;

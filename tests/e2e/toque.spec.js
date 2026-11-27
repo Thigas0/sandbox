@@ -7,7 +7,7 @@ const ALVOS = [
   '.hero .botao',
   '.hero-links a',
   '#quem-cuida .botao',
-  '.slips-vazio a',
+  '.slips-fonte a',
   '#onde .link-forte',
   '#idade',
   '#serie',

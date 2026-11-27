@@ -3,5 +3,36 @@
   "nota": "5,0",
   "total": 8,
   "exigirAceite": false,
-  "depoimentos": []
+  "depoimentos": [
+    {
+      "autor": "Aline Oliveira",
+      "nota": 5,
+      "texto": "Excelente profissional! Muito atenciosa, paciente e dedicada. Demonstra carinho e comprometimento em tudo o que faz, realizando um acompanhamento pedagógico cuidadoso e de muita qualidade. É muito bom encontrar profissionais que trabalham com tanto amor e dedicação. Super recomendo!"
+    },
+    {
+      "autor": "Ana Carolina Carraro",
+      "nota": 5,
+      "texto": "Excelente professora com grande conhecimento, técnicas de ensino com muito amor, entusiasmo, alegria e acolhimento. 💖 📚\nMeu filho é aluno da Catelle e a evolução dele está sendo gigantesca na escola com o reforço escolar.Indico a Catelle para reforço escolar de olhos fechados, pois o resultado é sólido e certo.💖"
+    },
+    {
+      "autor": "Jaqueline Silva",
+      "nota": 5,
+      "texto": "A nossa experiência com a prof° Cátia foi maravilhosa, ela é muito acolhedora o que nos passa segurança e nos deixa confortável, trata as crianças com carinho e firmeza, faz um ótimo trabalho ao usar atividades dinâmicas para engajar os alunos no conteúdo, tornando a sala de aula mais interativa e participativa. É uma profissional atenciosa, paciente, que respeita o ritmo dos alunos e cria um espaço seguro para dúvidas, explica o conteúdo de forma clara, facilitando a compreensão da matéria. Percebi que minha filha evoluiu nas matérias da escola o que me deixa tranquila e ela sabe que pode contar com a prof° para tirar dúvidas sobre matéria de alguma prova, a prof° Cátia interage com as crianças de igual para igual kkkk e isso elas amam,  mantém bom diálogo com a família o que eu acho muito válido, sempre nos passando um feedback dos nossos filhos."
+    },
+    {
+      "autor": "Vitoria Hellena",
+      "nota": 5,
+      "texto": "Ótima metodologia de ensino, totalmente capacitada e atenciosa. Meu filho começou o reforço escolar com a Cátia e foi nítido o progresso na aprendizagem e alfabetização. Agradeço demais por todo esforço e dedicação que ela atribuiu ao meu filho."
+    },
+    {
+      "autor": "Audiovisual IEQ JAGUARIÚNA",
+      "nota": 5,
+      "texto": "otima, professora agradavel e cordial."
+    },
+    {
+      "autor": "Alyne Roris",
+      "nota": 5,
+      "texto": "Indico de olhos fechados!"
+    }
+  ]
 }

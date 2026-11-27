@@ -50,7 +50,8 @@ for (const quantidade of [1, 8, 20]) {
       '.slip',
       (bilhetes) =>
         bilhetes.filter((b) => {
-          const maximo = 19 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const maximo = (b.classList.contains('slip-longo') ? 28 : 19) * rem;
           const largo = b.offsetWidth > maximo + 1; // offsetWidth ignora a rotação do bilhete
           const vaza = [...b.children].some((c) => c.scrollWidth > c.clientWidth + 1);
           return largo || vaza;
